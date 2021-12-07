@@ -1,3 +1,3 @@
-Il sistema deve modificare la quantità dei prodotti.
-Il sistema deve fornire una lista dei prodotti venduti.
-Il sistema deve mostrare l'immagine, il nome e il prezzo dei prodotti in vendita.
+Il sistema deve modificare le informazioni dei prodotti.
+Il sistema deve fornire un grafico dei prodotti venduti.
+Il sistema deve mostrare le recensioni dei clienti.
