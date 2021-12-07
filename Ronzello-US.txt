@@ -1,0 +1,5 @@
+Come negoziante, io voglio modificare la quantità dei prodotti, così posso tener traccia degli oggetti disponibili.
+
+Come fornitore, io voglio proporre offerte, così posso vendere i prodotti.
+
+Come user, io voglio inviare un email , così posso scambiare informazioni.
