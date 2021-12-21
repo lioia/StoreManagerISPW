@@ -4,5 +4,7 @@ module com.example.shoppingpoint {
 
 
     opens com.example.shoppingpoint to javafx.fxml;
+    opens com.example.shoppingpoint.view to javafx.fxml;
     exports com.example.shoppingpoint;
+    exports com.example.shoppingpoint.view;
 }

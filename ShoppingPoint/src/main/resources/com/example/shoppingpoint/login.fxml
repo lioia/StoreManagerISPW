@@ -26,27 +26,10 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="113.0" layoutY="383.0" text="Login as" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <PasswordField layoutX="370.0" layoutY="248.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
-            <Button layoutX="100.0" layoutY="466.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="440.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Login" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
-            <ComboBox layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" style="-fx-font-size: 24px">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Client"/>
-                     <String fx:value="Store Owner"/>
-                     <String fx:value="Supplier"/>
-                  </FXCollections>
-               </items>
-               <value>
-                  <String fx:value="Client"/>
-               </value>
-            </ComboBox>
+            <TextField fx:id="usernameTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
+            <PasswordField fx:id="passwordTextField" layoutX="370.0" layoutY="248.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
+            <Button onAction="#goToRegister" layoutX="100.0" layoutY="466.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="440.0" />
+            <Button onAction="#login" layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Login" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
          </children>
       </AnchorPane>
    </center>
