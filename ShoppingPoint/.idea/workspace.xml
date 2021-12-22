@@ -30,6 +30,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -71,7 +73,18 @@
       <workItem from="1640177478681" duration="207000" />
       <workItem from="1640181253480" duration="8000" />
       <workItem from="1640186077969" duration="1830000" />
+      <workItem from="1640188969113" duration="227000" />
+      <workItem from="1640189300710" duration="13000" />
+      <workItem from="1640191712594" duration="16000" />
+      <workItem from="1640192902150" duration="795000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
