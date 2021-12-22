@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clientshop.PaymentController">
+   <children>
+      <Rectangle arcHeight="15.0" arcWidth="20.0" fill="#ff6e6e" height="68.0" layoutX="-1.0" layoutY="-7.0" smooth="false" stroke="TRANSPARENT" strokeLineJoin="ROUND" width="801.0">
+         <effect>
+            <DropShadow offsetX="-1.0" offsetY="2.0">
+               <color>
+                  <Color red="0.5789473652839661" green="0.5789473652839661" blue="0.5789473652839661" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Button fx:id="accountButton" layoutX="742.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-radius: 10px; -fx-background-color: #6EC6FF;">
+         <effect>
+            <DropShadow offsetY="2.0" />
+         </effect>
+         <font>
+            <Font size="24.0" />
+         </font>
+         <graphic>
+            <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+         </graphic>
+      </Button>
+      <Button fx:id="backButton" layoutX="5.0" layoutY="9.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="55.0" style="-fx-background-radius: 15px; -fx-background-color: #ff6e6e;">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <graphic>
+            <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+         </graphic>
+      </Button>
+      <Text layoutX="275.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buy List" textAlignment="CENTER" wrappingWidth="250.13671875">
+         <font>
+            <Font name="Corbel" size="27.0" />
+         </font>
+      </Text>
+      <Text layoutX="70.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name" wrappingWidth="223.28955078125">
+         <font>
+            <Font name="Arial" size="31.0" />
+         </font>
+      </Text>
+      <Text layoutX="577.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity x price">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="584.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2 x 29.99€">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="82.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Smart trousers">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="530.5" layoutX="171.0" layoutY="321.0" startX="-100.0" />
+      <Text layoutX="525.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="589.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="59.98€">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <CheckBox fx:id="checkLoyaltyCard" layoutX="358.0" layoutY="355.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="135.0" text="Use Loyalty card">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
+      <Text layoutX="82.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose payment">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <RadioButton layoutX="338.0" layoutY="432.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="86.0" text="Paypal">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <toggleGroup>
+            <ToggleGroup fx:id="togglePayment" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="458.0" layoutY="432.0" mnemonicParsing="false" text="Credit card" toggleGroup="$togglePayment">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </RadioButton>
+      <Button fx:id="buyButton1" layoutX="640.0" layoutY="524.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy">
+         <effect>
+            <DropShadow offsetY="2.0" />
+         </effect>
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
+
