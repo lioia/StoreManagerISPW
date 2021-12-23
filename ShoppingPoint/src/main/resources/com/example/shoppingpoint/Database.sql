@@ -8,5 +8,5 @@ CREATE TABLE User (
     `Username` VARCHAR(16) PRIMARY KEY,
     `Email` VARCHAR(48) NOT NULL UNIQUE,
     `Password` VARCHAR(20) NOT NULL,
-    `Type` ENUM("Client", "StoreOwner", "Supplier") NOT NULL
+    `Type` ENUM("CLIENT", "STOREOWNER", "SUPPLIER") NOT NULL
 )

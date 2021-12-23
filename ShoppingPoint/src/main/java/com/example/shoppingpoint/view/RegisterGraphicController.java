@@ -18,11 +18,17 @@ public class RegisterGraphicController {
 
     RegisterController controller;
 
-    public TextField usernameTextField;
-    public PasswordField passwordTextField;
-    public TextField emailTextField;
-    public PasswordField verifyPasswordTextField;
-    public ComboBox userTypeField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private PasswordField passwordTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private PasswordField verifyPasswordTextField;
+    @FXML
+    private ComboBox userTypeField;
+
     @FXML
     protected void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));

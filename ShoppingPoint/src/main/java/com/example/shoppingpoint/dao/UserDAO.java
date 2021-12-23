@@ -1,6 +1,5 @@
 package com.example.shoppingpoint.dao;
 
-import com.example.shoppingpoint.bean.RegisterBean;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.utils.UserType;
@@ -9,6 +8,10 @@ import java.sql.*;
 
 // TODO gestione eccezioni
 public class UserDAO {
+    private UserDAO() {
+        throw new IllegalStateException();
+    }
+
     public static User getUserByUsernameAndPasssword(String username, String password) throws Exception {
         Statement statement = null;
         Connection connection = null;
@@ -25,25 +28,18 @@ public class UserDAO {
             ResultSet rs = statement.executeQuery(sql);
             // Empty result
             if (!rs.first()) {
-                Exception e = new Exception("No user found with username: " + username);
-                throw e;
+                throw new Exception("No user found with username: " + username);
             }
             rs.first();
             String email = rs.getString("Email");
             UserType type = UserType.valueOf(rs.getString("Type"));
 
-            switch (type) {
-                case Client:
-                    user = new Client(username, email, password);
-                    break;
-//                    TODO altre classi
-                case StoreOwner:
-                    user= new Client(username, email, password);
-                    break;
-                case Supplier:
-                    user = new Client(username, email, password);
-                    break;
-            }
+            user = switch (type) {
+//              TODO altre classi
+                case STOREOWNER -> new Client(username, email, password);
+                case SUPPLIER -> new Client(username, email, password);
+                default -> new Client(username, email, password);
+            };
             rs.close();
         } finally {
             // Clean-up dell'ambiente
@@ -51,6 +47,7 @@ public class UserDAO {
                 if (statement != null)
                     statement.close();
             } catch (SQLException se2) {
+                se2.printStackTrace();
             }
             try {
                 if (connection != null)
@@ -74,14 +71,15 @@ public class UserDAO {
             // Get user with specified username
             String sql = String.format("INSERT INTO User (Username, Email, Password, Type) VALUES ('%s', '%s', '%s', '%s')", username, email, password, userType);
             // Execute query
+//          TODO controllo result
             int result = statement.executeUpdate(sql);
-//            TODO controllo result
         } finally {
             // Clean-up dell'ambiente
             try {
                 if (statement != null)
                     statement.close();
             } catch (SQLException se2) {
+                se2.printStackTrace();
             }
             try {
                 if (connection != null)

@@ -64,16 +64,10 @@ public class RegisterBean {
     }
 
     public void setUserType(String type){
-        switch(type) {
-            case "Client":
-                this.userType = UserType.Client;
-                break;
-            case "Store Owner":
-                this.userType = UserType.StoreOwner;
-                break;
-            case "Supplier":
-                this.userType = UserType.Supplier;
-                break;
+        switch (type) {
+            case "Store Owner" -> this.userType = UserType.STOREOWNER;
+            case "Supplier" -> this.userType = UserType.SUPPLIER;
+            default -> this.userType = UserType.CLIENT; // case "Client"
         }
     }
 }

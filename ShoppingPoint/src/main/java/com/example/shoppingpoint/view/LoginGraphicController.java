@@ -17,8 +17,10 @@ public class LoginGraphicController {
 
     LoginController controller;
 
-    public TextField usernameTextField;
-    public PasswordField passwordTextField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private PasswordField passwordTextField;
 
     @FXML
     protected void goToRegister(ActionEvent event) throws IOException {
