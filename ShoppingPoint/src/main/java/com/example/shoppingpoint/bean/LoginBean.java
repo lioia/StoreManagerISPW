@@ -1,12 +1,12 @@
 package com.example.shoppingpoint.bean;
 
-public class UserBean {
+public class LoginBean {
     private String username;
     private String password;
 
-    public UserBean() {}
+    public LoginBean() {}
 
-    public UserBean(String username, String password) {
+    public LoginBean(String username, String password) {
         setUsername(username);
         setPassword(password);
     }
@@ -14,7 +14,6 @@ public class UserBean {
     public String getUsername() {
         return username;
     }
-
     public String getPassword() {
         return password;
     }

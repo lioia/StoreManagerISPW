@@ -1,18 +1,15 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
-import com.example.shoppingpoint.bean.UserBean;
+import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.controller.LoginController;
-import com.example.shoppingpoint.utils.UserType;
+import com.example.shoppingpoint.model.user.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -30,13 +27,13 @@ public class LoginGraphicController {
     }
 
     @FXML
-    protected void login(ActionEvent actionEvent) {
+    protected void login(ActionEvent actionEvent) throws Exception {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
-        UserBean bean = new UserBean(username, password);
+        LoginBean bean = new LoginBean(username, password);
 
         controller = new LoginController();
-        controller.login(bean);
-        System.out.println("Logged in");
+        User user = controller.login(bean);
+        System.out.println("Logged in as " + user.getUsername());
     }
 }

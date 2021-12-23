@@ -27,10 +27,10 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <PasswordField layoutX="370.0" layoutY="248.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="228.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
-            <ComboBox layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" style="-fx-font-size: 24px" visibleRowCount="3" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0">
+            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
+            <PasswordField fx:id="passwordTextField" layoutX="370.0" layoutY="248.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="228.0" />
+            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" onAction="#register" />
+            <ComboBox fx:id="userTypeField" layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" style="-fx-font-size: 24px" visibleRowCount="3" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Client" />
@@ -42,7 +42,7 @@
                   <String fx:value="Client" />
                </value>
             </ComboBox>
-            <TextField layoutX="360.0" layoutY="86.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="88.0" />
+            <TextField fx:id="usernameTextField" layoutX="360.0" layoutY="86.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="88.0" />
             <Label layoutX="100.0" layoutY="88.0" text="Username" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="90.0">
                <font>
                   <Font size="24.0" />
@@ -58,7 +58,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
+            <PasswordField fx:id="verifyPasswordTextField" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
          </children>
       </AnchorPane>
    </center>

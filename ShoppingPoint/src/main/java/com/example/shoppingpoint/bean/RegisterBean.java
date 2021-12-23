@@ -8,7 +8,7 @@ public class RegisterBean {
     private String email;
     private String password;
     private String verifyPassword;
-    private String userType;
+    private UserType userType;
 
     public RegisterBean() {}
 
@@ -21,7 +21,7 @@ public class RegisterBean {
     }
     public String getEmail(){return  email;}
     public String getUsername(){ return username;}
-    public String getUserType(){ return userType;}
+    public UserType getUserType(){ return userType;}
     public String getPassword(){ return password;}
     public String getVerifyPassword(){ return verifyPassword;}
 
@@ -63,8 +63,17 @@ public class RegisterBean {
         this.email= email;
     }
 
-    public void setUserType(String userType){
-
-        this.userType=userType;
+    public void setUserType(String type){
+        switch(type) {
+            case "Client":
+                this.userType = UserType.Client;
+                break;
+            case "Store Owner":
+                this.userType = UserType.StoreOwner;
+                break;
+            case "Supplier":
+                this.userType = UserType.Supplier;
+                break;
+        }
     }
 }
