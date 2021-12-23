@@ -9,11 +9,6 @@ import java.sql.*;
 
 // TODO gestione eccezioni
 public class UserDAO {
-    private String email;
-    private String username;
-    private String password;
-    private UserType userType;
-
     public static User getUserByUsernameAndPasssword(String username, String password) throws Exception {
         Statement statement = null;
         Connection connection = null;
