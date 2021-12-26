@@ -20,7 +20,7 @@
       fx:controller="com.example.shoppingpoint.view.StoreDashboardGraphicController">
     <children>
         <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
-                    style="-fx-background-color: #6EC6FF; -fx-background-radius: 0 0 12 12;">
+                    style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
             <center>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Store Dashboard - Shopping Point"
                       BorderPane.alignment="CENTER">
@@ -31,7 +31,7 @@
             </center>
             <right>
                 <Button alignment="CENTER" mnemonicParsing="false"
-                        style="-fx-border-radius: 12; -fx-border-color: #000000; -fx-background-radius: 16; -fx-background-color: #FFEB3B;"
+                        style="-fx-background-color: transparent"
                         BorderPane.alignment="CENTER">
                     <graphic>
                         <FontIcon iconLiteral="mdal-account_box" iconSize="32"/>
@@ -55,7 +55,7 @@
                     </font>
                 </TextField>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0"
-                        style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                        style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                         text="Search">
                     <HBox.margin>
                         <Insets left="48.0" right="40.0" top="40.0"/>
@@ -69,7 +69,7 @@
         <HBox alignment="TOP_CENTER" fillHeight="false">
             <children>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0"
-                        style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                        style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                         text="Client List" HBox.hgrow="ALWAYS" onAction="#goToClientList">
                     <font>
                         <Font size="24.0"/>
@@ -79,7 +79,7 @@
                     </HBox.margin>
                 </Button>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0"
-                        style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                        style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                         text="Summary" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="24.0"/>
@@ -89,7 +89,7 @@
                     </HBox.margin>
                 </Button>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0"
-                        style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                        style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                         text="Add Product" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="24.0"/>
@@ -99,7 +99,7 @@
                     </HBox.margin>
                 </Button>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0"
-                        style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                        style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                         text="Loyalty Card" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="24.0"/>
@@ -174,7 +174,7 @@
                                 <HBox translateX="64.0" translateY="288.0">
                                     <children>
                                         <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0"
-                                                style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                                                style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                                                 text="Edit">
                                             <font>
                                                 <Font size="24.0"/>
@@ -184,7 +184,7 @@
                                             </HBox.margin>
                                         </Button>
                                         <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0"
-                                                style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+                                                style="-fx-background-color: #6EC6FF; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
                                                 text="Request">
                                             <font>
                                                 <Font size="24.0"/>

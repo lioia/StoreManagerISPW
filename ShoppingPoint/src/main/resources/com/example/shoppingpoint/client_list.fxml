@@ -16,7 +16,7 @@
       fx:controller="com.example.shoppingpoint.view.ClientListGraphicController">
     <children>
         <BorderPane prefHeight="80.0" prefWidth="200.0"
-                    style="-fx-background-color: #6EC6FF; -fx-background-radius: 0 0 12 12;">
+                    style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
             <center>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Client List - Shopping Point"
                       BorderPane.alignment="CENTER">
@@ -27,7 +27,7 @@
             </center>
             <right>
                 <Button alignment="CENTER" mnemonicParsing="false"
-                        style="-fx-border-radius: 12; -fx-border-color: #000000; -fx-background-radius: 16; -fx-background-color: #FFEB3B;"
+                        style="-fx-background-color: transparent"
                         BorderPane.alignment="CENTER">
                     <graphic>
                         <FontIcon iconLiteral="mdal-account_box" iconSize="32"/>
