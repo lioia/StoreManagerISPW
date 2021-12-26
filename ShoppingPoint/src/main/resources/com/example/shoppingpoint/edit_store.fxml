@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
+   <top>
+      <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="Edit Store - Shopping Point">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </center>
+         <left>
+            <Button mnemonicParsing="false" style="-fx-background-color: trasparent" BorderPane.alignment="CENTER">
+               <graphic>
+                  <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+               </graphic>
+               <BorderPane.margin>
+                  <Insets left="48.0" />
+               </BorderPane.margin>
+            </Button>
+         </left>
+         <right>
+            <Button mnemonicParsing="false" style="-fx-background-color: trasparent" BorderPane.alignment="CENTER">
+               <graphic>
+                  <FontIcon iconLiteral="mdal-account_circle" iconSize="32" />
+               </graphic>
+               <BorderPane.margin>
+                  <Insets right="48.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <bottom>
+      <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="301.0" layoutY="160.0" text="Email" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
                <font>
@@ -20,7 +51,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
+            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
             <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: rgba(19,69,234,0.9);  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
             <Label layoutX="100.0" layoutY="300.0" text="Type" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
                <font>
@@ -29,38 +60,8 @@
             </Label>
             <TextField layoutX="360.0" layoutY="158.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
             <ChoiceBox layoutX="477.0" layoutY="318.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
+
          </children>
       </AnchorPane>
-   </center>
-   <top>
-      <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
-         <center>
-            <Label text="Edit Store - Shopping Point">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-         </center>
-         <left>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: trasparent" >
-               <graphic>
-                  <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
-               </graphic>
-               <BorderPane.margin>
-                  <Insets left="48.0" />
-               </BorderPane.margin>
-            </Button>
-         </left>
-         <right>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: rgba(19,69,234,0.9)" >
-               <graphic>
-                  <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
-               </graphic>
-               <BorderPane.margin>
-                  <Insets right="48.0" />
-               </BorderPane.margin>
-            </Button>
-         </right>
-      </BorderPane>
-   </top>
+   </bottom>
 </BorderPane>
