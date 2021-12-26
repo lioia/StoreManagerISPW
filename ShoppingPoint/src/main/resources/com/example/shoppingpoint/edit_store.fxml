@@ -21,7 +21,7 @@
                </font>
             </Label>
             <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF;  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
+            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: rgba(19,69,234,0.9);  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
             <Label layoutX="100.0" layoutY="300.0" text="Type" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
                <font>
                   <Font size="24.0" />
@@ -33,7 +33,7 @@
       </AnchorPane>
    </center>
    <top>
-      <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
          <center>
             <Label text="Edit Store - Shopping Point">
                <font>
@@ -42,7 +42,7 @@
             </Label>
          </center>
          <left>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: trasparent" >
                <graphic>
                   <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
                </graphic>
@@ -52,7 +52,7 @@
             </Button>
          </left>
          <right>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: rgba(19,69,234,0.9)" >
                <graphic>
                   <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
                </graphic>
