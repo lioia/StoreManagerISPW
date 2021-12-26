@@ -8,11 +8,11 @@ import javafx.scene.Node;
 
 import java.io.IOException;
 
-public class StoreDashboardGraphicController {
+public class ClientListGraphicController {
 
     @FXML
-    public void goToClientList(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
+    public void goBack(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         ((Node)event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

@@ -70,7 +70,7 @@
             <children>
                 <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0"
                         style="-fx-background-color: #FFEB3B; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
-                        text="Client List" HBox.hgrow="ALWAYS">
+                        text="Client List" HBox.hgrow="ALWAYS" onAction="#goToClientList">
                     <font>
                         <Font size="24.0"/>
                     </font>
