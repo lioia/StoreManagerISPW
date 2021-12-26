@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.EditAccountGraphicController">
    <center>
       <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
          <children>
@@ -20,15 +20,15 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
+            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
             <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF;  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
             <Label layoutX="100.0" layoutY="300.0" text="Verify Password" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <PasswordField layoutX="484.0" layoutY="165.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
-            <PasswordField layoutX="370.0" layoutY="168.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
+            <PasswordField fx:id="VerifyPasswordField" layoutX="484.0" layoutY="165.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
+            <PasswordField fx:id="passwordPasswordField" layoutX="370.0" layoutY="168.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
          </children>
       </AnchorPane>
    </center>
