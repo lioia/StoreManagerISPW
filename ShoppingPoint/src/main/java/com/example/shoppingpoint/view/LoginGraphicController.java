@@ -3,7 +3,8 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.controller.LoginController;
-import com.example.shoppingpoint.model.user.User;
+import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.model.user.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +37,20 @@ public class LoginGraphicController {
 
         controller = new LoginController();
         User user = controller.login(bean);
-        System.out.println("Logged in as " + user.getUsername());
+        if(user instanceof Client){
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+        }
+        if(user instanceof StoreOwner){
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+
+        }
+        if(user instanceof Supplier){
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            }
+
     }
 }

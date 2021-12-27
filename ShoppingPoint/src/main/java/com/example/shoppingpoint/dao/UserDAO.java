@@ -1,6 +1,8 @@
 package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.utils.UserType;
 
@@ -35,9 +37,9 @@ public class UserDAO {
             UserType type = UserType.valueOf(rs.getString("Type"));
 
             user = switch (type) {
-//              TODO altre classi
-                case STOREOWNER -> new Client(username, email, password);
-                case SUPPLIER -> new Client(username, email, password);
+
+                case STOREOWNER -> new StoreOwner(username, email, password);
+                case SUPPLIER -> new Supplier(username, email, password);
                 default -> new Client(username, email, password);
             };
             rs.close();
