@@ -52,7 +52,7 @@
                </font>
             </Label>
             <TextField fx:id="emailTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: rgba(19,69,234,0.9);  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
+            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: rgba(31,77,227,0.75);  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
             <Label layoutX="100.0" layoutY="300.0" text="Type" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
                <font>
                   <Font size="24.0" />
