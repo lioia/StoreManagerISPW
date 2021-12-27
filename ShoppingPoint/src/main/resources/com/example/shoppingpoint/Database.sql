@@ -1,12 +1,54 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-CREATE DATABASE IF NOT EXISTS `ShoppingPoint-DB` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE DATABASE IF NOT EXISTS `ShoppingPoint-DB` DEFAULT CHARACTER SET UTF8MB4;
 USE `ShoppingPoint-DB`;
 
 CREATE TABLE User (
-    `Username` VARCHAR(16) PRIMARY KEY,
-    `Email` VARCHAR(48) NOT NULL UNIQUE,
-    `Password` VARCHAR(20) NOT NULL,
-    `Type` ENUM("CLIENT", "STOREOWNER", "SUPPLIER") NOT NULL
-)
+    Username VARCHAR(16) PRIMARY KEY,
+    Email VARCHAR(48) NOT NULL UNIQUE,
+    Password VARCHAR(20) NOT NULL,
+    Type ENUM("CLIENT", "STOREOWNER", "SUPPLIER") NOT NULL
+);
+
+CREATE TABLE Store (
+    Name VARCHAR(16) PRIMARY KEY,
+    Address VARCHAR(25) NOT NULL,
+    Type ENUM("CLOTHES", "BOOKS", "VIDEOGAMES", "ELECTRONICS") NOT NULL,
+    PointsInEuro INT NOT NULL,
+
+    StoreOwner VARCHAR(16) NOT NULL,
+    FOREIGN KEY (StoreOwner) REFERENCES User(Username) ON DELETE CASCADE
+);
+
+CREATE TABLE Product (
+    ProductId INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(16) NOT NULL,
+    Price INT NOT NULL,
+    DiscountedPrice INT NOT NULL,
+    Type ENUM("CLOTHES", "SHOES", "BOOK", "COMICS", "VIDEOGAME", "GAMECONSOLE", "COMPUTER", "HOMEAPPLIANCES") NOT NULL,
+    Image BLOB,
+    Size VARCHAR(16),
+    Material VARCHAR(16),
+    ShoesType VARCHAR(16),
+    Author VARCHAR(25),
+    Artist VARCHAR(25),
+    Plot TEXT,
+    Genre VARCHAR(16),
+    VolumeNumber INT,
+    ConsoleType ENUM("PS5", "PS4", "XBOXSERIESX", "XBOXSERIESS", "XBOXONE", "NINTENDOSWITCH"),
+    DigitalOnly TINYINT(1),
+    ComputerType ENUM("LAPTOP", "DESKTOP", "2IN1", "TOUCHSCREEN"),
+    Ram INT,
+    SSD INT,
+    CPU VARCHAR(16),
+    GPU VARCHAR(16),
+    BatterySize INT,
+    DisplaySize FLOAT,
+    Brand VARCHAR(16),
+    EnergyClass VARCHAR(4),
+    Specs TEXT,
+
+    Store VARCHAR(16) NOT NULL,
+    FOREIGN KEY (Store) REFERENCES Store(Name) ON DELETE CASCADE
+);
