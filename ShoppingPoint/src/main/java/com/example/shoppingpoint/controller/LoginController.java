@@ -6,6 +6,6 @@ import com.example.shoppingpoint.model.user.User;
 
 public class LoginController {
     public User login(LoginBean bean) throws Exception {
-        return UserDAO.getUserByUsernameAndPasssword(bean.getUsername(), bean.getUsername());
+        return UserDAO.getUserByUsernameAndPasssword(bean.getUsername(), bean.getPassword());
     }
 }
