@@ -7,7 +7,6 @@ public class RegisterBean {
     private String username;
     private String email;
     private String password;
-    private String verifyPassword;
     private UserType userType;
 
     public RegisterBean() {}
@@ -16,14 +15,13 @@ public class RegisterBean {
         setEmail(email);
         setUsername(username);
         setUserType(userType);
-        setVerifyPassword(verifyPassword);
         setPassword(password);
+        setVerifyPassword(password,verifyPassword);
     }
     public String getEmail(){return  email;}
     public String getUsername(){ return username;}
     public UserType getUserType(){ return userType;}
     public String getPassword(){ return password;}
-    public String getVerifyPassword(){ return verifyPassword;}
 
 
     // TODO: bean exception
@@ -43,16 +41,15 @@ public class RegisterBean {
         this.password = pass;
     }
 
-    public void setVerifyPassword(String pass) {
-        if(pass.length() < 8 || pass.length() > 16) {
+    public void setVerifyPassword(String pass,String verifyPassword) {
+        if(!pass.equals(verifyPassword)) {
 //            TODO throws exception
             System.out.println("VerifyPassword not valid");
         }
-        this.verifyPassword = pass;
     }
 
     public void  setEmail(String email) {
-        String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+        String regex = "[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
