@@ -3,7 +3,10 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.RegisterBean;
 import com.example.shoppingpoint.controller.RegisterController;
-import com.example.shoppingpoint.model.user.User;
+import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.model.user.Supplier;
+import com.example.shoppingpoint.model.user.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -46,6 +49,19 @@ public class RegisterGraphicController {
 
         controller = new RegisterController();
         User user = controller.register(bean);
-        System.out.println("Registered user: " + user.getUsername());
+        if(user instanceof Client){
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+        }
+        if(user instanceof StoreOwner){
+
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_store.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+
+        }
+        if(user instanceof Supplier){
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
+            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+        }
     }
 }

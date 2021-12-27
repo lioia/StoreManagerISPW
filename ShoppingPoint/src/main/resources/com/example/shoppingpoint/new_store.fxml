@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.NewStoreGraphicController">
@@ -31,10 +32,9 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <Button layoutX="100.0" layoutY="466.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="440.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Login" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
-            <ComboBox layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" visibleRowCount="4" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" style="-fx-font-size: 24px">
+            <TextField fx:id="nameTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
+            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
+            <ComboBox fx:id="typeComboBoxField" layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" visibleRowCount="4" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" style="-fx-font-size: 24px">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:value="Clothes"/>
@@ -44,19 +44,39 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <TextField layoutX="360.0" layoutY="158.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
+            <TextField fx:id="addresTextField" layoutX="360.0" layoutY="158.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
          </children>
       </AnchorPane>
    </center>
    <top>
-      <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Create new store - Shopping Point">
+      <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="New Store - Shopping Point">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-         </children>
-      </HBox>
+         </center>
+         <left>
+            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+               <graphic>
+                  <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+               </graphic>
+               <BorderPane.margin>
+                  <Insets left="48.0" />
+               </BorderPane.margin>
+            </Button>
+         </left>
+         <right>
+            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+               <graphic>
+                  <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+               </graphic>
+               <BorderPane.margin>
+                  <Insets right="48.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+      </BorderPane>
    </top>
 </BorderPane>
