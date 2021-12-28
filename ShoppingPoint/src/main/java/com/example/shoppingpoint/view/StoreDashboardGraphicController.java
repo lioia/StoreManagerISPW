@@ -13,6 +13,11 @@ public class StoreDashboardGraphicController {
     @FXML
     public void goToClientList(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
-        ((Node)event.getSource()).getScene().setRoot(fxmlLoader.load());
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
+
+    public void goToRequest(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }
