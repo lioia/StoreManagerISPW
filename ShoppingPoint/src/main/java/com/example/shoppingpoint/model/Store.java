@@ -13,6 +13,10 @@ public class Store {
     private ArrayList<Product> products;
     private ArrayList<SoldProduct> soldProducts;
 
+    public Store(String name, String address, Integer pointsInEuro, StoreType type) {
+        this(name, address, pointsInEuro, type, new ArrayList<>(), new ArrayList<>());
+    }
+
     public Store(String name, String address, Integer pointsInEuro, StoreType type, ArrayList<Product> products, ArrayList<SoldProduct> soldProducts) {
         setName(name);
         setAddress(address);
