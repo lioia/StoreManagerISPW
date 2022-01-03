@@ -6,7 +6,8 @@ public class ComicsProduct extends Product {
     private String author, artist, plot, genre;
     private Integer volume;
 
-    public ComicsProduct(String name, Number price, Number discountedPrice, Integer quantity, StatusType status, String author, String artist, String plot, String genre, Integer number) {
+    public ComicsProduct(Integer id, String name, Number price, Number discountedPrice, Integer quantity, StatusType status, String author, String artist, String plot, String genre, Integer number) {
+        setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);

@@ -54,3 +54,12 @@ CREATE TABLE Product (
     Store VARCHAR(16) NOT NULL,
     FOREIGN KEY (Store) REFERENCES Store(Name) ON DELETE CASCADE
 );
+
+CREATE TABLE SoldProduct (
+    SoldProductId INT PRIMARY KEY AUTO_INCREMENT,
+    Quantity INT NOT NULL,
+    Date DATE NOT NULL,
+
+    ProductId INT NOT NULL,
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
+)

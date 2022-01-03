@@ -5,7 +5,8 @@ import com.example.shoppingpoint.utils.StatusType;
 public class ShoesProduct extends Product {
     private String size, material, shoesType;
 
-    public ShoesProduct(String name, Number price, Number discountedPrice, Integer quantity, StatusType status, String size, String material, String shoesType) {
+    public ShoesProduct(Integer id, String name, Number price, Number discountedPrice, Integer quantity, StatusType status, String size, String material, String shoesType) {
+        setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);

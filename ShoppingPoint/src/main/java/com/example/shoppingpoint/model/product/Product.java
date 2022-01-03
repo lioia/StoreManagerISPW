@@ -4,12 +4,21 @@ import com.example.shoppingpoint.utils.StatusType;
 import javafx.scene.image.Image;
 
 public abstract class Product {
+    private Integer id;
     private String name;
     private Number price;
     private Number discountedPrice;
     private Integer quantity;
     private StatusType status;
     private Image image;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
