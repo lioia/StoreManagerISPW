@@ -4,7 +4,8 @@ import com.example.shoppingpoint.utils.ConsoleType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class VideoGameProduct extends Product {
-    private String plot, genre;
+    private String plot;
+    private String genre;
     private ConsoleType consoleType;
 
     public VideoGameProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String plot, String genre, ConsoleType consoleType) {

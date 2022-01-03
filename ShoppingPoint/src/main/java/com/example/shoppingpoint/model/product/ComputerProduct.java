@@ -5,8 +5,12 @@ import com.example.shoppingpoint.utils.StatusType;
 
 public class ComputerProduct extends Product {
     private ComputerType computerType;
-    private Integer ram, ssd, batterySize;
-    private String cpu, gpu, brand;
+    private Integer ram;
+    private Integer ssd;
+    private Integer batterySize;
+    private String cpu;
+    private String gpu;
+    private String brand;
     private Float displaySize;
 
     public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, ComputerType computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {

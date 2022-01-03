@@ -3,7 +3,10 @@ package com.example.shoppingpoint.model.product;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class ComicsProduct extends Product {
-    private String author, artist, plot, genre;
+    private String author;
+    private String artist;
+    private String plot;
+    private String genre;
     private Integer volume;
 
     public ComicsProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String author, String artist, String plot, String genre, Integer number) {

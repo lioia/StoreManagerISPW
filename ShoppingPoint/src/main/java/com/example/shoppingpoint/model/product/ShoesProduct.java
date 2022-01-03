@@ -3,7 +3,9 @@ package com.example.shoppingpoint.model.product;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class ShoesProduct extends Product {
-    private String size, material, shoesType;
+    private String size;
+    private String material;
+    private String shoesType;
 
     public ShoesProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String size, String material, String shoesType) {
         setId(id);
