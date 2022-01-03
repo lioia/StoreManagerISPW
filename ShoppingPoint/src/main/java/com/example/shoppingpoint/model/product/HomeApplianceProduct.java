@@ -5,7 +5,7 @@ import com.example.shoppingpoint.utils.StatusType;
 public class HomeApplianceProduct extends Product {
     private String energyClass, specs;
 
-    public HomeApplianceProduct(Integer id, String name, Number price, Number discountedPrice, Integer quantity, StatusType status, String energyClass, String specs) {
+    public HomeApplianceProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String energyClass, String specs) {
         setId(id);
         setName(name);
         setPrice(price);

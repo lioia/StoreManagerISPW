@@ -6,8 +6,8 @@ import javafx.scene.image.Image;
 public abstract class Product {
     private Integer id;
     private String name;
-    private Number price;
-    private Number discountedPrice;
+    private Float price;
+    private Float discountedPrice;
     private Integer quantity;
     private StatusType status;
     private Image image;
@@ -28,19 +28,19 @@ public abstract class Product {
         this.name = name;
     }
 
-    public Number getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Number price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public Number getDiscountedPrice() {
+    public Float getDiscountedPrice() {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(Number discountedPrice) {
+    public void setDiscountedPrice(Float discountedPrice) {
         this.discountedPrice = discountedPrice;
     }
 

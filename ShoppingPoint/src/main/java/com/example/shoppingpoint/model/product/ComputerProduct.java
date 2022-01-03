@@ -9,7 +9,7 @@ public class ComputerProduct extends Product {
     private String cpu, gpu, brand;
     private Float displaySize;
 
-    public ComputerProduct(Integer id, String name, Number price, Number discountedPrice, Integer quantity, StatusType status, ComputerType computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
+    public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, ComputerType computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
         setId(id);
         setName(name);
         setPrice(price);
