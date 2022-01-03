@@ -4,20 +4,21 @@ import com.example.shoppingpoint.model.product.Product;
 import com.example.shoppingpoint.utils.StoreType;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Store {
     private String name;
     private String address;
     private Integer pointsInEuro;
     private StoreType type;
-    private ArrayList<Product> products;
-    private ArrayList<SoldProduct> soldProducts;
+    private List<Product> products;
+    private List<SoldProduct> soldProducts;
 
     public Store(String name, String address, Integer pointsInEuro, StoreType type) {
         this(name, address, pointsInEuro, type, new ArrayList<>(), new ArrayList<>());
     }
 
-    public Store(String name, String address, Integer pointsInEuro, StoreType type, ArrayList<Product> products, ArrayList<SoldProduct> soldProducts) {
+    public Store(String name, String address, Integer pointsInEuro, StoreType type, List<Product> products, List<SoldProduct> soldProducts) {
         setName(name);
         setAddress(address);
         setPointsInEuro(pointsInEuro);
@@ -58,19 +59,19 @@ public class Store {
         this.type = type;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(ArrayList<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
-    public ArrayList<SoldProduct> getSoldProducts() {
+    public List<SoldProduct> getSoldProducts() {
         return soldProducts;
     }
 
-    public void setSoldProducts(ArrayList<SoldProduct> soldProducts) {
+    public void setSoldProducts(List<SoldProduct> soldProducts) {
         this.soldProducts = soldProducts;
     }
 }

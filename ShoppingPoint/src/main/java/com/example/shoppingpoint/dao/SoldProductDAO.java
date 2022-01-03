@@ -8,7 +8,7 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class SoldProductDAO {
-    public SoldProductDAO() { throw new IllegalStateException(); }
+    private SoldProductDAO() { throw new IllegalStateException(); }
 
     public static SoldProduct getSoldProductById(Integer id) throws Exception {
         Statement statement = null;
@@ -56,7 +56,6 @@ public class SoldProductDAO {
     }
 
     public static void saveSoldProduct(Integer quantity, LocalDate date, Integer productId) throws Exception {
-//        Statement statement = null;
         PreparedStatement statement = null;
         Connection connection = null;
 
