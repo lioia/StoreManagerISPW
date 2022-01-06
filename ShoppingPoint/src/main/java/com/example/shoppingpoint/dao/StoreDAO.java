@@ -17,10 +17,10 @@ public class StoreDAO {
         throw new IllegalStateException();
     }
 
-    public static List<Store> getAllStores() throws Exception {
+    public static ArrayList<Store> getAllStores() throws Exception {
         Statement statement = null;
         Connection connection = null;
-        List<Store> stores = new ArrayList<Store>();
+        ArrayList<Store> stores = new ArrayList<Store>();
 
         try {
             // Create Connection
@@ -29,7 +29,7 @@ public class StoreDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Execute query
             ResultSet rs = statement.executeQuery("SELECT * FROM Store");
-            while (!rs.next()) {
+            while (rs.next()) {
                 String name = rs.getString("Name");
                 String address = rs.getString("Address");
                 Integer pointsInEuro = rs.getInt("PointsInEuro");

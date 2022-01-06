@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.geometry.Insets?>
+
+<Pane prefHeight="165.0" prefWidth="287.0"
+      style="-fx-background-color: #e4e3e3; -fx-border-radius: 16.0; -fx-border-color: #000; -fx-background-radius: 24;"
+      xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <AnchorPane prefHeight="165.0" prefWidth="287.0">
+        <Text fx:id="storeName" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Name"
+              wrappingWidth="155.13671875">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Text>
+        <Text fx:id="storeAddress" layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Address"
+              wrappingWidth="163.13671875">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <Text fx:id="storeType" layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Type"
+              wrappingWidth="127.0">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Text>
+        <Button layoutX="212.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0"
+                style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;">
+            <effect>
+                <DropShadow offsetY="2.0"/>
+            </effect>
+            <font>
+                <Font size="24.0"/>
+            </font>
+            <graphic>
+                <FontIcon iconLiteral="mdal-arrow_forward" iconSize="32"/>
+            </graphic>
+        </Button>
+    </AnchorPane>
+    <FlowPane.margin>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </FlowPane.margin>
+</Pane>

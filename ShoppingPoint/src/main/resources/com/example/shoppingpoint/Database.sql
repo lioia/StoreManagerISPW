@@ -12,7 +12,7 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Store (
-    Name VARCHAR(16) PRIMARY KEY,
+    Name VARCHAR(50) PRIMARY KEY,
     Address VARCHAR(25) NOT NULL,
     Type ENUM("CLOTHES", "BOOKS", "VIDEOGAMES", "ELECTRONICS") NOT NULL,
     PointsInEuro INT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE Store (
 
 CREATE TABLE Product (
     ProductId INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(16) NOT NULL,
+    Name VARCHAR(50) NOT NULL,
     Price FLOAT NOT NULL,
     DiscountedPrice FLOAT NOT NULL,
     Quantity INT NOT NULL,
@@ -43,15 +43,15 @@ CREATE TABLE Product (
     ComputerType ENUM("LAPTOP", "DESKTOP", "TWOINONE", "TOUCHSCREEN"),
     Ram INT,
     SSD INT,
-    CPU VARCHAR(16),
-    GPU VARCHAR(16),
+    CPU VARCHAR(25),
+    GPU VARCHAR(25),
     BatterySize INT,
     DisplaySize FLOAT,
     Brand VARCHAR(16),
     EnergyClass VARCHAR(4),
     Specs TEXT,
 
-    Store VARCHAR(16) NOT NULL,
+    Store VARCHAR(50) NOT NULL,
     FOREIGN KEY (Store) REFERENCES Store(Name) ON DELETE CASCADE
 );
 
