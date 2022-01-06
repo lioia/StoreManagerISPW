@@ -17,10 +17,10 @@ public class StoreDAO {
         throw new IllegalStateException();
     }
 
-    public static ArrayList<Store> getAllStores() throws Exception {
+    public static List<Store> getAllStores() throws Exception {
         Statement statement = null;
         Connection connection = null;
-        ArrayList<Store> stores = new ArrayList<Store>();
+        ArrayList<Store> stores = new ArrayList<>();
 
         try {
             // Create Connection

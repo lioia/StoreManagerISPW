@@ -6,14 +6,11 @@ import com.example.shoppingpoint.controller.SearchStoreController;
 import com.example.shoppingpoint.model.Store;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class SearchStoreGraphicController {
 
@@ -29,7 +26,7 @@ public class SearchStoreGraphicController {
 
         SearchStoreBean bean = new SearchStoreBean();
 
-        ArrayList<Store> stores = controller.getStores(bean);
+        List<Store> stores = controller.getStores(bean);
 
         for (Store store : stores) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_pane.fxml"));
