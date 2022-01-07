@@ -12,9 +12,9 @@ VALUES ('client', 'client_test@example.com', 'password', 'CLIENT'),
 
 INSERT INTO Store (`Name`, `Address`, `Type`, `PointsInEuro`, `StoreOwner`)
 VALUES ('Clothes Store', 'Via Finta 1', 'CLOTHES', 5, 'storeowner_1'),
-       ('Book Store', 'Via Finta 2', 'CLOTHES', 10, 'storeowner_2'),
-       ('Game Store', 'Via Finta 3', 'CLOTHES', 10, 'storeowner_3'),
-       ('Electronics Store', 'Via Finta 4', 'CLOTHES', 5, 'storeowner_4');
+       ('Book Store', 'Via Finta 2', 'BOOKS', 10, 'storeowner_2'),
+       ('Game Store', 'Via Finta 3', 'VIDEOGAMES', 10, 'storeowner_3'),
+       ('Electronics Store', 'Via Finta 4', 'ELECTRONICS', 5, 'storeowner_4');
 
 # Clothes Product
 INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Status`, `Store`, `Size`, `Material`)
