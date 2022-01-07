@@ -26,7 +26,7 @@ public class LoginGraphicController {
     @FXML
     protected void goToRegister(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("register.fxml"));
-        ((Node)event.getSource()).getScene().setRoot(fxmlLoader.load());
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
     @FXML
@@ -37,20 +37,20 @@ public class LoginGraphicController {
 
         controller = new LoginController();
         User user = controller.login(bean);
-        if(user instanceof Client){
+        if (user instanceof Client) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
         }
-        if(user instanceof StoreOwner){
+        if (user instanceof StoreOwner) {
 
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
 
         }
-        if(user instanceof Supplier){
+        if (user instanceof Supplier) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
-            }
+            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+        }
 
     }
 }

@@ -30,7 +30,7 @@ public class SearchStoreBean {
             case "Books" -> this.typeFilter = StoreType.BOOKS;
             case "Video Games" -> this.typeFilter = StoreType.VIDEOGAMES;
             case "Electronics" -> this.typeFilter = StoreType.ELECTRONICS;
-            default -> this.typeFilter = null;
+            default -> this.typeFilter = null; // All
         }
     }
 
