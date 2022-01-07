@@ -13,20 +13,17 @@
       style="-fx-background-color: #e4e3e3; -fx-border-radius: 16.0; -fx-border-color: #000; -fx-background-radius: 24;"
       xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <AnchorPane prefHeight="165.0" prefWidth="287.0">
-        <Text fx:id="storeName" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Name"
-              wrappingWidth="155.13671875">
+        <Text fx:id="storeName" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Name">
             <font>
                 <Font size="24.0"/>
             </font>
         </Text>
-        <Text fx:id="storeAddress" layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Address"
-              wrappingWidth="163.13671875">
+        <Text fx:id="storeAddress" layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Address">
             <font>
                 <Font size="18.0"/>
             </font>
         </Text>
-        <Text fx:id="storeType" layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Type"
-              wrappingWidth="127.0">
+        <Text fx:id="storeType" layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Type">
             <font>
                 <Font size="18.0"/>
             </font>
