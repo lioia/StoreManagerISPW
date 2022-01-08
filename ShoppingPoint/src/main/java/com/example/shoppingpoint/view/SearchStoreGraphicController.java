@@ -4,19 +4,21 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.controller.SearchStoreController;
 import com.example.shoppingpoint.model.Store;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SearchStoreGraphicController {
@@ -58,6 +60,22 @@ public class SearchStoreGraphicController {
             ((Text) node.lookup("#storeName")).setText(store.getName());
             ((Text) node.lookup("#storeAddress")).setText(store.getAddress());
             ((Text) node.lookup("#storeType")).setText("Type: " + store.getType().name().toLowerCase());
+            ((Button) node.lookup("#navigateButton")).setOnAction((ActionEvent event) -> {
+                try {
+//                    Load store fxml
+                    FXMLLoader storeFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
+                    Parent storeNode = storeFxml.load();
+//                    Get the graphic controller from the store page
+                    StoreGraphicController storeController = storeFxml.getController();
+//                    Set the store on the controller
+                    storeController.setStore(store);
+//                    Navigate to store
+                    ((Node) event.getSource()).getScene().setRoot(storeNode);
+                } catch (IOException e) {
+//                    TODO handle exception
+                    e.printStackTrace();
+                }
+            });
             storesPane.getChildren().add(node);
         }
     }
