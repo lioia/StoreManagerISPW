@@ -10,8 +10,11 @@
 <?import javafx.geometry.Insets?>
 
 <Pane prefHeight="165.0" prefWidth="287.0"
-      style="-fx-background-color: #e4e3e3; -fx-border-radius: 16.0; -fx-border-color: #000; -fx-background-radius: 24;"
+      style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
       xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow/>
+    </effect>
     <AnchorPane prefHeight="165.0" prefWidth="287.0">
         <Text fx:id="storeName" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Name">
             <font>
