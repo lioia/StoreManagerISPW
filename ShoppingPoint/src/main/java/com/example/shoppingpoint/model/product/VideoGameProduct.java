@@ -1,6 +1,7 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ConsoleType;
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class VideoGameProduct extends Product {
@@ -18,6 +19,7 @@ public class VideoGameProduct extends Product {
         setPlot(plot);
         setGenre(genre);
         setConsoleType(consoleType);
+        setType(ProductType.VIDEOGAME);
     }
 
     public String getPlot() {

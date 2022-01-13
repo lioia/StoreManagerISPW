@@ -1,6 +1,7 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ConsoleType;
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class GameConsoleProduct extends Product {
@@ -16,6 +17,7 @@ public class GameConsoleProduct extends Product {
         setStatus(status);
         setConsoleType(consoleType);
         setDigitalOnly(digitalOnly);
+        setType(ProductType.GAMECONSOLE);
     }
 
     public ConsoleType getConsoleType() {

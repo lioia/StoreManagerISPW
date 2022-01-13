@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class BookProduct extends Product {
@@ -17,6 +18,7 @@ public class BookProduct extends Product {
         setAuthor(author);
         setPlot(plot);
         setGenre(genre);
+        setType(ProductType.BOOK);
     }
 
     public String getAuthor() {

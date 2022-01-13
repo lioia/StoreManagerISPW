@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class ClothesProduct extends Product {
@@ -15,6 +16,7 @@ public class ClothesProduct extends Product {
         setStatus(status);
         setSize(size);
         setMaterial(material);
+        setType(ProductType.CLOTHES);
     }
 
     public String getSize() {

@@ -1,6 +1,7 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ComputerType;
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class ComputerProduct extends Product {
@@ -28,6 +29,7 @@ public class ComputerProduct extends Product {
         setGpu(gpu);
         setBrand(brand);
         setDisplaySize(displaySize);
+        setType(ProductType.COMPUTER);
     }
 
     public ComputerType getComputerType() {

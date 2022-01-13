@@ -12,4 +12,5 @@ module com.example.shoppingpoint {
     exports com.example.shoppingpoint;
     exports com.example.shoppingpoint.view;
     exports com.example.shoppingpoint.model;
+    exports com.example.shoppingpoint.model.user;
 }

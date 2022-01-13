@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 import javafx.scene.image.Image;
 
@@ -11,6 +12,7 @@ public abstract class Product {
     private Integer quantity;
     private StatusType status;
     private Image image;
+    private ProductType type;
 
     public Integer getId() {
         return id;
@@ -66,5 +68,13 @@ public abstract class Product {
 
     public void setImage(Image image) {
         this.image = image;
+    }
+
+    public ProductType getType() {
+        return type;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type;
     }
 }

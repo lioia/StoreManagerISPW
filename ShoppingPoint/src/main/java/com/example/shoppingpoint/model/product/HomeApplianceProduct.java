@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
+import com.example.shoppingpoint.utils.ProductType;
 import com.example.shoppingpoint.utils.StatusType;
 
 public class HomeApplianceProduct extends Product {
@@ -15,6 +16,7 @@ public class HomeApplianceProduct extends Product {
         setStatus(status);
         setEnergyClass(energyClass);
         setSpecs(specs);
+        setType(ProductType.HOMEAPPLIANCES);
     }
 
     public String getEnergyClass() {
