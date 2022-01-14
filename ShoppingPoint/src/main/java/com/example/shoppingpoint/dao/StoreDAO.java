@@ -57,7 +57,6 @@ public class StoreDAO {
         return stores;
     }
 
-
     public static Store getStoreByName(String name) throws Exception {
         Statement statement = null;
         Connection connection = null;
