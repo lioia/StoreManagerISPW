@@ -33,11 +33,7 @@
             </Button>
         </right>
         <effect>
-            <DropShadow offsetX="-1.0" offsetY="2.0">
-                <color>
-                    <Color red="0.5789473652839661" green="0.5789473652839661" blue="0.5789473652839661"/>
-                </color>
-            </DropShadow>
+            <DropShadow/>
         </effect>
     </BorderPane>
     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="320.0" prefWidth="384.0"
+            style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <effect>
+        <DropShadow/>
+    </effect>
+    <FlowPane.margin>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </FlowPane.margin>
+    <Pane layoutX="16.0" layoutY="16.0" style="-fx-background-radius: 16px; -fx-background-color: WHITE">
+        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true"/>
+        <effect>
+            <DropShadow/>
+        </effect>
+    </Pane>
+    <Label layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name"/>
+    <Label layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>
+    <Label layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price"/>
+    <Label layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"/>
+    <Label layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px" text="Description"/>
+    <Button layoutX="235.0" layoutY="255.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="127.0"
+            style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy now">
+        <effect>
+            <DropShadow offsetY="2.0"/>
+        </effect>
+        <font>
+            <Font size="23.0"/>
+        </font>
+    </Button>
+</AnchorPane>
