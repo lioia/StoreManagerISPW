@@ -90,7 +90,7 @@ public class ProductDAO {
 
     private static Product getProduct(ResultSet rs)  throws Exception{
         Product product;
-        Integer id = rs.getInt("Id");
+        Integer id = rs.getInt("ProductId");
         String name = rs.getString("Name");
         Float price = rs.getFloat("Price");
         Float discountedPrice = rs.getFloat("DiscountedPrice");
