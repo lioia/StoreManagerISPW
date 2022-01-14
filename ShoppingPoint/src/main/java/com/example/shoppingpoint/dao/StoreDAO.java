@@ -101,7 +101,7 @@ public class StoreDAO {
         return store;
     }
 
-    public static void saveStore(String name, String address, Integer pointsInEuro, StoreType type) throws Exception {
+    public static void saveStore(String name, String address, StoreType type, String storeOwner) throws Exception {
         Statement statement = null;
         Connection connection = null;
 
@@ -111,7 +111,8 @@ public class StoreDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro) VALUES ('%s', '%s', '%s', %d)", name, address, type, pointsInEuro);
+            // TODO passare null a punti
+            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%s')", name, address, type,0,storeOwner );
             // Execute query
 //          TODO controllo result
             int result = statement.executeUpdate(sql);

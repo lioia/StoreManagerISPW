@@ -22,7 +22,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="159.0" layoutY="253.0" text="Adress" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
+            <Label layoutX="159.0" layoutY="253.0" text="Address" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -33,7 +33,7 @@
                </font>
             </Label>
             <TextField fx:id="nameTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
+            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px" text="Register" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" onAction="#registerNewStore"/>
             <ComboBox fx:id="typeComboBoxField" layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0" visibleRowCount="4" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" style="-fx-font-size: 24px">
                <items>
                   <FXCollections fx:factory="observableArrayList">
@@ -44,7 +44,7 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <TextField fx:id="addresTextField" layoutX="360.0" layoutY="158.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
+            <TextField fx:id="addressTextField" layoutX="360.0" layoutY="158.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
          </children>
       </AnchorPane>
    </center>

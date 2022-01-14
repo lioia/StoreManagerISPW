@@ -15,7 +15,7 @@ CREATE TABLE Store (
     Name VARCHAR(50) PRIMARY KEY,
     Address VARCHAR(25) NOT NULL,
     Type ENUM("CLOTHES", "BOOKS", "VIDEOGAMES", "ELECTRONICS") NOT NULL,
-    PointsInEuro INT NOT NULL,
+    PointsInEuro INT ,
 
     StoreOwner VARCHAR(16) NOT NULL,
     FOREIGN KEY (StoreOwner) REFERENCES User(Username) ON DELETE CASCADE
