@@ -11,10 +11,11 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
-import java.io.IOException;
 public class NewStoreGraphicController {
 
-    NewStoreController controller;
+    private NewStoreController controller;
+
+    private String storeOwnerName;
 
     @FXML
     private TextField nameTextField;
@@ -23,23 +24,23 @@ public class NewStoreGraphicController {
     private TextField addressTextField;
 
     @FXML
-    private ComboBox typeComboBoxField;
+    private ComboBox<String> typeComboBoxField;
 
     @FXML
     protected void registerNewStore(ActionEvent actionEvent) throws Exception {
         String name = nameTextField.getText();
         String address = addressTextField.getText();
-        String type = (String) typeComboBoxField.getValue();
+        String type = typeComboBoxField.getValue();
 
         NewStoreBean bean = new NewStoreBean(name, address, type);
 
         controller = new NewStoreController();
-       // TODO passare il nome del proprietario
-        String storeOwner="storeowner2";
-        Store store = controller.register(bean,storeOwner);
+        Store store = controller.register(bean, storeOwnerName);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
-
+    public void setStoreOwnerName(String storeOwnerName) {
+        this.storeOwnerName = storeOwnerName;
+    }
 }

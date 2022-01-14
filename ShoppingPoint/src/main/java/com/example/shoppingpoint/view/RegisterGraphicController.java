@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
@@ -54,10 +55,11 @@ public class RegisterGraphicController {
             ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
         }
         if(user instanceof StoreOwner){
-
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_store.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
-
+            Parent node = fxmlLoader.load();
+            NewStoreGraphicController controller = fxmlLoader.getController();
+            controller.setStoreOwnerName(user.getUsername());
+            ((Node)actionEvent.getSource()).getScene().setRoot(node);
         }
         if(user instanceof Supplier){
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
