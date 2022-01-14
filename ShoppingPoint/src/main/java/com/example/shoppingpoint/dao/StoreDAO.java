@@ -1,12 +1,7 @@
 package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.model.Store;
-import com.example.shoppingpoint.model.user.Client;
-import com.example.shoppingpoint.model.user.StoreOwner;
-import com.example.shoppingpoint.model.user.Supplier;
-import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.utils.StoreType;
-import com.example.shoppingpoint.utils.UserType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -111,10 +106,9 @@ public class StoreDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
             // TODO passare null a punti
-            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%s')", name, address, type,0,storeOwner );
+            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%s')", name, address, type, 0, storeOwner);
             // Execute query
-//          TODO controllo result
-            int result = statement.executeUpdate(sql);
+            statement.executeUpdate(sql);
         } finally {
             // Clean-up dell'ambiente
             try {

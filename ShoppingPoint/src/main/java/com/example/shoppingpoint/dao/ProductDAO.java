@@ -1,6 +1,5 @@
 package com.example.shoppingpoint.dao;
 
-import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.product.*;
 import com.example.shoppingpoint.utils.*;
 import javafx.scene.image.Image;
@@ -88,7 +87,7 @@ public class ProductDAO {
         return product;
     }
 
-    private static Product getProduct(ResultSet rs)  throws Exception{
+    private static Product getProduct(ResultSet rs) throws Exception {
         Product product;
         Integer id = rs.getInt("ProductId");
         String name = rs.getString("Name");
@@ -100,7 +99,7 @@ public class ProductDAO {
         Image image = null;
 //            Load Image
         Blob imageBlob = rs.getBlob("Image");
-        if(!rs.wasNull()) { // Image was not null
+        if (!rs.wasNull()) { // Image was not null
             InputStream is = imageBlob.getBinaryStream();
             image = new Image(is);
         }
@@ -215,8 +214,7 @@ public class ProductDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Execute query
-//          TODO controllo result
-            int result = statement.executeUpdate(sql);
+            statement.executeUpdate(sql);
         } finally {
             // Clean-up dell'ambiente
             try {

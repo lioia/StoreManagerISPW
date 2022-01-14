@@ -2,13 +2,14 @@ package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.product.*;
-import com.example.shoppingpoint.utils.StoreType;
 
 import java.sql.*;
 import java.time.LocalDate;
 
 public class SoldProductDAO {
-    private SoldProductDAO() { throw new IllegalStateException(); }
+    private SoldProductDAO() {
+        throw new IllegalStateException();
+    }
 
     public static SoldProduct getSoldProductById(Integer id) throws Exception {
         Statement statement = null;
@@ -67,9 +68,8 @@ public class SoldProductDAO {
             statement.setInt(1, quantity);
             statement.setDate(2, Date.valueOf(date));
             statement.setInt(3, productId);
-           // Execute query
-//          TODO controllo result
-            int result = statement.executeUpdate();
+            // Execute query
+            statement.executeUpdate();
         } finally {
             // Clean-up dell'ambiente
             try {

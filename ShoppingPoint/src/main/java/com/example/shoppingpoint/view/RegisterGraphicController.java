@@ -36,7 +36,7 @@ public class RegisterGraphicController {
     @FXML
     protected void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
-        ((Node)event.getSource()).getScene().setRoot(fxmlLoader.load());
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
     @FXML
@@ -44,26 +44,26 @@ public class RegisterGraphicController {
         String username = usernameTextField.getText();
         String password = passwordTextField.getText();
         String verifyPassword = verifyPasswordTextField.getText();
-        String email  = emailTextField.getText();
-        String type =(String) userTypeField.getValue();
-        RegisterBean bean = new RegisterBean(email,username,type, password, verifyPassword);
+        String email = emailTextField.getText();
+        String type = (String) userTypeField.getValue();
+        RegisterBean bean = new RegisterBean(email, username, type, password, verifyPassword);
 
         controller = new RegisterController();
         User user = controller.register(bean);
-        if(user instanceof Client){
+        if (user instanceof Client) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
         }
-        if(user instanceof StoreOwner){
+        if (user instanceof StoreOwner) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_store.fxml"));
             Parent node = fxmlLoader.load();
-            NewStoreGraphicController controller = fxmlLoader.getController();
-            controller.setStoreOwnerName(user.getUsername());
-            ((Node)actionEvent.getSource()).getScene().setRoot(node);
+            NewStoreGraphicController newStoreController = fxmlLoader.getController();
+            newStoreController.setStoreOwnerName(user.getUsername());
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
         }
-        if(user instanceof Supplier){
+        if (user instanceof Supplier) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node)actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
         }
     }
 }

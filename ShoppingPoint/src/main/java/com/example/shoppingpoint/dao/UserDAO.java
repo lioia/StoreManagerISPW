@@ -73,8 +73,7 @@ public class UserDAO {
             // Get user with specified username
             String sql = String.format("INSERT INTO User (Username, Email, Password, Type) VALUES ('%s', '%s', '%s', '%s')", username, email, password, userType);
             // Execute query
-//          TODO controllo result
-            int result = statement.executeUpdate(sql);
+            statement.executeUpdate(sql);
         } finally {
             // Clean-up dell'ambiente
             try {
