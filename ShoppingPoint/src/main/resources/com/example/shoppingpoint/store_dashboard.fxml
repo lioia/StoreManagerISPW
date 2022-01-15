@@ -14,11 +14,11 @@
             <DropShadow />
         </effect>
         <center>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Store Dashboard - Shopping Point" BorderPane.alignment="CENTER">
+            <Label fx:id="labelStoreName"  text="Store Dashboard - Shopping Point" BorderPane.alignment="CENTER">
                 <font>
                     <Font size="36.0" />
                 </font>
-            </Text>
+            </Label>
         </center>
         <right>
             <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
@@ -105,84 +105,8 @@
         </Button>
     </HBox>
     <ScrollPane fitToWidth="true" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
-        <FlowPane>
-            <Pane prefHeight="360.0" prefWidth="320.0" style="-fx-background-color: #E0E0E0; -fx-background-radius: 16;">
-                <effect>
-                    <DropShadow />
-                </effect>
-                <FlowPane.margin>
-                    <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-                </FlowPane.margin>
-                <Pane prefHeight="64.0" prefWidth="64.0" style="-fx-border-color: #000000;" translateX="16.0" translateY="16.0">
-                    <ImageView fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
-                </Pane>
-                <VBox translateX="96.0" translateY="16.0">
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Discounted Price">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Text>
-                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity">
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <VBox.margin>
-                            <Insets bottom="10.0" />
-                        </VBox.margin>
-                    </Text>
-                </VBox>
-                <HBox translateX="64.0" translateY="288.0">
-                    <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Edit">
-                        <effect>
-                            <DropShadow />
-                        </effect>
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets right="8.0" />
-                        </HBox.margin>
-                    </Button>
-                    <Button mnemonicParsing="false" onAction="#goToRequest" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Request">
-                        <effect>
-                            <DropShadow />
-                        </effect>
-                        <font>
-                            <Font size="24.0" />
-                        </font>
-                        <HBox.margin>
-                            <Insets />
-                        </HBox.margin>
-                    </Button>
-                </HBox>
-            </Pane>
+        <FlowPane fx:id="productsPane">
+
         </FlowPane>
     </ScrollPane>
 </VBox>

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -44,7 +45,12 @@ public class LoginGraphicController {
         if (user instanceof StoreOwner) {
 
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            Parent node = fxmlLoader.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
+            StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
+            storeDashboardController.setStoreOwner(user);
+            storeDashboardController.initData();
+            
 
         }
         if (user instanceof Supplier) {

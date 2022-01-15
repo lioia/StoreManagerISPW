@@ -40,6 +40,7 @@
                 <ComboBox fx:id="userTypeField" layoutX="360.0" layoutY="277.0" prefHeight="40.0" prefWidth="384.0"
                           style="-fx-font-size: 24px" visibleRowCount="3" AnchorPane.leftAnchor="360.0"
                           AnchorPane.topAnchor="158.0">
+
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Client"/>

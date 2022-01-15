@@ -95,6 +95,50 @@ public class StoreDAO {
         return store;
     }
 
+    public static Store getStoreByStoreOwnerUsername(String username) throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        Store store = null;
+
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Get store with specified store owner
+            String sql = String.format("SELECT * FROM Store WHERE StoreOwner='%s'", username);
+            // Execute query
+            ResultSet rs = statement.executeQuery(sql);
+            // Empty result
+            if (!rs.first()) {
+                throw new Exception("Not found " + username +"'store");
+            }
+            rs.first();
+            String name = rs.getString("Name");
+            String address = rs.getString("Address");
+            Integer pointsInEuro = rs.getInt("PointsInEuro");
+            StoreType type = StoreType.valueOf(rs.getString("Type"));
+            store = new Store(name, address, pointsInEuro, type);
+
+            rs.close();
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return store;
+    }
+
     public static void saveStore(String name, String address, StoreType type, String storeOwner) throws Exception {
         Statement statement = null;
         Connection connection = null;
