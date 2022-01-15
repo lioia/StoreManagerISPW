@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
+import javafx.scene.control.TextField;
+
 
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
@@ -68,18 +70,18 @@ public class StoreDashboardGraphicController {
         List<GenericProduct> products = controller.getProductsFromStore(store);
 
         for (GenericProduct product : products) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_product_pane.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
             AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
-            ((Label) pane.lookup("#name")).setText(product.getName());
+            ((TextField) pane.lookup("#name")).setText(product.getName());
             String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#price")).setText(formattedPrice);
+            ((TextField) pane.lookup("#price")).setText(formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
+            ((TextField) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             //((Label) pane.lookup("#status")).setText(getStatusNameFromType(product.getStatus()));
-            ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
-//            TODO button click
+            ((TextField) pane.lookup("#description")).setText(product.getDescription());
+            ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
+//            TODO
             });
 //            Add product to the view
             productsPane.getChildren().add(pane);
