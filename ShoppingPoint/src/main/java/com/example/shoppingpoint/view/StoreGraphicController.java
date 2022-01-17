@@ -10,9 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 
@@ -21,7 +19,7 @@ import java.util.List;
 
 public class StoreGraphicController {
     private Store store;
-    private StoreController controller;
+    private final StoreController controller;
 
     @FXML
     private Label storeNameText;
@@ -29,6 +27,8 @@ public class StoreGraphicController {
     private Label loyaltyCardName;
     @FXML
     private FlowPane productsPane;
+    @FXML
+    private TextField searchTextField;
 
     public StoreGraphicController() {
         controller = new StoreController();
@@ -53,6 +53,14 @@ public class StoreGraphicController {
     public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
+
+    @FXML
+    public void search() throws Exception {
+//        TODO filtro per tipo
+        String searchQuery = searchTextField.getText();
+
+        createProductsView(new StoreBean(store.getName(), searchQuery));
     }
 
     private void createProductsView(StoreBean bean) throws Exception {

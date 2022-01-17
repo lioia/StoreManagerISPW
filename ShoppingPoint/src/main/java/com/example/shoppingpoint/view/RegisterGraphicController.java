@@ -31,7 +31,7 @@ public class RegisterGraphicController {
     @FXML
     private PasswordField verifyPasswordTextField;
     @FXML
-    private ComboBox userTypeField;
+    private ComboBox<String> userTypeField;
 
     @FXML
     protected void goBack(ActionEvent event) throws IOException {
@@ -45,7 +45,7 @@ public class RegisterGraphicController {
         String password = passwordTextField.getText();
         String verifyPassword = verifyPasswordTextField.getText();
         String email = emailTextField.getText();
-        String type = (String) userTypeField.getValue();
+        String type = userTypeField.getValue();
         RegisterBean bean = new RegisterBean(email, username, type, password, verifyPassword);
 
         controller = new RegisterController();
