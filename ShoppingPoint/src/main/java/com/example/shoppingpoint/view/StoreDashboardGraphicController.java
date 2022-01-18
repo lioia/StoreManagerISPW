@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.dao.StoreDAO;
+import com.example.shoppingpoint.view.ClientListGraphicController;
 
 import java.io.IOException;
 import java.util.List;
@@ -53,7 +55,10 @@ public class StoreDashboardGraphicController {
     @FXML
     public void goToClientList(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
-        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+        Parent node = fxmlLoader.load();
+        ((Node) event.getSource()).getScene().setRoot(node);
+        ClientListGraphicController clientListGraphicController= fxmlLoader.getController();
+        clientListGraphicController.initData(storeOwner,store);
     }
 
     public void goToRequest(ActionEvent event) throws IOException {
