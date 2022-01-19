@@ -60,7 +60,7 @@ public class ProductAdapter implements GenericProduct {
             }
             case COMICS -> {
                 ComicsProduct comics = (ComicsProduct) product;
-                return String.format("Author: %s. Artist: %s\n Genre: %s. Volume Number: %d\nPlot: %s", comics.getAuthor(), comics.getArtist(), comics.getGenre(), comics.getVolume(), comics.getPlot());
+                return String.format("Author: %s. Artist: %s\nGenre: %s. Volume Number: %d\nPlot: %s", comics.getAuthor(), comics.getArtist(), comics.getGenre(), comics.getVolume(), comics.getPlot());
             }
             case VIDEOGAME -> {
                 VideoGameProduct videoGame = (VideoGameProduct) product;

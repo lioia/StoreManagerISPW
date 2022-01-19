@@ -24,12 +24,13 @@
             <DropShadow/>
         </effect>
     </Pane>
-    <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name"/>
+    <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" maxWidth="204"/>
     <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>
     <Label fx:id="discountedPrice" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price"/>
     <Label fx:id="status" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"/>
-<!--    TODO fix testo troppo lungo -->
-    <Label fx:id="description" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px" text="Description"/>
+    <!--    TODO aggiungere tasto per vedere tutta la descrizione -->
+    <Label fx:id="description" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px" text="Description"
+           maxWidth="204"/>
     <Button fx:id="buyButton" layoutX="235.0" layoutY="255.0" mnemonicParsing="false" prefHeight="51.0"
             prefWidth="127.0"
             style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy now">
