@@ -4,26 +4,25 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.controller.SearchStoreController;
 import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.user.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-import java.io.IOException;
 import java.util.List;
 
 public class SearchStoreGraphicController {
 
+    private Client client;
     private SearchStoreController controller;
 
     @FXML
@@ -72,6 +71,7 @@ public class SearchStoreGraphicController {
                     StoreGraphicController storeController = storeFxml.getController();
 //                    Set the store on the controller and initialize data
                     storeController.setStore(store);
+                    storeController.setClient(client);
                     storeController.initData();
                 } catch (Exception e) {
 //                    TODO handle exception
@@ -86,5 +86,9 @@ public class SearchStoreGraphicController {
     public void filter(ActionEvent event) throws Exception {
         String filter = ((RadioButton) event.getSource()).getText();
         createStorePaneView(new SearchStoreBean(filter, ""));
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

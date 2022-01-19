@@ -5,6 +5,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.utils.StatusType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class StoreGraphicController {
+    private Client client;
     private Store store;
     private final StoreController controller;
 
@@ -41,12 +43,12 @@ public class StoreGraphicController {
         createProductsView(new StoreBean(store.getName()));
     }
 
-    public Store getStore() {
-        return store;
-    }
-
     public void setStore(Store store) {
         this.store = store;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     @FXML
