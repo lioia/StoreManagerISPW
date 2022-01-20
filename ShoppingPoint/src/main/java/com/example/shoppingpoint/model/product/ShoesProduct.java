@@ -1,14 +1,13 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ProductType;
-import com.example.shoppingpoint.utils.StatusType;
 
 public class ShoesProduct extends Product {
     private String size;
     private String material;
     private String shoesType;
 
-    public ShoesProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String size, String material, String shoesType) {
+    public ShoesProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String size, String material, String shoesType) {
         setId(id);
         setName(name);
         setPrice(price);

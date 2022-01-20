@@ -1,11 +1,9 @@
 package com.example.shoppingpoint.model.product;
 
-import com.example.shoppingpoint.utils.ComputerType;
 import com.example.shoppingpoint.utils.ProductType;
-import com.example.shoppingpoint.utils.StatusType;
 
 public class ComputerProduct extends Product {
-    private ComputerType computerType;
+    private String computerType;
     private Integer ram;
     private Integer ssd;
     private Integer batterySize;
@@ -14,7 +12,7 @@ public class ComputerProduct extends Product {
     private String brand;
     private Float displaySize;
 
-    public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, ComputerType computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
+    public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
         setId(id);
         setName(name);
         setPrice(price);
@@ -32,11 +30,11 @@ public class ComputerProduct extends Product {
         setType(ProductType.COMPUTER);
     }
 
-    public ComputerType getComputerType() {
+    public String getComputerType() {
         return computerType;
     }
 
-    public void setComputerType(ComputerType computerType) {
+    public void setComputerType(String computerType) {
         this.computerType = computerType;
     }
 

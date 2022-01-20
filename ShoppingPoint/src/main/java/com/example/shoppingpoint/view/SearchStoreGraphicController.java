@@ -68,9 +68,7 @@ public class SearchStoreGraphicController {
 //                    Get the graphic controller from the store page
                     StoreGraphicController storeController = storeFxml.getController();
 //                    Set the store on the controller and initialize data
-                    storeController.setStore(store);
-                    storeController.setClient(client);
-                    storeController.initData();
+                    storeController.initData(store, getClient());
                 } catch (Exception e) {
 //                    TODO handle exception
                     e.printStackTrace();
@@ -88,5 +86,9 @@ public class SearchStoreGraphicController {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Client getClient() {
+        return this.client;
     }
 }

@@ -1,9 +1,6 @@
 package com.example.shoppingpoint.adapter;
 
 import com.example.shoppingpoint.model.product.*;
-import com.example.shoppingpoint.utils.ComputerType;
-import com.example.shoppingpoint.utils.ConsoleType;
-import com.example.shoppingpoint.utils.StatusType;
 import javafx.scene.image.Image;
 
 public class ProductAdapter implements GenericProduct {
@@ -39,7 +36,7 @@ public class ProductAdapter implements GenericProduct {
     }
 
     @Override
-    public StatusType getStatus() {
+    public String getStatus() {
         return this.product.getStatus();
     }
 
@@ -64,7 +61,7 @@ public class ProductAdapter implements GenericProduct {
             }
             case VIDEOGAME -> {
                 VideoGameProduct videoGame = (VideoGameProduct) product;
-                return String.format("Genre: %s. Console: %s\nPlot: %s", videoGame.getGenre(), getConsoleNameFromType(videoGame.getConsoleType()), videoGame.getPlot());
+                return String.format("Genre: %s. Console: %s\nPlot: %s", videoGame.getGenre(), videoGame.getConsoleType(), videoGame.getPlot());
             }
             case GAMECONSOLE -> {
                 GameConsoleProduct console = (GameConsoleProduct) product;
@@ -72,55 +69,13 @@ public class ProductAdapter implements GenericProduct {
             }
             case COMPUTER -> {
                 ComputerProduct computer = (ComputerProduct) product;
-                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d\nCPU: %s. GPU: %s", getComputerNameFromType(computer.getComputerType()), computer.getBrand(), computer.getDisplaySize(), computer.getRam(), computer.getSsd(), computer.getBatterySize(), computer.getCpu(), computer.getGpu());
+                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d\nCPU: %s. GPU: %s", computer.getComputerType(), computer.getBrand(), computer.getDisplaySize(), computer.getRam(), computer.getSsd(), computer.getBatterySize(), computer.getCpu(), computer.getGpu());
             }
             case HOMEAPPLIANCES -> {
                 HomeApplianceProduct homeAppliance = (HomeApplianceProduct) product;
                 return String.format("Energy Class: %s. Specs: %s", homeAppliance.getEnergyClass(), homeAppliance.getSpecs());
             }
             default -> throw new IllegalStateException("Unexpected value: " + product.getType());
-        }
-    }
-
-    private String getConsoleNameFromType(ConsoleType type) {
-        switch (type) {
-            case PS5 -> {
-                return "PlayStation 5";
-            }
-            case PS4 -> {
-                return "PlayStation 4";
-            }
-            case XBOXSERIESX -> {
-                return "Xbox Series X";
-            }
-            case XBOXSERIESS -> {
-                return "Xbox Series S";
-            }
-            case XBOXONE -> {
-                return "Xbox One";
-            }
-            case NINTENDOSWITCH -> {
-                return "Nintendo Switch";
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
-        }
-    }
-
-    private String getComputerNameFromType(ComputerType type) {
-        switch (type) {
-            case LAPTOP -> {
-                return "Laptop";
-            }
-            case DESKTOP -> {
-                return "Desktop";
-            }
-            case TWOINONE -> {
-                return "2 in 1";
-            }
-            case TOUCHSCREEN -> {
-                return "Touch Screen";
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 }

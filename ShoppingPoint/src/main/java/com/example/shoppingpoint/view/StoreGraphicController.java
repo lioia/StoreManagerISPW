@@ -6,7 +6,6 @@ import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
-import com.example.shoppingpoint.utils.StatusType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,19 +35,13 @@ public class StoreGraphicController {
         controller = new StoreController();
     }
 
-    public void initData() throws Exception {
+    public void initData(Store store, Client client) throws Exception {
+        this.client = client;
+        this.store = store;
         storeNameText.setText(store.getName() + " - Shopping Point");
         loyaltyCardName.setText(String.format("Every %d points equals 1 euro in discount", store.getPointsInEuro()));
 
         createProductsView(new StoreBean(store.getName()));
-    }
-
-    public void setStore(Store store) {
-        this.store = store;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     @FXML
@@ -78,31 +71,13 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#price")).setText(formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
-            ((Label) pane.lookup("#status")).setText(getStatusNameFromType(product.getStatus()));
+            ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
             ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
 //            TODO button click
             });
 //            Add product to the view
             productsPane.getChildren().add(pane);
-        }
-    }
-
-    private String getStatusNameFromType(StatusType type) {
-        switch (type) {
-            case NEW -> {
-                return "New";
-            }
-            case USED -> {
-                return "Used";
-            }
-            case USEDLIKENEW -> {
-                return "Used Like New";
-            }
-            case REGENERATED -> {
-                return "Regenerated";
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 }

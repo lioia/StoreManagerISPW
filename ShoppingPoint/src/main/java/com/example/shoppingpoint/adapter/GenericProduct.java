@@ -1,6 +1,5 @@
 package com.example.shoppingpoint.adapter;
 
-import com.example.shoppingpoint.utils.StatusType;
 import javafx.scene.image.Image;
 
 public interface GenericProduct {
@@ -9,6 +8,6 @@ public interface GenericProduct {
     Float getDiscountedPrice();
     Integer getQuantity();
     Image getImage();
-    StatusType getStatus();
+    String getStatus();
     String getDescription();
 }

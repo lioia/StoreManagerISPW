@@ -37,7 +37,6 @@ public class UserDAO {
             UserType type = UserType.valueOf(rs.getString("Type"));
 
             user = switch (type) {
-
                 case STOREOWNER -> new StoreOwner(username, email, password);
                 case SUPPLIER -> new Supplier(username, email, password);
                 default -> new Client(username, email, password);

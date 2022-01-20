@@ -2,9 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
-import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
-import com.example.shoppingpoint.utils.UserType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,7 +80,7 @@ public class StoreDashboardGraphicController {
             ((TextField) pane.lookup("#price")).setText(formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
             ((TextField) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
-            //((Label) pane.lookup("#status")).setText(getStatusNameFromType(product.getStatus()));
+            ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((TextField) pane.lookup("#description")).setText(product.getDescription());
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
 //            TODO

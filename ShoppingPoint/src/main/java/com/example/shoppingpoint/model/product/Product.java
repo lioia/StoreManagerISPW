@@ -1,7 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ProductType;
-import com.example.shoppingpoint.utils.StatusType;
 import javafx.scene.image.Image;
 
 public abstract class Product {
@@ -10,7 +9,7 @@ public abstract class Product {
     private Float price;
     private Float discountedPrice;
     private Integer quantity;
-    private StatusType status;
+    private String status;
     private Image image;
     private ProductType type;
 
@@ -54,11 +53,11 @@ public abstract class Product {
         this.quantity = quantity;
     }
 
-    public StatusType getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusType status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

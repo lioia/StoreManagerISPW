@@ -1,15 +1,13 @@
 package com.example.shoppingpoint.model.product;
 
-import com.example.shoppingpoint.utils.ConsoleType;
 import com.example.shoppingpoint.utils.ProductType;
-import com.example.shoppingpoint.utils.StatusType;
 
 public class VideoGameProduct extends Product {
     private String plot;
     private String genre;
-    private ConsoleType consoleType;
+    private String consoleType;
 
-    public VideoGameProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, StatusType status, String plot, String genre, ConsoleType consoleType) {
+    public VideoGameProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String plot, String genre, String consoleType) {
         setId(id);
         setName(name);
         setPrice(price);
@@ -38,11 +36,11 @@ public class VideoGameProduct extends Product {
         this.genre = genre;
     }
 
-    public ConsoleType getConsoleType() {
+    public String getConsoleType() {
         return consoleType;
     }
 
-    public void setConsoleType(ConsoleType consoleType) {
+    public void setConsoleType(String consoleType) {
         this.consoleType = consoleType;
     }
 }
