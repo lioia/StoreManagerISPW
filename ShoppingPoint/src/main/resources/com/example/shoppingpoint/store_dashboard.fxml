@@ -92,7 +92,7 @@
                 <Insets left="6.0" right="6.0" />
             </HBox.margin>
         </Button>
-        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Loyalty Card" HBox.hgrow="ALWAYS">
+        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="176.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Loyalty Card" HBox.hgrow="ALWAYS" onAction="#openEditCard">
             <effect>
                 <DropShadow />
             </effect>

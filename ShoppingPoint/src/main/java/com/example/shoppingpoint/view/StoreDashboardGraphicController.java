@@ -6,12 +6,17 @@ import com.example.shoppingpoint.controller.StoreDashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import javafx.scene.control.TextField;
 
@@ -20,6 +25,7 @@ import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.view.ClientListGraphicController;
+import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
 import java.util.List;
@@ -80,7 +86,7 @@ public class StoreDashboardGraphicController {
             ((TextField) pane.lookup("#price")).setText(formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
             ((TextField) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
-            ((Label) pane.lookup("#status")).setText(product.getStatus());
+            ((TextField) pane.lookup("#status")).setText(product.getStatus());
             ((TextField) pane.lookup("#description")).setText(product.getDescription());
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
 //            TODO
@@ -89,4 +95,24 @@ public class StoreDashboardGraphicController {
             productsPane.getChildren().add(pane);
         }
     }
+
+    @FXML
+    public void openEditCard(ActionEvent actionEvent) {
+        VBox vbox = new VBox(16);
+        vbox.setPadding(new Insets(16));
+        CheckBox activeBox = new CheckBox("Active");
+        activeBox.setAlignment(Pos.CENTER);
+        //TODO
+
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().add(activeBox);
+
+        PopOver popOver = new PopOver();
+        Node node = (Node) actionEvent.getSource();
+        popOver.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
+        popOver.setContentNode(vbox);
+        popOver.setCornerRadius(16);
+        popOver.show(node);
+    }
+
 }

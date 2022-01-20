@@ -139,7 +139,36 @@ public class StoreDAO {
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
             // TODO passare null a punti
-            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%s')", name, address, type, 0, storeOwner);
+            String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, EuroInPoints,StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%d','%s')", name, address, type, 0,0, storeOwner);
+            // Execute query
+            statement.executeUpdate(sql);
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public static void savePointsCard(int pointsInEuro, int euroInPoints, String storeOwner) throws Exception{
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Get user with specified username
+            String sql = String.format("UPDATE Store SET PointsInEuro = %d AND EuroInPoints = %d WHERE  StoreOwner = '%s'", pointsInEuro, euroInPoints, storeOwner);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
