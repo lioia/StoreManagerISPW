@@ -58,7 +58,7 @@ public class RegisterGraphicController {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_store.fxml"));
             Parent node = fxmlLoader.load();
             NewStoreGraphicController newStoreController = fxmlLoader.getController();
-            newStoreController.setStoreOwnerName(user.getUsername());
+            newStoreController.setStoreOwnerName((StoreOwner) user);
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
         }
         if (user instanceof Supplier) {

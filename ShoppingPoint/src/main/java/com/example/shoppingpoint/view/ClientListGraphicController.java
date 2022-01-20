@@ -16,27 +16,25 @@ import java.io.IOException;
 
 public class ClientListGraphicController {
 
-    Store store;
-    User storeOwner;
+    private StoreOwner storeOwner;
 
     @FXML
     private Label labelStoreName;
 
 
     @FXML
-    public void goBack(ActionEvent event) throws IOException {
+    public void goBack(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-        storeDashboardController.setStoreOwner(storeOwner);
-        //storeDashboardController.initData();
+        storeDashboardController.initData(storeOwner);
     }
+
     @FXML
-    public void initData(User storeOwner,Store store) throws IOException {
-        this.store = store;
+    public void initData(StoreOwner storeOwner) throws IOException {
         this.storeOwner = storeOwner;
 
-        labelStoreName.setText(store.getName() + " - Shopping Point");
+        labelStoreName.setText(storeOwner.getStore().getName() + " - Shopping Point");
     }
 }

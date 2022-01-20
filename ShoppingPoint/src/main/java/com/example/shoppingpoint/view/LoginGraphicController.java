@@ -17,8 +17,6 @@ import java.io.IOException;
 
 public class LoginGraphicController {
 
-    private LoginController controller;
-
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -36,7 +34,7 @@ public class LoginGraphicController {
         String password = passwordTextField.getText();
         LoginBean bean = new LoginBean(username, password);
 
-        controller = new LoginController();
+        LoginController controller = new LoginController();
         User user = controller.login(bean);
         if (user instanceof Client) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
@@ -50,8 +48,7 @@ public class LoginGraphicController {
             Parent node = fxmlLoader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-            storeDashboardController.setStoreOwner(user);
-            storeDashboardController.initData();
+            storeDashboardController.initData((StoreOwner)user);
         }
         if (user instanceof Supplier) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));

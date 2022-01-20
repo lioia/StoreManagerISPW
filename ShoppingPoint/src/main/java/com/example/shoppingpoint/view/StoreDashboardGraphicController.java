@@ -31,43 +31,42 @@ public class StoreDashboardGraphicController {
     @FXML
     private Label labelStoreName;
 
-    private String storeName;
-    private Store store;
-    private StoreDashboardController controller;
-    private User storeOwner;
+    private final StoreDashboardController controller;
+    private StoreOwner storeOwner;
 
     @FXML
     private FlowPane productsPane;
-    public StoreDashboardGraphicController() {controller = new StoreDashboardController();}
 
-    public void initData() throws Exception{
-        setStore(storeOwner);
-        labelStoreName.setText(store.getName()+" - Shopping Point");
-        createProductsView(store);
-
-    }
-    public Store setStore  (User storeOwner)throws Exception{
-        this.store = StoreDAO.getStoreByStoreOwnerUsername(storeOwner.getUsername());
-        return store;
+    public StoreDashboardGraphicController() {
+        controller = new StoreDashboardController();
     }
 
+    public void initData(StoreOwner owner) throws Exception {
+        setStoreOwner(owner);
+        labelStoreName.setText(storeOwner.getStore().getName() + " - Shopping Point");
+        createProductsView(storeOwner.getStore());
+    }
 
     @FXML
     public void goToClientList(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
-        ClientListGraphicController clientListGraphicController= fxmlLoader.getController();
-        clientListGraphicController.initData(storeOwner,store);
+        ClientListGraphicController clientListGraphicController = fxmlLoader.getController();
+        clientListGraphicController.initData(storeOwner);
     }
 
     public void goToRequest(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
-    //TODO devo farlo diventare tipo StoreOwner prima?
-    public void setStoreOwner(User storeOwnerName) {
+
+    private void setStoreOwner(StoreOwner storeOwnerName) throws Exception {
         this.storeOwner = storeOwnerName;
+        if (storeOwner.getStore() == null) {
+            Store store = controller.getStoreFromStoreOwnerName(storeOwner.getUsername());
+            storeOwner.setStore(store);
+        }
     }
 
     private void createProductsView(Store store) throws Exception {

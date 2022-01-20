@@ -4,18 +4,18 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.NewStoreBean;
 import com.example.shoppingpoint.controller.NewStoreController;
 import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.user.StoreOwner;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ComboBox;
 
 public class NewStoreGraphicController {
 
-    private NewStoreController controller;
-
-    private String storeOwnerName;
+    private StoreOwner storeOwner;
 
     @FXML
     private TextField nameTextField;
@@ -34,13 +34,17 @@ public class NewStoreGraphicController {
 
         NewStoreBean bean = new NewStoreBean(name, address, type);
 
-        controller = new NewStoreController();
-        Store store = controller.register(bean, storeOwnerName);
+        NewStoreController controller = new NewStoreController();
+        Store store = controller.register(bean, storeOwner.getUsername());
+        storeOwner.setStore(store);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-        ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+        Parent node = fxmlLoader.load();
+        ((Node) actionEvent.getSource()).getScene().setRoot(node);
+        StoreDashboardGraphicController storeDashboardGraphicController = fxmlLoader.getController();
+        storeDashboardGraphicController.initData(storeOwner);
     }
 
-    public void setStoreOwnerName(String storeOwnerName) {
-        this.storeOwnerName = storeOwnerName;
+    public void setStoreOwnerName(StoreOwner storeOwner) {
+        this.storeOwner = storeOwner;
     }
 }

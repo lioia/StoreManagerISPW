@@ -23,7 +23,6 @@ import java.util.List;
 public class SearchStoreGraphicController {
 
     private Client client;
-    private SearchStoreController controller;
 
     @FXML
     private TextField searchTextField;
@@ -36,8 +35,6 @@ public class SearchStoreGraphicController {
     //    This method gets called when loading the view
     @FXML
     public void initialize() throws Exception {
-        controller = new SearchStoreController();
-
 //        Create stores view with all the value in the database
         createStorePaneView(new SearchStoreBean());
     }
@@ -52,6 +49,7 @@ public class SearchStoreGraphicController {
 
     private void createStorePaneView(SearchStoreBean bean) throws Exception {
         storesPane.getChildren().clear();
+        SearchStoreController controller = new SearchStoreController();
         List<Store> stores = controller.getStores(bean);
 
         for (Store store : stores) {
