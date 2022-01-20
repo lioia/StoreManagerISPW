@@ -2,4 +2,4 @@ Il sistema deve mostrare tutte le offerte proposte dai fornitori su un prodotto.
 
 Il sistema deve inviare una notifica quando il negoziante accetta un offerta.
 
-Il sistema deve gestire una carta fedeltà.
+Il sistema deve gestire una carta fedeltà(specificare il funzionameto).
