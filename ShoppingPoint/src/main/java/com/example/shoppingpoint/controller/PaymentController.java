@@ -24,9 +24,11 @@ public class PaymentController {
             } else {
                 pointsToBeAdded = (int) (total / store.getEuroInPoints());
             }
+
+        }
+        if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) {
             LoyaltyCardDAO.updateLoyaltyCard(clientUsername, store.getName(), card.getPoints() - pointsUsed + pointsToBeAdded);
         }
-
         ProductDAO.updateProductQuantity(product.getId(), product.getQuantity() - bean.getQuantity());
         SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername);
     }

@@ -71,7 +71,7 @@ public class PaymentGraphicController {
     @FXML
     public void loyaltyCardCheck(ActionEvent actionEvent) {
         if (checkLoyaltyCard.isSelected()) {
-            float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice() - store.getPointsInEuro() * card.getPoints();
+            float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice() -  card.getPoints()/store.getPointsInEuro() ;
             if (total < 0) {
                 total = 0f;
             }
