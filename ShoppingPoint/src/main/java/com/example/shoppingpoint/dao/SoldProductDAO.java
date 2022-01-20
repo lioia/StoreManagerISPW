@@ -2,6 +2,7 @@ package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.product.*;
+import com.example.shoppingpoint.model.user.Client;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -33,9 +34,11 @@ public class SoldProductDAO {
             LocalDate date = sqlDate.toLocalDate();
             Integer quantity = rs.getInt("Quantity");
             Integer productId = rs.getInt("ProductId");
+            String clientUsername = rs.getString("Client");
             Product product = ProductDAO.getProductById(productId);
+            Client client = (Client) UserDAO.getUserByUsername(clientUsername);
 
-            soldProduct = new SoldProduct(product, date, quantity);
+            soldProduct = new SoldProduct(client, product, date, quantity);
 
         } finally {
             // Clean-up dell'ambiente
@@ -56,7 +59,7 @@ public class SoldProductDAO {
         return soldProduct;
     }
 
-    public static void saveSoldProduct(Integer quantity, LocalDate date, Integer productId) throws Exception {
+    public static void saveSoldProduct(Integer quantity, LocalDate date, Integer productId, String clientUsername) throws Exception {
         PreparedStatement statement = null;
         Connection connection = null;
 
@@ -64,10 +67,11 @@ public class SoldProductDAO {
             // Create Connection
             connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
             // Create statement
-            statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId) VALUES (?, ?, ?)");
+            statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)");
             statement.setInt(1, quantity);
             statement.setDate(2, Date.valueOf(date));
             statement.setInt(3, productId);
+            statement.setString(4, clientUsername);
             // Execute query
             statement.executeUpdate();
         } finally {

@@ -15,7 +15,8 @@ CREATE TABLE Store (
     Name VARCHAR(50) PRIMARY KEY,
     Address VARCHAR(25) NOT NULL,
     Type ENUM("CLOTHES", "BOOKS", "VIDEOGAMES", "ELECTRONICS") NOT NULL,
-    PointsInEuro INT ,
+    PointsInEuro INT,
+    EuroInPoints INT,
 
     StoreOwner VARCHAR(16) NOT NULL,
     FOREIGN KEY (StoreOwner) REFERENCES User(Username) ON DELETE CASCADE
@@ -61,5 +62,18 @@ CREATE TABLE SoldProduct (
     Date DATE NOT NULL,
 
     ProductId INT NOT NULL,
-    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE,
+
+    Client VARCHAR(16) NOT NULL,
+    FOREIGN KEY (Client) REFERENCES User(Username)
+);
+
+CREATE TABLE LoyaltyCard (
+    Client VARCHAR(16) NOT NULL,
+    Store VARCHAR(16) NOT NULL,
+    Points INTEGER NOT NULL,
+
+    FOREIGN KEY (Client) REFERENCES User(Username),
+    FOREIGN KEY (Store) REFERENCES Store(Name),
+    PRIMARY KEY (Client, Store)
 )

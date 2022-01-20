@@ -11,6 +11,11 @@ public class ProductAdapter implements GenericProduct {
     }
 
     @Override
+    public Integer getId() {
+        return this.product.getId();
+    }
+
+    @Override
     public String getName() {
         return this.product.getName();
     }

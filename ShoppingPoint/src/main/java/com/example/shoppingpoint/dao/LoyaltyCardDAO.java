@@ -1,23 +1,18 @@
 package com.example.shoppingpoint.dao;
 
-import com.example.shoppingpoint.model.user.Client;
-import com.example.shoppingpoint.model.user.StoreOwner;
-import com.example.shoppingpoint.model.user.Supplier;
-import com.example.shoppingpoint.model.user.User;
-import com.example.shoppingpoint.utils.UserType;
+import com.example.shoppingpoint.model.LoyaltyCard;
 
 import java.sql.*;
 
-// TODO gestione eccezioni
-public class UserDAO {
-    private UserDAO() {
+public class LoyaltyCardDAO {
+    private LoyaltyCardDAO() {
         throw new IllegalStateException();
     }
 
-    public static User getUserByUsername(String username) throws Exception {
+    public static LoyaltyCard getLoyaltyCardFromClientAndStoreName(String client, String storeName) throws Exception {
         Statement statement = null;
         Connection connection = null;
-        User user;
+        LoyaltyCard card;
 
         try {
             // Create Connection
@@ -25,24 +20,16 @@ public class UserDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("SELECT * FROM User WHERE Username='%s'", username);
+            String sql = String.format("SELECT * FROM LoyaltyCard WHERE Client='%s' AND Store = '%s'", client, storeName);
             // Execute query
             ResultSet rs = statement.executeQuery(sql);
             // Empty result
             if (!rs.first()) {
-                throw new Exception("No user found with username: " + username);
+                throw new Exception("No loyalty card found");
             }
             rs.first();
-            String password = rs.getString("Password");
-            String email = rs.getString("Email");
-            UserType type = UserType.valueOf(rs.getString("Type"));
-
-            user = switch (type) {
-                case STOREOWNER -> new StoreOwner(username, email, password);
-                case SUPPLIER -> new Supplier(username, email, password);
-                default -> new Client(username, email, password);
-
-            };
+            Integer points = rs.getInt("Points");
+            card = new LoyaltyCard(points, client, storeName);
             rs.close();
         } finally {
             // Clean-up dell'ambiente
@@ -59,10 +46,10 @@ public class UserDAO {
                 se.printStackTrace();
             }
         }
-        return user;
+        return card;
     }
 
-    public static void saveUser(String username, String email, String password, UserType userType) throws Exception {
+    public static void saveLoyaltyCard(String client, String storeName, Integer points) throws Exception {
         Statement statement = null;
         Connection connection = null;
 
@@ -72,7 +59,36 @@ public class UserDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("INSERT INTO User (Username, Email, Password, Type) VALUES ('%s', '%s', '%s', '%s')", username, email, password, userType);
+            String sql = String.format("INSERT INTO LoyaltyCard (Client, Store, Points) VALUES ('%s', '%s', %d)", client, storeName, points);
+            // Execute query
+            statement.executeUpdate(sql);
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    public static void updateLoyaltyCard(String client, String storeName, Integer points) throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Get user with specified username
+            String sql = String.format("UPDATE LoyaltyCard SET Points = %d WHERE Client = '%s' AND Store = '%s'", points, client, storeName);
             // Execute query
             statement.executeUpdate(sql);
         } finally {

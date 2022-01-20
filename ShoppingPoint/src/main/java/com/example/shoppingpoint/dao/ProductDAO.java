@@ -231,4 +231,33 @@ public class ProductDAO {
             }
         }
     }
+
+    public static void updateProductQuantity(Integer productId, Integer quantity) throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Get user with specified username
+            String sql = String.format("UPDATE Product SET Quantity = %d WHERE ProductId =  %d", quantity, productId);
+            // Execute query
+            statement.executeUpdate(sql);
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
 }

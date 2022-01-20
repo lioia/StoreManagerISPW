@@ -10,18 +10,20 @@ public class Store {
     private String name;
     private String address;
     private Integer pointsInEuro;
+    private Integer euroInPoints;
     private StoreType type;
     private List<Product> products;
     private List<SoldProduct> soldProducts;
 
-    public Store(String name, String address, Integer pointsInEuro, StoreType type) {
-        this(name, address, pointsInEuro, type, new ArrayList<>(), new ArrayList<>());
+    public Store(String name, String address, Integer pointsInEuro, Integer euroInPoints, StoreType type) {
+        this(name, address, pointsInEuro, euroInPoints, type, new ArrayList<>(), new ArrayList<>());
     }
 
-    public Store(String name, String address, Integer pointsInEuro, StoreType type, List<Product> products, List<SoldProduct> soldProducts) {
+    public Store(String name, String address, Integer pointsInEuro, Integer euroInPoints, StoreType type, List<Product> products, List<SoldProduct> soldProducts) {
         setName(name);
         setAddress(address);
         setPointsInEuro(pointsInEuro);
+        setEuroInPoints(euroInPoints);
         setType(type);
         setProducts(products);
         setSoldProducts(soldProducts);
@@ -73,5 +75,13 @@ public class Store {
 
     public void setSoldProducts(List<SoldProduct> soldProducts) {
         this.soldProducts = soldProducts;
+    }
+
+    public Integer getEuroInPoints() {
+        return euroInPoints;
+    }
+
+    public void setEuroInPoints(Integer euroInPoints) {
+        this.euroInPoints = euroInPoints;
     }
 }

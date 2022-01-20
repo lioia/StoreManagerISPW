@@ -52,7 +52,7 @@
                 <Font size="18.0" />
             </font>
         </TextField>
-        <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Search" onAction="#search">
+        <Button mnemonicParsing="false" onAction="#search" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Search">
             <HBox.margin>
                 <Insets left="24.0" right="20.0" top="20.0" />
             </HBox.margin>
@@ -63,16 +63,46 @@
                 <Font size="24.0" />
             </font>
         </Button>
+      <VBox.margin>
+         <Insets bottom="16.0" />
+      </VBox.margin>
     </HBox>
-<!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
-    <Label fx:id="loyaltyCardName" text="Loyalty Card">
+    <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
+    <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
         <font>
             <Font size="18.0" />
         </font>
-      <VBox.margin>
-         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-      </VBox.margin>
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" />
+        </VBox.margin>
     </Label>
+    <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
+        <font>
+            <Font size="18.0" />
+        </font>
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" />
+        </VBox.margin>
+    </Label>
+    <Label fx:id="currentPointsText" text="Points" visible="false">
+        <font>
+            <Font size="18.0" />
+        </font>
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" />
+        </VBox.margin>
+    </Label>
+    <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" />
+        </VBox.margin>
+        <font>
+            <Font size="18.0" />
+        </font>
+        <effect>
+            <DropShadow />
+        </effect>
+    </Button>
     <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="productsPane" />
     </ScrollPane>

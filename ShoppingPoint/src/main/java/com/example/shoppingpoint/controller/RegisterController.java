@@ -7,6 +7,6 @@ import com.example.shoppingpoint.model.user.User;
 public class RegisterController {
     public User register(RegisterBean bean) throws Exception {
         UserDAO.saveUser(bean.getUsername(), bean.getEmail(), bean.getPassword(), bean.getUserType());
-        return UserDAO.getUserByUsernameAndPasssword(bean.getUsername(), bean.getPassword());
+        return UserDAO.getUserByUsername(bean.getUsername());
     }
 }

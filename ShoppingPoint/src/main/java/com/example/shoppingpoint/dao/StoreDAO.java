@@ -28,8 +28,9 @@ public class StoreDAO {
                 String name = rs.getString("Name");
                 String address = rs.getString("Address");
                 Integer pointsInEuro = rs.getInt("PointsInEuro");
+                Integer euroInPoints = rs.getInt("EuroInPoints");
                 StoreType type = StoreType.valueOf(rs.getString("Type"));
-                Store store = new Store(name, address, pointsInEuro, type);
+                Store store = new Store(name, address, pointsInEuro, euroInPoints, type);
                 stores.add(store);
             }
 
@@ -73,8 +74,9 @@ public class StoreDAO {
             rs.first();
             String address = rs.getString("Address");
             Integer pointsInEuro = rs.getInt("PointsInEuro");
+            Integer euroInPoints = rs.getInt("EuroInPoints");
             StoreType type = StoreType.valueOf(rs.getString("Type"));
-            store = new Store(name, address, pointsInEuro, type);
+            store = new Store(name, address, pointsInEuro, euroInPoints, type);
 
             rs.close();
         } finally {
@@ -117,8 +119,9 @@ public class StoreDAO {
             String name = rs.getString("Name");
             String address = rs.getString("Address");
             Integer pointsInEuro = rs.getInt("PointsInEuro");
+            Integer euroInPoints = rs.getInt("EuroInPoints");
             StoreType type = StoreType.valueOf(rs.getString("Type"));
-            store = new Store(name, address, pointsInEuro, type);
+            store = new Store(name, address, pointsInEuro, euroInPoints, type);
 
             rs.close();
         } finally {
