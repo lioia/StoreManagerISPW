@@ -64,7 +64,7 @@ public class PaymentGraphicController {
 
         PaymentController controller = new PaymentController();
         PaymentBean bean = new PaymentBean(quantityTextField.getText(), checkLoyaltyCard.isSelected());
-        controller.buy(bean, card.getPoints(), client.getUsername(), store, product);
+        controller.buy(bean, card, client.getUsername(), store, product);
 //        TODO go to payment completed
     }
 
