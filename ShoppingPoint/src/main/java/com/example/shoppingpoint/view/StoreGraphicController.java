@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.util.List;
@@ -61,7 +62,7 @@ public class StoreGraphicController {
                 loyaltyCardButton.setVisible(false);
                 currentPointsText.setVisible(true);
                 currentPointsText.setText(String.format("You have %d points.", card.getPoints()));
-                ((VBox)loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
+                ((HBox)loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
             } else {
                 loyaltyCardButton.setVisible(true);
                 currentPointsText.setVisible(false);
@@ -71,10 +72,10 @@ public class StoreGraphicController {
             loyaltyCard2Text.setVisible(true);
             loyaltyCard2Text.setText(String.format("Every %d€ spent, you will receive 1 point", store.getEuroInPoints()));
         } else {
-            ((VBox)loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
-            ((VBox)loyaltyCard1Text.getParent()).getChildren().remove(loyaltyCard1Text);
+            ((HBox)loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
+            ((HBox)loyaltyCard1Text.getParent()).getChildren().remove(loyaltyCard1Text);
             ((VBox)loyaltyCard2Text.getParent()).getChildren().remove(loyaltyCard2Text);
-            ((VBox)currentPointsText.getParent()).getChildren().remove(currentPointsText);
+            ((HBox)currentPointsText.getParent()).getChildren().remove(currentPointsText);
         }
 
         createProductsView(new StoreBean(store.getName()));

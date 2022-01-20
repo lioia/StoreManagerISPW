@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
     <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
         <left>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
@@ -67,15 +67,38 @@
          <Insets bottom="16.0" />
       </VBox.margin>
     </HBox>
-    <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
-    <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
-        <font>
-            <Font size="18.0" />
-        </font>
-        <VBox.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0" />
-        </VBox.margin>
-    </Label>
+   <HBox>
+      <VBox.margin>
+         <Insets bottom="16.0" left="16.0" right="16.0" />
+      </VBox.margin>
+      <children>
+          <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
+          <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
+              <font>
+                  <Font size="18.0" />
+              </font>
+            <HBox.margin>
+               <Insets right="16.0" />
+            </HBox.margin>
+          </Label>
+          <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+              <font>
+                  <Font size="18.0" />
+              </font>
+              <effect>
+                  <DropShadow />
+              </effect>
+          </Button>
+          <Label fx:id="currentPointsText" text="Points" visible="false">
+              <font>
+                  <Font size="18.0" />
+              </font>
+            <HBox.margin>
+               <Insets right="16.0" />
+            </HBox.margin>
+          </Label>
+      </children>
+   </HBox>
     <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
         <font>
             <Font size="18.0" />
@@ -84,25 +107,6 @@
             <Insets bottom="16.0" left="16.0" right="16.0" />
         </VBox.margin>
     </Label>
-    <Label fx:id="currentPointsText" text="Points" visible="false">
-        <font>
-            <Font size="18.0" />
-        </font>
-        <VBox.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0" />
-        </VBox.margin>
-    </Label>
-    <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
-        <VBox.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0" />
-        </VBox.margin>
-        <font>
-            <Font size="18.0" />
-        </font>
-        <effect>
-            <DropShadow />
-        </effect>
-    </Button>
     <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="productsPane" />
     </ScrollPane>
