@@ -4,7 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
@@ -23,7 +22,7 @@
         </center>
         <right>
             <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"
-                    BorderPane.alignment="CENTER">
+                    BorderPane.alignment="CENTER" onAction="#openAccountPopOver">
                 <graphic>
                     <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
                 </graphic>

@@ -6,6 +6,7 @@ module com.example.shoppingpoint {
     requires org.kordamp.ikonli.material2;
     requires java.sql;
     requires mysql.connector.java;
+    requires org.controlsfx.controls;
 
     opens com.example.shoppingpoint to javafx.fxml;
     opens com.example.shoppingpoint.view to javafx.fxml;

@@ -8,17 +8,23 @@ import com.example.shoppingpoint.model.user.Client;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.List;
+
+import javafx.scene.text.TextAlignment;
+import org.controlsfx.control.PopOver;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SearchStoreGraphicController {
 
@@ -28,7 +34,6 @@ public class SearchStoreGraphicController {
     private TextField searchTextField;
     @FXML
     private ToggleGroup toggle;
-
     @FXML
     private FlowPane storesPane;
 
@@ -90,5 +95,34 @@ public class SearchStoreGraphicController {
 
     public Client getClient() {
         return this.client;
+    }
+
+    @FXML
+    public void openAccountPopOver(ActionEvent actionEvent) {
+        VBox vbox = new VBox(16);
+        vbox.setPadding(new Insets(16));
+        Button logoutButton = new Button("Log Out");
+        logoutButton.setAlignment(Pos.CENTER);
+        logoutButton.setStyle("-fx-background-color: #6EC6FF; -fx-background-radius: 16;");
+        logoutButton.setOnAction(event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
+                ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        logoutButton.setEffect(new DropShadow());
+        logoutButton.setGraphic(new FontIcon("mdal-log_out"));
+        logoutButton.setPrefSize(120, 48);
+        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().add(logoutButton);
+
+        PopOver popOver = new PopOver();
+        Node node = (Node) actionEvent.getSource();
+        popOver.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
+        popOver.setContentNode(vbox);
+        popOver.setCornerRadius(16);
+        popOver.show(node);
     }
 }
