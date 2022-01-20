@@ -25,12 +25,7 @@ public class StoreDAO {
             // Execute query
             ResultSet rs = statement.executeQuery("SELECT * FROM Store");
             while (rs.next()) {
-                String name = rs.getString("Name");
-                String address = rs.getString("Address");
-                Integer pointsInEuro = rs.getInt("PointsInEuro");
-                Integer euroInPoints = rs.getInt("EuroInPoints");
-                StoreType type = StoreType.valueOf(rs.getString("Type"));
-                Store store = new Store(name, address, pointsInEuro, euroInPoints, type);
+                Store store = getStore(rs);
                 stores.add(store);
             }
 
@@ -56,7 +51,7 @@ public class StoreDAO {
     public static Store getStoreByName(String name) throws Exception {
         Statement statement = null;
         Connection connection = null;
-        Store store = null;
+        Store store;
 
         try {
             // Create Connection
@@ -72,11 +67,7 @@ public class StoreDAO {
                 throw new Exception("No store found with name: " + name);
             }
             rs.first();
-            String address = rs.getString("Address");
-            Integer pointsInEuro = rs.getInt("PointsInEuro");
-            Integer euroInPoints = rs.getInt("EuroInPoints");
-            StoreType type = StoreType.valueOf(rs.getString("Type"));
-            store = new Store(name, address, pointsInEuro, euroInPoints, type);
+            store = getStore(rs);
 
             rs.close();
         } finally {
@@ -113,15 +104,10 @@ public class StoreDAO {
             ResultSet rs = statement.executeQuery(sql);
             // Empty result
             if (!rs.first()) {
-                throw new Exception("Not found " + username +"'store");
+                throw new Exception("Not found " + username + "'store");
             }
             rs.first();
-            String name = rs.getString("Name");
-            String address = rs.getString("Address");
-            Integer pointsInEuro = rs.getInt("PointsInEuro");
-            Integer euroInPoints = rs.getInt("EuroInPoints");
-            StoreType type = StoreType.valueOf(rs.getString("Type"));
-            store = new Store(name, address, pointsInEuro, euroInPoints, type);
+            store = getStore(rs);
 
             rs.close();
         } finally {
@@ -171,5 +157,14 @@ public class StoreDAO {
                 se.printStackTrace();
             }
         }
+    }
+
+    private static Store getStore(ResultSet rs) throws Exception {
+        String name = rs.getString("Name");
+        String address = rs.getString("Address");
+        Integer pointsInEuro = rs.getInt("PointsInEuro");
+        Integer euroInPoints = rs.getInt("EuroInPoints");
+        StoreType type = StoreType.valueOf(rs.getString("Type"));
+        return new Store(name, address, pointsInEuro, euroInPoints, type);
     }
 }

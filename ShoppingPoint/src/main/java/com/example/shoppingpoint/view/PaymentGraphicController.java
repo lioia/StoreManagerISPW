@@ -41,6 +41,8 @@ public class PaymentGraphicController {
     @FXML
     private Label maxQuantityText;
 
+    private final String DECIMAL_FORMAT = "%.02f€";
+
     public void initData(Client client, GenericProduct product, Store store, LoyaltyCard card) {
         this.client = client;
         this.product = product;
@@ -48,10 +50,10 @@ public class PaymentGraphicController {
         this.card = card;
 
         productNameText.setText(product.getName());
-        String formattedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
+        String formattedPrice = String.format(DECIMAL_FORMAT, product.getDiscountedPrice()); // Price with 2 decimal points
         priceText.setText(formattedPrice);
         Float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice();
-        String formattedTotal = String.format("%.02f€", total);
+        String formattedTotal = String.format(DECIMAL_FORMAT, total);
         totalText.setText(formattedTotal);
         checkLoyaltyCard.setVisible(card != null);
         maxQuantityText.setText(maxQuantityText.getText() + product.getQuantity());
@@ -73,11 +75,11 @@ public class PaymentGraphicController {
             if (total < 0) {
                 total = 0f;
             }
-            String formattedTotal = String.format("%.02f€", total);
+            String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         } else {
             Float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice();
-            String formattedTotal = String.format("%.02f€", total);
+            String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         }
     }

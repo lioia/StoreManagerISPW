@@ -118,8 +118,8 @@ public class StoreGraphicController {
                     FXMLLoader paymentLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment.fxml"));
                     Parent node = paymentLoader.load();
                     ((Node) event.getSource()).getScene().setRoot(node);
-                    PaymentGraphicController controller = paymentLoader.getController();
-                    controller.initData(client, product, store, card);
+                    PaymentGraphicController paymentController = paymentLoader.getController();
+                    paymentController.initData(client, product, store, card);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
