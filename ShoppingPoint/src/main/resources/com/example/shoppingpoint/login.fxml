@@ -8,7 +8,8 @@
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.shoppingpoint.view.LoginGraphicController">
     <top>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 16px"
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0"
+              style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16px 16px"
               BorderPane.alignment="CENTER">
             <effect>
                 <DropShadow/>
