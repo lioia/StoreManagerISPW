@@ -36,8 +36,15 @@
                 </Label>
             </center>
             <right>
-<!--                TODO account -->
-                <Label text="Account"/>
+                <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"
+                        BorderPane.alignment="CENTER" onAction="#openAccountInfo">
+                    <graphic>
+                        <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+                    </graphic>
+                    <BorderPane.margin>
+                        <Insets right="16.0"/>
+                    </BorderPane.margin>
+                </Button>
             </right>
         </BorderPane>
     </top>
