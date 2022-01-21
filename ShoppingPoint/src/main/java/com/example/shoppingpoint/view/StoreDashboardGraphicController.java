@@ -25,6 +25,7 @@ import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.view.ClientListGraphicController;
+import javafx.scene.text.Text;
 import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
@@ -102,11 +103,27 @@ public class StoreDashboardGraphicController {
         vbox.setPadding(new Insets(16));
         CheckBox activeBox = new CheckBox("Active");
         activeBox.setAlignment(Pos.CENTER);
+        HBox hbox1 = new HBox();
+        HBox hbox2 = new HBox();
+        TextField pointInEuroTextField = new TextField();
+        pointInEuroTextField.setPromptText("1");
+        pointInEuroTextField.setPrefHeight(12);
+        pointInEuroTextField.setPrefWidth(20);
+        TextField euroInPointsTextField = new TextField();
+        euroInPointsTextField.setPromptText("1");
+        euroInPointsTextField.setPrefWidth(20);
+        euroInPointsTextField.setPrefHeight(6);
+        Text text1 = new Text("poits spent = 1€ discount");
+        Text text2 = new Text("€ spent = 1 point earned");
+        hbox1.getChildren().addAll(pointInEuroTextField,text1);
+        hbox2.getChildren().addAll(euroInPointsTextField,text2);
 
-        //TODO
+
+        //TODO sistemare textfield fare la bean e controll
 
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().add(activeBox);
+        vbox.getChildren().addAll(activeBox,hbox1,hbox2);
+
 
         PopOver popOver = new PopOver();
         Node node = (Node) actionEvent.getSource();
