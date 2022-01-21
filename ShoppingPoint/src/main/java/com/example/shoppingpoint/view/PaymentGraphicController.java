@@ -52,7 +52,7 @@ public class PaymentGraphicController {
     @FXML
     private Text pointText;
 
-    private final String DECIMAL_FORMAT = "%.02f€";
+    private static final String DECIMAL_FORMAT = "%.02f€";
 
     public void initData(Client client, GenericProduct product, Store store, LoyaltyCard card) {
         this.client = client;
