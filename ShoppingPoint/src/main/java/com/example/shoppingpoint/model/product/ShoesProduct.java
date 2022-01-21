@@ -7,13 +7,14 @@ public class ShoesProduct extends Product {
     private String material;
     private String shoesType;
 
-    public ShoesProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String size, String material, String shoesType) {
+    public ShoesProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material, String shoesType) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setSize(size);
         setMaterial(material);
         setShoesType(shoesType);

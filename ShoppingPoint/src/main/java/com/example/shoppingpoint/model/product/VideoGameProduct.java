@@ -7,13 +7,14 @@ public class VideoGameProduct extends Product {
     private String genre;
     private String consoleType;
 
-    public VideoGameProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String plot, String genre, String consoleType) {
+    public VideoGameProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String plot, String genre, String consoleType) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setPlot(plot);
         setGenre(genre);
         setConsoleType(consoleType);

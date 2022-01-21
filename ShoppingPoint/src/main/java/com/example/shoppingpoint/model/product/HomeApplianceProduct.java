@@ -6,13 +6,14 @@ public class HomeApplianceProduct extends Product {
     private String energyClass;
     private String specs;
 
-    public HomeApplianceProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String energyClass, String specs) {
+    public HomeApplianceProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String energyClass, String specs) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setEnergyClass(energyClass);
         setSpecs(specs);
         setType(ProductType.HOMEAPPLIANCES);

@@ -95,6 +95,7 @@ public class ProductDAO {
         Float discountedPrice = rs.getFloat("DiscountedPrice");
         Integer quantity = rs.getInt("Quantity");
         String status = rs.getString("Status");
+        String storeName = rs.getString("Store");
         ProductType type = ProductType.valueOf(rs.getString("Type"));
         Image image = null;
 //            Load Image
@@ -108,19 +109,19 @@ public class ProductDAO {
             case CLOTHES -> {
                 String size = rs.getString("Size");
                 String material = rs.getString("Material");
-                product = new ClothesProduct(id, name, price, discountedPrice, quantity, status, size, material);
+                product = new ClothesProduct(id, name, price, discountedPrice, quantity, status, storeName, size, material);
             }
             case SHOES -> {
                 String size = rs.getString("Size");
                 String material = rs.getString("Material");
                 String shoesType = rs.getString("ShoesType");
-                product = new ShoesProduct(id, name, price, discountedPrice, quantity, status, size, material, shoesType);
+                product = new ShoesProduct(id, name, price, discountedPrice, quantity, status, storeName, size, material, shoesType);
             }
             case BOOK -> {
                 String author = rs.getString("Author");
                 String plot = rs.getString("Plot");
                 String genre = rs.getString("Genre");
-                product = new BookProduct(id, name, price, discountedPrice, quantity, status, author, plot, genre);
+                product = new BookProduct(id, name, price, discountedPrice, quantity, status, storeName, author, plot, genre);
             }
             case COMICS -> {
                 String author = rs.getString("Author");
@@ -128,18 +129,18 @@ public class ProductDAO {
                 String plot = rs.getString("Plot");
                 String genre = rs.getString("Genre");
                 Integer volume = rs.getInt("VolumeNumber");
-                product = new ComicsProduct(id, name, price, discountedPrice, quantity, status, author, artist, plot, genre, volume);
+                product = new ComicsProduct(id, name, price, discountedPrice, quantity, status, storeName, author, artist, plot, genre, volume);
             }
             case VIDEOGAME -> {
                 String plot = rs.getString("Plot");
                 String genre = rs.getString("Genre");
                 String consoleType = rs.getString("ConsoleType");
-                product = new VideoGameProduct(id, name, price, discountedPrice, quantity, status, plot, genre, consoleType);
+                product = new VideoGameProduct(id, name, price, discountedPrice, quantity, status, storeName, plot, genre, consoleType);
             }
             case GAMECONSOLE -> {
                 String consoleType = rs.getString("ConsoleType");
                 boolean digitalOnly = rs.getBoolean("DigitalOnly");
-                product = new GameConsoleProduct(id, name, price, discountedPrice, quantity, status, consoleType, digitalOnly);
+                product = new GameConsoleProduct(id, name, price, discountedPrice, quantity, status, storeName, consoleType, digitalOnly);
             }
             case COMPUTER -> {
                 String computerType = rs.getString("ComputerType");
@@ -150,13 +151,13 @@ public class ProductDAO {
                 String gpu = rs.getString("GPU");
                 String brand = rs.getString("Brand");
                 Float displaySize = rs.getFloat("DisplaySize");
-                product = new ComputerProduct(id, name, price, discountedPrice, quantity, status, computerType, ram, ssd, batterySize, cpu, gpu, brand, displaySize);
+                product = new ComputerProduct(id, name, price, discountedPrice, quantity, status, storeName, computerType, ram, ssd, batterySize, cpu, gpu, brand, displaySize);
             }
             case HOMEAPPLIANCES -> {
                 String energyClass = rs.getString("EnergyClass");
                 String specs = rs.getString("Specs");
 
-                product = new HomeApplianceProduct(id, name, price, discountedPrice, quantity, status, energyClass, specs);
+                product = new HomeApplianceProduct(id, name, price, discountedPrice, quantity, storeName, status, energyClass, specs);
             }
             default -> throw new Exception("Unrecognized type: " + type);
         }

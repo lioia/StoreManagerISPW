@@ -4,6 +4,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.PaymentBean;
 import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
+import com.example.shoppingpoint.dao.ReviewDAO;
 import com.example.shoppingpoint.dao.SoldProductDAO;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
@@ -31,5 +32,6 @@ public class PaymentController {
 
         ProductDAO.updateProductQuantity(product.getId(), product.getQuantity() - bean.getQuantity());
         SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername);
+        ReviewDAO.addReview(0, clientUsername, product.getId());
     }
 }

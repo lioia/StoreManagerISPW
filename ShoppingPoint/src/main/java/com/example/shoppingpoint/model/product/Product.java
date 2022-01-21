@@ -12,6 +12,7 @@ public abstract class Product {
     private String status;
     private Image image;
     private ProductType type;
+    private String storeName;
 
     public Integer getId() {
         return id;
@@ -75,5 +76,13 @@ public abstract class Product {
 
     public void setType(ProductType type) {
         this.type = type;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 }

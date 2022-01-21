@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.controlsfx.control.Rating?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="160.0" prefWidth="256.0" style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;">
+    <effect>
+        <DropShadow/>
+    </effect>
+    <FlowPane.margin>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </FlowPane.margin>
+    <Label fx:id="name" layoutX="16.0" layoutY="16.0" maxWidth="204" style="-fx-font-size: 24px" text="Product Name"/>
+    <Label fx:id="price" layoutX="16.0" layoutY="64.0" style="-fx-font-size: 18px" text="Total Price"/>
+    <Rating fx:id="rating" layoutX="16.0" layoutY="96.0" max="5" rating="0"/>
+</AnchorPane>

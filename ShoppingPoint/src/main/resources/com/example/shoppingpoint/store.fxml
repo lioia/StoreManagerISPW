@@ -7,107 +7,114 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
-    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
         <left>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack"
+                    style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                 <graphic>
-                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
                 </graphic>
                 <BorderPane.margin>
-                    <Insets right="16.0" />
+                    <Insets left="48.0"/>
                 </BorderPane.margin>
             </Button>
         </left>
         <center>
             <Label fx:id="storeNameText" text="Store - Shopping Point" BorderPane.alignment="CENTER">
                 <font>
-                    <Font size="36.0" />
+                    <Font size="36.0"/>
                 </font>
             </Label>
         </center>
         <right>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"
+                    BorderPane.alignment="CENTER" onAction="#openAccountInfo">
                 <graphic>
-                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32" />
+                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
                 </graphic>
                 <BorderPane.margin>
-                    <Insets right="16.0" />
+                    <Insets right="16.0"/>
                 </BorderPane.margin>
             </Button>
         </right>
         <effect>
-            <DropShadow />
+            <DropShadow/>
         </effect>
     </BorderPane>
     <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-        <TextField fx:id="searchTextField" prefHeight="64.0" prefWidth="544.0" promptText="Search for a product" style="-fx-background-radius: 12; -fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
+        <TextField fx:id="searchTextField" prefHeight="64.0" prefWidth="544.0" promptText="Search for a product"
+                   style="-fx-background-radius: 12; -fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
             <HBox.margin>
-                <Insets left="24.0" top="16.0" />
+                <Insets left="24.0" top="16.0"/>
             </HBox.margin>
             <effect>
-                <DropShadow />
+                <DropShadow/>
             </effect>
             <font>
-                <Font size="18.0" />
+                <Font size="18.0"/>
             </font>
         </TextField>
-        <Button mnemonicParsing="false" onAction="#search" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Search">
+        <Button mnemonicParsing="false" onAction="#search" prefHeight="48.0" prefWidth="120.0"
+                style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Search">
             <HBox.margin>
-                <Insets left="24.0" right="20.0" top="20.0" />
+                <Insets left="24.0" right="20.0" top="20.0"/>
             </HBox.margin>
             <effect>
-                <DropShadow />
+                <DropShadow/>
             </effect>
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
         </Button>
-      <VBox.margin>
-         <Insets bottom="16.0" />
-      </VBox.margin>
+        <VBox.margin>
+            <Insets bottom="16.0"/>
+        </VBox.margin>
     </HBox>
-   <HBox>
-      <VBox.margin>
-         <Insets bottom="16.0" left="16.0" right="16.0" />
-      </VBox.margin>
-      <children>
-          <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
-          <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
-              <font>
-                  <Font size="18.0" />
-              </font>
+    <HBox>
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0"/>
+        </VBox.margin>
+        <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
+        <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
+            <font>
+                <Font size="18.0"/>
+            </font>
             <HBox.margin>
-               <Insets right="16.0" />
+                <Insets right="16.0"/>
             </HBox.margin>
-          </Label>
-          <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
-              <font>
-                  <Font size="18.0" />
-              </font>
-              <effect>
-                  <DropShadow />
-              </effect>
-          </Button>
-          <Label fx:id="currentPointsText" text="Points" visible="false">
-              <font>
-                  <Font size="18.0" />
-              </font>
+        </Label>
+        <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0"
+                prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate"
+                visible="false">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <effect>
+                <DropShadow/>
+            </effect>
+        </Button>
+        <Label fx:id="currentPointsText" text="Points" visible="false">
+            <font>
+                <Font size="18.0"/>
+            </font>
             <HBox.margin>
-               <Insets right="16.0" />
+                <Insets right="16.0"/>
             </HBox.margin>
-          </Label>
-      </children>
-   </HBox>
+        </Label>
+    </HBox>
     <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
         <font>
-            <Font size="18.0" />
+            <Font size="18.0"/>
         </font>
         <VBox.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0" />
+            <Insets bottom="16.0" left="16.0" right="16.0"/>
         </VBox.margin>
     </Label>
     <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
-        <FlowPane fx:id="productsPane" />
+        <FlowPane fx:id="productsPane"/>
     </ScrollPane>
 </VBox>

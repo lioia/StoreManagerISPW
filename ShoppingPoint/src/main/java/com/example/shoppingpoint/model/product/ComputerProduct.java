@@ -12,13 +12,14 @@ public class ComputerProduct extends Product {
     private String brand;
     private Float displaySize;
 
-    public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
+    public ComputerProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setComputerType(computerType);
         setRam(ram);
         setSsd(ssd);

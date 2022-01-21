@@ -6,13 +6,14 @@ public class GameConsoleProduct extends Product {
     private String consoleType;
     private boolean digitalOnly;
 
-    public GameConsoleProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String consoleType, boolean digitalOnly) {
+    public GameConsoleProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String consoleType, boolean digitalOnly) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setConsoleType(consoleType);
         setDigitalOnly(digitalOnly);
         setType(ProductType.GAMECONSOLE);

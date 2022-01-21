@@ -7,13 +7,14 @@ public class BookProduct extends Product {
     private String plot;
     private String genre;
 
-    public BookProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String author, String plot, String genre) {
+    public BookProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String plot, String genre) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setAuthor(author);
         setPlot(plot);
         setGenre(genre);

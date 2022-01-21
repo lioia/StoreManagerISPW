@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shoppingpoint.view.OrdersGraphicController">
+    <top>
+        <BorderPane prefHeight="80.0" prefWidth="200.0"
+                    style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16px 16px"
+                    BorderPane.alignment="CENTER">
+            <effect>
+                <DropShadow/>
+            </effect>
+            <left>
+                <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent"
+                        onAction="#goBack">
+                    <graphic>
+                        <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+                    </graphic>
+                    <BorderPane.margin>
+                        <Insets left="48.0"/>
+                    </BorderPane.margin>
+                </Button>
+            </left>
+            <center>
+                <Label fx:id="titleLabel" text="Orders - Shopping Point">
+                    <font>
+                        <Font size="36.0"/>
+                    </font>
+                </Label>
+            </center>
+            <right>
+<!--                TODO account -->
+                <Label text="Account"/>
+            </right>
+        </BorderPane>
+    </top>
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
+            <FlowPane fx:id="ordersPane"/>
+        </ScrollPane>
+    </center>
+</BorderPane>

@@ -9,13 +9,14 @@ public class ComicsProduct extends Product {
     private String genre;
     private Integer volume;
 
-    public ComicsProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String author, String artist, String plot, String genre, Integer number) {
+    public ComicsProduct(Integer id, String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String artist, String plot, String genre, Integer number) {
         setId(id);
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
         setQuantity(quantity);
         setStatus(status);
+        setStoreName(storeName);
         setAuthor(author);
         setArtist(artist);
         setPlot(plot);

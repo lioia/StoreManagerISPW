@@ -76,4 +76,14 @@ CREATE TABLE LoyaltyCard (
     FOREIGN KEY (Client) REFERENCES User(Username),
     FOREIGN KEY (Store) REFERENCES Store(Name),
     PRIMARY KEY (Client, Store)
+);
+
+CREATE TABLE Review (
+    ReviewId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ProductId INT NOT NULL,
+    Client VARCHAR(16) NOT NULL,
+    Value FLOAT,
+
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId),
+    FOREIGN KEY (Client) REFERENCES User(Username)
 )
