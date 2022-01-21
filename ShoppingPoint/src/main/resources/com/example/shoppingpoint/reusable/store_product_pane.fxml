@@ -8,7 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.*?>
 
+<?import javafx.scene.chart.BarChart?>
 <AnchorPane prefHeight="320.0" prefWidth="384.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
@@ -28,9 +30,16 @@
     <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>
     <Label fx:id="discountedPrice" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price"/>
     <Label fx:id="status" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"/>
-    <!--    TODO aggiungere tasto per vedere tutta la descrizione -->
-    <Label fx:id="description" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px" text="Description"
-           maxWidth="204"/>
+    <HBox alignment="TOP_CENTER" layoutX="164.0" layoutY="160.0">
+        <Label fx:id="description"  style="-fx-font-size: 16px" text="Description" maxWidth="204"/>
+
+        <Button fx:id="descriptionButton" layoutX="184.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: transparent" >
+            <graphic>
+                <FontIcon iconLiteral="mdal-control_point" iconSize="18" />
+            </graphic>
+        </Button>
+    </HBox>
+
     <Button fx:id="buyButton" layoutX="235.0" layoutY="255.0" mnemonicParsing="false" prefHeight="51.0"
             prefWidth="127.0"
             style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy now">

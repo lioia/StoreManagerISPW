@@ -16,8 +16,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
+import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
 import java.util.List;
@@ -114,6 +117,24 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
+            ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event)->{
+                ScrollPane scrollPane= new ScrollPane();
+                scrollPane.setMaxWidth(400.0);
+                scrollPane.setMaxHeight(400.0);
+                Label label= new Label();
+                label.setText(product.getDescription());
+                label.setStyle("-fx-font-size: 16px");
+                label.setMaxWidth(350.0);
+                label.setWrapText(true);
+                scrollPane.setContent(label);
+                PopOver popOver = new PopOver();
+                Node node = (Node) event.getSource();
+                popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
+                popOver.setContentNode(scrollPane);
+                popOver.setCornerRadius(16);
+                popOver.show(node);
+
+            });
             ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
                 try {
                     FXMLLoader paymentLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment.fxml"));

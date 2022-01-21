@@ -102,6 +102,7 @@ public class StoreDashboardGraphicController {
         vbox.setPadding(new Insets(16));
         CheckBox activeBox = new CheckBox("Active");
         activeBox.setAlignment(Pos.CENTER);
+
         //TODO
 
         vbox.setAlignment(Pos.CENTER);
