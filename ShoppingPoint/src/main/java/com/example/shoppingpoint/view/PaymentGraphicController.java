@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,12 +23,13 @@ public class PaymentGraphicController {
     private GenericProduct product;
     private Store store;
     private LoyaltyCard card;
+    private float total;
 
     @FXML
     private Text productNameText;
 
     @FXML
-    private TextField quantityTextField;
+    private Label quantityLabel;
 
     @FXML
     private Text priceText;
@@ -41,6 +43,15 @@ public class PaymentGraphicController {
     @FXML
     private Label maxQuantityText;
 
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Button removeButton;
+
+    @FXML
+    private Text pointText;
+
     private final String DECIMAL_FORMAT = "%.02f€";
 
     public void initData(Client client, GenericProduct product, Store store, LoyaltyCard card) {
@@ -49,13 +60,20 @@ public class PaymentGraphicController {
         this.store = store;
         this.card = card;
 
+        if(product.getQuantity()==1){
+            addButton.setVisible(false);
+        }
         productNameText.setText(product.getName());
         String formattedPrice = String.format(DECIMAL_FORMAT, product.getDiscountedPrice()); // Price with 2 decimal points
         priceText.setText(formattedPrice);
-        Float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice();
+        total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice();
         String formattedTotal = String.format(DECIMAL_FORMAT, total);
         totalText.setText(formattedTotal);
-        checkLoyaltyCard.setVisible(card != null);
+        if(card != null){
+            checkLoyaltyCard.setVisible(true);
+            pointText.setVisible(true);
+            pointText.setText("You have " + card.getPoints() + " points");
+        }
         maxQuantityText.setText(maxQuantityText.getText() + product.getQuantity());
     }
 
@@ -63,7 +81,7 @@ public class PaymentGraphicController {
     public void buy(ActionEvent actionEvent) throws Exception {
 
         PaymentController controller = new PaymentController();
-        PaymentBean bean = new PaymentBean(quantityTextField.getText(), checkLoyaltyCard.isSelected());
+        PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
         controller.buy(bean, card, client.getUsername(), store, product);
 //        TODO go to payment completed
     }
@@ -71,14 +89,14 @@ public class PaymentGraphicController {
     @FXML
     public void loyaltyCardCheck(ActionEvent actionEvent) {
         if (checkLoyaltyCard.isSelected()) {
-            float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice() -  card.getPoints()/store.getPointsInEuro() ;
+            total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice() -  card.getPoints()/store.getPointsInEuro() ;
             if (total < 0) {
                 total = 0f;
             }
             String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         } else {
-            Float total = Integer.parseInt(quantityTextField.getText()) * product.getDiscountedPrice();
+             total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice();
             String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         }
@@ -91,5 +109,33 @@ public class PaymentGraphicController {
         ((Node) event.getSource()).getScene().setRoot(node);
         StoreGraphicController storeGraphicController = fxmlLoader.getController();
         storeGraphicController.initData(store, client);
+    }
+    @FXML
+    public void addQuantity(ActionEvent event){
+        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText())+1));
+        if(Integer.parseInt(quantityLabel.getText())==product.getQuantity()){
+            addButton.setVisible(false);
+        }
+        if(Integer.parseInt(quantityLabel.getText())==2){
+            removeButton.setVisible(true);
+        }
+        total = total + product.getDiscountedPrice();
+        String formattedTotal = String.format(DECIMAL_FORMAT, total);
+        totalText.setText(formattedTotal);
+
+    }
+
+    @FXML
+    public void removeQuantity(ActionEvent event){
+        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText())-1));
+        if(Integer.parseInt(quantityLabel.getText())==1){
+            removeButton.setVisible(false);
+        }
+        if(Integer.parseInt(quantityLabel.getText())==product.getQuantity()-1){
+            addButton.setVisible(true);
+        }
+        total = total - product.getDiscountedPrice();
+        String formattedTotal = String.format(DECIMAL_FORMAT, total);
+        totalText.setText(formattedTotal);
     }
 }
