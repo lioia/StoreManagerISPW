@@ -60,7 +60,7 @@ public class PaymentGraphicController {
         this.store = store;
         this.card = card;
 
-        if(product.getQuantity()==1){
+        if (product.getQuantity() == 1) {
             addButton.setVisible(false);
         }
         productNameText.setText(product.getName());
@@ -69,7 +69,7 @@ public class PaymentGraphicController {
         total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice();
         String formattedTotal = String.format(DECIMAL_FORMAT, total);
         totalText.setText(formattedTotal);
-        if(card != null){
+        if (card != null) {
             checkLoyaltyCard.setVisible(true);
             pointText.setVisible(true);
             pointText.setText("You have " + card.getPoints() + " points");
@@ -79,24 +79,27 @@ public class PaymentGraphicController {
 
     @FXML
     public void buy(ActionEvent actionEvent) throws Exception {
-
         PaymentController controller = new PaymentController();
         PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
         controller.buy(bean, card, client.getUsername(), store, product);
-//        TODO go to payment completed
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment_completed.fxml"));
+        Parent node = loader.load();
+        ((Node) actionEvent.getSource()).getScene().setRoot(node);
+        PaymentCompletedGraphicController paymentCompletedGraphicController = loader.getController();
+        paymentCompletedGraphicController.initData(client, store);
     }
 
     @FXML
     public void loyaltyCardCheck(ActionEvent actionEvent) {
         if (checkLoyaltyCard.isSelected()) {
-            total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice() -  card.getPoints()/store.getPointsInEuro() ;
+            total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice() - (float) card.getPoints() / store.getPointsInEuro();
             if (total < 0) {
                 total = 0f;
             }
             String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         } else {
-             total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice();
+            total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice();
             String formattedTotal = String.format(DECIMAL_FORMAT, total);
             totalText.setText(formattedTotal);
         }
@@ -110,13 +113,14 @@ public class PaymentGraphicController {
         StoreGraphicController storeGraphicController = fxmlLoader.getController();
         storeGraphicController.initData(store, client);
     }
+
     @FXML
-    public void addQuantity(ActionEvent event){
-        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText())+1));
-        if(Integer.parseInt(quantityLabel.getText())==product.getQuantity()){
+    public void addQuantity(ActionEvent event) {
+        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText()) + 1));
+        if (Integer.parseInt(quantityLabel.getText()) == product.getQuantity()) {
             addButton.setVisible(false);
         }
-        if(Integer.parseInt(quantityLabel.getText())==2){
+        if (Integer.parseInt(quantityLabel.getText()) == 2) {
             removeButton.setVisible(true);
         }
         total = total + product.getDiscountedPrice();
@@ -126,12 +130,12 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void removeQuantity(ActionEvent event){
-        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText())-1));
-        if(Integer.parseInt(quantityLabel.getText())==1){
+    public void removeQuantity(ActionEvent event) {
+        quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText()) - 1));
+        if (Integer.parseInt(quantityLabel.getText()) == 1) {
             removeButton.setVisible(false);
         }
-        if(Integer.parseInt(quantityLabel.getText())==product.getQuantity()-1){
+        if (Integer.parseInt(quantityLabel.getText()) == product.getQuantity() - 1) {
             addButton.setVisible(true);
         }
         total = total - product.getDiscountedPrice();

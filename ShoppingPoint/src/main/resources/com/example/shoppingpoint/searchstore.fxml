@@ -13,12 +13,11 @@
     <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
                 style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
         <center>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search Store - Shopping Point"
-                  BorderPane.alignment="CENTER">
+            <Label text="Search Store - Shopping Point" BorderPane.alignment="CENTER">
                 <font>
                     <Font size="36.0"/>
                 </font>
-            </Text>
+            </Label>
         </center>
         <right>
             <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"

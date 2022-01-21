@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="800.0"
+            prefHeight="650.0"
+            prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.shoppingpoint.view.PaymentCompletedGraphicController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0"
+              style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16" BorderPane.alignment="CENTER">
+            <effect>
+                <DropShadow/>
+            </effect>
+            <Label text="Payment Completed - Shopping Point">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER">
+            <Label text="Payment successfully completed!">
+                <font>
+                    <Font size="24"/>
+                </font>
+            </Label>
+            <Label text="You can review the purchase in the orders list">
+                <font>
+                    <Font size="18"/>
+                </font>
+            </Label>
+            <Label text="You will be automatically redirected to the Store page in a few seconds">
+                <font>
+                    <Font size="18"/>
+                </font>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="160.0"
+                    style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;"
+                    text="Redirect now" onAction="#redirect">
+                <VBox.margin>
+                    <Insets left="24.0" right="20.0" top="20.0"/>
+                </VBox.margin>
+                <effect>
+                    <DropShadow/>
+                </effect>
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </Button>
+        </VBox>
+    </center>
+</BorderPane>
