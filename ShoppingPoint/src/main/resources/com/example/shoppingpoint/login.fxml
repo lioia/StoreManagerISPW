@@ -7,6 +7,19 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.shoppingpoint.view.LoginGraphicController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 16px"
+              BorderPane.alignment="CENTER">
+            <effect>
+                <DropShadow/>
+            </effect>
+            <Label text="Login - Shopping Point">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </HBox>
+    </top>
     <center>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
             <Label layoutX="301.0" layoutY="160.0" text="Username" AnchorPane.leftAnchor="100.0"
@@ -54,14 +67,4 @@
             </Button>
         </AnchorPane>
     </center>
-    <top>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e;"
-              BorderPane.alignment="CENTER">
-            <Label text="Login - Shopping Point">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-            </Label>
-        </HBox>
-    </top>
 </BorderPane>
