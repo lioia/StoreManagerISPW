@@ -2,6 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
+import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -19,9 +21,7 @@ import javafx.scene.layout.HBox;
 
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
-import com.example.shoppingpoint.dao.StoreDAO;
-import com.example.shoppingpoint.view.ClientListGraphicController;
-import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import org.controlsfx.control.PopOver;
 
 import java.io.IOException;
@@ -153,38 +153,64 @@ public class StoreDashboardGraphicController {
 
     @FXML
     public void openEditCard(ActionEvent actionEvent) {
+        PopOver popOver = new PopOver();
+
+        Font font = new Font(18);
         VBox vbox = new VBox(16);
         vbox.setPadding(new Insets(16));
         CheckBox activeBox = new CheckBox("Active");
         activeBox.setAlignment(Pos.CENTER);
+        activeBox.setFont(font);
+        activeBox.setSelected(storeOwner.getStore().getPointsInEuro() != 0 && storeOwner.getStore().getEuroInPoints() != 0);
+
         HBox hbox1 = new HBox();
         HBox hbox2 = new HBox();
-        TextField pointInEuroTextField = new TextField();
-        pointInEuroTextField.setPromptText("1");
-        pointInEuroTextField.setPrefHeight(12);
-        pointInEuroTextField.setPrefWidth(20);
-        TextField euroInPointsTextField = new TextField();
-        euroInPointsTextField.setPromptText("1");
-        euroInPointsTextField.setPrefWidth(20);
-        euroInPointsTextField.setPrefHeight(6);
-        Text text1 = new Text("poits spent = 1€ discount");
-        Text text2 = new Text("€ spent = 1 point earned");
-        hbox1.getChildren().addAll(pointInEuroTextField,text1);
-        hbox2.getChildren().addAll(euroInPointsTextField,text2);
+        TextField pointInEuroTextField = new TextField(storeOwner.getStore().getPointsInEuro().toString());
+        pointInEuroTextField.setPrefSize(64, 32);
+        pointInEuroTextField.setDisable(!activeBox.isSelected());
+        TextField euroInPointsTextField = new TextField(storeOwner.getStore().getEuroInPoints().toString());
+        euroInPointsTextField.setPrefSize(64, 32);
+        euroInPointsTextField.setDisable(!activeBox.isSelected());
+        Label text1 = new Label(" points spent = 1€ discount");
+        text1.setAlignment(Pos.CENTER);
+        text1.setFont(font);
+        Label text2 = new Label(" € spent = 1 point earned");
+        text2.setAlignment(Pos.CENTER);
+        text2.setFont(font);
+        hbox1.getChildren().addAll(pointInEuroTextField, text1);
+        hbox2.getChildren().addAll(euroInPointsTextField, text2);
 
+        activeBox.setOnAction(event -> {
+            boolean selected = ((CheckBox) event.getSource()).isSelected();
+            pointInEuroTextField.setDisable(!selected);
+            euroInPointsTextField.setDisable(!selected);
+        });
 
-        //TODO sistemare textfield fare la bean e controll
+        Button updateButton = new Button("Update");
+        updateButton.setAlignment(Pos.CENTER);
+        updateButton.setStyle("-fx-background-color: #6EC6FF; -fx-background-radius: 16;");
+        updateButton.setEffect(new DropShadow());
+        updateButton.setPrefSize(120, 48);
+        updateButton.setOnAction(event -> {
+            try {
+                LoyaltyCardBean bean = new LoyaltyCardBean(activeBox.isSelected(), pointInEuroTextField.getText(), euroInPointsTextField.getText());
+                System.out.printf("PiE: %d, EiP: %d\n", bean.getPointsInEuro(), bean.getEuroInPoints());
+                controller.updateLoyaltyCard(bean, storeOwner.getStore());
+                storeOwner.getStore().setPointsInEuro(bean.getPointsInEuro());
+                storeOwner.getStore().setEuroInPoints(bean.getEuroInPoints());
+                popOver.hide();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
         vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().addAll(activeBox,hbox1,hbox2);
+        vbox.getChildren().addAll(activeBox, hbox1, hbox2, updateButton);
 
-
-        PopOver popOver = new PopOver();
         Node node = (Node) actionEvent.getSource();
         popOver.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
         popOver.setContentNode(vbox);
         popOver.setCornerRadius(16);
         popOver.show(node);
     }
-
 }

@@ -159,7 +159,7 @@ public class StoreDAO {
         }
     }
 
-    public static void savePointsCard(int pointsInEuro, int euroInPoints, String storeOwner) throws Exception{
+    public static void updatePoints(int pointsInEuro, int euroInPoints, String storeName) throws Exception{
         Statement statement = null;
         Connection connection = null;
         try {
@@ -168,7 +168,7 @@ public class StoreDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("UPDATE Store SET PointsInEuro = %d AND EuroInPoints = %d WHERE  StoreOwner = '%s'", pointsInEuro, euroInPoints, storeOwner);
+            String sql = String.format("UPDATE Store SET PointsInEuro = %d, EuroInPoints = %d WHERE Name = '%s'", pointsInEuro, euroInPoints, storeName);
             // Execute query
             statement.executeUpdate(sql);
         } finally {

@@ -3,6 +3,8 @@ package com.example.shoppingpoint.controller;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.StoreBean;
+import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
+import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.model.product.Product;
@@ -21,10 +23,14 @@ public class StoreDashboardController {
 
 
         List<GenericProduct> genericProducts = new ArrayList<>();
-        for(Product product : products) {
+        for (Product product : products) {
             genericProducts.add(new ProductAdapter(product));
         }
 
         return genericProducts;
+    }
+
+    public void updateLoyaltyCard(LoyaltyCardBean bean, Store store) throws Exception {
+        StoreDAO.updatePoints(bean.getPointsInEuro(), bean.getEuroInPoints(), store.getName());
     }
 }

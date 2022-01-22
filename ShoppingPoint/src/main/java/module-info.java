@@ -16,4 +16,5 @@ module com.example.shoppingpoint {
     exports com.example.shoppingpoint.model.user;
     exports com.example.shoppingpoint.model.product;
     exports com.example.shoppingpoint.adapter;
+    exports com.example.shoppingpoint.bean.store_dashboard;
 }
