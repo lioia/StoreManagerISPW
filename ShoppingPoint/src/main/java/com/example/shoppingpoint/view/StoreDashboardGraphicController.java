@@ -104,21 +104,20 @@ public class StoreDashboardGraphicController {
                 popOver.show(node);
             });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
-                ((Label) pane.lookup("#name")).setVisible(false);
-                ((Label) pane.lookup("#price")).setVisible(false);
-                ((Label)pane.lookup("#discountedPrice")).setVisible(false);
-                ((Label) pane.lookup("#status")).setVisible(false);
-                ((Button) pane.lookup("#editButton")).setVisible(false);
-                ((Button) pane.lookup("#requestButton")).setVisible(false);
-                ((HBox)pane.lookup("#descriptionHbox")).setVisible(false);
+                pane.lookup("#name").setVisible(false);
+                pane.lookup("#price").setVisible(false);
+                pane.lookup("#discountedPrice").setVisible(false);
+                pane.lookup("#status").setVisible(false);
+                pane.lookup("#editButton").setVisible(false);
+                pane.lookup("#requestButton").setVisible(false);
+                pane.lookup("#descriptionHbox").setVisible(false);
 
-                ((TextField) pane.lookup("#nameTextField")).setVisible(true);
-                ((TextField) pane.lookup("#priceTextField")).setVisible(true);
-                ((TextField) pane.lookup("#discountedPriceTextField")).setVisible(true);
-                ((TextField) pane.lookup("#statusTextField")).setVisible(true);
-                ((TextField) pane.lookup("#descriptionTextField")).setVisible(true);
-                ((Button)pane.lookup("#saveButton")).setVisible((true));
-
+                pane.lookup("#nameTextField").setVisible(true);
+                pane.lookup("#priceTextField").setVisible(true);
+                pane.lookup("#discountedPriceTextField").setVisible(true);
+                pane.lookup("#statusTextField").setVisible(true);
+                pane.lookup("#descriptionTextField").setVisible(true);
+                pane.lookup("#saveButton").setVisible((true));
 
 
                 ((TextField) pane.lookup("#nameTextField")).setText(product.getName());
@@ -129,20 +128,20 @@ public class StoreDashboardGraphicController {
                 ((TextField) pane.lookup("#statusTextField")).setText(product.getStatus());
                 ((TextField) pane.lookup("#descriptionTextField")).setText(product.getDescription());
                 ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
-                    ((Label) pane.lookup("#name")).setVisible(true);
-                    ((Label) pane.lookup("#price")).setVisible(true);
-                    ((Label)pane.lookup("#discountedPrice")).setVisible(true);
-                    ((Label) pane.lookup("#status")).setVisible(true);
-                    ((Button) pane.lookup("#editButton")).setVisible(true);
-                    ((Button) pane.lookup("#requestButton")).setVisible(true);
-                    ((HBox)pane.lookup("#descriptionHbox")).setVisible(true);
+                    pane.lookup("#name").setVisible(true);
+                    pane.lookup("#price").setVisible(true);
+                    pane.lookup("#discountedPrice").setVisible(true);
+                    pane.lookup("#status").setVisible(true);
+                    pane.lookup("#editButton").setVisible(true);
+                    pane.lookup("#requestButton").setVisible(true);
+                    pane.lookup("#descriptionHbox").setVisible(true);
 
-                    ((TextField) pane.lookup("#nameTextField")).setVisible(false);
-                    ((TextField) pane.lookup("#priceTextField")).setVisible(false);
-                    ((TextField) pane.lookup("#discountedPriceTextField")).setVisible(false);
-                    ((TextField) pane.lookup("#statusTextField")).setVisible(false);
-                    ((TextField) pane.lookup("#descriptionTextField")).setVisible(false);
-                    ((Button)pane.lookup("#saveButton")).setVisible(false);
+                    pane.lookup("#nameTextField").setVisible(false);
+                    pane.lookup("#priceTextField").setVisible(false);
+                    pane.lookup("#discountedPriceTextField").setVisible(false);
+                    pane.lookup("#statusTextField").setVisible(false);
+                    pane.lookup("#descriptionTextField").setVisible(false);
+                    pane.lookup("#saveButton").setVisible(false);
                 });
 
             });
@@ -194,7 +193,6 @@ public class StoreDashboardGraphicController {
         updateButton.setOnAction(event -> {
             try {
                 LoyaltyCardBean bean = new LoyaltyCardBean(activeBox.isSelected(), pointInEuroTextField.getText(), euroInPointsTextField.getText());
-                System.out.printf("PiE: %d, EiP: %d\n", bean.getPointsInEuro(), bean.getEuroInPoints());
                 controller.updateLoyaltyCard(bean, storeOwner.getStore());
                 storeOwner.getStore().setPointsInEuro(bean.getPointsInEuro());
                 storeOwner.getStore().setEuroInPoints(bean.getEuroInPoints());
