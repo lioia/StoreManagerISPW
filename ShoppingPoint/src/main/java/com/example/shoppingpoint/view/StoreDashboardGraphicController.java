@@ -10,15 +10,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-
-import javafx.scene.control.TextField;
 
 
 import com.example.shoppingpoint.model.user.*;
@@ -82,15 +78,73 @@ public class StoreDashboardGraphicController {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
             AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
-            ((TextField) pane.lookup("#name")).setText(product.getName());
+            ((Label) pane.lookup("#name")).setText(product.getName());
             String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((TextField) pane.lookup("#price")).setText(formattedPrice);
+            ((Label) pane.lookup("#price")).setText(formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((TextField) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
-            ((TextField) pane.lookup("#status")).setText(product.getStatus());
-            ((TextField) pane.lookup("#description")).setText(product.getDescription());
+            ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
+            ((Label) pane.lookup("#status")).setText(product.getStatus());
+            ((Label) pane.lookup("#description")).setText(product.getDescription());
+            ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction((ActionEvent event) -> {
+                ScrollPane scrollPane = new ScrollPane();
+                scrollPane.setMaxWidth(400.0);
+                scrollPane.setMaxHeight(400.0);
+                scrollPane.setPadding(new Insets(16));
+                Label label = new Label();
+                label.setText(product.getDescription());
+                label.setStyle("-fx-font-size: 16px");
+                label.setMaxWidth(350.0);
+                label.setWrapText(true);
+                scrollPane.setContent(label);
+                PopOver popOver = new PopOver();
+                Node node = (Node) event.getSource();
+                popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
+                popOver.setContentNode(scrollPane);
+                popOver.setCornerRadius(16);
+                popOver.show(node);
+            });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
-//            TODO
+                ((Label) pane.lookup("#name")).setVisible(false);
+                ((Label) pane.lookup("#price")).setVisible(false);
+                ((Label)pane.lookup("#discountedPrice")).setVisible(false);
+                ((Label) pane.lookup("#status")).setVisible(false);
+                ((Button) pane.lookup("#editButton")).setVisible(false);
+                ((Button) pane.lookup("#requestButton")).setVisible(false);
+                ((HBox)pane.lookup("#descriptionHbox")).setVisible(false);
+
+                ((TextField) pane.lookup("#nameTextField")).setVisible(true);
+                ((TextField) pane.lookup("#priceTextField")).setVisible(true);
+                ((TextField) pane.lookup("#discountedPriceTextField")).setVisible(true);
+                ((TextField) pane.lookup("#statusTextField")).setVisible(true);
+                ((TextField) pane.lookup("#descriptionTextField")).setVisible(true);
+                ((Button)pane.lookup("#saveButton")).setVisible((true));
+
+
+
+                ((TextField) pane.lookup("#nameTextField")).setText(product.getName());
+                String formattedPriceTextField = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
+                ((TextField) pane.lookup("#priceTextField")).setText(formattedPriceTextField);
+                String formattedDiscountedPriceTextField = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
+                ((TextField) pane.lookup("#discountedPriceTextField")).setText(formattedDiscountedPriceTextField);
+                ((TextField) pane.lookup("#statusTextField")).setText(product.getStatus());
+                ((TextField) pane.lookup("#descriptionTextField")).setText(product.getDescription());
+                ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
+                    ((Label) pane.lookup("#name")).setVisible(true);
+                    ((Label) pane.lookup("#price")).setVisible(true);
+                    ((Label)pane.lookup("#discountedPrice")).setVisible(true);
+                    ((Label) pane.lookup("#status")).setVisible(true);
+                    ((Button) pane.lookup("#editButton")).setVisible(true);
+                    ((Button) pane.lookup("#requestButton")).setVisible(true);
+                    ((HBox)pane.lookup("#descriptionHbox")).setVisible(true);
+
+                    ((TextField) pane.lookup("#nameTextField")).setVisible(false);
+                    ((TextField) pane.lookup("#priceTextField")).setVisible(false);
+                    ((TextField) pane.lookup("#discountedPriceTextField")).setVisible(false);
+                    ((TextField) pane.lookup("#statusTextField")).setVisible(false);
+                    ((TextField) pane.lookup("#descriptionTextField")).setVisible(false);
+                    ((Button)pane.lookup("#saveButton")).setVisible(false);
+                });
+
             });
 //            Add product to the view
             productsPane.getChildren().add(pane);
