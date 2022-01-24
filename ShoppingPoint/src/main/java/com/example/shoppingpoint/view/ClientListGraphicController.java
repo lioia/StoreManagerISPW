@@ -59,7 +59,7 @@ public class ClientListGraphicController {
             Label email = (Label) pane.lookup("#clientEmailText");
             email.setText(client.getEmail());
             email.setOnMouseClicked(event -> {
-                HostServices hostServices = new ShoppingPointApplication().getHostServices();
+                HostServices hostServices = ShoppingPointApplication.getInstance().getHostServices();
                 hostServices.showDocument("mailto:" + client.getEmail());
             });
             ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));

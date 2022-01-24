@@ -8,6 +8,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ShoppingPointApplication extends Application {
+    private static ShoppingPointApplication instance;
+
+    public static ShoppingPointApplication getInstance() {
+//        Create an instance of this class if it's not already present
+        if (instance == null)
+            instance = new ShoppingPointApplication();
+        return instance;
+    }
+
+    public ShoppingPointApplication() {
+//        Set the instance to the current one (created by the launch method)
+        instance = this;
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
