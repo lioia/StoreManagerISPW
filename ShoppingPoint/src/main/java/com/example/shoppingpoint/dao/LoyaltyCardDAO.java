@@ -1,14 +1,12 @@
 package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.model.LoyaltyCard;
-import com.example.shoppingpoint.model.product.Product;
-import com.example.shoppingpoint.model.user.Client;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.shoppingpoint.utils.datiClientList;
+import com.example.shoppingpoint.utils.ClientListData;
 
 public class LoyaltyCardDAO {
     private LoyaltyCardDAO() {
@@ -114,10 +112,10 @@ public class LoyaltyCardDAO {
         }
     }
 
-    public static List<datiClientList> getClientFromStoreName (String storeName) throws Exception{
+    public static List<ClientListData> getClientFromStoreName (String storeName) throws Exception{
         Statement statement = null;
         Connection connection = null;
-        List<datiClientList> clients = new ArrayList<>();
+        List<ClientListData> clients = new ArrayList<>();
 
         try {
             // Create Connection
@@ -131,7 +129,7 @@ public class LoyaltyCardDAO {
                 String clientUsername=rs.getString("Client");
                 String email = getLEmailFromUsername(clientUsername);
                 Integer clientPoints=rs.getInt("Points");
-                clients.add(new datiClientList(clientUsername,email,clientPoints));
+                clients.add(new ClientListData(clientUsername,email,clientPoints));
             }
 
             rs.close();

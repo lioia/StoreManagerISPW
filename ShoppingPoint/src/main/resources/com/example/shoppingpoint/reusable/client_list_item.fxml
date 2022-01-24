@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.effect.DropShadow?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="165.0" prefWidth="287.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <effect>
         <DropShadow/>
     </effect>
-    <Text fx:id="clientNameText" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Name">
+    <Label fx:id="clientNameText" layoutX="16.0" layoutY="16.0" text="Client Name">
         <font>
             <Font size="24.0"/>
         </font>
-    </Text>
-    <Text fx:id="clientEmailText" layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="Client Email">
+    </Label>
+    <Label fx:id="clientEmailText" layoutX="16.0" layoutY="64.0" text="Client Email" textFill="#6EC6FF">
         <font>
             <Font size="18.0"/>
         </font>
-    </Text>
-    <Text fx:id="clientPointsText" layoutX="18.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client Points">
+    </Label>
+    <Label fx:id="clientPointsText" layoutX="16.0" layoutY="96.0" text="Client Points">
         <font>
             <Font size="18.0"/>
         </font>
-    </Text>
+    </Label>
 
     <FlowPane.margin>
         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
     </FlowPane.margin>
+    <effect>
+        <DropShadow/>
+    </effect>
 </AnchorPane>

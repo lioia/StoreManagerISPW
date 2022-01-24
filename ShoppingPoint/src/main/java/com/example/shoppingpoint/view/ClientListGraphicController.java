@@ -1,24 +1,21 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
 
 
-import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.control.Label;
-import com.example.shoppingpoint.utils.datiClientList;
+import com.example.shoppingpoint.utils.ClientListData;
 import com.example.shoppingpoint.controller.ClientListController;
 
-import java.io.IOException;
 import java.util.List;
 
 public class ClientListGraphicController {
@@ -30,11 +27,6 @@ public class ClientListGraphicController {
 
     @FXML
     private FlowPane clientPane;
-
-    private ClientListController controller;
-
-
-
 
     @FXML
     public void goBack(ActionEvent event) throws Exception {
@@ -50,25 +42,28 @@ public class ClientListGraphicController {
         this.storeOwner = storeOwner;
         String storeName = storeOwner.getStore().getName();
 
-        labelStoreName.setText( storeName + " - Shopping Point");
+        labelStoreName.setText(storeName + " - Shopping Point");
         createClientListView(storeName);
-
-
     }
 
-    private void createClientListView(String storeName) throws Exception{
+    private void createClientListView(String storeName) throws Exception {
         clientPane.getChildren().clear();
-        controller = new ClientListController();
-        List<datiClientList> clients = controller.getClientFromStore(storeName);
+        ClientListController controller = new ClientListController();
+        List<ClientListData> clients = controller.getClientFromStore(storeName);
 
-        for(datiClientList client : clients){
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/DATOGLIERE.fxml"));
+        for (ClientListData client : clients) {
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/client_list_item.fxml"));
             AnchorPane pane = fxmlLoader.load();
 
-            ((Text) pane.lookup("#clientNameText")).setText(client.getUsername());
-            ((Text) pane.lookup("#clientEmailText")).setText(client.getEmail());
-            ((Text) pane.lookup("#clientPointsText")).setText(String.format("Points: %d",client.getPoints()));
-            //            Add product to the view
+            ((Label) pane.lookup("#clientNameText")).setText(client.getUsername());
+            Label email = (Label) pane.lookup("#clientEmailText");
+            email.setText(client.getEmail());
+            email.setOnMouseClicked(event -> {
+                HostServices hostServices = new ShoppingPointApplication().getHostServices();
+                hostServices.showDocument("mailto:" + client.getEmail());
+            });
+            ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
+//            Add client to the view
             clientPane.getChildren().add(pane);
         }
     }

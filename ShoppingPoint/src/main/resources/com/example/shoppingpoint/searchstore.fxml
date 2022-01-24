@@ -11,7 +11,7 @@
       prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.SearchStoreGraphicController">
     <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
-                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
         <center>
             <Label text="Search Store - Shopping Point" BorderPane.alignment="CENTER">
                 <font>

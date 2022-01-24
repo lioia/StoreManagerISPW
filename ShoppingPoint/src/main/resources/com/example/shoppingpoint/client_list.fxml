@@ -2,41 +2,53 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.ClientListGraphicController">
-    <BorderPane prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shoppingpoint.view.ClientListGraphicController">
+    <BorderPane prefHeight="80.0" prefWidth="200.0"
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
         <center>
             <Label fx:id="labelStoreName" text="Client List - Shopping Point" BorderPane.alignment="CENTER">
                 <font>
-                    <Font size="36.0" />
+                    <Font size="36.0"/>
                 </font>
             </Label>
         </center>
         <right>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"
+                    BorderPane.alignment="CENTER">
                 <graphic>
-                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32" />
+                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
                 </graphic>
                 <BorderPane.margin>
-                    <Insets right="16.0" />
+                    <Insets right="16.0"/>
                 </BorderPane.margin>
             </Button>
         </right>
         <left>
-            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent"
+                    BorderPane.alignment="CENTER">
                 <graphic>
-                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
                 </graphic>
                 <BorderPane.margin>
-                    <Insets left="48.0" />
+                    <Insets left="48.0"/>
                 </BorderPane.margin>
             </Button>
         </left>
+        <effect>
+            <DropShadow/>
+        </effect>
     </BorderPane>
     <ScrollPane style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="clientPane"/>
+        <VBox.margin>
+            <Insets top="16.0"/>
+        </VBox.margin>
     </ScrollPane>
 </VBox>

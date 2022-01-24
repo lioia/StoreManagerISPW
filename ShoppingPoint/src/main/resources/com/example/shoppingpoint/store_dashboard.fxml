@@ -12,7 +12,7 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.shoppingpoint.view.StoreDashboardGraphicController">
     <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
-                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 12 12;">
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
         <effect>
             <DropShadow/>
         </effect>
@@ -118,8 +118,6 @@
         </Button>
     </HBox>
     <ScrollPane fitToWidth="true" style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
-        <FlowPane fx:id="productsPane">
-
-        </FlowPane>
+        <FlowPane fx:id="productsPane" />
     </ScrollPane>
 </VBox>
