@@ -7,12 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 
 
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.control.Label;
+import com.example.shoppingpoint.utils.datiClientList;
+import com.example.shoppingpoint.controller.ClientListController;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClientListGraphicController {
 
@@ -20,6 +27,13 @@ public class ClientListGraphicController {
 
     @FXML
     private Label labelStoreName;
+
+    @FXML
+    private FlowPane clientPane;
+
+    private ClientListController controller;
+
+
 
 
     @FXML
@@ -32,9 +46,30 @@ public class ClientListGraphicController {
     }
 
     @FXML
-    public void initData(StoreOwner storeOwner) throws IOException {
+    public void initData(StoreOwner storeOwner) throws Exception {
         this.storeOwner = storeOwner;
+        String storeName = storeOwner.getStore().getName();
 
-        labelStoreName.setText(storeOwner.getStore().getName() + " - Shopping Point");
+        labelStoreName.setText( storeName + " - Shopping Point");
+        createClientListView(storeName);
+
+
+    }
+
+    private void createClientListView(String storeName) throws Exception{
+        clientPane.getChildren().clear();
+        controller = new ClientListController();
+        List<datiClientList> clients = controller.getClientFromStore(storeName);
+
+        for(datiClientList client : clients){
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/DATOGLIERE.fxml"));
+            AnchorPane pane = fxmlLoader.load();
+
+            ((Text) pane.lookup("#clientNameText")).setText(client.getUsername());
+            ((Text) pane.lookup("#clientEmailText")).setText(client.getEmail());
+            ((Text) pane.lookup("#clientPointsText")).setText(String.format("Points: %d",client.getPoints()));
+            //            Add product to the view
+            clientPane.getChildren().add(pane);
+        }
     }
 }

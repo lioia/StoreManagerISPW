@@ -5,5 +5,7 @@ public class Client extends User {
         setUsername(username);
         setEmail(email);
         setPassword(password);
+
+
     }
 }

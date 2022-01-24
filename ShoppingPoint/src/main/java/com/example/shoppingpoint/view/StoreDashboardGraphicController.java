@@ -49,7 +49,7 @@ public class StoreDashboardGraphicController {
     }
 
     @FXML
-    public void goToClientList(ActionEvent event) throws IOException {
+    public void goToClientList(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
