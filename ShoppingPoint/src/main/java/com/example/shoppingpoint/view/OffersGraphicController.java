@@ -55,7 +55,7 @@ public class OffersGraphicController {
                         ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
                         ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
                             try {
-                                controller.acceptOffer(req, product.getId(), off.getOfferId());
+                                controller.acceptOffer(req, product, off.getOfferId());
                                 goBack(event);
                             } catch (Exception e) {
                                 e.printStackTrace();

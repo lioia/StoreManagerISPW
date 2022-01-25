@@ -1,10 +1,12 @@
 package com.example.shoppingpoint.controller;
 
+import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.RequestDAO;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
+import com.example.shoppingpoint.model.product.Product;
 
 import java.util.List;
 
@@ -21,9 +23,9 @@ public class OffersController {
         return OfferDAO.getOffersOfRequest(requestId);
     }
 
-    public void acceptOffer(Request request, int productId, int offerId) throws Exception {
+    public void acceptOffer(Request request, GenericProduct product, int offerId) throws Exception {
         RequestDAO.acceptRequest(request.getRequestId());
         OfferDAO.acceptOffer(offerId);
-        ProductDAO.updateProductQuantity(productId, request.getQuantity());
+        ProductDAO.updateProductQuantity(product.getId(), product.getQuantity() + request.getQuantity());
     }
 }
