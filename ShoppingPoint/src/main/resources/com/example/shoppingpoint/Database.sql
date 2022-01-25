@@ -40,7 +40,7 @@ CREATE TABLE Product (
     Genre VARCHAR(16),
     VolumeNumber INT,
     ConsoleType ENUM("PS5", "PS4", "XBOXSERIESX", "XBOXSERIESS", "XBOXONE", "NINTENDOSWITCH"),
-    DigitalOnly TINYINT(1),
+    DigitalOnly TINYINT(1), # TODO change in BIT
     ComputerType ENUM("LAPTOP", "DESKTOP", "TWOINONE", "TOUCHSCREEN"),
     Ram INT,
     SSD INT,
@@ -86,4 +86,14 @@ CREATE TABLE Review (
 
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId),
     FOREIGN KEY (Client) REFERENCES User(Username)
+);
+
+CREATE TABLE Request (
+    RequestId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ProductId INT NOT NULL,
+    MaxPrice FLOAT NOT NULL,
+    Quantity INT NOT NULL,
+    ACCEPTED BIT NOT NULL,
+
+    FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 )

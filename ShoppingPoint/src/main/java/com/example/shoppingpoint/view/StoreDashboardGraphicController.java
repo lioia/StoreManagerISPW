@@ -58,11 +58,6 @@ public class StoreDashboardGraphicController {
         clientListGraphicController.initData(storeOwner);
     }
 
-    public void goToRequest(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request.fxml"));
-        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
-    }
-
     private void setStoreOwner(StoreOwner storeOwnerName) throws Exception {
         this.storeOwner = storeOwnerName;
         if (storeOwner.getStore() == null) {
@@ -105,6 +100,17 @@ public class StoreDashboardGraphicController {
                 popOver.setContentNode(scrollPane);
                 popOver.setCornerRadius(16);
                 popOver.show(node);
+            });
+            ((Button)pane.lookup("#requestButton")).setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_request.fxml"));
+                    Parent node = loader.load();
+                    ((Node)event.getSource()).getScene().setRoot(node);
+                    NewRequestGraphicController newRequestGraphicController = loader.getController();
+                    newRequestGraphicController.initData(storeOwner, product);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
             });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
                 setProductVisibility(pane, false);
