@@ -93,7 +93,7 @@ CREATE TABLE Request (
     ProductId INT NOT NULL,
     MaxPrice FLOAT NOT NULL,
     Quantity INT NOT NULL,
-    ACCEPTED BIT NOT NULL,
+    Accepted BIT NOT NULL,
 
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 )
