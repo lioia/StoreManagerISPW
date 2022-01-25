@@ -10,7 +10,7 @@ public class LoginController {
     public User login(LoginBean bean) throws Exception {
         User user = UserDAO.getUserByUsername(bean.getUsername());
         if(!Objects.equals(user.getPassword(), bean.getPassword())) {
-            throw new Exception("");
+            throw new Exception("Invalid password");
         }
         return user;
     }
