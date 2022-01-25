@@ -87,7 +87,7 @@ public class StoreDashboardGraphicController {
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Rating)pane.lookup("#rating")).setRating(reviewAverage);
+            ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
             ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);
@@ -107,46 +107,10 @@ public class StoreDashboardGraphicController {
                 popOver.show(node);
             });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
-                pane.lookup("#name").setVisible(false);
-                pane.lookup("#price").setVisible(false);
-                pane.lookup("#discountedPrice").setVisible(false);
-                pane.lookup("#status").setVisible(false);
-                pane.lookup("#editButton").setVisible(false);
-                pane.lookup("#requestButton").setVisible(false);
-                pane.lookup("#descriptionHbox").setVisible(false);
-                pane.lookup("#rating").setVisible(false);
-
-                pane.lookup("#nameTextField").setVisible(true);
-                pane.lookup("#priceTextField").setVisible(true);
-                pane.lookup("#discountedPriceTextField").setVisible(true);
-                pane.lookup("#statusTextField").setVisible(true);
-                pane.lookup("#descriptionTextField").setVisible(true);
-                pane.lookup("#saveButton").setVisible((true));
-
-
-                ((TextField) pane.lookup("#nameTextField")).setText(product.getName());
-                String formattedPriceTextField = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-                ((TextField) pane.lookup("#priceTextField")).setText(formattedPriceTextField);
-                String formattedDiscountedPriceTextField = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-                ((TextField) pane.lookup("#discountedPriceTextField")).setText(formattedDiscountedPriceTextField);
-                ((TextField) pane.lookup("#statusTextField")).setText(product.getStatus());
-                ((TextField) pane.lookup("#descriptionTextField")).setText(product.getDescription());
+                setProductVisibility(pane, false);
                 ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
-                    pane.lookup("#name").setVisible(true);
-                    pane.lookup("#price").setVisible(true);
-                    pane.lookup("#discountedPrice").setVisible(true);
-                    pane.lookup("#status").setVisible(true);
-                    pane.lookup("#editButton").setVisible(true);
-                    pane.lookup("#requestButton").setVisible(true);
-                    pane.lookup("#descriptionHbox").setVisible(true);
-                    pane.lookup("#rating").setVisible(true);
-
-                    pane.lookup("#nameTextField").setVisible(false);
-                    pane.lookup("#priceTextField").setVisible(false);
-                    pane.lookup("#discountedPriceTextField").setVisible(false);
-                    pane.lookup("#statusTextField").setVisible(false);
-                    pane.lookup("#descriptionTextField").setVisible(false);
-                    pane.lookup("#saveButton").setVisible(false);
+                    setProductVisibility(pane, true);
+//                    TODO update product
                 });
 
             });
@@ -215,5 +179,24 @@ public class StoreDashboardGraphicController {
         popOver.setContentNode(vbox);
         popOver.setCornerRadius(16);
         popOver.show(node);
+    }
+
+    private void setProductVisibility(AnchorPane pane, boolean visibility) {
+        pane.lookup("#name").setVisible(visibility);
+        pane.lookup("#price").setVisible(visibility);
+        pane.lookup("#discountedPrice").setVisible(visibility);
+        pane.lookup("#status").setVisible(visibility);
+        pane.lookup("#editButton").setVisible(visibility);
+        pane.lookup("#requestButton").setVisible(visibility);
+        pane.lookup("#descriptionHbox").setVisible(visibility);
+        pane.lookup("#rating").setVisible(visibility);
+        pane.lookup("#viewOffersButton").setVisible(visibility);
+
+        pane.lookup("#nameTextField").setVisible(!visibility);
+        pane.lookup("#priceTextField").setVisible(!visibility);
+        pane.lookup("#discountedPriceTextField").setVisible(!visibility);
+        pane.lookup("#statusTextField").setVisible(!visibility);
+        pane.lookup("#descriptionTextField").setVisible(!visibility);
+        pane.lookup("#saveButton").setVisible(!visibility);
     }
 }
