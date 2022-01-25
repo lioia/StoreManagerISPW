@@ -49,6 +49,10 @@ public class NewRequestGraphicController {
         NewRequestBean bean = new NewRequestBean(maxPriceTextField.getText(), quantityTextField.getText());
         NewRequestController controller = new NewRequestController();
         controller.saveRequest(bean, product.getId());
-//        TODO go to offers view
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
+        Parent node = loader.load();
+        ((Node)actionEvent.getSource()).getScene().setRoot(node);
+        OffersGraphicController offersGraphicController = loader.getController();
+        offersGraphicController.initData(storeOwner, product);
     }
 }

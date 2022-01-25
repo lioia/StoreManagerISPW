@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" prefHeight="200.0" prefWidth="800.0" spacing="8">
+    <Label fx:id="requestIdLabel" text="Request ID">
+        <VBox.margin>
+            <Insets top="8" left="32"/>
+        </VBox.margin>
+        <font>
+            <Font size="24"/>
+        </font>
+    </Label>
+    <HBox spacing="8">
+        <VBox.margin>
+            <Insets left="32"/>
+        </VBox.margin>
+        <Label fx:id="maxPriceLabel" text="Max Price">
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <Label fx:id="quantityLabel" text="Quantity">
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+        <Label fx:id="statusLabel" text="Accepted offer: offerPrice by supplierUsername">
+            <font>
+                <Font size="18"/>
+            </font>
+        </Label>
+    </HBox>
+    <!--            if it's accepted, don't show other offers-->
+    <!--            otherwise, show all the offers for the request-->
+    <Label fx:id="offersLabel" text="Offers">
+        <VBox.margin>
+            <Insets top="8" left="32"/>
+        </VBox.margin>
+        <font>
+            <Font size="18"/>
+        </font>
+    </Label>
+    <FlowPane fx:id="offersPane"/>
+    <Separator/>
+</VBox>

@@ -112,6 +112,17 @@ public class StoreDashboardGraphicController {
                     e.printStackTrace();
                 }
             });
+            ((Button)pane.lookup("#offersButton")).setOnAction(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
+                    Parent node = loader.load();
+                    ((Node)event.getSource()).getScene().setRoot(node);
+                    OffersGraphicController offersGraphicController = loader.getController();
+                    offersGraphicController.initData(storeOwner, product);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
                 setProductVisibility(pane, false);
                 ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {

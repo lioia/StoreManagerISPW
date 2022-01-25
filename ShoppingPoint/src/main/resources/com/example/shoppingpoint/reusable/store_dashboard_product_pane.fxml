@@ -63,7 +63,7 @@
             <Font size="24.0"/>
         </font>
     </Button>
-    <Button fx:id="viewOffersButton" mnemonicParsing="false" prefHeight="52.0" layoutY="256.0" layoutX="235.0"
+    <Button fx:id="offersButton" mnemonicParsing="false" prefHeight="52.0" layoutY="256.0" layoutX="235.0"
             prefWidth="128.0" style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Offers">
         <effect>
             <DropShadow/>

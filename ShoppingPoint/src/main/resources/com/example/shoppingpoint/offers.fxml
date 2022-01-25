@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.OffersGraphicController">
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
+        <left>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack"
+                    style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                <graphic>
+                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+                </graphic>
+                <BorderPane.margin>
+                    <Insets left="48.0"/>
+                </BorderPane.margin>
+            </Button>
+        </left>
+        <center>
+            <Label fx:id="productNameText" text="Product - Shopping Point" BorderPane.alignment="CENTER">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </center>
+        <right>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#openAccountInfo"
+                    style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                <graphic>
+                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+                </graphic>
+                <BorderPane.margin>
+                    <Insets right="16.0"/>
+                </BorderPane.margin>
+            </Button>
+        </right>
+        <effect>
+            <DropShadow/>
+        </effect>
+    </BorderPane>
+    <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets top="8"/>
+        </VBox.margin>
+        <FlowPane fx:id="requestsPane"/>
+    </ScrollPane>
+</VBox>

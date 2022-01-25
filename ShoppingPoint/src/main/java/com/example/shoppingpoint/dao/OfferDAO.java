@@ -1,21 +1,22 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
-import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.user.Supplier;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestDAO {
-    private RequestDAO() {
+public class OfferDAO {
+    private OfferDAO() {
         throw new IllegalStateException();
     }
 
-    public static List<Request> getRequestsOfProduct(int productId) throws Exception {
+    public static Offer getAcceptedOfferOfRequest(int requestId) throws Exception {
         Statement statement = null;
         Connection connection = null;
-        ArrayList<Request> requests = new ArrayList<>();
+        Offer offer;
 
         try {
             // Create Connection
@@ -23,15 +24,11 @@ public class RequestDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Execute query
-            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Request WHERE ProductId = %d", productId));
-            while (rs.next()) {
-                int requestId = rs.getInt("RequestId");
-                float maxPrice = rs.getFloat("MaxPrice");
-                int quantity = rs.getInt("Quantity");
-                boolean accepted = rs.getBoolean("Accepted");
-                requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
-            }
-
+            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Offer WHERE RequestId = %d AND Accepted = 1", requestId));
+            if (!rs.first())
+                throw new Exception("No accepted offer found");
+            rs.first();
+            offer = getOffer(rs);
             rs.close();
         } finally {
             // Clean-up dell'ambiente
@@ -48,10 +45,44 @@ public class RequestDAO {
                 se.printStackTrace();
             }
         }
-        return requests;
+        return offer;
     }
 
-    public static void saveNewRequest(int productId, float maxPrice, int quantity) throws Exception {
+    public static List<Offer> getOffersOfRequest(int requestId) throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        ArrayList<Offer> offers = new ArrayList<>();
+
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Execute query
+            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Offer WHERE RequestId = %d", requestId));
+            while (rs.next()) {
+                offers.add(getOffer(rs));
+            }
+            rs.close();
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return offers;
+    }
+
+    public static void acceptOffer(int offerId) throws Exception {
         Statement statement = null;
         Connection connection = null;
 
@@ -60,7 +91,7 @@ public class RequestDAO {
             connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = String.format("INSERT INTO Request (ProductId, MaxPrice, Quantity, Accepted) VALUES (%d, %f, %d, %d)", productId, maxPrice, quantity, 0);
+            String sql = String.format("UPDATE Offer SET Accepted = 1 WHERE RequestId = %d", offerId);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
@@ -80,32 +111,12 @@ public class RequestDAO {
         }
     }
 
-    public static void acceptRequest(int requestId) throws Exception {
-        Statement statement = null;
-        Connection connection = null;
-
-        try {
-            // Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-            // Create statement
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = String.format("UPDATE Request SET Accepted = 1 WHERE RequestId = %d", requestId);
-            // Execute query
-            statement.executeUpdate(sql);
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+    private static Offer getOffer(ResultSet rs) throws Exception {
+        int offerId = rs.getInt("OfferId");
+        int requestId = rs.getInt("RequestId");
+        float offerPrice = rs.getFloat("OfferPrice");
+        boolean accepted = rs.getBoolean("Accepted");
+        Supplier supplier = (Supplier) UserDAO.getUserByUsername(rs.getString("Supplier"));
+        return new Offer(offerId, requestId, offerPrice, accepted, supplier);
     }
 }
