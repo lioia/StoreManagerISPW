@@ -62,7 +62,7 @@ public class ProductAdapter implements GenericProduct {
             }
             case COMICS -> {
                 ComicsProduct comics = (ComicsProduct) product;
-                return String.format("Author: %s. Artist: %s\nGenre: %s. Volume Number: %d\nPlot: %s", comics.getAuthor(), comics.getArtist(), comics.getGenre(), comics.getVolume(), comics.getPlot());
+                return String.format("Author: %s. Artist: %s\nGenre: %s. Volume Number: %d. Plot: %s", comics.getAuthor(), comics.getArtist(), comics.getGenre(), comics.getVolume(), comics.getPlot());
             }
             case VIDEOGAME -> {
                 VideoGameProduct videoGame = (VideoGameProduct) product;
@@ -74,7 +74,7 @@ public class ProductAdapter implements GenericProduct {
             }
             case COMPUTER -> {
                 ComputerProduct computer = (ComputerProduct) product;
-                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d\nCPU: %s. GPU: %s", computer.getComputerType(), computer.getBrand(), computer.getDisplaySize(), computer.getRam(), computer.getSsd(), computer.getBatterySize(), computer.getCpu(), computer.getGpu());
+                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d. CPU: %s. GPU: %s", computer.getComputerType(), computer.getBrand(), computer.getDisplaySize(), computer.getRam(), computer.getSsd(), computer.getBatterySize(), computer.getCpu(), computer.getGpu());
             }
             case HOMEAPPLIANCES -> {
                 HomeApplianceProduct homeAppliance = (HomeApplianceProduct) product;

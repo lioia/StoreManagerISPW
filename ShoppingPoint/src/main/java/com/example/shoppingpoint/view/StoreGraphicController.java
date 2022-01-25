@@ -23,6 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.control.Rating;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
@@ -110,6 +111,7 @@ public class StoreGraphicController {
 
         for (GenericProduct product : products) {
             if (product.getQuantity() == 0) continue;
+            float reviewAverage = controller.getReviewOfProduct(product.getId());
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_product_pane.fxml"));
             AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
@@ -120,6 +122,7 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
+            ((Rating)pane.lookup("#rating")).setRating(reviewAverage);
             ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);

@@ -9,7 +9,8 @@
 
 <?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.*?>
-<!--    TODO fare realmente per storeOwner -->
+
+<?import org.controlsfx.control.Rating?>
 <AnchorPane prefHeight="320.0" prefWidth="384.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
@@ -25,12 +26,16 @@
             <DropShadow/>
         </effect>
     </Pane>
-    <TextField fx:id="nameTextField" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" visible="false" maxWidth="204"/>
-    <TextField fx:id="priceTextField" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"  visible="false"/>
-    <TextField fx:id="discountedPriceTextField" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price" visible="false"/>
-    <TextField fx:id="statusTextField" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status" visible="false"/>
-    <TextField fx:id="descriptionTextField" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px" text="Description" visible="false" maxWidth="204"/>
-
+    <TextField fx:id="nameTextField" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name"
+               visible="false" maxWidth="204"/>
+    <TextField fx:id="priceTextField" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"
+               visible="false"/>
+    <TextField fx:id="discountedPriceTextField" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px"
+               text="Discounted Price" visible="false"/>
+    <TextField fx:id="statusTextField" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"
+               visible="false"/>
+    <TextField fx:id="descriptionTextField" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px"
+               text="Description" visible="false" maxWidth="204"/>
 
     <Button fx:id="saveButton" layoutX="235.0" layoutY="255.0" mnemonicParsing="false" prefHeight="51.0" visible="false"
             prefWidth="127.0"
@@ -43,19 +48,21 @@
         </font>
     </Button>
 
-    <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" maxWidth="204" />
-    <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price" />
+    <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" maxWidth="204"/>
+    <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>
     <Label fx:id="discountedPrice" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price"/>
     <Label fx:id="status" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"/>
     <HBox fx:id="descriptionHbox" alignment="TOP_CENTER" layoutX="164.0" layoutY="160.0">
-        <Label fx:id="description"  style="-fx-font-size: 16px" text="Description" maxWidth="204"/>
+        <Label fx:id="description" style="-fx-font-size: 16px" text="Description" maxWidth="204"/>
 
-        <Button fx:id="descriptionButtonOfLabel" layoutX="184.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: transparent" >
+        <Button fx:id="descriptionButtonOfLabel" layoutX="184.0" layoutY="160.0" mnemonicParsing="false"
+                style="-fx-background-color: transparent">
             <graphic>
-                <FontIcon iconLiteral="mdal-control_point" iconSize="18" />
+                <FontIcon iconLiteral="mdal-control_point" iconSize="18"/>
             </graphic>
         </Button>
     </HBox>
+    <Rating fx:id="rating" max="5" rating="0" disable="true" layoutX="164.0" layoutY="212.0"/>
 
     <Button fx:id="editButton" layoutX="235.0" layoutY="255.0" mnemonicParsing="false" prefHeight="51.0"
             prefWidth="127.0"

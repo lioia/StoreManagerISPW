@@ -23,6 +23,7 @@ import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import javafx.scene.text.Font;
 import org.controlsfx.control.PopOver;
+import org.controlsfx.control.Rating;
 
 import java.io.IOException;
 import java.util.List;
@@ -76,6 +77,7 @@ public class StoreDashboardGraphicController {
 
         for (GenericProduct product : products) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
+            float reviewAverage = controller.getReviewOfProduct(product.getId());
             AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
             ((Label) pane.lookup("#name")).setText(product.getName());
@@ -85,6 +87,7 @@ public class StoreDashboardGraphicController {
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
+            ((Rating)pane.lookup("#rating")).setRating(reviewAverage);
             ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);
@@ -111,6 +114,7 @@ public class StoreDashboardGraphicController {
                 pane.lookup("#editButton").setVisible(false);
                 pane.lookup("#requestButton").setVisible(false);
                 pane.lookup("#descriptionHbox").setVisible(false);
+                pane.lookup("#rating").setVisible(false);
 
                 pane.lookup("#nameTextField").setVisible(true);
                 pane.lookup("#priceTextField").setVisible(true);
@@ -135,6 +139,7 @@ public class StoreDashboardGraphicController {
                     pane.lookup("#editButton").setVisible(true);
                     pane.lookup("#requestButton").setVisible(true);
                     pane.lookup("#descriptionHbox").setVisible(true);
+                    pane.lookup("#rating").setVisible(true);
 
                     pane.lookup("#nameTextField").setVisible(false);
                     pane.lookup("#priceTextField").setVisible(false);
