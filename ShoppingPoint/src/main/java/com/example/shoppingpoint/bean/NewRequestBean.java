@@ -4,7 +4,7 @@ public class NewRequestBean {
     private float maxPrice;
     private int quantity;
 
-    public NewRequestBean(String maxPrice, String quantity) {
+    public NewRequestBean(String maxPrice, String quantity) throws Exception {
         setMaxPrice(Float.parseFloat(maxPrice));
         setQuantity(Integer.parseInt(quantity));
     }
@@ -13,7 +13,11 @@ public class NewRequestBean {
         return maxPrice;
     }
 
-    public void setMaxPrice(float maxPrice) {
+    public void setMaxPrice(float maxPrice) throws Exception {
+        if(maxPrice <= 0) {
+//            TODO exception
+            throw new Exception("Invalid data");
+        }
         this.maxPrice = maxPrice;
     }
 
@@ -21,7 +25,11 @@ public class NewRequestBean {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(int quantity) throws Exception {
+        if(quantity <= 0) {
+//            TODO exception
+            throw new Exception("Invalid data");
+        }
         this.quantity = quantity;
     }
 }
