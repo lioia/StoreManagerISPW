@@ -108,4 +108,43 @@ public class RequestDAO {
             }
         }
     }
+    public static List<Request> getAllRequests() throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        ArrayList<Request> requests = new ArrayList<>();
+
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Execute query
+            ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Request"));
+            while (rs.next()) {
+                int requestId = rs.getInt("RequestId");
+                float maxPrice = rs.getFloat("MaxPrice");
+                int quantity = rs.getInt("Quantity");
+                boolean accepted = rs.getBoolean("Accepted");
+                int productId= rs.getInt("ProductId");
+                requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
+            }
+
+            rs.close();
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return requests;
+    }
 }

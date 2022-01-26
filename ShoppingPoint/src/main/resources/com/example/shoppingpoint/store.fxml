@@ -33,6 +33,7 @@
         <right>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout"
                     style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+
                 <graphic>
                     <FontIcon iconLiteral="mdal-log_out" iconSize="32"/>
                 </graphic>
@@ -74,10 +75,10 @@
             <Insets bottom="16.0"/>
         </VBox.margin>
     </HBox>
-    <HBox>
+    <HBox alignment="TOP_RIGHT">
         <VBox.margin>
-            <Insets bottom="16.0" left="16.0" right="16.0"/>
-        </VBox.margin>
+
+       </VBox.margin>
         <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
         <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
             <font>

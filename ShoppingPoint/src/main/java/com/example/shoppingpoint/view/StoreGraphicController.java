@@ -166,6 +166,7 @@ public class StoreGraphicController {
         ((HBox) loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
     }
 
+
     @FXML
     public void goOrderList(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("orders.fxml"));

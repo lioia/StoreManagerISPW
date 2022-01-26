@@ -3,6 +3,7 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.controller.LoginController;
+import com.example.shoppingpoint.controller.RequestListController;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.*;
 import javafx.event.ActionEvent;
@@ -51,8 +52,11 @@ public class LoginGraphicController {
             storeDashboardController.initData((StoreOwner)user);
         }
         if (user instanceof Supplier) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request_list.fxml"));
+            Parent node = fxmlLoader.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
+            RequestListGraphicController requestListGraphicControllerController = fxmlLoader.getController();
+            requestListGraphicControllerController.initialize((Supplier)user);
         }
     }
 }
