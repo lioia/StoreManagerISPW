@@ -24,6 +24,7 @@ import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.IOException;
 import java.util.List;
 
 public class OrdersGraphicController {
@@ -74,31 +75,8 @@ public class OrdersGraphicController {
     }
 
     @FXML
-    public void openAccountInfo(ActionEvent actionEvent) {
-        VBox vbox = new VBox(16);
-        vbox.setPadding(new Insets(16));
-        Button logoutButton = new Button("Log Out");
-        logoutButton.setAlignment(Pos.CENTER);
-        logoutButton.setStyle("-fx-background-color: #6EC6FF; -fx-background-radius: 16;");
-        logoutButton.setOnAction(event -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
-                ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        logoutButton.setEffect(new DropShadow());
-        logoutButton.setGraphic(new FontIcon("mdal-log_out"));
-        logoutButton.setPrefSize(120, 48);
-        vbox.setAlignment(Pos.CENTER);
-        vbox.getChildren().add(logoutButton);
-
-        PopOver popOver = new PopOver();
-        Node node = (Node) actionEvent.getSource();
-        popOver.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
-        popOver.setContentNode(vbox);
-        popOver.setCornerRadius(16);
-        popOver.show(node);
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

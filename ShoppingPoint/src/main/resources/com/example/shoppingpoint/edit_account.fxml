@@ -10,7 +10,7 @@
    <center>
       <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
          <children>
-            <Label layoutX="301.0" layoutY="160.0" text="Email" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
+            <Label  layoutX="301.0" layoutY="160.0" text="Email" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
                <font>
                   <Font size="24.0" />
                </font>
@@ -42,7 +42,7 @@
             </Label>
          </center>
          <left>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" onAction="#goBack" >
                <graphic>
                   <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
                </graphic>

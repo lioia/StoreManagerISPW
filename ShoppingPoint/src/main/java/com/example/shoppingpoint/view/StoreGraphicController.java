@@ -214,4 +214,12 @@ public class StoreGraphicController {
         popOver.setCornerRadius(16);
         popOver.show(node);
     }
+    @FXML
+    public void goOrderList(ActionEvent event)throws Exception{
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("orders.fxml"));
+        Parent node = loader.load();
+        ((Node)event.getSource()).getScene().setRoot(node);
+        OrdersGraphicController ordersGraphicController = loader.getController();
+        ordersGraphicController.initData(client, store);
+    }
 }

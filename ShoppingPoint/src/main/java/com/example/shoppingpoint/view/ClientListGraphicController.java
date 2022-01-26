@@ -16,6 +16,7 @@ import javafx.scene.layout.FlowPane;
 import com.example.shoppingpoint.utils.ClientListData;
 import com.example.shoppingpoint.controller.ClientListController;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ClientListGraphicController {
@@ -66,5 +67,11 @@ public class ClientListGraphicController {
 //            Add client to the view
             clientPane.getChildren().add(pane);
         }
+    }
+
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

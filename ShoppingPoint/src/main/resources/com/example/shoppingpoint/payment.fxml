@@ -18,7 +18,7 @@
             </DropShadow>
         </effect>
     </Rectangle>
-    <Button fx:id="accountButton" layoutX="742.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-radius: 10px; -fx-background-color: #6EC6FF;">
+    <Button fx:id="accountButton" layoutX="742.0" layoutY="7.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" style="-fx-background-radius: 10px; -fx-background-color: #6EC6FF;" onAction="#logout">
         <effect>
             <DropShadow offsetY="2.0" />
         </effect>
@@ -26,7 +26,7 @@
             <Font size="24.0" />
         </font>
         <graphic>
-            <FontIcon iconLiteral="mdal-account_circle" iconSize="32" />
+            <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
         </graphic>
     </Button>
     <Button layoutX="5.0" layoutY="9.0" mnemonicParsing="false" onAction="#goBack" prefHeight="35.0" prefWidth="55.0" style="-fx-background-radius: 15px; -fx-background-color: #ff6e6e;">

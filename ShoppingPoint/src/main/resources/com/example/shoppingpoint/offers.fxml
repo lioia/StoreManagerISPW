@@ -31,10 +31,10 @@
             </Label>
         </center>
         <right>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#openAccountInfo"
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout"
                     style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                 <graphic>
-                    <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+                    <FontIcon iconLiteral="mdal-log_out" iconSize="32"/>
                 </graphic>
                 <BorderPane.margin>
                     <Insets right="16.0"/>

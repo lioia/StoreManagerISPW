@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 public class NewRequestGraphicController {
     private StoreOwner storeOwner;
     private GenericProduct product;
@@ -54,5 +56,11 @@ public class NewRequestGraphicController {
         ((Node)actionEvent.getSource()).getScene().setRoot(node);
         OffersGraphicController offersGraphicController = loader.getController();
         offersGraphicController.initData(storeOwner, product);
+    }
+
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

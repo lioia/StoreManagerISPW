@@ -216,4 +216,10 @@ public class StoreDashboardGraphicController {
         pane.lookup("#descriptionTextField").setVisible(!visibility);
         pane.lookup("#saveButton").setVisible(!visibility);
     }
+
+    @FXML
+    protected void logout(ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
 }

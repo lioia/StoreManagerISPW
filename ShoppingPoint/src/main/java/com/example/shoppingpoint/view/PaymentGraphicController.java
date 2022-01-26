@@ -18,6 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+
 public class PaymentGraphicController {
     private Client client;
     private GenericProduct product;
@@ -141,5 +143,11 @@ public class PaymentGraphicController {
         total = total - product.getDiscountedPrice();
         String formattedTotal = String.format(DECIMAL_FORMAT, total);
         totalText.setText(formattedTotal);
+    }
+
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

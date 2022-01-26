@@ -17,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.List;
 
 public class OffersGraphicController {
@@ -77,7 +78,9 @@ public class OffersGraphicController {
         storeDashboardGraphicController.initData(storeOwner);
     }
 
-    public void openAccountInfo(ActionEvent actionEvent) {
-//        TODO
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }
