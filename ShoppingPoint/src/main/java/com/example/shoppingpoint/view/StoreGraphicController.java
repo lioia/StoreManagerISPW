@@ -122,7 +122,7 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Rating)pane.lookup("#rating")).setRating(reviewAverage);
+            ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
             ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);
@@ -166,60 +166,17 @@ public class StoreGraphicController {
         ((HBox) loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
     }
 
-    public void openAccountInfo(ActionEvent actionEvent) {
-        String style = "-fx-background-color: #6EC6FF; -fx-background-radius: 16;";
-        VBox vbox = new VBox(16);
-        vbox.setPadding(new Insets(16));
-        vbox.setAlignment(Pos.CENTER);
-
-        Button ordersButton = new Button("Orders");
-        ordersButton.setAlignment(Pos.CENTER);
-        ordersButton.setStyle(style);
-        ordersButton.setEffect(new DropShadow());
-        ordersButton.setPrefSize(120, 48);
-        ordersButton.setOnAction(event -> {
-//            TODO go to orders view
-            try {
-                FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("orders.fxml"));
-                Parent node = loader.load();
-                ((Node)actionEvent.getSource()).getScene().setRoot(node);
-                OrdersGraphicController ordersGraphicController = loader.getController();
-                ordersGraphicController.initData(client, store);
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        });
-
-        Button logoutButton = new Button("Log Out");
-        logoutButton.setAlignment(Pos.CENTER);
-        logoutButton.setStyle(style);
-        logoutButton.setEffect(new DropShadow());
-        logoutButton.setGraphic(new FontIcon("mdal-log_out"));
-        logoutButton.setPrefSize(120, 48);
-        logoutButton.setOnAction(event -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
-                ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        vbox.getChildren().add(ordersButton);
-        vbox.getChildren().add(logoutButton);
-
-        PopOver popOver = new PopOver();
-        Node node = (Node) actionEvent.getSource();
-        popOver.setArrowLocation(PopOver.ArrowLocation.TOP_CENTER);
-        popOver.setContentNode(vbox);
-        popOver.setCornerRadius(16);
-        popOver.show(node);
-    }
     @FXML
-    public void goOrderList(ActionEvent event)throws Exception{
+    public void goOrderList(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("orders.fxml"));
         Parent node = loader.load();
-        ((Node)event.getSource()).getScene().setRoot(node);
+        ((Node) event.getSource()).getScene().setRoot(node);
         OrdersGraphicController ordersGraphicController = loader.getController();
         ordersGraphicController.initData(client, store);
+    }
+
+    public void logout(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

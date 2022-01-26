@@ -219,7 +219,7 @@ public class StoreDashboardGraphicController {
 
     @FXML
     protected void logout(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("Login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }
