@@ -95,9 +95,7 @@ public class ReviewDAO {
             connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // Get user with specified username
-            String valueS =String.format(java.util.Locale.US,"%.2f", value);
-            String sql = String.format("INSERT INTO Review (Value, Client, ProductId) VALUES (%s, '%s', %d)", valueS, client, productId);
+            String sql = String.format(java.util.Locale.US, "INSERT INTO Review (Value, Client, ProductId) VALUES (%f, '%s', %d)", value, client, productId);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
@@ -126,8 +124,7 @@ public class ReviewDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String valueS =String.format(java.util.Locale.US,"%.2f", value);
-            String sql = String.format("UPDATE Review SET Value = %s WHERE ReviewId = %d AND Client = '%s' AND ProductId = %d", valueS, reviewId, client, productId);
+            String sql = String.format(java.util.Locale.US, "UPDATE Review SET Value = %s WHERE ReviewId = %d AND Client = '%s' AND ProductId = %d", value, reviewId, client, productId);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
@@ -147,7 +144,7 @@ public class ReviewDAO {
         }
     }
 
-    private static Review getReview(ResultSet rs)  throws Exception {
+    private static Review getReview(ResultSet rs) throws Exception {
         int id = rs.getInt("ReviewId");
         int productId = rs.getInt("ProductId");
         String client = rs.getString("Client");
