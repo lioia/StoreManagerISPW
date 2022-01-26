@@ -55,12 +55,14 @@ public class RequestDAO {
         Statement statement = null;
         Connection connection = null;
 
+
         try {
             // Create Connection
             connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            String sql = String.format("INSERT INTO Request (ProductId, MaxPrice, Quantity, Accepted) VALUES (%d, %f, %d, %d)", productId, maxPrice, quantity, 0);
+            String maxPriceS=String.format(java.util.Locale.US,"%.2f", maxPrice);
+            String sql = String.format("INSERT INTO Request (ProductId, MaxPrice, Quantity, Accepted) VALUES (%d, %s, %d, %d)", productId, maxPriceS, quantity, 0);
             // Execute query
             statement.executeUpdate(sql);
         } finally {

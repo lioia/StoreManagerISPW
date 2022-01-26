@@ -96,7 +96,8 @@ public class ReviewDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("INSERT INTO Review (Value, Client, ProductId) VALUES (%f, '%s', %d)", value, client, productId);
+            String valueS =String.format(java.util.Locale.US,"%.2f", value);
+            String sql = String.format("INSERT INTO Review (Value, Client, ProductId) VALUES (%s, '%s', %d)", valueS, client, productId);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
@@ -125,7 +126,8 @@ public class ReviewDAO {
             // Create statement
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             // Get user with specified username
-            String sql = String.format("UPDATE Review SET Value = %f WHERE ReviewId = %d AND Client = '%s' AND ProductId = %d", value, reviewId, client, productId);
+            String valueS =String.format(java.util.Locale.US,"%.2f", value);
+            String sql = String.format("UPDATE Review SET Value = %s WHERE ReviewId = %d AND Client = '%s' AND ProductId = %d", valueS, reviewId, client, productId);
             // Execute query
             statement.executeUpdate(sql);
         } finally {
