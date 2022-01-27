@@ -34,11 +34,11 @@ public class AddProductContinueGraphicController {
             case SHOES -> pane.getChildren().addAll(createTextFieldElement("Size"), createTextFieldElement("Material"), createTextFieldElement("Type"));
             case BOOK -> pane.getChildren().addAll(createTextFieldElement("Author"), createTextAreaElement("Plot"), createTextFieldElement("Genre"));
             case COMICS -> pane.getChildren().addAll(createTextFieldElement("Author"), createTextFieldElement("Artist"), createTextAreaElement("Plot"), createTextFieldElement("Genre"), createTextFieldElement("Volume"));
-            case VIDEOGAME -> pane.getChildren().addAll(createTextAreaElement("Plot"), createTextFieldElement("Genre"), createComboBoxElement("Type", consoles));
-            case GAMECONSOLE -> pane.getChildren().addAll(createComboBoxElement("Type", consoles), createCheckBoxElement("Digital"));
+            case VIDEOGAME -> pane.getChildren().addAll(createTextAreaElement("Plot"), createTextFieldElement("Genre"), createComboBoxElement(consoles));
+            case GAMECONSOLE -> pane.getChildren().addAll(createComboBoxElement(consoles), createCheckBoxElement());
             case COMPUTER -> {
                 String[] elements = {"Laptop", "Desktop", "2in1", "Touch Screen"};
-                pane.getChildren().addAll(createComboBoxElement("Type", elements), createTextFieldElement("RAM"), createTextFieldElement("SSD"), createTextFieldElement("Battery"), createTextFieldElement("CPU"), createTextFieldElement("GPU"), createTextFieldElement("Brand"), createTextFieldElement("Display"));
+                pane.getChildren().addAll(createComboBoxElement(elements), createTextFieldElement("RAM"), createTextFieldElement("SSD"), createTextFieldElement("Battery"), createTextFieldElement("CPU"), createTextFieldElement("GPU"), createTextFieldElement("Brand"), createTextFieldElement("Display"));
             }
             case HOMEAPPLIANCES -> pane.getChildren().addAll(createTextFieldElement("Energy Class"), createTextAreaElement("Specs"));
             default -> throw new Exception("Unsupported type");
@@ -113,6 +113,7 @@ public class AddProductContinueGraphicController {
                 energyClass = ((TextField) pane.lookup("#Energy Class")).getText();
                 specs = ((TextField) pane.lookup("#Specs")).getText();
             }
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
         AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
         AddProductController controller = new AddProductController();
@@ -147,12 +148,12 @@ public class AddProductContinueGraphicController {
         return hbox;
     }
 
-    private HBox createComboBoxElement(String name, String[] elements) {
+    private HBox createComboBoxElement(String[] elements) {
         HBox hbox = new HBox(8);
-        Label label = new Label(name);
+        Label label = new Label("Type");
         label.setFont(new Font(24));
         ComboBox<String> comboBox = new ComboBox<>();
-        comboBox.setId(name);
+        comboBox.setId("Type");
         comboBox.setPrefSize(384, 40);
         comboBox.setStyle("-fx-background-radius: WHITE; -fx-background-radius: 12px");
         comboBox.setEffect(new DropShadow());
@@ -161,12 +162,12 @@ public class AddProductContinueGraphicController {
         return hbox;
     }
 
-    private HBox createCheckBoxElement(String name) {
+    private HBox createCheckBoxElement() {
         HBox hbox = new HBox(8);
-        Label label = new Label(name);
+        Label label = new Label("Digital");
         label.setFont(new Font(24));
         CheckBox box = new CheckBox();
-        box.setId(name);
+        box.setId("Digital");
         hbox.getChildren().addAll(label, box);
         return hbox;
     }
