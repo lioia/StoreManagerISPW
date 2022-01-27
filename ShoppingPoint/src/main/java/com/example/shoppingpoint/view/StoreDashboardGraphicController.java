@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +35,6 @@ public class StoreDashboardGraphicController {
     private Label labelStoreName;
 
     private final StoreDashboardController controller;
-    private StoreOwner storeOwner;
 
     @FXML
     private FlowPane productsPane;
@@ -43,10 +43,11 @@ public class StoreDashboardGraphicController {
         controller = new StoreDashboardController();
     }
 
-    public void initData(StoreOwner owner) throws Exception {
-        setStoreOwner(owner);
-        labelStoreName.setText(storeOwner.getStore().getName() + " - Shopping Point");
-        createProductsView(storeOwner.getStore());
+    public void initData() throws Exception {
+        Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
+        ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
+        labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
+        createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
     }
 
     @FXML
@@ -55,15 +56,7 @@ public class StoreDashboardGraphicController {
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         ClientListGraphicController clientListGraphicController = fxmlLoader.getController();
-        clientListGraphicController.initData(storeOwner);
-    }
-
-    private void setStoreOwner(StoreOwner storeOwnerName) throws Exception {
-        this.storeOwner = storeOwnerName;
-        if (storeOwner.getStore() == null) {
-            Store store = controller.getStoreFromStoreOwnerName(storeOwner.getUsername());
-            storeOwner.setStore(store);
-        }
+        clientListGraphicController.initData();
     }
 
     private void createProductsView(Store store) throws Exception {
@@ -101,25 +94,25 @@ public class StoreDashboardGraphicController {
                 popOver.setCornerRadius(16);
                 popOver.show(node);
             });
-            ((Button)pane.lookup("#requestButton")).setOnAction(event -> {
+            ((Button) pane.lookup("#requestButton")).setOnAction(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_request.fxml"));
                     Parent node = loader.load();
-                    ((Node)event.getSource()).getScene().setRoot(node);
+                    ((Node) event.getSource()).getScene().setRoot(node);
                     NewRequestGraphicController newRequestGraphicController = loader.getController();
-                    newRequestGraphicController.initData(storeOwner, product);
-                } catch(Exception e) {
+                    newRequestGraphicController.initData(product);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
-            ((Button)pane.lookup("#offersButton")).setOnAction(event -> {
+            ((Button) pane.lookup("#offersButton")).setOnAction(event -> {
                 try {
                     FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
                     Parent node = loader.load();
-                    ((Node)event.getSource()).getScene().setRoot(node);
+                    ((Node) event.getSource()).getScene().setRoot(node);
                     OffersGraphicController offersGraphicController = loader.getController();
-                    offersGraphicController.initData(storeOwner, product);
-                } catch(Exception e) {
+                    offersGraphicController.initData(product);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             });
@@ -146,14 +139,14 @@ public class StoreDashboardGraphicController {
         CheckBox activeBox = new CheckBox("Active");
         activeBox.setAlignment(Pos.CENTER);
         activeBox.setFont(font);
-        activeBox.setSelected(storeOwner.getStore().getPointsInEuro() != 0 && storeOwner.getStore().getEuroInPoints() != 0);
+        activeBox.setSelected(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getPointsInEuro() != 0 && ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getEuroInPoints() != 0);
 
         HBox hbox1 = new HBox();
         HBox hbox2 = new HBox();
-        TextField pointInEuroTextField = new TextField(storeOwner.getStore().getPointsInEuro().toString());
+        TextField pointInEuroTextField = new TextField(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getPointsInEuro().toString());
         pointInEuroTextField.setPrefSize(64, 32);
         pointInEuroTextField.setDisable(!activeBox.isSelected());
-        TextField euroInPointsTextField = new TextField(storeOwner.getStore().getEuroInPoints().toString());
+        TextField euroInPointsTextField = new TextField(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getEuroInPoints().toString());
         euroInPointsTextField.setPrefSize(64, 32);
         euroInPointsTextField.setDisable(!activeBox.isSelected());
         Label text1 = new Label(" points spent = 1€ discount");
@@ -179,9 +172,9 @@ public class StoreDashboardGraphicController {
         updateButton.setOnAction(event -> {
             try {
                 LoyaltyCardBean bean = new LoyaltyCardBean(activeBox.isSelected(), pointInEuroTextField.getText(), euroInPointsTextField.getText());
-                controller.updateLoyaltyCard(bean, storeOwner.getStore());
-                storeOwner.getStore().setPointsInEuro(bean.getPointsInEuro());
-                storeOwner.getStore().setEuroInPoints(bean.getEuroInPoints());
+                controller.updateLoyaltyCard(bean, ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
+                ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setPointsInEuro(bean.getPointsInEuro());
+                ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setEuroInPoints(bean.getEuroInPoints());
                 popOver.hide();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -207,7 +200,7 @@ public class StoreDashboardGraphicController {
         pane.lookup("#requestButton").setVisible(visibility);
         pane.lookup("#descriptionHbox").setVisible(visibility);
         pane.lookup("#rating").setVisible(visibility);
-        pane.lookup("#viewOffersButton").setVisible(visibility);
+        pane.lookup("#offersButton").setVisible(visibility);
 
         pane.lookup("#nameTextField").setVisible(!visibility);
         pane.lookup("#priceTextField").setVisible(!visibility);
@@ -218,7 +211,7 @@ public class StoreDashboardGraphicController {
     }
 
     @FXML
-    protected void logout(ActionEvent event) throws IOException{
+    protected void logout(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }

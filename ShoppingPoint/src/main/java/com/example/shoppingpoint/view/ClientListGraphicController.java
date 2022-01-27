@@ -1,6 +1,7 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +22,6 @@ import java.util.List;
 
 public class ClientListGraphicController {
 
-    private StoreOwner storeOwner;
-
     @FXML
     private Label labelStoreName;
 
@@ -35,13 +34,12 @@ public class ClientListGraphicController {
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-        storeDashboardController.initData(storeOwner);
+        storeDashboardController.initData();
     }
 
     @FXML
-    public void initData(StoreOwner storeOwner) throws Exception {
-        this.storeOwner = storeOwner;
-        String storeName = storeOwner.getStore().getName();
+    public void initData() throws Exception {
+        String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
 
         labelStoreName.setText(storeName + " - Shopping Point");
         createClientListView(storeName);

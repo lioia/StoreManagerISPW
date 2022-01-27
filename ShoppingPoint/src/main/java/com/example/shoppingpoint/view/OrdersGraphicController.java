@@ -7,6 +7,7 @@ import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,17 +35,16 @@ public class OrdersGraphicController {
     private FlowPane ordersPane;
 
     private Store store;
-    private Client client;
 
-    public void initData(Client client, Store store) {
+    public void initData(Store store) {
         this.store = store;
-        this.client = client;
+
         try {
             titleLabel.setText("Orders from " + store.getName());
             OrdersController controller = new OrdersController();
-            List<SoldProduct> orders = controller.getOrders(client.getUsername(), store.getName());
+            List<SoldProduct> orders = controller.getOrders(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
             for (SoldProduct order : orders) {
-                Review review = controller.getReview(client.getUsername(), order.getProduct().getId());
+                Review review = controller.getReview(LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
                 FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/order.fxml"));
                 AnchorPane pane = loader.load();
                 ((Label) pane.lookup("#name")).setText(order.getProduct().getName());
@@ -53,7 +53,7 @@ public class OrdersGraphicController {
                 ((Rating) pane.lookup("#rating")).ratingProperty().addListener((observable, oldValue, newValue) -> {
                     try {
                         OrdersBean bean = new OrdersBean(newValue.floatValue());
-                        controller.updateReview(bean, review.getReviewId(), client.getUsername(), order.getProduct().getId());
+                        controller.updateReview(bean, review.getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -71,7 +71,7 @@ public class OrdersGraphicController {
         Parent node = loader.load();
         ((Node)actionEvent.getSource()).getScene().setRoot(node);
         StoreGraphicController storeGraphicController = loader.getController();
-        storeGraphicController.initData(store, client);
+        storeGraphicController.initData(store);
     }
 
     @FXML

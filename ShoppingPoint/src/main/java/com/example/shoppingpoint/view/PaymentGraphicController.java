@@ -7,6 +7,7 @@ import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,6 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class PaymentGraphicController {
-    private Client client;
     private GenericProduct product;
     private Store store;
     private LoyaltyCard card;
@@ -56,8 +56,7 @@ public class PaymentGraphicController {
 
     private static final String DECIMAL_FORMAT = "%.02f€";
 
-    public void initData(Client client, GenericProduct product, Store store, LoyaltyCard card) {
-        this.client = client;
+    public void initData(GenericProduct product, Store store, LoyaltyCard card) {
         this.product = product;
         this.store = store;
         this.card = card;
@@ -83,12 +82,12 @@ public class PaymentGraphicController {
     public void buy(ActionEvent actionEvent) throws Exception {
         PaymentController controller = new PaymentController();
         PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
-        controller.buy(bean, card, client.getUsername(), store, product);
+        controller.buy(bean, card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment_completed.fxml"));
         Parent node = loader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);
         PaymentCompletedGraphicController paymentCompletedGraphicController = loader.getController();
-        paymentCompletedGraphicController.initData(client, store);
+        paymentCompletedGraphicController.initData(store);
     }
 
     @FXML
@@ -113,7 +112,7 @@ public class PaymentGraphicController {
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         StoreGraphicController storeGraphicController = fxmlLoader.getController();
-        storeGraphicController.initData(store, client);
+        storeGraphicController.initData(store);
     }
 
     @FXML

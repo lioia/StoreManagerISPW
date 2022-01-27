@@ -19,11 +19,9 @@ public class PaymentCompletedGraphicController {
 
     private PauseTransition transition;
 
-    private Client client;
     private Store store;
 
-    public void initData(Client client, Store store) {
-        this.client = client;
+    public void initData(Store store) {
         this.store = store;
 
         transition = new PauseTransition(Duration.seconds(3));
@@ -43,7 +41,7 @@ public class PaymentCompletedGraphicController {
             Parent node = loader.load();
             parent.getScene().setRoot(node);
             StoreGraphicController storeGraphicController = loader.getController();
-            storeGraphicController.initData(store, client);
+            storeGraphicController.initData(store);
         } catch (Exception e) {
             e.printStackTrace();
         }

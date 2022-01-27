@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class NewRequestGraphicController {
-    private StoreOwner storeOwner;
     private GenericProduct product;
 
     @FXML
@@ -26,8 +25,7 @@ public class NewRequestGraphicController {
     @FXML
     private TextField quantityTextField;
 
-    public void initData(StoreOwner storeOwner, GenericProduct product) {
-        this.storeOwner = storeOwner;
+    public void initData(GenericProduct product) {
         this.product = product;
         productNameLabel.setText(product.getName());
     }
@@ -38,7 +36,7 @@ public class NewRequestGraphicController {
         Parent node = loader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);
         StoreDashboardGraphicController storeDashboardGraphicController = loader.getController();
-        storeDashboardGraphicController.initData(storeOwner);
+        storeDashboardGraphicController.initData();
     }
 
     @FXML
@@ -53,9 +51,9 @@ public class NewRequestGraphicController {
         controller.saveRequest(bean, product.getId());
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
         Parent node = loader.load();
-        ((Node)actionEvent.getSource()).getScene().setRoot(node);
+        ((Node) actionEvent.getSource()).getScene().setRoot(node);
         OffersGraphicController offersGraphicController = loader.getController();
-        offersGraphicController.initData(storeOwner, product);
+        offersGraphicController.initData(product);
     }
 
     @FXML

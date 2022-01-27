@@ -41,7 +41,7 @@ public class NewStoreGraphicController {
         Parent node = fxmlLoader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);
         StoreDashboardGraphicController storeDashboardGraphicController = fxmlLoader.getController();
-        storeDashboardGraphicController.initData(storeOwner);
+        storeDashboardGraphicController.initData();
     }
 
     public void setStoreOwnerName(StoreOwner storeOwner) {

@@ -7,6 +7,7 @@ import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class StoreGraphicController {
-    private Client client;
     private Store store;
     private final StoreController controller;
     private LoyaltyCard card;
@@ -54,14 +54,13 @@ public class StoreGraphicController {
         controller = new StoreController();
     }
 
-    public void initData(Store store, Client client) throws Exception {
-        this.client = client;
+    public void initData(Store store) throws Exception {
         this.store = store;
         storeNameText.setText(store.getName() + " - Shopping Point");
 
         if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) {
             try {
-                this.card = controller.getLoyaltyCard(client.getUsername(), store.getName());
+                this.card = controller.getLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -91,10 +90,7 @@ public class StoreGraphicController {
     @FXML
     public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-        Parent node = fxmlLoader.load();
-        ((Node) event.getSource()).getScene().setRoot(node);
-        SearchStoreGraphicController searchStoreGraphicController = fxmlLoader.getController();
-        searchStoreGraphicController.setClient(client);
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
     @FXML
@@ -147,7 +143,7 @@ public class StoreGraphicController {
                     Parent node = paymentLoader.load();
                     ((Node) event.getSource()).getScene().setRoot(node);
                     PaymentGraphicController paymentController = paymentLoader.getController();
-                    paymentController.initData(client, product, store, card);
+                    paymentController.initData(product, store, card);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -159,7 +155,7 @@ public class StoreGraphicController {
 
     @FXML
     public void activate(ActionEvent actionEvent) throws Exception {
-        this.card = controller.createLoyaltyCard(client.getUsername(), store.getName());
+        this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
         loyaltyCardButton.setVisible(false);
         currentPointsText.setVisible(true);
         currentPointsText.setText(String.format("You have %d points.", card.getPoints()));
@@ -173,7 +169,7 @@ public class StoreGraphicController {
         Parent node = loader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         OrdersGraphicController ordersGraphicController = loader.getController();
-        ordersGraphicController.initData(client, store);
+        ordersGraphicController.initData(store);
     }
 
     public void logout(ActionEvent event) throws Exception {

@@ -5,6 +5,7 @@ import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.controller.SearchStoreController;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +28,6 @@ import org.controlsfx.control.PopOver;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SearchStoreGraphicController {
-
-    private Client client;
 
     @FXML
     private TextField searchTextField;
@@ -73,7 +72,7 @@ public class SearchStoreGraphicController {
 //                    Get the graphic controller from the store page
                     StoreGraphicController storeController = storeFxml.getController();
 //                    Set the store on the controller and initialize data
-                    storeController.initData(store, getClient());
+                    storeController.initData(store);
                 } catch (Exception e) {
 //                    TODO handle exception
                     e.printStackTrace();
@@ -87,14 +86,6 @@ public class SearchStoreGraphicController {
     public void filter(ActionEvent event) throws Exception {
         String filter = ((RadioButton) event.getSource()).getText();
         createStorePaneView(new SearchStoreBean(filter, ""));
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Client getClient() {
-        return this.client;
     }
 
     @FXML

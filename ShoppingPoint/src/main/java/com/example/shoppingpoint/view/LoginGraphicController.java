@@ -6,6 +6,7 @@ import com.example.shoppingpoint.controller.LoginController;
 import com.example.shoppingpoint.controller.RequestListController;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.*;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,26 +38,26 @@ public class LoginGraphicController {
 
         LoginController controller = new LoginController();
         User user = controller.login(bean);
+        LoggedInUser.getInstance().setUser(user);
         if (user instanceof Client) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
             Parent node = fxmlLoader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             SearchStoreGraphicController searchStoreGraphicController = fxmlLoader.getController();
-            searchStoreGraphicController.setClient((Client) user);
         }
         if (user instanceof StoreOwner) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
             Parent node = fxmlLoader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-            storeDashboardController.initData((StoreOwner)user);
+            storeDashboardController.initData();
         }
         if (user instanceof Supplier) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request_list.fxml"));
             Parent node = fxmlLoader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             RequestListGraphicController requestListGraphicControllerController = fxmlLoader.getController();
-            requestListGraphicControllerController.initialize((Supplier)user);
+            requestListGraphicControllerController.initialize();
         }
     }
 }

@@ -6,6 +6,7 @@ import com.example.shoppingpoint.controller.OffersController;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,16 +22,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class OffersGraphicController {
-    private StoreOwner storeOwner;
-
     @FXML
     private Label productNameText;
     @FXML
     private FlowPane requestsPane;
 
-    public void initData(StoreOwner storeOwner, GenericProduct product) throws Exception {
+    public void initData(GenericProduct product) throws Exception {
         OffersController controller = new OffersController();
-        this.storeOwner = storeOwner;
         productNameText.setText(product.getName() + " Offers - Shopping Point");
 
         List<Request> requests = controller.getRequestsOfProduct(product.getId());
@@ -75,7 +73,7 @@ public class OffersGraphicController {
         Parent node = loader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);
         StoreDashboardGraphicController storeDashboardGraphicController = loader.getController();
-        storeDashboardGraphicController.initData(storeOwner);
+        storeDashboardGraphicController.initData();
     }
 
     @FXML
