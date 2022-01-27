@@ -40,8 +40,6 @@ public class NewStoreGraphicController {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);
-        StoreDashboardGraphicController storeDashboardGraphicController = fxmlLoader.getController();
-        storeDashboardGraphicController.initData();
     }
 
     public void setStoreOwnerName(StoreOwner storeOwner) {

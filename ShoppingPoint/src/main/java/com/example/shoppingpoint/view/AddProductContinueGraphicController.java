@@ -1,11 +1,14 @@
 package com.example.shoppingpoint.view;
 
+import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.controller.AddProductController;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
@@ -24,34 +27,20 @@ public class AddProductContinueGraphicController {
         this.commonBean = bean;
         this.type = type;
 
+        String[] consoles = {"PS5", "PS4", "Xbox Series X", "Xbox Series S", "Xbox One", "Nintendo Switch"};
+
         switch (type) {
-            case CLOTHES -> {
-                pane.getChildren().addAll(createTextFieldElement("Size"), createTextFieldElement("Material"));
-            }
-            case SHOES -> {
-                pane.getChildren().addAll(createTextFieldElement("Size"), createTextFieldElement("Material"), createTextFieldElement("Type"));
-            }
-            case BOOK -> {
-                pane.getChildren().addAll(createTextFieldElement("Author"), createTextAreaElement("Plot"), createTextFieldElement("Genre"));
-            }
-            case COMICS -> {
-                pane.getChildren().addAll(createTextFieldElement("Author"), createTextFieldElement("Artist"), createTextAreaElement("Plot"), createTextFieldElement("Genre"), createTextFieldElement("Volume"));
-            }
-            case VIDEOGAME -> {
-                String[] elements = {"PS5", "PS4", "XBox Series X", "XBox Series S", "XBox One", "Nintendo Switch"};
-                pane.getChildren().addAll(createTextAreaElement("Plot"), createTextFieldElement("Genre"), createComboBoxElement("Type", elements));
-            }
-            case GAMECONSOLE -> {
-                String[] elements = {"PS5", "PS4", "XBox Series X", "XBox Series S", "XBox One", "Nintendo Switch"};
-                pane.getChildren().addAll(createComboBoxElement("Type", elements), createCheckBoxElement("Digital"));
-            }
+            case CLOTHES -> pane.getChildren().addAll(createTextFieldElement("Size"), createTextFieldElement("Material"));
+            case SHOES -> pane.getChildren().addAll(createTextFieldElement("Size"), createTextFieldElement("Material"), createTextFieldElement("Type"));
+            case BOOK -> pane.getChildren().addAll(createTextFieldElement("Author"), createTextAreaElement("Plot"), createTextFieldElement("Genre"));
+            case COMICS -> pane.getChildren().addAll(createTextFieldElement("Author"), createTextFieldElement("Artist"), createTextAreaElement("Plot"), createTextFieldElement("Genre"), createTextFieldElement("Volume"));
+            case VIDEOGAME -> pane.getChildren().addAll(createTextAreaElement("Plot"), createTextFieldElement("Genre"), createComboBoxElement("Type", consoles));
+            case GAMECONSOLE -> pane.getChildren().addAll(createComboBoxElement("Type", consoles), createCheckBoxElement("Digital"));
             case COMPUTER -> {
                 String[] elements = {"Laptop", "Desktop", "2in1", "Touch Screen"};
                 pane.getChildren().addAll(createComboBoxElement("Type", elements), createTextFieldElement("RAM"), createTextFieldElement("SSD"), createTextFieldElement("Battery"), createTextFieldElement("CPU"), createTextFieldElement("GPU"), createTextFieldElement("Brand"), createTextFieldElement("Display"));
             }
-            case HOMEAPPLIANCES -> {
-                pane.getChildren().addAll(createTextFieldElement("Energy Class"), createTextAreaElement("Specs"));
-            }
+            case HOMEAPPLIANCES -> pane.getChildren().addAll(createTextFieldElement("Energy Class"), createTextAreaElement("Specs"));
             default -> throw new Exception("Unsupported type");
         }
     }
@@ -81,53 +70,55 @@ public class AddProductContinueGraphicController {
 
         switch (type) {
             case CLOTHES -> {
-                size = ((TextField) pane.lookup("Size")).getText();
-                material = ((TextField) pane.lookup("Material")).getText();
+                size = ((TextField) pane.lookup("#Size")).getText();
+                material = ((TextField) pane.lookup("#Material")).getText();
             }
             case SHOES -> {
-                size = ((TextField) pane.lookup("Size")).getText();
-                material = ((TextField) pane.lookup("Material")).getText();
-                shoesType = ((TextField) pane.lookup("Type")).getText();
+                size = ((TextField) pane.lookup("#Size")).getText();
+                material = ((TextField) pane.lookup("#Material")).getText();
+                shoesType = ((TextField) pane.lookup("#Type")).getText();
             }
             case BOOK -> {
-                author = ((TextField) pane.lookup("Author")).getText();
-                genre = ((TextField) pane.lookup("Genre")).getText();
-                plot = ((TextArea) pane.lookup("Plot")).getText();
+                author = ((TextField) pane.lookup("#Author")).getText();
+                genre = ((TextField) pane.lookup("#Genre")).getText();
+                plot = ((TextArea) pane.lookup("#Plot")).getText();
             }
             case COMICS -> {
-                author = ((TextField) pane.lookup("Author")).getText();
-                artist = ((TextField) pane.lookup("Artist")).getText();
-                genre = ((TextField) pane.lookup("Genre")).getText();
-                plot = ((TextArea) pane.lookup("Plot")).getText();
-                volumeNumber = ((TextField) pane.lookup("Volume")).getText();
+                author = ((TextField) pane.lookup("#Author")).getText();
+                artist = ((TextField) pane.lookup("#Artist")).getText();
+                genre = ((TextField) pane.lookup("#Genre")).getText();
+                plot = ((TextArea) pane.lookup("#Plot")).getText();
+                volumeNumber = ((TextField) pane.lookup("#Volume")).getText();
             }
             case VIDEOGAME -> {
-                genre = ((TextField) pane.lookup("Genre")).getText();
-                plot = ((TextArea) pane.lookup("Plot")).getText();
-                consoleType = ((ComboBox<String>) pane.lookup("Type")).getValue();
+                genre = ((TextField) pane.lookup("#Genre")).getText();
+                plot = ((TextArea) pane.lookup("#Plot")).getText();
+                consoleType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
             }
             case GAMECONSOLE -> {
-                consoleType = ((ComboBox<String>) pane.lookup("Type")).getValue();
+                consoleType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
                 digitalOnly = ((CheckBox) pane.lookup("Digital")).isSelected();
             }
             case COMPUTER -> {
-                computerType = ((TextField) pane.lookup("Type")).getText();
-                ram = ((TextField) pane.lookup("RAM")).getText();
-                ssd = ((TextField) pane.lookup("SSD")).getText();
-                cpu = ((TextArea) pane.lookup("CPU")).getText();
-                gpu = ((TextField) pane.lookup("GPU")).getText();
-                batterySize = ((TextField) pane.lookup("Battery")).getText();
-                displaySize = ((TextField) pane.lookup("Display")).getText();
-                brand = ((TextField) pane.lookup("Brand")).getText();
+                computerType = ((TextField) pane.lookup("#Type")).getText();
+                ram = ((TextField) pane.lookup("#RAM")).getText();
+                ssd = ((TextField) pane.lookup("#SSD")).getText();
+                cpu = ((TextArea) pane.lookup("#CPU")).getText();
+                gpu = ((TextField) pane.lookup("#GPU")).getText();
+                batterySize = ((TextField) pane.lookup("#Battery")).getText();
+                displaySize = ((TextField) pane.lookup("#Display")).getText();
+                brand = ((TextField) pane.lookup("#Brand")).getText();
             }
             case HOMEAPPLIANCES -> {
-                energyClass = ((TextField) pane.lookup("Energy Class")).getText();
-                specs = ((TextField) pane.lookup("Specs")).getText();
+                energyClass = ((TextField) pane.lookup("#Energy Class")).getText();
+                specs = ((TextField) pane.lookup("#Specs")).getText();
             }
         }
         AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
         AddProductController controller = new AddProductController();
         controller.saveProduct(type, bean, commonBean);
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
+        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 
     private HBox createTextFieldElement(String name) {

@@ -43,7 +43,8 @@ public class StoreDashboardGraphicController {
         controller = new StoreDashboardController();
     }
 
-    public void initData() throws Exception {
+    @FXML
+    public void initialize() throws Exception {
         Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
         ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
         labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
@@ -214,5 +215,11 @@ public class StoreDashboardGraphicController {
     protected void logout(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
+
+    @FXML
+    public void addProduct(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product.fxml"));
+        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 }

@@ -49,8 +49,6 @@ public class LoginGraphicController {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
             Parent node = fxmlLoader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
-            StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-            storeDashboardController.initData();
         }
         if (user instanceof Supplier) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request_list.fxml"));

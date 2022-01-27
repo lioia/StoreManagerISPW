@@ -33,8 +33,6 @@ public class ClientListGraphicController {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
-        StoreDashboardGraphicController storeDashboardController = fxmlLoader.getController();
-        storeDashboardController.initData();
     }
 
     @FXML
