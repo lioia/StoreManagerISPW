@@ -165,47 +165,47 @@ public class ProductDAO {
         return product;
     }
 
-    private static void saveClothesProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material) throws Exception {
+    public static void saveClothesProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, Size, Material) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s')", name, price, discountedPrice, quantity, "CLOTHES", status, storeName, size, material);
         saveProduct(sql);
     }
 
-    private static void saveShoesProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material, String shoesType) throws Exception {
+    public static void saveShoesProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material, String shoesType) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, Size, Material, ShoesType) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s', '%s')", name, price, discountedPrice, quantity, "SHOES", status, storeName, size, material, shoesType);
         saveProduct(sql);
     }
 
-    private static void saveBookProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String plot, String genre) throws Exception {
+    public static void saveBookProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String plot, String genre) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, Author, Plot, Genre) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s', '%s')", name, price, discountedPrice, quantity, "BOOK", status, storeName, author, plot, genre);
         saveProduct(sql);
     }
 
-    private static void saveComicsProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String artist, String plot, String genre, Integer volume) throws Exception {
+    public static void saveComicsProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String author, String artist, String plot, String genre, Integer volume) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, Author, Artist, Plot, Genre, VolumeNumber) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)", name, price, discountedPrice, quantity, "COMICS", status, storeName, author, artist, plot, genre, volume);
         saveProduct(sql);
     }
 
-    private static void saveVideoGameProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String plot, String genre, String consoleType) throws Exception {
+    public static void saveVideoGameProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String plot, String genre, String consoleType) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, Plot, Genre, ConsoleType) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s', '%s')", name, price, discountedPrice, quantity, "VIDEOGAME", status, storeName, plot, genre, consoleType);
         saveProduct(sql);
     }
 
-    private static void saveGameConsoleProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String consoleType, boolean digitalOnly) throws Exception {
+    public static void saveGameConsoleProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String consoleType, boolean digitalOnly) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, ConsoleType, DigitalOnly) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', %d)", name, price, discountedPrice, quantity, "GAMECONSOLE", status, storeName, consoleType, digitalOnly);
         saveProduct(sql);
     }
 
-    private static void saveComputerProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) throws Exception {
+    public static void saveComputerProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String computerType, Integer ram, Integer ssd, Integer batterySize, String cpu, String gpu, String brand, Float displaySize) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, ComputerType, Ram, SSD, BatterySize, CPU, GPU, Brand, DisplaySize) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', %d, %d, %d, '%s', '%s', '%s', %f)", name, price, discountedPrice, quantity, "COMPUTER", status, storeName, computerType, ram, ssd, batterySize, cpu, gpu, brand, displaySize);
         saveProduct(sql);
     }
 
-    private static void saveHomeApplianceProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String energyClass, String specs) throws Exception {
+    public static void saveHomeApplianceProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String energyClass, String specs) throws Exception {
         String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, EnergyClass, Specs) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', '%s')", name, price, discountedPrice, quantity, "HOMEAPPLIANCES", status, storeName, energyClass, specs);
         saveProduct(sql);
     }
 
-    public static void saveProduct(String sql) throws Exception {
+    private static void saveProduct(String sql) throws Exception {
         Statement statement = null;
         Connection connection = null;
 

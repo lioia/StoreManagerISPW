@@ -2,6 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
+import com.example.shoppingpoint.controller.AddProductController;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class AddProductContinueGraphicController {
-    private AddProductCommonBean bean;
+    private AddProductCommonBean commonBean;
     private ProductType type;
 
     @FXML
@@ -20,7 +21,7 @@ public class AddProductContinueGraphicController {
 
     @FXML
     public void initialize(AddProductCommonBean bean, ProductType type) throws Exception {
-        this.bean = bean;
+        this.commonBean = bean;
         this.type = type;
 
         switch (type) {
@@ -125,7 +126,8 @@ public class AddProductContinueGraphicController {
             }
         }
         AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
-// TODO controller
+        AddProductController controller = new AddProductController();
+        controller.saveProduct(type, bean, commonBean);
     }
 
     private HBox createTextFieldElement(String name) {
