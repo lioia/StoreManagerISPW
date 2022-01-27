@@ -155,7 +155,7 @@ public class AddProductContinueGraphicController {
         ComboBox<String> comboBox = new ComboBox<>();
         comboBox.setId("Type");
         comboBox.setPrefSize(384, 40);
-        comboBox.setStyle("-fx-background-radius: WHITE; -fx-background-radius: 12px");
+        comboBox.setStyle("-fx-background-radius: WHITE;");
         comboBox.setEffect(new DropShadow());
         comboBox.getItems().addAll(elements);
         hbox.getChildren().addAll(label, comboBox);
