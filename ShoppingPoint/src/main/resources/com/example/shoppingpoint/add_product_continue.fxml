@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.AddProductContinueGraphicController">
+    <top>
+        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16" BorderPane.alignment="CENTER">
+            <effect>
+                <DropShadow />
+            </effect>
+            <Label text="Add Product - Shopping Point">
+                <font>
+                    <Font size="36.0" />
+                </font>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
+            <VBox fx:id="pane" prefWidth="800.0" />
+            <Button defaultButton="true" layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#add" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Add" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Button>
+        </AnchorPane>
+    </center>
+</BorderPane>

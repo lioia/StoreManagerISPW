@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.shoppingpoint.utils.ClientListData;
+import com.example.shoppingpoint.model.ClientListData;
 
 public class LoyaltyCardDAO {
     private LoyaltyCardDAO() {

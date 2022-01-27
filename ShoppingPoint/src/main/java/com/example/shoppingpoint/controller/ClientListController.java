@@ -1,6 +1,6 @@
 package com.example.shoppingpoint.controller;
 
-import com.example.shoppingpoint.utils.ClientListData;
+import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 
 import java.util.List;

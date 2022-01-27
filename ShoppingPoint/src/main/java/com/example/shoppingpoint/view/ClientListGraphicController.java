@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import com.example.shoppingpoint.model.user.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import com.example.shoppingpoint.utils.ClientListData;
+import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.controller.ClientListController;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.shoppingpoint.utils;
+package com.example.shoppingpoint.model;
 
 public class ClientListData {
     private String username;
