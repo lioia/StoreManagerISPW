@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.factory.ProductFactory;
 import com.example.shoppingpoint.model.product.*;
 import com.example.shoppingpoint.utils.*;
 import javafx.scene.image.Image;
@@ -88,12 +89,12 @@ public class ProductDAO {
     }
 
     private static Product getProduct(ResultSet rs) throws Exception {
-        Product product;
-        Integer id = rs.getInt("ProductId");
+        ProductFactory factory = new ProductFactory();
+        int id = rs.getInt("ProductId");
         String name = rs.getString("Name");
-        Float price = rs.getFloat("Price");
-        Float discountedPrice = rs.getFloat("DiscountedPrice");
-        Integer quantity = rs.getInt("Quantity");
+        float price = rs.getFloat("Price");
+        float discountedPrice = rs.getFloat("DiscountedPrice");
+        int quantity = rs.getInt("Quantity");
         String status = rs.getString("Status");
         String storeName = rs.getString("Store");
         ProductType type = ProductType.valueOf(rs.getString("Type"));
@@ -105,64 +106,13 @@ public class ProductDAO {
             image = new Image(is);
         }
 
-        switch (type) {
-            case CLOTHES -> {
-                String size = rs.getString("Size");
-                String material = rs.getString("Material");
-                product = new ClothesProduct(id, name, price, discountedPrice, quantity, status, storeName, size, material);
-            }
-            case SHOES -> {
-                String size = rs.getString("Size");
-                String material = rs.getString("Material");
-                String shoesType = rs.getString("ShoesType");
-                product = new ShoesProduct(id, name, price, discountedPrice, quantity, status, storeName, size, material, shoesType);
-            }
-            case BOOK -> {
-                String author = rs.getString("Author");
-                String plot = rs.getString("Plot");
-                String genre = rs.getString("Genre");
-                product = new BookProduct(id, name, price, discountedPrice, quantity, status, storeName, author, plot, genre);
-            }
-            case COMICS -> {
-                String author = rs.getString("Author");
-                String artist = rs.getString("Artist");
-                String plot = rs.getString("Plot");
-                String genre = rs.getString("Genre");
-                Integer volume = rs.getInt("VolumeNumber");
-                product = new ComicsProduct(id, name, price, discountedPrice, quantity, status, storeName, author, artist, plot, genre, volume);
-            }
-            case VIDEOGAME -> {
-                String plot = rs.getString("Plot");
-                String genre = rs.getString("Genre");
-                String consoleType = rs.getString("ConsoleType");
-                product = new VideoGameProduct(id, name, price, discountedPrice, quantity, status, storeName, plot, genre, consoleType);
-            }
-            case GAMECONSOLE -> {
-                String consoleType = rs.getString("ConsoleType");
-                boolean digitalOnly = rs.getBoolean("DigitalOnly");
-                product = new GameConsoleProduct(id, name, price, discountedPrice, quantity, status, storeName, consoleType, digitalOnly);
-            }
-            case COMPUTER -> {
-                String computerType = rs.getString("ComputerType");
-                Integer ram = rs.getInt("Ram");
-                Integer ssd = rs.getInt("SSD");
-                Integer batterySize = rs.getInt("BatterySize");
-                String cpu = rs.getString("CPU");
-                String gpu = rs.getString("GPU");
-                String brand = rs.getString("Brand");
-                Float displaySize = rs.getFloat("DisplaySize");
-                product = new ComputerProduct(id, name, price, discountedPrice, quantity, status, storeName, computerType, ram, ssd, batterySize, cpu, gpu, brand, displaySize);
-            }
-            case HOMEAPPLIANCES -> {
-                String energyClass = rs.getString("EnergyClass");
-                String specs = rs.getString("Specs");
-
-                product = new HomeApplianceProduct(id, name, price, discountedPrice, quantity, storeName, status, energyClass, specs);
-            }
-            default -> throw new Exception("Unrecognized type: " + type);
-        }
-        product.setImage(image);
-        return product;
+        return factory.createProduct(type, id, name, price, discountedPrice, quantity, status, image, storeName,
+                rs.getString("Size"), rs.getString("Material"), rs.getString("ShoesType"),
+                rs.getString("Author"), rs.getString("Artist"), rs.getString("Plot"), rs.getString("Genre"), rs.getInt("VolumeNumber"),
+                rs.getString("ConsoleType"), rs.getBoolean("DigitalOnly"),
+                rs.getString("ComputerType"), rs.getInt("Ram"), rs.getInt("SSD"), rs.getString("CPU"),
+                rs.getString("GPU"), rs.getInt("BatterySize"), rs.getFloat("DisplaySize"),
+                rs.getString("Brand"), rs.getString("EnergyClass"), rs.getString("Specs"));
     }
 
     public static void saveClothesProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String size, String material) throws Exception {
@@ -191,7 +141,7 @@ public class ProductDAO {
     }
 
     public static void saveGameConsoleProduct(String name, Float price, Float discountedPrice, Integer quantity, String status, String storeName, String consoleType, boolean digitalOnly) throws Exception {
-        String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, ConsoleType, DigitalOnly) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', %d)", name, price, discountedPrice, quantity, "GAMECONSOLE", status, storeName, consoleType, digitalOnly);
+        String sql = String.format("INSERT INTO Product (Name, Price, DiscountedPrice, Quantity, Type, Status, Store, ConsoleType, DigitalOnly) VALUES ('%s', %f, %f, %d, '%s', '%s', '%s', '%s', %d)", name, price, discountedPrice, quantity, "GAMECONSOLE", status, storeName, consoleType, digitalOnly ? 1 : 0);
         saveProduct(sql);
     }
 
