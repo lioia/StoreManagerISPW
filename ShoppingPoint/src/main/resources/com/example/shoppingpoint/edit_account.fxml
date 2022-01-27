@@ -1,37 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import org.kordamp.ikonli.javafx.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.EditAccountGraphicController">
-   <center>
-      <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
-         <children>
-            <Label  layoutX="301.0" layoutY="160.0" text="Email" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="20.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label layoutX="159.0" layoutY="253.0" text="Password" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="160.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <TextField fx:id="emailTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="18.0" />
-            <Button layoutX="612.0" layoutY="480.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF;  -fx-font-size: 24px" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0" />
-            <Label layoutX="100.0" layoutY="300.0" text="Verify Password" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="300.0">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="VerifyPasswordField" layoutX="484.0" layoutY="165.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="158.0" />
-            <PasswordField fx:id="passwordPasswordField" layoutX="370.0" layoutY="168.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
-         </children>
-      </AnchorPane>
-   </center>
    <top>
       <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
          <center>
@@ -42,9 +17,9 @@
             </Label>
          </center>
          <left>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" onAction="#goBack" >
+            <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                <graphic>
-                  <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+                  <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
                </graphic>
                <BorderPane.margin>
                   <Insets left="48.0" />
@@ -52,9 +27,9 @@
             </Button>
          </left>
          <right>
-            <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent" >
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                <graphic>
-                  <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
+                  <FontIcon iconLiteral="mdal-account_circle" iconSize="32" />
                </graphic>
                <BorderPane.margin>
                   <Insets right="48.0" />
@@ -63,4 +38,33 @@
          </right>
       </BorderPane>
    </top>
+   <left>
+      <AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="TOP_CENTER" prefWidth="800.0">
+               <children>
+                  <Label text="Verify Password">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="emailTextField" prefHeight="40.0" prefWidth="384.0" />
+                  <Label text="Email">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Password">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF;  -fx-font-size: 24px" text="Save" />
+                  <PasswordField fx:id="VerifyPasswordField" prefHeight="40.0" prefWidth="384.0" />
+               </children>
+            </VBox>
+            <PasswordField fx:id="passwordPasswordField" layoutX="370.0" layoutY="168.0" prefHeight="40.0" prefWidth="384.0" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="298.0" />
+         </children>
+      </AnchorPane>
+   </left>
 </BorderPane>

@@ -8,12 +8,15 @@ import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+
+import java.io.IOException;
 
 public class AddProductContinueGraphicController {
     private AddProductCommonBean commonBean;
@@ -124,6 +127,7 @@ public class AddProductContinueGraphicController {
 
     private HBox createTextFieldElement(String name) {
         HBox hbox = new HBox(8);
+        hbox.setSpacing(40);
         Label label = new Label(name);
         label.setFont(new Font(24));
         TextField textField = new TextField();
@@ -137,6 +141,7 @@ public class AddProductContinueGraphicController {
 
     private HBox createTextAreaElement(String name) {
         HBox hbox = new HBox(8);
+        hbox.setSpacing(40);
         Label label = new Label(name);
         label.setFont(new Font(24));
         TextArea textArea = new TextArea();
@@ -150,6 +155,7 @@ public class AddProductContinueGraphicController {
 
     private HBox createComboBoxElement(String[] elements) {
         HBox hbox = new HBox(8);
+        hbox.setSpacing(40);
         Label label = new Label("Type");
         label.setFont(new Font(24));
         ComboBox<String> comboBox = new ComboBox<>();
@@ -164,11 +170,22 @@ public class AddProductContinueGraphicController {
 
     private HBox createCheckBoxElement() {
         HBox hbox = new HBox(8);
+        hbox.setSpacing(40);
         Label label = new Label("Digital");
         label.setFont(new Font(24));
         CheckBox box = new CheckBox();
         box.setId("Digital");
         hbox.getChildren().addAll(label, box);
         return hbox;
+    }
+    @FXML
+    public void goBack(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
+        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
+    }
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 }

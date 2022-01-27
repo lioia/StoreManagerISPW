@@ -38,6 +38,7 @@
     <TextField fx:id="descriptionTextField" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px"
                text="Description" visible="false" maxWidth="204"/>
 
+
     <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" maxWidth="204"/>
     <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>
     <Label fx:id="discountedPrice" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px" text="Discounted Price"/>
@@ -52,6 +53,7 @@
             </graphic>
         </Button>
     </HBox>
+    <Label fx:id="quantity" layoutX="164.0" layoutY="184.0" style="-fx-font-size: 16px" text="Quantity"/>
     <Rating fx:id="rating" max="5" rating="0" disable="true" layoutX="164.0" layoutY="212.0"/>
 
     <Button fx:id="requestButton" mnemonicParsing="false" prefHeight="52.0" layoutY="256.0" layoutX="64.0"

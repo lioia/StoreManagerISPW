@@ -71,11 +71,12 @@ public class StoreDashboardGraphicController {
 //            Set product data in the View
             ((Label) pane.lookup("#name")).setText(product.getName());
             String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#price")).setText(formattedPrice);
+            ((Label) pane.lookup("#price")).setText("price: "+formattedPrice);
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
+            ((Label) pane.lookup("#discountedPrice")).setText("dicounted price: "+formattedDiscountedPrice);
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
+            ((Label) pane.lookup("#quantity")).setText(String.format("quantity: %d",product.getQuantity()));
             ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
             ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
@@ -199,6 +200,7 @@ public class StoreDashboardGraphicController {
         pane.lookup("#status").setVisible(visibility);
         pane.lookup("#editButton").setVisible(visibility);
         pane.lookup("#requestButton").setVisible(visibility);
+        pane.lookup("#quantity").setVisible(visibility);
         pane.lookup("#descriptionHbox").setVisible(visibility);
         pane.lookup("#rating").setVisible(visibility);
         pane.lookup("#offersButton").setVisible(visibility);

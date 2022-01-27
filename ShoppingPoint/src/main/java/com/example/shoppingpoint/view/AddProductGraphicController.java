@@ -68,4 +68,9 @@ public class AddProductGraphicController {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
+    @FXML
+    protected void logout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
 }

@@ -2,125 +2,121 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<?import javafx.geometry.Insets?>
-
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.shoppingpoint.view.AddProductGraphicController">
-    <left>
-        <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent"
-                BorderPane.alignment="CENTER">
-            <graphic>
-                <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
-            </graphic>
-            <BorderPane.margin>
-                <Insets left="48.0"/>
-            </BorderPane.margin>
-        </Button>
-    </left>
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.AddProductGraphicController">
     <top>
-        <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0"
-              style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16" BorderPane.alignment="CENTER">
-            <effect>
-                <DropShadow/>
-            </effect>
-            <Label text="Add Product - Shopping Point">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-            </Label>
-        </HBox>
+        <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
+            <center>
+                <Label text="Add product - Shopping Point">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+            </center>
+            <left>
+                <Button mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                    <graphic>
+                        <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                    </graphic>
+                    <BorderPane.margin>
+                        <Insets left="48.0" />
+                    </BorderPane.margin>
+                </Button>
+            </left>
+            <right>
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                    <graphic>
+                        <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
+                    </graphic>
+                    <BorderPane.margin>
+                        <Insets right="16.0" />
+                    </BorderPane.margin>
+                </Button>
+            </right>
+        </BorderPane>
     </top>
     <center>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
             <Label layoutX="101.0" layoutY="41.0" text="Name" AnchorPane.leftAnchor="101.0" AnchorPane.topAnchor="41.0">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <TextField fx:id="nameTextField" layoutX="360.0" layoutY="39.0" prefHeight="40.0" prefWidth="384.0"
-                       style="-fx-background-color: WHITE; -fx-background-radius: 12px">
+            <TextField fx:id="nameTextField" layoutX="360.0" layoutY="39.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px" AnchorPane.leftAnchor="360.0">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </TextField>
-            <Label layoutX="100.0" layoutY="91.0" text="Price">
+            <Label layoutX="100.0" layoutY="91.0" text="Price" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="91.0">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <TextField fx:id="priceTextField" layoutX="360.0" layoutY="91.0" prefHeight="40.0" prefWidth="384.0"
-                       style="-fx-background-color: WHITE; -fx-background-radius: 12px">
+            <TextField fx:id="priceTextField" layoutX="360.0" layoutY="91.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </TextField>
             <Label layoutX="100.0" layoutY="145.0" text="Discounted Price">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <TextField fx:id="discountedPriceTextField" layoutX="360.0" layoutY="145.0" prefHeight="40.0"
-                       prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px">
+            <TextField fx:id="discountedPriceTextField" layoutX="360.0" layoutY="145.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </TextField>
             <Label layoutX="100.0" layoutY="196.0" text="Quantity">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <TextField fx:id="quantityTextField" layoutX="360.0" layoutY="196.0" prefHeight="40.0" prefWidth="384.0"
-                       style="-fx-background-color: WHITE; -fx-background-radius: 12px">
+            <TextField fx:id="quantityTextField" layoutX="360.0" layoutY="196.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </TextField>
             <Label layoutX="100.0" layoutY="245.0" text="Status">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="statusComboBox" layoutX="360.0" layoutY="245.0" prefHeight="40.0" prefWidth="384.0"
-                      style="-fx-font-size: 24px; -fx-background-radius: 16" visibleRowCount="4">
+            <ComboBox fx:id="statusComboBox" layoutX="360.0" layoutY="245.0" prefHeight="40.0" prefWidth="384.0" style="-fx-font-size: 24px; -fx-background-radius: 16" visibleRowCount="4">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
                 <items>
                     <FXCollections fx:factory="observableArrayList">
-                        <String fx:value="New"/>
-                        <String fx:value="Used"/>
-                        <String fx:value="Used Like New"/>
-                        <String fx:value="Regenerated"/>
+                        <String fx:value="New" />
+                        <String fx:value="Used" />
+                        <String fx:value="Used Like New" />
+                        <String fx:value="Regenerated" />
                     </FXCollections>
                 </items>
                 <value>
-                    <String fx:value="New"/>
+                    <String fx:value="New" />
                 </value>
             </ComboBox>
             <Label layoutX="101.0" layoutY="321.0" text="Type">
                 <font>
-                    <Font size="24.0"/>
+                    <Font size="24.0" />
                 </font>
             </Label>
-            <ComboBox fx:id="typeComboBox" layoutX="360.0" layoutY="313.0" prefHeight="40.0" prefWidth="384.0"
-                      style="-fx-font-size: 24px; -fx-background-radius: 16" visibleRowCount="4">
+            <ComboBox fx:id="typeComboBox" layoutX="360.0" layoutY="313.0" prefHeight="40.0" prefWidth="384.0" style="-fx-font-size: 24px; -fx-background-radius: 16" visibleRowCount="4">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </ComboBox>
-            <Button defaultButton="true" layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#goNext"
-                    prefHeight="42.0" prefWidth="132.0"
-                    style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;"
-                    text="Continue" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0">
+            <Button defaultButton="true" layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#goNext" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Continue" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0">
                 <effect>
-                    <DropShadow/>
+                    <DropShadow />
                 </effect>
             </Button>
         </AnchorPane>
