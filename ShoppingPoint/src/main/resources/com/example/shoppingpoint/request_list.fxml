@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.RequestListGraphicController" >
+   <top>
+      <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
+         <center>
+            <Label text="Request List - Shopping Point">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </center>
+
+         <right>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER" onAction="#logout">
+               <graphic>
+                  <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
+               </graphic>
+               <BorderPane.margin>
+                  <Insets right="48.0" />
+               </BorderPane.margin>
+            </Button>
+         </right>
+      </BorderPane>
+   </top>
+   <center>
+      <ScrollPane   BorderPane.alignment="CENTER" fitToWidth="true">
+        <content>
+          <FlowPane fx:id="requestPane" />
+        </content>
+      </ScrollPane>
+   </center>
+
+</BorderPane>

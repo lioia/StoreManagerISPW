@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="165.0" prefWidth="287.0"
+            style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow/>
+    </effect>
+    <Text fx:id="ProductName" layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Text>
+    <Text fx:id="quantity" layoutX="18.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="quantity">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <Text fx:id="maxPrice" layoutX="18.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="maxPrice">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Text>
+    <HBox alignment="TOP_CENTER" layoutX="18.0" layoutY="115.0">
+        <Label fx:id="description" style="-fx-font-size: 16px" text="Description" maxWidth="204"/>
+
+        <Button fx:id="descriptionButton" layoutX="38.0" layoutY="115.0" mnemonicParsing="false"
+                style="-fx-background-color: transparent">
+            <graphic>
+                <FontIcon iconLiteral="mdal-control_point" iconSize="18"/>
+            </graphic>
+        </Button>
+    </HBox>
+    <Button layoutX="212.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0"
+            style="-fx-background-radius: 16px; -fx-background-color: #6EC6FF;" fx:id="offerButton">
+        <effect>
+            <DropShadow offsetY="2.0"/>
+        </effect>
+        <font>
+            <Font size="24.0"/>
+        </font>
+        <graphic>
+            <FontIcon iconLiteral="mdal-arrow_forward" iconSize="32"/>
+        </graphic>
+    </Button>
+    <FlowPane.margin>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </FlowPane.margin>
+</AnchorPane>
