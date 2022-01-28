@@ -79,7 +79,6 @@
         <VBox.margin>
 
         </VBox.margin>
-        <!--    TODO filtro per tipo (dipendente dal tipo del negozio) -->
         <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
             <font>
                 <Font size="18.0"/>

@@ -27,17 +27,36 @@
             <DropShadow/>
         </effect>
     </Pane>
-    <TextField fx:id="nameTextField" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name"
-               visible="false" maxWidth="204"/>
-    <TextField fx:id="priceTextField" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"
-               visible="false"/>
-    <TextField fx:id="discountedPriceTextField" layoutX="164.0" layoutY="96.0" style="-fx-font-size: 18px"
-               text="Discounted Price" visible="false"/>
-    <TextField fx:id="statusTextField" layoutX="164.0" layoutY="128.0" style="-fx-font-size: 16px" text="Status"
-               visible="false"/>
-    <TextField fx:id="descriptionTextField" layoutX="164.0" layoutY="160.0" style="-fx-font-size: 16px"
-               text="Description" visible="false" maxWidth="204"/>
-
+    <TextField fx:id="priceTextField" layoutX="164.0" layoutY="64.0"
+               style="-fx-font-size: 18px; -fx-background-color: WHITE; -fx-background-radius: 12px" text="Price"
+               visible="false" promptText="Price" prefWidth="128">
+        <effect>
+            <DropShadow/>
+        </effect>
+    </TextField>
+    <TextField fx:id="discountedPriceTextField" layoutX="164.0" layoutY="128.0"
+               style="-fx-font-size: 18px; -fx-background-color: WHITE; -fx-background-radius: 12px"
+               text="Discounted Price" visible="false" promptText="Discounted Price" prefWidth="128">
+        <effect>
+            <DropShadow/>
+        </effect>
+    </TextField>
+    <TextField fx:id="quantityTextField" layoutX="164.0" layoutY="192.0"
+               style="-fx-font-size: 16px; -fx-background-color: WHITE; -fx-background-radius: 12px" text="Quantity"
+               visible="false" promptText="Quantity" prefWidth="128">
+        <effect>
+            <DropShadow/>
+        </effect>
+    </TextField>
+    <Button fx:id="uploadImageButton" layoutX="192.0" layoutY="256.0" mnemonicParsing="false" prefHeight="52.0"
+            style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Upload Image" visible="false">
+        <effect>
+            <DropShadow/>
+        </effect>
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Button>
 
     <Label fx:id="name" layoutX="164.0" layoutY="16.0" style="-fx-font-size: 24px" text="Product Name" maxWidth="204"/>
     <Label fx:id="price" layoutX="164.0" layoutY="64.0" style="-fx-font-size: 18px" text="Price"/>

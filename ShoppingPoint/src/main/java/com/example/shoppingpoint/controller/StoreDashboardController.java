@@ -3,6 +3,7 @@ package com.example.shoppingpoint.controller;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.StoreBean;
+import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
@@ -48,5 +49,9 @@ public class StoreDashboardController {
             total += r.getValue();
         }
         return (count > 0) ? total / count : 0f;
+    }
+
+    public void editProduct(Integer id, EditProductBean bean) throws Exception {
+        ProductDAO.updateProduct(id, bean.getPrice(), bean.getDiscountedPrice(), bean.getQuantity());
     }
 }

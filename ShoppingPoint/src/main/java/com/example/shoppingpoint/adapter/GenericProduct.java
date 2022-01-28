@@ -11,4 +11,8 @@ public interface GenericProduct {
     Image getImage();
     String getStatus();
     String getDescription();
+
+    void setPrice(float price);
+    void setDiscountedPrice(float discountedPrice);
+    void setQuantity(int quantity);
 }

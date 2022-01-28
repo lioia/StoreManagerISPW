@@ -95,7 +95,6 @@ public class StoreGraphicController {
 
     @FXML
     public void search() throws Exception {
-//        TODO filtro per tipo
         String searchQuery = searchTextField.getText();
 
         createProductsView(new StoreBean(store.getName(), searchQuery));

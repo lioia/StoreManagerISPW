@@ -2,6 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
+import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -14,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -71,14 +73,17 @@ public class StoreDashboardGraphicController {
 //            Set product data in the View
             ((Label) pane.lookup("#name")).setText(product.getName());
             String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#price")).setText("price: "+formattedPrice);
+            ((Label) pane.lookup("#price")).setText("Price: " + formattedPrice);
+            ((TextField) pane.lookup("#priceTextField")).setText(product.getPrice().toString());
             String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#discountedPrice")).setText("dicounted price: "+formattedDiscountedPrice);
+            ((Label) pane.lookup("#discountedPrice")).setText("Discounted Price: " + formattedDiscountedPrice);
+            ((TextField) pane.lookup("#discountedPriceTextField")).setText(product.getDiscountedPrice().toString());
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Label) pane.lookup("#quantity")).setText(String.format("quantity: %d",product.getQuantity()));
+            ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
+            ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
             ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
-            ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction((ActionEvent event) -> {
+            ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);
                 scrollPane.setMaxHeight(400.0);
@@ -120,9 +125,27 @@ public class StoreDashboardGraphicController {
             });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
                 setProductVisibility(pane, false);
+//                TODO upload image
+                ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
+                });
                 ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
                     setProductVisibility(pane, true);
-//                    TODO update product
+                    String price = ((TextField) pane.lookup("#priceTextField")).getText();
+                    String discountedPrice = ((TextField) pane.lookup("#discountedPriceTextField")).getText();
+                    String quantity = ((TextField) pane.lookup("#quantityTextField")).getText();
+                    try {
+                        EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
+                        controller.editProduct(product.getId(), bean);
+//                        Update local copy of product (and the relative labels)
+                        product.setPrice(bean.getPrice());
+                        product.setDiscountedPrice(bean.getDiscountedPrice());
+                        product.setQuantity(bean.getQuantity());
+                        ((Label) pane.lookup("#price")).setText(String.format("Price: %.02f€", product.getPrice()));
+                        ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
+                        ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 });
 
             });
@@ -194,7 +217,6 @@ public class StoreDashboardGraphicController {
     }
 
     private void setProductVisibility(AnchorPane pane, boolean visibility) {
-        pane.lookup("#name").setVisible(visibility);
         pane.lookup("#price").setVisible(visibility);
         pane.lookup("#discountedPrice").setVisible(visibility);
         pane.lookup("#status").setVisible(visibility);
@@ -205,12 +227,11 @@ public class StoreDashboardGraphicController {
         pane.lookup("#rating").setVisible(visibility);
         pane.lookup("#offersButton").setVisible(visibility);
 
-        pane.lookup("#nameTextField").setVisible(!visibility);
         pane.lookup("#priceTextField").setVisible(!visibility);
         pane.lookup("#discountedPriceTextField").setVisible(!visibility);
-        pane.lookup("#statusTextField").setVisible(!visibility);
-        pane.lookup("#descriptionTextField").setVisible(!visibility);
+        pane.lookup("#quantityTextField").setVisible(!visibility);
         pane.lookup("#saveButton").setVisible(!visibility);
+        pane.lookup("#uploadImageButton").setVisible(!visibility);
     }
 
     @FXML
@@ -223,12 +244,12 @@ public class StoreDashboardGraphicController {
     @FXML
     public void addProduct(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product.fxml"));
-        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
+        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 
     @FXML
     public void goToSummary(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("summary.fxml"));
-        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
+        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 }

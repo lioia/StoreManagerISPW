@@ -83,4 +83,19 @@ public class ProductAdapter implements GenericProduct {
             default -> throw new IllegalStateException("Unexpected value: " + product.getType());
         }
     }
+
+    @Override
+    public void setPrice(float price) {
+        product.setPrice(price);
+    }
+
+    @Override
+    public void setDiscountedPrice(float discountedPrice) {
+        product.setDiscountedPrice(discountedPrice);
+    }
+
+    @Override
+    public void setQuantity(int quantity) {
+        product.setQuantity(quantity);
+    }
 }

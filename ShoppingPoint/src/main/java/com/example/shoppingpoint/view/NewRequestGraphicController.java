@@ -39,11 +39,6 @@ public class NewRequestGraphicController {
     }
 
     @FXML
-    public void openAccountInfo(ActionEvent actionEvent) {
-//        TODO
-    }
-
-    @FXML
     public void save(ActionEvent actionEvent) throws Exception {
         NewRequestBean bean = new NewRequestBean(maxPriceTextField.getText(), quantityTextField.getText());
         NewRequestController controller = new NewRequestController();
