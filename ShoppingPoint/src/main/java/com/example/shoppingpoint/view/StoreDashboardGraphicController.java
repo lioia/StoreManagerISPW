@@ -225,4 +225,10 @@ public class StoreDashboardGraphicController {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product.fxml"));
         ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
     }
+
+    @FXML
+    public void goToSummary(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("summary.fxml"));
+        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
+    }
 }

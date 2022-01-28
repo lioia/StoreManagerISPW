@@ -14,6 +14,40 @@ public class SoldProductDAO {
         throw new IllegalStateException();
     }
 
+    public static List<SoldProduct> getSoldProducts() throws Exception {
+        Statement statement = null;
+        Connection connection = null;
+        List<SoldProduct> products = new ArrayList<>();
+
+        try {
+//            Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+//            Create Statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//            Execute query
+            ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
+            while (rs.next()) {
+                products.add(getSoldProduct(rs));
+            }
+            rs.close();
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return products;
+    }
+
     public static List<SoldProduct> getProductsOfClient(String client) throws Exception {
         Statement statement = null;
         Connection connection = null;

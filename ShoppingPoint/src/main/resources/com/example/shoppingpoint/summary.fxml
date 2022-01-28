@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.shoppingpoint.view.SummaryGraphicController">
+
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
+                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
+        <left>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack"
+                    style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                <graphic>
+                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
+                </graphic>
+                <BorderPane.margin>
+                    <Insets left="48.0"/>
+                </BorderPane.margin>
+            </Button>
+        </left>
+        <center>
+            <Label text="Summary - Shopping Point" BorderPane.alignment="CENTER">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+            </Label>
+        </center>
+        <right>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout"
+                    style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                <graphic>
+                    <FontIcon iconLiteral="mdal-log_out" iconSize="32"/>
+                </graphic>
+                <BorderPane.margin>
+                    <Insets right="16.0"/>
+                </BorderPane.margin>
+            </Button>
+        </right>
+    </BorderPane>
+    <HBox alignment="CENTER">
+        <Label text="Time period:">
+            <font>
+                <Font size="18.0"/>
+            </font>
+            <HBox.margin>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </HBox.margin>
+        </Label>
+        <RadioButton mnemonicParsing="false" onAction="#filter" selected="true" text="All">
+            <toggleGroup>
+                <ToggleGroup fx:id="toggle"/>
+            </toggleGroup>
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <HBox.margin>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+            </HBox.margin>
+        </RadioButton>
+        <RadioButton mnemonicParsing="false" onAction="#filter" text="Last Month" toggleGroup="$toggle">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <HBox.margin>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+            </HBox.margin>
+        </RadioButton>
+        <RadioButton mnemonicParsing="false" onAction="#filter" text="Last Week" toggleGroup="$toggle">
+            <font>
+                <Font size="14.0"/>
+            </font>
+            <HBox.margin>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+            </HBox.margin>
+        </RadioButton>
+        <VBox.margin>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+        </VBox.margin>
+    </HBox>
+    <BarChart fx:id="barChart">
+        <xAxis>
+            <CategoryAxis label="Time" side="BOTTOM"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis label="Quantity" side="LEFT"/>
+        </yAxis>
+    </BarChart>
+</VBox>
