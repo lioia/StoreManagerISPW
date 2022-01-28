@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.adapter;
 
+
 import com.example.shoppingpoint.model.product.*;
 import javafx.scene.image.Image;
 
@@ -44,6 +45,9 @@ public class ProductAdapter implements GenericProduct {
     public String getStatus() {
         return this.product.getStatus();
     }
+
+    @Override
+    public String getStore(){return this.product.getStoreName();}
 
     @Override
     public String getDescription() {
