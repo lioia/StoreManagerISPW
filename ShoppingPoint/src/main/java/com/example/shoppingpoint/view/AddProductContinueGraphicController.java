@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.controller.AddProductController;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

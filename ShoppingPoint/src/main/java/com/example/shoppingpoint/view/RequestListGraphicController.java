@@ -2,6 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.model.user.Supplier;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +42,6 @@ public class RequestListGraphicController {
 
             requestPane.getChildren().add(node);
         }
-
     }
 
     @FXML

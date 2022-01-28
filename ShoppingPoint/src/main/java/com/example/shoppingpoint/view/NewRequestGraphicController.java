@@ -5,6 +5,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.NewRequestBean;
 import com.example.shoppingpoint.controller.NewRequestController;
 import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
