@@ -173,6 +173,7 @@ public class StoreGraphicController {
     }
 
     public void logout(ActionEvent event) throws Exception {
+        LoggedInUser.getInstance().setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }

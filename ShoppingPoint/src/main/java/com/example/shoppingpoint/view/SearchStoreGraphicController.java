@@ -90,6 +90,7 @@ public class SearchStoreGraphicController {
 
     @FXML
     protected void logout(ActionEvent event) throws IOException {
+        LoggedInUser.getInstance().setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
