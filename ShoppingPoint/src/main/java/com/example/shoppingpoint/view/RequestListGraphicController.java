@@ -11,10 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import com.example.shoppingpoint.controller.RequestListController;
 import com.example.shoppingpoint.adapter.ProductAdapter;
+import com.example.shoppingpoint.bean.RequestListBean;
 
 import java.io.IOException;
 import java.util.List;
@@ -65,6 +67,13 @@ public class RequestListGraphicController {
                 popOver.setContentNode(scrollPane);
                 popOver.setCornerRadius(16);
                 popOver.show(pane);
+            });
+            ((Button) node.lookup("#offerButton")).setOnAction((ActionEvent event)  -> {
+                try {
+                    controller.saveOffer(product.getId(), new RequestListBean( ((TextField) node.lookup("#choosePriceTextField")).getText()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
 
 

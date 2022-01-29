@@ -13,6 +13,37 @@ public class OfferDAO {
         throw new IllegalStateException();
     }
 
+    public static void saveOffer(String supplierUsername, int requestId, float offerPrice)throws Exception{
+
+        Statement statement = null;
+        Connection connection = null;
+
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            String sql = String.format(java.util.Locale.US, "INSERT INTO Offer (Supplier,RequestId,OfferPrice) VALUES ('%s', %d, %f)",supplierUsername,requestId,offerPrice );
+            // Execute query
+            statement.executeUpdate(sql);
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+
     public static Offer getAcceptedOfferOfRequest(int requestId) throws Exception {
         Statement statement = null;
         Connection connection = null;

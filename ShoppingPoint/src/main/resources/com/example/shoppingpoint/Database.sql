@@ -93,7 +93,7 @@ CREATE TABLE Request (
     ProductId INT NOT NULL,
     MaxPrice FLOAT NOT NULL,
     Quantity INT NOT NULL,
-    Accepted BIT NOT NULL,
+    Accepted BIT NOT NULL DEFAULT 0,
 
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 );
@@ -103,7 +103,7 @@ CREATE TABLE Offer (
     Supplier VARCHAR(16) NOT NULL,
     RequestId INT NOT NULL,
     OfferPrice FLOAT NOT NULL,
-    Accepted BIT NOT NULL,
+    Accepted BIT NOT NULL DEFAULT 0,
 
     FOREIGN KEY (RequestId) REFERENCES Request(RequestId),
     FOREIGN KEY (Supplier) REFERENCES User(Username)
