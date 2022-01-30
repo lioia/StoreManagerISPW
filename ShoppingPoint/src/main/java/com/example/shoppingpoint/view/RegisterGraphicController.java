@@ -7,6 +7,7 @@ import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.*;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +51,7 @@ public class RegisterGraphicController {
 
         controller = new RegisterController();
         User user = controller.register(bean);
+        LoggedInUser.getInstance().setUser(user);
         if (user instanceof Client) {
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
             ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
@@ -62,8 +64,11 @@ public class RegisterGraphicController {
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
         }
         if (user instanceof Supplier) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("searchstore.fxml"));
-            ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
+            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("request_list.fxml"));
+            Parent node = fxmlLoader.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
+            RequestListGraphicController requestListGraphicControllerController = fxmlLoader.getController();
+            requestListGraphicControllerController.initialize();
         }
     }
 }
