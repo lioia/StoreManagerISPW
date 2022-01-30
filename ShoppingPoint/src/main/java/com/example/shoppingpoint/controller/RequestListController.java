@@ -11,8 +11,7 @@ import com.example.shoppingpoint.singleton.LoggedInUser;
 
 public class RequestListController {
     public List<Request> getRequest()throws Exception{
-        List<Request> requestList = RequestDAO.getAllRequests();
-        return requestList;
+        return RequestDAO.getAllRequests();
     }
     public Product getProduct(int productId)throws Exception{
         return ProductDAO.getProductById(productId);
@@ -20,5 +19,4 @@ public class RequestListController {
     public void saveOffer(int requestId, RequestListBean offerPrice)throws Exception{
         OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(),requestId,offerPrice.getOfferPrice());
     }
-
 }

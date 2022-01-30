@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.control.ScrollPane;
@@ -118,6 +119,7 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
             ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
+            ((ImageView) pane.lookup("#imageView")).setImage(product.getImage());
             ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);

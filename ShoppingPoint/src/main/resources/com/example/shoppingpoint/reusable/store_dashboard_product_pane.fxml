@@ -22,7 +22,7 @@
         <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
     </FlowPane.margin>
     <Pane layoutX="16.0" layoutY="16.0" style="-fx-background-radius: 16px; -fx-background-color: WHITE">
-        <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true"/>
+        <ImageView fx:id="imageView" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true"/>
         <effect>
             <DropShadow/>
         </effect>

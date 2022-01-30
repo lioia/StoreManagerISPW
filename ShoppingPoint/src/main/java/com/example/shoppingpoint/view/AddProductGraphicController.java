@@ -13,7 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
+import java.io.*;
 
 public class AddProductGraphicController {
     @FXML
@@ -68,6 +68,7 @@ public class AddProductGraphicController {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
+
     @FXML
     protected void logout(ActionEvent event) throws IOException {
         LoggedInUser.getInstance().setUser(null);

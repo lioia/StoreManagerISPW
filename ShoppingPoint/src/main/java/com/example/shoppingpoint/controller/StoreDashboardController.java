@@ -13,6 +13,9 @@ import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.product.Product;
 import com.example.shoppingpoint.model.Store;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,6 @@ public class StoreDashboardController {
 
     public List<GenericProduct> getProductsFromStore(Store store) throws Exception {
         List<Product> products = ProductDAO.getProductsFromStore(store.getName());
-
 
         List<GenericProduct> genericProducts = new ArrayList<>();
         for (Product product : products) {
@@ -53,5 +55,10 @@ public class StoreDashboardController {
 
     public void editProduct(Integer id, EditProductBean bean) throws Exception {
         ProductDAO.updateProduct(id, bean.getPrice(), bean.getDiscountedPrice(), bean.getQuantity());
+    }
+
+    public void setImageOfProduct(Integer id, File image) throws Exception {
+        InputStream stream = new FileInputStream(image);
+        ProductDAO.setImageOfProductId(id, stream);
     }
 }

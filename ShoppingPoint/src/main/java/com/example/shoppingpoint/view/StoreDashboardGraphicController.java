@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -25,9 +26,11 @@ import javafx.scene.layout.HBox;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -83,6 +86,7 @@ public class StoreDashboardGraphicController {
             ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
             ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
             ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
+            ((ImageView) pane.lookup("#imageView")).setImage(product.getImage());
             ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
                 ScrollPane scrollPane = new ScrollPane();
                 scrollPane.setMaxWidth(400.0);
@@ -125,8 +129,30 @@ public class StoreDashboardGraphicController {
             });
             ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
                 setProductVisibility(pane, false);
-//                TODO upload image
                 ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
+                    try {
+                        FileChooser chooser = new FileChooser();
+                        //Set extension filter
+                        FileChooser.ExtensionFilter extFilterJPG
+                                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
+                        FileChooser.ExtensionFilter extFilterjpg
+                                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+                        FileChooser.ExtensionFilter extFilterPNG
+                                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
+                        FileChooser.ExtensionFilter extFilterpng
+                                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+                        chooser.getExtensionFilters()
+                                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
+                        File image = chooser.showOpenDialog(null);
+                        if (image != null) {
+                            controller.setImageOfProduct(product.getId(), image);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setContentText("Correctly uploaded file: " + image.getName());
+                            alert.show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 });
                 ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
                     setProductVisibility(pane, true);
