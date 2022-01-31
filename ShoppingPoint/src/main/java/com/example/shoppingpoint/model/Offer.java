@@ -7,14 +7,14 @@ public class Offer {
     private int requestId;
     private float offerPrice;
     private boolean accepted;
-    private Supplier supplier;
+    private String supplierUsername;
 
-    public Offer(int offerId, int requestId, float offerPrice, boolean accepted, Supplier supplier) {
+    public Offer(int offerId, int requestId, float offerPrice, boolean accepted, String supplierUsername) {
         setOfferId(offerId);
         setRequestId(requestId);
         setOfferPrice(offerPrice);
         setAccepted(accepted);
-        setSupplier(supplier);
+        setSupplierUsername(supplierUsername);
     }
 
     public int getOfferId() {
@@ -49,11 +49,12 @@ public class Offer {
         this.accepted = accepted;
     }
 
-    public Supplier getSupplier() {
-        return supplier;
+
+    public String getSupplierUsername() {
+        return supplierUsername;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    public void setSupplierUsername(String supplierUsername) {
+        this.supplierUsername = supplierUsername;
     }
 }

@@ -15,6 +15,9 @@ import javafx.scene.layout.FlowPane;
 import com.example.shoppingpoint.controller.RequestListController;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.RequestListBean;
+import com.example.shoppingpoint.controller.SendEmailController;
+import com.example.shoppingpoint.dao.StoreDAO;
+import com.example.shoppingpoint.dao.UserDAO;
 
 import java.io.IOException;
 import java.util.List;
@@ -64,6 +67,16 @@ public class RequestListGraphicController {
                     popOver.setContentNode(scrollPane);
                     popOver.setCornerRadius(16);
                     popOver.show(pane);
+                });
+                Text sendEmail = (Text) node.lookup("#sendEmail");
+                sendEmail.setOnMouseClicked(event ->{
+                    try {
+                        String storeOwner=StoreDAO.getStoreOwnerUsernameByStoreName(product.getStoreName());
+                        new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 });
                 ((Button) node.lookup("#offerButton")).setOnAction((ActionEvent event) -> {
                     try {

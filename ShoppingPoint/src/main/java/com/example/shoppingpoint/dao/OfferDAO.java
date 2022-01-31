@@ -147,7 +147,7 @@ public class OfferDAO {
         int requestId = rs.getInt("RequestId");
         float offerPrice = rs.getFloat("OfferPrice");
         boolean accepted = rs.getBoolean("Accepted");
-        Supplier supplier = (Supplier) UserDAO.getUserByUsername(rs.getString("Supplier"));
-        return new Offer(offerId, requestId, offerPrice, accepted, supplier);
+        String  supplierUsername = rs.getString("Supplier");
+        return new Offer(offerId, requestId, offerPrice, accepted, supplierUsername);
     }
 }

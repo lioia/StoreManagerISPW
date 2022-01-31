@@ -3,9 +3,10 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.controller.OffersController;
+import com.example.shoppingpoint.controller.SendEmailController;
+import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
-import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,9 +41,10 @@ public class OffersGraphicController {
             ((Label) node.lookup("#requestIdLabel")).setText("Request: " + req.getRequestId());
             ((Label) node.lookup("#maxPriceLabel")).setText("Max Price: " + req.getMaxPrice() + "€");
             ((Label) node.lookup("#quantityLabel")).setText("Quantity: " + req.getQuantity());
+
             if (req.isAccepted()) {
                 Offer acceptedOffer = controller.getAcceptedOffer(req.getRequestId());
-                ((Label) node.lookup("#statusLabel")).setText(String.format("Accepted offer: %.02f by %s", acceptedOffer.getOfferPrice(), acceptedOffer.getSupplier().getUsername()));
+                ((Label) node.lookup("#statusLabel")).setText(String.format("Accepted offer: %.02f by %s", acceptedOffer.getOfferPrice(), acceptedOffer.getSupplierUsername()));
             } else {
                 ((Label) node.lookup("#statusLabel")).setText("Not accepted");
                 List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
@@ -50,8 +53,18 @@ public class OffersGraphicController {
                     FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
                     Pane offer = offerLoader.load();
                     for (Offer off : offers) {
-                        ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplier().getUsername());
+                        ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
                         ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
+                        Text sendEmail = (Text) offer.lookup("#sendEmail");
+                        sendEmail.setOnMouseClicked(event ->{
+                            try {
+                                String supplier= off.getSupplierUsername();
+                                new SendEmailController().sendEmail(UserDAO.getEmailByUsername(supplier));
+                            }
+                            catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        });
                         ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
                             try {
                                 controller.acceptOffer(req, product, off.getOfferId());

@@ -5,6 +5,8 @@
 
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
 
 <?import javafx.scene.effect.DropShadow?>
 
@@ -16,6 +18,13 @@
             <Font size="18.0"/>
         </font>
     </Label>
+    <Text fx:id="sendEmail" layoutX="18.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="send email to supplier" fill="#6EC6FF">
+        <font>
+            <Font size="18.0"/>
+
+        </font>
+    </Text>
     <Label fx:id="offerPriceLabel" layoutX="16.0" layoutY="64.0" text="Offer Price:">
         <font>
             <Font size="16.0"/>

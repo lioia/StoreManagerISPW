@@ -3,7 +3,10 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.StoreBean;
+import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.controller.StoreController;
+import com.example.shoppingpoint.dao.StoreDAO;
+import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -95,6 +98,11 @@ public class StoreGraphicController {
         String searchQuery = searchTextField.getText();
 
         createProductsView(new StoreBean(store.getName(), searchQuery));
+    }
+    @FXML
+    public void sendEmail()throws Exception{
+        String storeOwner= StoreDAO.getStoreOwnerUsernameByStoreName(store.getName());
+        new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
     }
 
     private void createProductsView(StoreBean bean) throws Exception {

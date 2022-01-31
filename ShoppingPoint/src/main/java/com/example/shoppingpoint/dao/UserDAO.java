@@ -14,6 +14,49 @@ public class UserDAO {
         throw new IllegalStateException();
     }
 
+    public static  String getEmailByUsername(String username) throws Exception{
+        Statement statement = null;
+        Connection connection = null;
+        String email;
+
+        try {
+            // Create Connection
+            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+            // Create statement
+            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            // Get user with specified username
+            String sql = String.format("SELECT Email FROM User WHERE Username='%s'", username);
+            // Execute query
+            ResultSet rs = statement.executeQuery(sql);
+            // Empty result
+            if (!rs.first()) {
+                throw new Exception("No email found with username: " + username);
+            }
+            rs.first();
+            email = rs.getString("Email");
+
+
+
+            rs.close();
+        } finally {
+            // Clean-up dell'ambiente
+            try {
+                if (statement != null)
+                    statement.close();
+            } catch (SQLException se2) {
+                se2.printStackTrace();
+            }
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return email;
+    }
+
+
     public static User getUserByUsername(String username) throws Exception {
         Statement statement = null;
         Connection connection = null;

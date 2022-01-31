@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.controller.ClientListController;
+import com.example.shoppingpoint.controller.SendEmailController;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,8 +56,8 @@ public class ClientListGraphicController {
                 Label email = (Label) pane.lookup("#clientEmailText");
                 email.setText(client.getEmail());
                 email.setOnMouseClicked(event -> {
-                    HostServices hostServices = ShoppingPointApplication.getInstance().getHostServices();
-                    hostServices.showDocument("mailto:" + client.getEmail());
+                    new SendEmailController().sendEmail(client.getEmail());
+
                 });
                 ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
 //            Add client to the view
