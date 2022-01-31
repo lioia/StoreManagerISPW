@@ -71,7 +71,7 @@ public class OrdersGraphicController {
         Parent node = loader.load();
         ((Node)actionEvent.getSource()).getScene().setRoot(node);
         StoreGraphicController storeGraphicController = loader.getController();
-        storeGraphicController.initData(store);
+        storeGraphicController.initialize(store);
     }
 
     @FXML

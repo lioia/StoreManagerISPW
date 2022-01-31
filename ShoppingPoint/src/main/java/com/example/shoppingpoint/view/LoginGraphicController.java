@@ -25,20 +25,13 @@ public class LoginGraphicController {
     private PasswordField passwordTextField;
 
     @FXML
-    protected void goToRegister(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("register.fxml"));
-            ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
-        } catch (IOException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Load error");
-            alert.setContentText("Could not load the next screen. Please try again");
-            alert.show();
-        }
+    protected void goToRegister(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("register.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
     @FXML
-    protected void login(ActionEvent actionEvent) {
+    protected void login(ActionEvent actionEvent) throws IOException {
         try {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
@@ -63,12 +56,7 @@ public class LoginGraphicController {
             alert.setHeaderText("Incorrect data");
             alert.setContentText(e.getMessage());
             alert.show();
-        } catch (IOException ioException) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Load error");
-            alert.setContentText("Could not load the next screen. Please try again");
-            alert.show();
-        } catch (Exception ex) {
+        } catch (Exception ex) { // TODO handle controller exception
             ex.printStackTrace();
         }
     }

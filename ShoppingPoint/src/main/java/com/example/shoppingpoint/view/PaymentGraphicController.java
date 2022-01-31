@@ -112,7 +112,7 @@ public class PaymentGraphicController {
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         StoreGraphicController storeGraphicController = fxmlLoader.getController();
-        storeGraphicController.initData(store);
+        storeGraphicController.initialize(store);
     }
 
     @FXML

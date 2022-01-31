@@ -38,52 +38,56 @@ public class SearchStoreGraphicController {
 
     //    This method gets called when loading the view
     @FXML
-    public void initialize() throws Exception {
+    public void initialize() throws IOException {
 //        Create stores view with all the value in the database
         createStorePaneView(new SearchStoreBean());
     }
 
     @FXML
-    public void search() throws Exception {
+    public void search() throws IOException {
         String filter = ((RadioButton) toggle.getSelectedToggle()).getText();
         String searchQuery = searchTextField.getText();
 
         createStorePaneView(new SearchStoreBean(filter, searchQuery));
     }
 
-    private void createStorePaneView(SearchStoreBean bean) throws Exception {
-        storesPane.getChildren().clear();
-        SearchStoreController controller = new SearchStoreController();
-        List<Store> stores = controller.getStores(bean);
+    private void createStorePaneView(SearchStoreBean bean) throws IOException {
+        try {
+            storesPane.getChildren().clear();
+            SearchStoreController controller = new SearchStoreController();
+            List<Store> stores = controller.getStores(bean);
 
-        for (Store store : stores) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_pane.fxml"));
-            AnchorPane node = fxmlLoader.load();
-            ((Text) node.lookup("#storeName")).setText(store.getName());
-            ((Text) node.lookup("#storeAddress")).setText(store.getAddress());
-            ((Text) node.lookup("#storeType")).setText("Type: " + store.getType().name().toLowerCase());
-            ((Button) node.lookup("#navigateButton")).setOnAction((ActionEvent event) -> {
-                try {
+            for (Store store : stores) {
+                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_pane.fxml"));
+                AnchorPane node = fxmlLoader.load();
+                ((Text) node.lookup("#storeName")).setText(store.getName());
+                ((Text) node.lookup("#storeAddress")).setText(store.getAddress());
+                ((Text) node.lookup("#storeType")).setText("Type: " + store.getType().name().toLowerCase());
+                ((Button) node.lookup("#navigateButton")).setOnAction((ActionEvent event) -> {
+                    try {
 //                    Load store fxml
-                    FXMLLoader storeFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
-                    Parent storeNode = storeFxml.load();
+                        FXMLLoader storeFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
+                        Parent storeNode = storeFxml.load();
 //                    Navigate to store
-                    ((Node) event.getSource()).getScene().setRoot(storeNode);
+                        ((Node) event.getSource()).getScene().setRoot(storeNode);
 //                    Get the graphic controller from the store page
-                    StoreGraphicController storeController = storeFxml.getController();
+                        StoreGraphicController storeController = storeFxml.getController();
 //                    Set the store on the controller and initialize data
-                    storeController.initData(store);
-                } catch (Exception e) {
-//                    TODO handle exception
-                    e.printStackTrace();
-                }
-            });
-            storesPane.getChildren().add(node);
+                        storeController.initialize(store);
+                    } catch (Exception e) {
+//                    TODO handle controller exception
+                        e.printStackTrace();
+                    }
+                });
+                storesPane.getChildren().add(node);
+            }
+        } catch (Exception e) { // TODO handle controller exception
+            e.printStackTrace();
         }
     }
 
     @FXML
-    public void filter(ActionEvent event) throws Exception {
+    public void filter(ActionEvent event) throws IOException {
         String filter = ((RadioButton) event.getSource()).getText();
         createStorePaneView(new SearchStoreBean(filter, ""));
     }

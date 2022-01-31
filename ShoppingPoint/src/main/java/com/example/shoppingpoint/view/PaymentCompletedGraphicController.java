@@ -41,7 +41,7 @@ public class PaymentCompletedGraphicController {
             Parent node = loader.load();
             parent.getScene().setRoot(node);
             StoreGraphicController storeGraphicController = loader.getController();
-            storeGraphicController.initData(store);
+            storeGraphicController.initialize(store);
         } catch (Exception e) {
             e.printStackTrace();
         }

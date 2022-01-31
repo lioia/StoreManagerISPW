@@ -10,11 +10,6 @@ public class SearchStoreBean {
         this("All", "");
     }
 
-    public SearchStoreBean(StoreType filter, String query) {
-        setTypeFilter(filter);
-        setSearchQuery(query);
-    }
-
     public SearchStoreBean(String filter, String query) {
         setTypeFilter(filter);
         setSearchQuery(query);
@@ -24,7 +19,7 @@ public class SearchStoreBean {
         return typeFilter;
     }
 
-    public void setTypeFilter(String typeFilter){
+    public void setTypeFilter(String typeFilter) {
         switch (typeFilter) {
             case "Clothes" -> this.typeFilter = StoreType.CLOTHES;
             case "Books" -> this.typeFilter = StoreType.BOOKS;
