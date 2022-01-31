@@ -4,12 +4,12 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.controller.AddProductController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
@@ -27,7 +27,7 @@ public class AddProductContinueGraphicController {
     private VBox pane;
 
     @FXML
-    public void initialize(AddProductCommonBean bean, ProductType type) throws Exception {
+    public void initialize(AddProductCommonBean bean, ProductType type) {
         this.commonBean = bean;
         this.type = type;
 
@@ -45,12 +45,12 @@ public class AddProductContinueGraphicController {
                 pane.getChildren().addAll(createComboBoxElement(elements), createTextFieldElement("RAM"), createTextFieldElement("SSD"), createTextFieldElement("Battery"), createTextFieldElement("CPU"), createTextFieldElement("GPU"), createTextFieldElement("Brand"), createTextFieldElement("Display"));
             }
             case HOMEAPPLIANCES -> pane.getChildren().addAll(createTextFieldElement("Energy Class"), createTextAreaElement("Specs"));
-            default -> throw new Exception("Unsupported type");
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 
     @FXML
-    public void add(ActionEvent actionEvent) throws Exception {
+    public void add(ActionEvent actionEvent) {
         String size = null;
         String material = null;
         String shoesType = null;
@@ -119,11 +119,20 @@ public class AddProductContinueGraphicController {
             }
             default -> throw new IllegalStateException("Unexpected value: " + type);
         }
-        AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
-        AddProductController controller = new AddProductController();
-        controller.saveProduct(type, bean, commonBean);
-        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
+        try {
+            AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
+            AddProductController controller = new AddProductController();
+            controller.saveProduct(type, bean, commonBean);
+            FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
+            ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
+        } catch (BeanException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Incorrect data");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        } catch (Exception e) { // TODO handle controller exception
+            e.printStackTrace();
+        }
     }
 
     private HBox createTextFieldElement(String name) {
@@ -179,11 +188,13 @@ public class AddProductContinueGraphicController {
         hbox.getChildren().addAll(label, box);
         return hbox;
     }
+
     @FXML
     public void goBack(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
+
     @FXML
     protected void logout(ActionEvent event) throws IOException {
         LoggedInUser.getInstance().setUser(null);

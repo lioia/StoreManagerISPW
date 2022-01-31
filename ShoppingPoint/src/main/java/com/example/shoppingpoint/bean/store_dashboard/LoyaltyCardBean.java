@@ -1,15 +1,17 @@
 package com.example.shoppingpoint.bean.store_dashboard;
 
+import com.example.shoppingpoint.exception.BeanException;
+
 public class LoyaltyCardBean {
     private boolean active;
     private Integer pointsInEuro;
     private Integer euroInPoints;
 
-    public LoyaltyCardBean(boolean active, String pointsInEuro, String euroInPoints) {
+    public LoyaltyCardBean(boolean active, String pointsInEuro, String euroInPoints) throws BeanException {
         this(active, Integer.parseInt(pointsInEuro), Integer.parseInt(euroInPoints));
     }
 
-    public LoyaltyCardBean(boolean active, Integer pointsInEuro, Integer euroInPoints) {
+    public LoyaltyCardBean(boolean active, Integer pointsInEuro, Integer euroInPoints) throws BeanException {
         setActive(active);
         setPointsInEuro(pointsInEuro);
         setEuroInPoints(euroInPoints);
@@ -23,11 +25,8 @@ public class LoyaltyCardBean {
         return pointsInEuro;
     }
 
-    public void setPointsInEuro(Integer pointsInEuro) {
-        if (pointsInEuro < 0) {
-//            TODO throw exception
-            System.out.println("Invalid data");
-        }
+    public void setPointsInEuro(Integer pointsInEuro) throws BeanException {
+        if (pointsInEuro < 0) throw new BeanException("points in euro", "it has to be more than 0");
         if (active)
             this.pointsInEuro = pointsInEuro;
         else this.pointsInEuro = 0;
@@ -37,11 +36,8 @@ public class LoyaltyCardBean {
         return euroInPoints;
     }
 
-    public void setEuroInPoints(Integer euroInPoints) {
-        if (euroInPoints < 0) {
-//            TODO throw exception
-            System.out.println("Invalid data");
-        }
+    public void setEuroInPoints(Integer euroInPoints) throws BeanException {
+        if (euroInPoints < 0) throw new BeanException("euro in points", "it has to be more than 0");
         if (active)
             this.euroInPoints = euroInPoints;
         else this.euroInPoints = 0;

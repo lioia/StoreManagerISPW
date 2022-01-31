@@ -5,6 +5,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -36,11 +36,10 @@ import java.util.List;
 
 public class StoreDashboardGraphicController {
 
-    @FXML
-    private Label labelStoreName;
-
     private final StoreDashboardController controller;
 
+    @FXML
+    private Label labelStoreName;
     @FXML
     private FlowPane productsPane;
 
@@ -49,134 +48,147 @@ public class StoreDashboardGraphicController {
     }
 
     @FXML
-    public void initialize() throws Exception {
-        Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
-        ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
-        labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
+    public void initialize() throws IOException {
+        try {
+            Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
+            ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
+            labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
+        } catch(Exception e) { // TODO handle controller exception
+            e.printStackTrace();
+        }
         createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
     }
 
     @FXML
-    public void goToClientList(ActionEvent event) throws Exception {
+    public void goToClientList(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("client_list.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         ClientListGraphicController clientListGraphicController = fxmlLoader.getController();
-        clientListGraphicController.initData();
+        clientListGraphicController.initialize();
     }
 
-    private void createProductsView(Store store) throws Exception {
-        productsPane.getChildren().clear();
-        List<GenericProduct> products = controller.getProductsFromStore(store);
+    private void createProductsView(Store store) {
+        try {
+            productsPane.getChildren().clear();
+            List<GenericProduct> products = controller.getProductsFromStore(store);
 
-        for (GenericProduct product : products) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
-            float reviewAverage = controller.getReviewOfProduct(product.getId());
-            AnchorPane pane = fxmlLoader.load();
+            for (GenericProduct product : products) {
+                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
+                float reviewAverage = controller.getReviewOfProduct(product.getId());
+                AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
-            ((Label) pane.lookup("#name")).setText(product.getName());
-            String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#price")).setText("Price: " + formattedPrice);
-            ((TextField) pane.lookup("#priceTextField")).setText(product.getPrice().toString());
-            String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#discountedPrice")).setText("Discounted Price: " + formattedDiscountedPrice);
-            ((TextField) pane.lookup("#discountedPriceTextField")).setText(product.getDiscountedPrice().toString());
-            ((Label) pane.lookup("#status")).setText(product.getStatus());
-            ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
-            ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
-            ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
-            ((ImageView) pane.lookup("#imageView")).setImage(product.getImage());
-            ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
-                ScrollPane scrollPane = new ScrollPane();
-                scrollPane.setMaxWidth(400.0);
-                scrollPane.setMaxHeight(400.0);
-                scrollPane.setPadding(new Insets(16));
-                Label label = new Label();
-                label.setText(product.getDescription());
-                label.setStyle("-fx-font-size: 16px");
-                label.setMaxWidth(350.0);
-                label.setWrapText(true);
-                scrollPane.setContent(label);
-                PopOver popOver = new PopOver();
-                Node node = (Node) event.getSource();
-                popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
-                popOver.setContentNode(scrollPane);
-                popOver.setCornerRadius(16);
-                popOver.show(node);
-            });
-            ((Button) pane.lookup("#requestButton")).setOnAction(event -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_request.fxml"));
-                    Parent node = loader.load();
-                    ((Node) event.getSource()).getScene().setRoot(node);
-                    NewRequestGraphicController newRequestGraphicController = loader.getController();
-                    newRequestGraphicController.initData(product);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-            ((Button) pane.lookup("#offersButton")).setOnAction(event -> {
-                try {
-                    FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
-                    Parent node = loader.load();
-                    ((Node) event.getSource()).getScene().setRoot(node);
-                    OffersGraphicController offersGraphicController = loader.getController();
-                    offersGraphicController.initData(product);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-            ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
-                setProductVisibility(pane, false);
-                ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
+                ((Label) pane.lookup("#name")).setText(product.getName());
+                String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
+                ((Label) pane.lookup("#price")).setText("Price: " + formattedPrice);
+                ((TextField) pane.lookup("#priceTextField")).setText(product.getPrice().toString());
+                String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
+                ((Label) pane.lookup("#discountedPrice")).setText("Discounted Price: " + formattedDiscountedPrice);
+                ((TextField) pane.lookup("#discountedPriceTextField")).setText(product.getDiscountedPrice().toString());
+                ((Label) pane.lookup("#status")).setText(product.getStatus());
+                ((Label) pane.lookup("#description")).setText(product.getDescription());
+                ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
+                ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
+                ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
+                ((ImageView) pane.lookup("#imageView")).setImage(product.getImage());
+                ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
+                    ScrollPane scrollPane = new ScrollPane();
+                    scrollPane.setMaxWidth(400.0);
+                    scrollPane.setMaxHeight(400.0);
+                    scrollPane.setPadding(new Insets(16));
+                    Label label = new Label();
+                    label.setText(product.getDescription());
+                    label.setStyle("-fx-font-size: 16px");
+                    label.setMaxWidth(350.0);
+                    label.setWrapText(true);
+                    scrollPane.setContent(label);
+                    PopOver popOver = new PopOver();
+                    Node node = (Node) event.getSource();
+                    popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
+                    popOver.setContentNode(scrollPane);
+                    popOver.setCornerRadius(16);
+                    popOver.show(node);
+                });
+                ((Button) pane.lookup("#requestButton")).setOnAction(event -> {
                     try {
-                        FileChooser chooser = new FileChooser();
-                        //Set extension filter
-                        FileChooser.ExtensionFilter extFilterJPG
-                                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
-                        FileChooser.ExtensionFilter extFilterjpg
-                                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-                        FileChooser.ExtensionFilter extFilterPNG
-                                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
-                        FileChooser.ExtensionFilter extFilterpng
-                                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-                        chooser.getExtensionFilters()
-                                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
-                        File image = chooser.showOpenDialog(null);
-                        if (image != null) {
-                            controller.setImageOfProduct(product.getId(), image);
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Correctly uploaded file: " + image.getName());
-                            alert.show();
+                        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_request.fxml"));
+                        Parent node = loader.load();
+                        ((Node) event.getSource()).getScene().setRoot(node);
+                        NewRequestGraphicController newRequestGraphicController = loader.getController();
+                        newRequestGraphicController.initData(product);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                ((Button) pane.lookup("#offersButton")).setOnAction(event -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("offers.fxml"));
+                        Parent node = loader.load();
+                        ((Node) event.getSource()).getScene().setRoot(node);
+                        OffersGraphicController offersGraphicController = loader.getController();
+                        offersGraphicController.initData(product);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
+                    setProductVisibility(pane, false);
+                    ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
+                        try {
+                            FileChooser chooser = new FileChooser();
+                            //Set extension filter
+                            FileChooser.ExtensionFilter extFilterJPG
+                                    = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
+                            FileChooser.ExtensionFilter extFilterjpg
+                                    = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+                            FileChooser.ExtensionFilter extFilterPNG
+                                    = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
+                            FileChooser.ExtensionFilter extFilterpng
+                                    = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+                            chooser.getExtensionFilters()
+                                    .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
+                            File image = chooser.showOpenDialog(null);
+                            if (image != null) {
+                                controller.setImageOfProduct(product.getId(), image);
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setContentText("Correctly uploaded file: " + image.getName());
+                                alert.show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-                ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
-                    setProductVisibility(pane, true);
-                    String price = ((TextField) pane.lookup("#priceTextField")).getText();
-                    String discountedPrice = ((TextField) pane.lookup("#discountedPriceTextField")).getText();
-                    String quantity = ((TextField) pane.lookup("#quantityTextField")).getText();
-                    try {
-                        EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
-                        controller.editProduct(product.getId(), bean);
+                    });
+                    ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
+                        setProductVisibility(pane, true);
+                        String price = ((TextField) pane.lookup("#priceTextField")).getText();
+                        String discountedPrice = ((TextField) pane.lookup("#discountedPriceTextField")).getText();
+                        String quantity = ((TextField) pane.lookup("#quantityTextField")).getText();
+                        try {
+                            EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
+                            controller.editProduct(product.getId(), bean);
 //                        Update local copy of product (and the relative labels)
-                        product.setPrice(bean.getPrice());
-                        product.setDiscountedPrice(bean.getDiscountedPrice());
-                        product.setQuantity(bean.getQuantity());
-                        ((Label) pane.lookup("#price")).setText(String.format("Price: %.02f€", product.getPrice()));
-                        ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
-                        ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+                            product.setPrice(bean.getPrice());
+                            product.setDiscountedPrice(bean.getDiscountedPrice());
+                            product.setQuantity(bean.getQuantity());
+                            ((Label) pane.lookup("#price")).setText(String.format("Price: %.02f€", product.getPrice()));
+                            ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
+                            ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
+                        } catch (BeanException e) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setHeaderText("Incorrect data");
+                            alert.setContentText(e.getMessage());
+                            alert.show();
+                        } catch (Exception e) { // TODO handle controller exception
+                            e.printStackTrace();
+                        }
+                    });
 
-            });
+                });
 //            Add product to the view
-            productsPane.getChildren().add(pane);
+                productsPane.getChildren().add(pane);
+            }
+        } catch (Exception e) { // TODO handle controller exception
+            e.printStackTrace();
         }
     }
 
@@ -227,7 +239,12 @@ public class StoreDashboardGraphicController {
                 ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setPointsInEuro(bean.getPointsInEuro());
                 ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setEuroInPoints(bean.getEuroInPoints());
                 popOver.hide();
-            } catch (Exception e) {
+            } catch (BeanException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Incorrect data");
+                alert.setContentText(e.getMessage());
+                alert.show();
+            } catch (Exception e) { // TODO handle controller exception
                 e.printStackTrace();
             }
         });

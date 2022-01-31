@@ -2,6 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ProductType;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
@@ -30,37 +32,46 @@ public class AddProductGraphicController {
     private ComboBox<String> typeComboBox;
 
     @FXML
-    public void initialize() throws Exception {
+    public void initialize() {
         switch (((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getType()) {
             case CLOTHES -> typeComboBox.getItems().addAll("Clothes", "Shoes");
             case BOOKS -> typeComboBox.getItems().addAll("Book", "Comics");
             case VIDEOGAMES -> typeComboBox.getItems().addAll("Video Game", "Game Console");
             case ELECTRONICS -> typeComboBox.getItems().addAll("Home Appliances", "Computer");
-            default -> throw new Exception("Unrecognized store type");
+            default -> throw new IllegalStateException("Unexpected value: " + ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getType());
         }
     }
 
     @FXML
-    public void goNext(ActionEvent actionEvent) throws Exception {
-        AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
-        ProductType type;
-        switch (typeComboBox.getValue()) {
-            case "Clothes" -> type = ProductType.CLOTHES;
-            case "Shoes" -> type = ProductType.SHOES;
-            case "Book" -> type = ProductType.BOOK;
-            case "Comics" -> type = ProductType.COMICS;
-            case "Video Game" -> type = ProductType.VIDEOGAME;
-            case "Game Console" -> type = ProductType.GAMECONSOLE;
-            case "Home Appliances" -> type = ProductType.HOMEAPPLIANCES;
-            case "Computer" -> type = ProductType.COMPUTER;
-            default -> throw new Exception("Unsupported type");
-        }
+    public void goNext(ActionEvent actionEvent) {
+        try {
+            AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
+            ProductType type;
+            switch (typeComboBox.getValue()) {
+                case "Clothes" -> type = ProductType.CLOTHES;
+                case "Shoes" -> type = ProductType.SHOES;
+                case "Book" -> type = ProductType.BOOK;
+                case "Comics" -> type = ProductType.COMICS;
+                case "Video Game" -> type = ProductType.VIDEOGAME;
+                case "Game Console" -> type = ProductType.GAMECONSOLE;
+                case "Home Appliances" -> type = ProductType.HOMEAPPLIANCES;
+                case "Computer" -> type = ProductType.COMPUTER;
+                default -> throw new IllegalStateException("Unexpected value: " + typeComboBox.getValue());
+            }
 
-        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product_continue.fxml"));
-        Parent node = loader.load();
-        ((Node) actionEvent.getSource()).getScene().setRoot(node);
-        AddProductContinueGraphicController addProductContinueGraphicController = loader.getController();
-        addProductContinueGraphicController.initialize(bean, type);
+            FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product_continue.fxml"));
+            Parent node = loader.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
+            AddProductContinueGraphicController addProductContinueGraphicController = loader.getController();
+            addProductContinueGraphicController.initialize(bean, type);
+        } catch (BeanException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Incorrect data");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        } catch (Exception e) { // TODO handle controller exception
+            e.printStackTrace();
+        }
     }
 
     @FXML

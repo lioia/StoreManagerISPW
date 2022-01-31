@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 
 
@@ -29,39 +28,42 @@ public class ClientListGraphicController {
     private FlowPane clientPane;
 
     @FXML
-    public void goBack(ActionEvent event) throws Exception {
+    public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-        Parent node = fxmlLoader.load();
-        ((Node) event.getSource()).getScene().setRoot(node);
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
     @FXML
-    public void initData() throws Exception {
+    public void initialize() {
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
 
         labelStoreName.setText(storeName + " - Shopping Point");
         createClientListView(storeName);
     }
 
-    private void createClientListView(String storeName) throws Exception {
-        clientPane.getChildren().clear();
-        ClientListController controller = new ClientListController();
-        List<ClientListData> clients = controller.getClientFromStore(storeName);
+    private void createClientListView(String storeName) {
+        try {
+            clientPane.getChildren().clear();
+            ClientListController controller = new ClientListController();
+            List<ClientListData> clients = controller.getClientFromStore(storeName);
 
-        for (ClientListData client : clients) {
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/client_list_item.fxml"));
-            AnchorPane pane = fxmlLoader.load();
+            for (ClientListData client : clients) {
+                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/client_list_item.fxml"));
+                AnchorPane pane = fxmlLoader.load();
 
-            ((Label) pane.lookup("#clientNameText")).setText(client.getUsername());
-            Label email = (Label) pane.lookup("#clientEmailText");
-            email.setText(client.getEmail());
-            email.setOnMouseClicked(event -> {
-                HostServices hostServices = ShoppingPointApplication.getInstance().getHostServices();
-                hostServices.showDocument("mailto:" + client.getEmail());
-            });
-            ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
+                ((Label) pane.lookup("#clientNameText")).setText(client.getUsername());
+                Label email = (Label) pane.lookup("#clientEmailText");
+                email.setText(client.getEmail());
+                email.setOnMouseClicked(event -> {
+                    HostServices hostServices = ShoppingPointApplication.getInstance().getHostServices();
+                    hostServices.showDocument("mailto:" + client.getEmail());
+                });
+                ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
 //            Add client to the view
-            clientPane.getChildren().add(pane);
+                clientPane.getChildren().add(pane);
+            }
+        } catch (Exception e) { // TODO handle controller exception
+            e.printStackTrace();
         }
     }
 

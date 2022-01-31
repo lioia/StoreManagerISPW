@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.bean.add_product;
 
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.utils.ProductType;
 
 public class AddProductBean {
@@ -24,7 +25,9 @@ public class AddProductBean {
     private String energyClass;
     private String specs;
 
-    public AddProductBean(ProductType type, String size, String material, String shoesType, String author, String artist, String plot, String genre, String volumeNumber, String consoleType, boolean digitalOnly, String computerType, String ram, String ssd, String cpu, String gpu, String batterySize, String displaySize, String brand, String energyClass, String specs) throws Exception {
+    public AddProductBean(ProductType type, String size, String material, String shoesType, String author, String artist, String plot, String genre,
+                          String volumeNumber, String consoleType, boolean digitalOnly, String computerType, String ram, String ssd, String cpu,
+                          String gpu, String batterySize, String displaySize, String brand, String energyClass, String specs) throws BeanException {
         switch (type) {
             case CLOTHES -> {
                 setSize(size);
@@ -70,7 +73,7 @@ public class AddProductBean {
                 setEnergyClass(energyClass);
                 setSpecs(specs);
             }
-            default -> throw new Exception("Unsupported type");
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 
@@ -134,10 +137,8 @@ public class AddProductBean {
         return volumeNumber;
     }
 
-    public void setVolumeNumber(int volumeNumber) throws Exception {
-        if (volumeNumber < 0) {
-            throw new Exception("");
-        }
+    public void setVolumeNumber(int volumeNumber) throws BeanException {
+        if (volumeNumber < 0) throw new BeanException("volume number", "it has to be more than or equal to 0");
         this.volumeNumber = volumeNumber;
     }
 
@@ -169,9 +170,9 @@ public class AddProductBean {
         return ram;
     }
 
-    public void setRam(int ram) throws Exception {
+    public void setRam(int ram) throws BeanException {
         if (ram < 1)
-            throw new Exception("");
+            throw new BeanException("RAM", "it has to be more than 1GB");
         this.ram = ram;
     }
 
@@ -179,9 +180,9 @@ public class AddProductBean {
         return ssd;
     }
 
-    public void setSsd(int ssd) throws Exception {
+    public void setSsd(int ssd) throws BeanException {
         if (ssd < 64)
-            throw new Exception("");
+            throw new BeanException("SSD", "it has to be more than 64GB");
         this.ssd = ssd;
     }
 
@@ -205,9 +206,9 @@ public class AddProductBean {
         return batterySize;
     }
 
-    public void setBatterySize(int batterySize) throws Exception {
+    public void setBatterySize(int batterySize) throws BeanException {
         if (batterySize < 1000)
-            throw new Exception("");
+            throw new BeanException("battery size", "it has to be more than 1000mAh");
         this.batterySize = batterySize;
     }
 
@@ -215,9 +216,9 @@ public class AddProductBean {
         return displaySize;
     }
 
-    public void setDisplaySize(float displaySize) throws Exception {
+    public void setDisplaySize(float displaySize) throws BeanException {
         if (displaySize < 7)
-            throw new Exception("");
+            throw new BeanException("display size", "it has to be more than 7 inches");
         this.displaySize = displaySize;
     }
 

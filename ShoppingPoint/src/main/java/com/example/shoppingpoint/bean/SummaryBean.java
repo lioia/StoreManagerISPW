@@ -1,9 +1,11 @@
 package com.example.shoppingpoint.bean;
 
+import com.example.shoppingpoint.exception.BeanException;
+
 public class SummaryBean {
     private String selected;
 
-    public SummaryBean(String selected) throws Exception {
+    public SummaryBean(String selected) throws BeanException {
         setSelected(selected);
     }
 
@@ -11,9 +13,9 @@ public class SummaryBean {
         return selected;
     }
 
-    public void setSelected(String selected) throws Exception {
+    public void setSelected(String selected) throws BeanException {
         if (!selected.equals("All") && !selected.equals("Last Month") && !selected.equals("Last Week"))
-            throw new Exception("Invalid data");
+            throw new BeanException("time selection", "not a valid time period");
         this.selected = selected;
     }
 }

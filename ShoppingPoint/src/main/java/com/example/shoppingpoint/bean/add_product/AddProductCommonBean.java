@@ -1,5 +1,7 @@
 package com.example.shoppingpoint.bean.add_product;
 
+import com.example.shoppingpoint.exception.BeanException;
+
 public class AddProductCommonBean {
     private String name;
     private float price;
@@ -7,7 +9,7 @@ public class AddProductCommonBean {
     private int quantity;
     private String status;
 
-    public AddProductCommonBean(String name, float price, float discountedPrice, int quantity, String status) throws Exception {
+    public AddProductCommonBean(String name, float price, float discountedPrice, int quantity, String status) throws BeanException {
         setName(name);
         setPrice(price);
         setDiscountedPrice(discountedPrice);
@@ -15,7 +17,7 @@ public class AddProductCommonBean {
         setStatus(status);
     }
 
-    public AddProductCommonBean(String name, String price, String discountedPrice, String quantity, String status) throws Exception {
+    public AddProductCommonBean(String name, String price, String discountedPrice, String quantity, String status) throws BeanException {
         this(name, Float.parseFloat(price), Float.parseFloat(discountedPrice), Integer.parseInt(quantity), status);
     }
 
@@ -31,11 +33,8 @@ public class AddProductCommonBean {
         return price;
     }
 
-    public void setPrice(float price) throws Exception {
-        if (price < 0) {
-//            TODO throws Exception
-            throw new Exception("Invalid data");
-        }
+    public void setPrice(float price) throws BeanException {
+        if (price < 0) throw new BeanException("price", "it has to be more than 0");
         this.price = price;
     }
 
@@ -43,11 +42,8 @@ public class AddProductCommonBean {
         return discountedPrice;
     }
 
-    public void setDiscountedPrice(float discountedPrice) throws Exception {
-        if (discountedPrice < 0) {
-//            TODO throws Exception
-            throw new Exception("Invalid data");
-        }
+    public void setDiscountedPrice(float discountedPrice) throws BeanException {
+        if (discountedPrice < 0) throw new BeanException("discounted price", "it has to be more than 0");
         this.discountedPrice = discountedPrice;
     }
 
@@ -55,11 +51,8 @@ public class AddProductCommonBean {
         return quantity;
     }
 
-    public void setQuantity(int quantity) throws Exception {
-        if (quantity < 0) {
-//            TODO throws Exception
-            throw new Exception("Invalid data");
-        }
+    public void setQuantity(int quantity) throws BeanException {
+        if (quantity < 0) throw new BeanException("quantity", "it has to be more than 0");
 
         this.quantity = quantity;
     }
