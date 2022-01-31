@@ -2,7 +2,6 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.model.Store;
-import com.example.shoppingpoint.model.user.Client;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class PaymentCompletedGraphicController {
 
@@ -21,7 +22,8 @@ public class PaymentCompletedGraphicController {
 
     private Store store;
 
-    public void initData(Store store) {
+    @FXML
+    public void initialize(Store store) {
         this.store = store;
 
         transition = new PauseTransition(Duration.seconds(3));
@@ -42,7 +44,7 @@ public class PaymentCompletedGraphicController {
             parent.getScene().setRoot(node);
             StoreGraphicController storeGraphicController = loader.getController();
             storeGraphicController.initialize(store);
-        } catch (Exception e) {
+        } catch (Exception e) { // TODO handle controller exception
             e.printStackTrace();
         }
     }

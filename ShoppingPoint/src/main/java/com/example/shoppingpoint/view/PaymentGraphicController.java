@@ -4,19 +4,19 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.PaymentBean;
 import com.example.shoppingpoint.controller.PaymentController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
-import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -29,34 +29,27 @@ public class PaymentGraphicController {
 
     @FXML
     private Text productNameText;
-
     @FXML
     private Label quantityLabel;
-
     @FXML
     private Text priceText;
-
     @FXML
     private Text totalText;
-
     @FXML
     private CheckBox checkLoyaltyCard;
-
     @FXML
     private Label maxQuantityText;
-
     @FXML
     private Button addButton;
-
     @FXML
     private Button removeButton;
-
     @FXML
     private Text pointText;
 
     private static final String DECIMAL_FORMAT = "%.02f€";
 
-    public void initData(GenericProduct product, Store store, LoyaltyCard card) {
+    @FXML
+    public void initialize(GenericProduct product, Store store, LoyaltyCard card) {
         this.product = product;
         this.store = store;
         this.card = card;
@@ -79,19 +72,28 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void buy(ActionEvent actionEvent) throws Exception {
-        PaymentController controller = new PaymentController();
-        PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
-        controller.buy(bean, card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
-        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment_completed.fxml"));
-        Parent node = loader.load();
-        ((Node) actionEvent.getSource()).getScene().setRoot(node);
-        PaymentCompletedGraphicController paymentCompletedGraphicController = loader.getController();
-        paymentCompletedGraphicController.initData(store);
+    public void buy(ActionEvent actionEvent) throws IOException {
+        try {
+            PaymentController controller = new PaymentController();
+            PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
+            controller.buy(bean, card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
+            FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment_completed.fxml"));
+            Parent node = loader.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(node);
+            PaymentCompletedGraphicController paymentCompletedGraphicController = loader.getController();
+            paymentCompletedGraphicController.initialize(store);
+        } catch (BeanException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Incorrect data");
+            alert.setContentText(e.getMessage());
+            alert.show();
+        } catch(Exception e) { // TODO handle controller exception
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    public void loyaltyCardCheck(ActionEvent actionEvent) {
+    public void loyaltyCardCheck() {
         if (checkLoyaltyCard.isSelected()) {
             total = Integer.parseInt(quantityLabel.getText()) * product.getDiscountedPrice() - (float) card.getPoints() / store.getPointsInEuro();
             if (total < 0) {
@@ -116,7 +118,7 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void addQuantity(ActionEvent event) {
+    public void addQuantity() {
         quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText()) + 1));
         if (Integer.parseInt(quantityLabel.getText()) == product.getQuantity()) {
             addButton.setVisible(false);
@@ -131,7 +133,7 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void removeQuantity(ActionEvent event) {
+    public void removeQuantity() {
         quantityLabel.setText(String.valueOf(Integer.parseInt(quantityLabel.getText()) - 1));
         if (Integer.parseInt(quantityLabel.getText()) == 1) {
             removeButton.setVisible(false);

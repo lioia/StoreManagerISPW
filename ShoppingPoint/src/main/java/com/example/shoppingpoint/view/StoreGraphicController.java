@@ -6,17 +6,14 @@ import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
-import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -26,7 +23,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.IOException;
 import java.util.List;
@@ -144,7 +140,7 @@ public class StoreGraphicController {
                     Parent node = paymentLoader.load();
                     ((Node) event.getSource()).getScene().setRoot(node);
                     PaymentGraphicController paymentController = paymentLoader.getController();
-                    paymentController.initData(product, store, card);
+                    paymentController.initialize(product, store, card);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -155,7 +151,7 @@ public class StoreGraphicController {
     }
 
     @FXML
-    public void activate(ActionEvent actionEvent) throws Exception {
+    public void activate() throws Exception {
         this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
         loyaltyCardButton.setVisible(false);
         currentPointsText.setVisible(true);
@@ -169,7 +165,7 @@ public class StoreGraphicController {
         Parent node = loader.load();
         ((Node) event.getSource()).getScene().setRoot(node);
         OrdersGraphicController ordersGraphicController = loader.getController();
-        ordersGraphicController.initData(store);
+        ordersGraphicController.initialize(store);
     }
 
     public void logout(ActionEvent event) throws IOException {
