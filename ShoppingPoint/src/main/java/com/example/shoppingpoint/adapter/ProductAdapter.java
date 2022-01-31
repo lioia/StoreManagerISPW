@@ -47,7 +47,9 @@ public class ProductAdapter implements GenericProduct {
     }
 
     @Override
-    public String getStore(){return this.product.getStoreName();}
+    public String getStoreName() {
+        return this.product.getStoreName();
+    }
 
     @Override
     public String getDescription() {

@@ -46,7 +46,7 @@ public class RequestListGraphicController {
                 ((Text) node.lookup("#quantity")).setText(String.format("Quantity: %d", request.getQuantity()));
                 ((Text) node.lookup("#maxPrice")).setText(String.format("Max Price:%.2f", request.getMaxPrice()));
                 ((Label) node.lookup("#description")).setText(product.getDescription());
-                ((Text) node.lookup("#store")).setText("Store: " + product.getStore());
+                ((Text) node.lookup("#store")).setText("Store: " + product.getStoreName());
                 ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
                     ScrollPane scrollPane = new ScrollPane();
                     scrollPane.setMaxWidth(400.0);

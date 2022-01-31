@@ -21,8 +21,7 @@ public interface GenericProduct {
 
     void setPrice(float price);
 
-    //TODO giusto mettere nel adapter getStore?
-    String getStore();
+    String getStoreName();
 
     void setDiscountedPrice(float discountedPrice);
 

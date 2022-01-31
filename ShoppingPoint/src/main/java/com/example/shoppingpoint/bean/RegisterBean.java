@@ -36,19 +36,19 @@ public class RegisterBean {
     }
 
     public void setUsername(String user) throws BeanException {
-        if (user.length() < 4) throw new BeanException("username", "too short");
-        if (user.length() > 16) throw new BeanException("username", "too long");
+        if (user.length() < 4) throw new BeanException("register username", "too short");
+        if (user.length() > 16) throw new BeanException("register username", "too long");
         this.username = user;
     }
 
     public void setPassword(String pass) throws BeanException {
-        if (pass.length() < 8) throw new BeanException("password", "too short");
-        if (pass.length() > 16) throw new BeanException("password", "too long");
+        if (pass.length() < 8) throw new BeanException("register password", "too short");
+        if (pass.length() > 16) throw new BeanException("register password", "too long");
         this.password = pass;
     }
 
     public void setVerifyPassword(String pass, String verifyPassword) throws BeanException {
-        if (!pass.equals(verifyPassword)) throw new BeanException("verify password", "not equal to password");
+        if (!pass.equals(verifyPassword)) throw new BeanException("register verify password", "not equal to password");
     }
 
     public void setEmail(String email) throws BeanException {
@@ -57,7 +57,7 @@ public class RegisterBean {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches())
-            throw new BeanException("email", "not valid");
+            throw new BeanException("register email", "not valid");
 
         this.email = email;
     }

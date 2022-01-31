@@ -17,11 +17,6 @@ public class ShoppingPointApplication extends Application {
         return instance;
     }
 
-    public ShoppingPointApplication() {
-//        Set the instance to the current one (created by the launch method)
-        instance = this;
-    }
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
