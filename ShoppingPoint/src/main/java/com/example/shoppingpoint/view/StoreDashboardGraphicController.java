@@ -153,6 +153,7 @@ public class StoreDashboardGraphicController {
                                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                                 alert.setContentText("Correctly uploaded file: " + image.getName());
                                 alert.show();
+
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
