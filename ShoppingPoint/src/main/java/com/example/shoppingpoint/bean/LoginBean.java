@@ -20,14 +20,14 @@ public class LoginBean {
     }
 
     public void setUsername(String user) throws BeanException {
-        if (user.length() < 4) throw new BeanException("username", "too short");
-        if (user.length() > 16) throw new BeanException("username", "too long");
+        if (user.length() < 4) throw new BeanException("username", "it has to be longer than 4 characters");
+        if (user.length() > 16) throw new BeanException("username", "it has to be shorter than 16 characters");
         this.username = user;
     }
 
     public void setPassword(String pass) throws BeanException {
-        if (pass.length() < 8) throw new BeanException("password", "too short");
-        if (pass.length() > 16) throw new BeanException("password", "too long");
+        if (pass.length() < 8) throw new BeanException("password", "it has to be longer than 8 characters");
+        if (pass.length() > 16) throw new BeanException("password", "it has to be shorter than 16 characters");
         this.password = pass;
     }
 }

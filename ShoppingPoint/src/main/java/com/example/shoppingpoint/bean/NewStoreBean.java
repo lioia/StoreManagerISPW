@@ -1,5 +1,7 @@
 package com.example.shoppingpoint.bean;
 
+import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.utils.StoreType;
 import com.example.shoppingpoint.utils.UserType;
 
@@ -8,42 +10,45 @@ public class NewStoreBean {
     private String address;
     private StoreType storeType;
 
-    public NewStoreBean(){}
-
-    public NewStoreBean(String name, String address, String type){
+    public NewStoreBean(String name, String address, String type) throws BeanException {
         setName(name);
         setAddress(address);
         setStoreType(type);
     }
 
-    public String getName() {return name;}
-    public String getAddress() {return address;}
-    public StoreType getStoreType() {return storeType;}
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public StoreType getStoreType() {
+        return storeType;
+    }
 
 
     // TODO: bean exception
-    public void setName(String name) {
-        if (name.length() < 4 || name.length() > 30) {
-//            TODO throws exception
-            System.out.println("Store name not valid");
-        }
+    public void setName(String name) throws BeanException {
+        if (name.length() < 4) throw new BeanException("store name", "it has to be longer than 4 characters");
+        if (name.length() > 30) throw new BeanException("store name", "it has to be shorter than 30 characters");
         this.name = name;
     }
 
-    public void setAddress(String address) {
-        if(address.length() < 8 || address.length() > 40) {
-//            TODO throws exception
-            System.out.println("address not valid");
-        }
+    public void setAddress(String address) throws BeanException {
+        if (address.length() < 8) throw new BeanException("address", "it has to be longer than 8 characters");
+        if (address.length() > 40) throw new BeanException("address", "it has to be shorter than 40 characters");
         this.address = address;
     }
 
-    public void setStoreType(String type){
+    public void setStoreType(String type) {
         switch (type) {
             case "Clothes" -> this.storeType = StoreType.CLOTHES;
             case "Books" -> this.storeType = StoreType.BOOKS;
             case "VideoGames" -> this.storeType = StoreType.VIDEOGAMES;
-            default -> this.storeType = StoreType.ELECTRONICS; // case "Electronics"
+            case "Electronics" -> this.storeType = StoreType.ELECTRONICS;
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
     }
 }

@@ -115,7 +115,7 @@ public class StoreDashboardGraphicController {
                         Parent node = loader.load();
                         ((Node) event.getSource()).getScene().setRoot(node);
                         NewRequestGraphicController newRequestGraphicController = loader.getController();
-                        newRequestGraphicController.initData(product);
+                        newRequestGraphicController.initialize(product);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

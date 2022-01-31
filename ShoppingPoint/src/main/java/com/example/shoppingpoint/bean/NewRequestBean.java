@@ -1,10 +1,12 @@
 package com.example.shoppingpoint.bean;
 
+import com.example.shoppingpoint.exception.BeanException;
+
 public class NewRequestBean {
     private float maxPrice;
     private int quantity;
 
-    public NewRequestBean(String maxPrice, String quantity) throws Exception {
+    public NewRequestBean(String maxPrice, String quantity) throws BeanException {
         setMaxPrice(Float.parseFloat(maxPrice));
         setQuantity(Integer.parseInt(quantity));
     }
@@ -13,11 +15,8 @@ public class NewRequestBean {
         return maxPrice;
     }
 
-    public void setMaxPrice(float maxPrice) throws Exception {
-        if(maxPrice <= 0) {
-//            TODO exception
-            throw new Exception("Invalid data");
-        }
+    public void setMaxPrice(float maxPrice) throws BeanException {
+        if (maxPrice < 0) throw new BeanException("max price", "it has to be more than 0");
         this.maxPrice = maxPrice;
     }
 
@@ -25,11 +24,8 @@ public class NewRequestBean {
         return quantity;
     }
 
-    public void setQuantity(int quantity) throws Exception {
-        if(quantity <= 0) {
-//            TODO exception
-            throw new Exception("Invalid data");
-        }
+    public void setQuantity(int quantity) throws BeanException {
+        if (quantity < 0) throw new BeanException("quantity", "it has to be more than 0");
         this.quantity = quantity;
     }
 }
