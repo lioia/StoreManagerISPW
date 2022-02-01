@@ -1,7 +1,6 @@
 package com.example.shoppingpoint.controller;
 
 import com.example.shoppingpoint.dao.ProductDAO;
-import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -9,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class UploadImageController {
-    public void uploadImage(int productId) throws Exception {
+    public File uploadImage(int productId) throws Exception {
         FileChooser chooser = new FileChooser();
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG
@@ -26,10 +25,7 @@ public class UploadImageController {
         if (image != null) {
             InputStream stream = new FileInputStream(image);
             ProductDAO.setImageOfProductId(productId, stream);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Correctly uploaded file: " + image.getName());
-            alert.show();
-
         }
+        return image;
     }
 }

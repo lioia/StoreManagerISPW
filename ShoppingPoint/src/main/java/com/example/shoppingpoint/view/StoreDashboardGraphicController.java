@@ -5,6 +5,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.StoreDashboardController;
+import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -26,12 +28,13 @@ import javafx.scene.layout.HBox;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.model.Store;
 import javafx.scene.text.Font;
-import javafx.stage.FileChooser;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class StoreDashboardGraphicController {
@@ -53,7 +56,7 @@ public class StoreDashboardGraphicController {
             Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
             ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
             labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
-        } catch(Exception e) { // TODO handle controller exception
+        } catch (Exception e) { // TODO handle controller exception
             e.printStackTrace();
         }
         createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
@@ -90,7 +93,8 @@ public class StoreDashboardGraphicController {
                 ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
                 ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
                 ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
-                ((ImageView) pane.lookup("#imageView")).setImage(product.getImage());
+                if (product.getImage() != null)
+                    ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
                 ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
                     ScrollPane scrollPane = new ScrollPane();
                     scrollPane.setMaxWidth(400.0);
@@ -135,25 +139,11 @@ public class StoreDashboardGraphicController {
                     setProductVisibility(pane, false);
                     ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
                         try {
-                            FileChooser chooser = new FileChooser();
-                            //Set extension filter
-                            FileChooser.ExtensionFilter extFilterJPG
-                                    = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
-                            FileChooser.ExtensionFilter extFilterjpg
-                                    = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-                            FileChooser.ExtensionFilter extFilterPNG
-                                    = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
-                            FileChooser.ExtensionFilter extFilterpng
-                                    = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-                            chooser.getExtensionFilters()
-                                    .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
-                            File image = chooser.showOpenDialog(null);
+                            UploadImageController uploadImageController = new UploadImageController();
+                            File image = uploadImageController.uploadImage(product.getId());
                             if (image != null) {
-                                controller.setImageOfProduct(product.getId(), image);
-                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                                alert.setContentText("Correctly uploaded file: " + image.getName());
-                                alert.show();
-
+                                InputStream stream = new FileInputStream(image);
+                                ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

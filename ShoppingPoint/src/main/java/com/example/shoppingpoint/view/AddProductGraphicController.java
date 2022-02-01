@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 
 import java.io.*;
 
@@ -31,6 +32,8 @@ public class AddProductGraphicController {
     @FXML
     private ComboBox<String> typeComboBox;
 
+    private InputStream image;
+
     @FXML
     public void initialize() {
         switch (((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getType()) {
@@ -46,6 +49,7 @@ public class AddProductGraphicController {
     public void goNext(ActionEvent actionEvent) {
         try {
             AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
+            bean.setImage(image);
             ProductType type;
             switch (typeComboBox.getValue()) {
                 case "Clothes" -> type = ProductType.CLOTHES;
@@ -85,5 +89,22 @@ public class AddProductGraphicController {
         LoggedInUser.getInstance().setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
+
+    public void uploadImage() throws FileNotFoundException {
+        FileChooser chooser = new FileChooser();
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG
+                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterjpg
+                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
+        FileChooser.ExtensionFilter extFilterPNG
+                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
+        FileChooser.ExtensionFilter extFilterpng
+                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
+        chooser.getExtensionFilters()
+                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
+        File file = chooser.showOpenDialog(null);
+        image = new FileInputStream(file);
     }
 }

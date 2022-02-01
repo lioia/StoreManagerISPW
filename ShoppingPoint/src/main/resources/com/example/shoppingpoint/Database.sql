@@ -30,7 +30,7 @@ CREATE TABLE Product (
     Quantity INT NOT NULL,
     Type ENUM("CLOTHES", "SHOES", "BOOK", "COMICS", "VIDEOGAME", "GAMECONSOLE", "COMPUTER", "HOMEAPPLIANCES") NOT NULL,
     Status ENUM("New", "Used", "Used Like New", "Regenerated") NOT NULL,
-    Image BLOB,
+    Image MEDIUMBLOB,
     Size VARCHAR(16),
     Material VARCHAR(16),
     ShoesType VARCHAR(16),

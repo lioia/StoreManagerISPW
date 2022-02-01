@@ -1,6 +1,6 @@
 package com.example.shoppingpoint.adapter;
 
-import javafx.scene.image.Image;
+import java.io.InputStream;
 
 public interface GenericProduct {
     Integer getId();
@@ -13,7 +13,7 @@ public interface GenericProduct {
 
     Integer getQuantity();
 
-    Image getImage();
+    InputStream getImage();
 
     String getStatus();
 

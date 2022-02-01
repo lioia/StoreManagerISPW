@@ -2,7 +2,8 @@ package com.example.shoppingpoint.adapter;
 
 
 import com.example.shoppingpoint.model.product.*;
-import javafx.scene.image.Image;
+
+import java.io.InputStream;
 
 public class ProductAdapter implements GenericProduct {
     private final Product product;
@@ -37,7 +38,7 @@ public class ProductAdapter implements GenericProduct {
     }
 
     @Override
-    public Image getImage() {
+    public InputStream getImage() {
         return this.product.getImage();
     }
 

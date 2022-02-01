@@ -26,6 +26,6 @@ public class OffersController {
     public void acceptOffer(Request request, GenericProduct product, int offerId) throws Exception {
         RequestDAO.acceptRequest(request.getRequestId());
         OfferDAO.acceptOffer(offerId);
-        ProductDAO.updateProductQuantity(product.getId(), product.getQuantity() + request.getQuantity());
+        ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() + request.getQuantity());
     }
 }

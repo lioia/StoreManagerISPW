@@ -2,12 +2,15 @@ package com.example.shoppingpoint.bean.add_product;
 
 import com.example.shoppingpoint.exception.BeanException;
 
+import java.io.InputStream;
+
 public class AddProductCommonBean {
     private String name;
     private float price;
     private float discountedPrice;
     private int quantity;
     private String status;
+    private InputStream image;
 
     public AddProductCommonBean(String name, float price, float discountedPrice, int quantity, String status) throws BeanException {
         setName(name);
@@ -63,5 +66,13 @@ public class AddProductCommonBean {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public InputStream getImage() {
+        return image;
+    }
+
+    public void setImage(InputStream image) {
+        this.image = image;
     }
 }

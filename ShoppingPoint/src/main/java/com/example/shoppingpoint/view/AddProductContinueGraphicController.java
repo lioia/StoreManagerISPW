@@ -136,8 +136,7 @@ public class AddProductContinueGraphicController {
     }
 
     private HBox createTextFieldElement(String name) {
-        HBox hbox = new HBox(8);
-        hbox.setSpacing(40);
+        HBox hbox = new HBox(40);
         Label label = new Label(name);
         label.setFont(new Font(24));
         TextField textField = new TextField();
@@ -150,8 +149,7 @@ public class AddProductContinueGraphicController {
     }
 
     private HBox createTextAreaElement(String name) {
-        HBox hbox = new HBox(8);
-        hbox.setSpacing(40);
+        HBox hbox = new HBox(40);
         Label label = new Label(name);
         label.setFont(new Font(24));
         TextArea textArea = new TextArea();
@@ -164,8 +162,7 @@ public class AddProductContinueGraphicController {
     }
 
     private HBox createComboBoxElement(String[] elements) {
-        HBox hbox = new HBox(8);
-        hbox.setSpacing(40);
+        HBox hbox = new HBox(40);
         Label label = new Label("Type");
         label.setFont(new Font(24));
         ComboBox<String> comboBox = new ComboBox<>();
@@ -179,8 +176,7 @@ public class AddProductContinueGraphicController {
     }
 
     private HBox createCheckBoxElement() {
-        HBox hbox = new HBox(8);
-        hbox.setSpacing(40);
+        HBox hbox = new HBox(4);
         Label label = new Label("Digital");
         label.setFont(new Font(24));
         CheckBox box = new CheckBox();

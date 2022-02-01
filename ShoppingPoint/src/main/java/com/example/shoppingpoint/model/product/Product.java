@@ -3,6 +3,8 @@ package com.example.shoppingpoint.model.product;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.scene.image.Image;
 
+import java.io.InputStream;
+
 public abstract class Product {
     private Integer id;
     private String name;
@@ -10,7 +12,7 @@ public abstract class Product {
     private Float discountedPrice;
     private Integer quantity;
     private String status;
-    private Image image;
+    private InputStream image;
     private ProductType type;
     private String storeName;
 
@@ -62,11 +64,11 @@ public abstract class Product {
         this.status = status;
     }
 
-    public Image getImage() {
+    public InputStream getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(InputStream image) {
         this.image = image;
     }
 
