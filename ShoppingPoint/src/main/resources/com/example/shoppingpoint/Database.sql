@@ -104,6 +104,7 @@ CREATE TABLE Offer (
     RequestId INT NOT NULL,
     OfferPrice FLOAT NOT NULL,
     Accepted BIT NOT NULL DEFAULT 0,
+    Checked BIT NOT NULL DEFAULT 0,
 
     FOREIGN KEY (RequestId) REFERENCES Request(RequestId),
     FOREIGN KEY (Supplier) REFERENCES User(Username)

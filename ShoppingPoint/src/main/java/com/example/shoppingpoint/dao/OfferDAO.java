@@ -64,7 +64,18 @@ public class OfferDAO {
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        String sql = String.format("UPDATE Offer SET Accepted = 1 WHERE RequestId = %d", offerId);
+        String sql = String.format("UPDATE Offer SET Accepted = 1 AND Checked = 1 WHERE RequestId = %d", offerId);
+        // Execute query
+        statement.executeUpdate(sql);
+        statement.close();
+        connection.close();
+    }
+    public static void checkedOffer(String supplier) throws SQLException {
+        // Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        // Create statement
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        String sql = String.format("UPDATE Offer SET Checked = 0 WHERE Supplier = '%s' AND Checked = 1", supplier);
         // Execute query
         statement.executeUpdate(sql);
         statement.close();
@@ -79,4 +90,23 @@ public class OfferDAO {
         String supplierUsername = rs.getString("Supplier");
         return new Offer(offerId, requestId, offerPrice, accepted, supplierUsername);
     }
+
+    public static int countAcceptedOffer(String supplier)throws SQLException{
+        // Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        // Create statement
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        // Execute query
+        ResultSet rs = statement.executeQuery(String.format("SELECT COUNT(*) AS total FROM Offer WHERE Supplier = '%s' and Checked=1", supplier));
+
+        rs.next();
+        int n=rs.getInt("total");
+        rs.close();
+        statement.close();
+        connection.close();
+        return n;
+
+
+    }
+
 }

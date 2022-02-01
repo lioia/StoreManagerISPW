@@ -2,11 +2,12 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.RequestListGraphicController" >
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.RequestListGraphicController">
    <top>
       <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
          <center>
@@ -18,7 +19,7 @@
          </center>
 
          <right>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent" BorderPane.alignment="CENTER" onAction="#logout">
+            <Button mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                <graphic>
                   <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
                </graphic>
@@ -30,11 +31,21 @@
       </BorderPane>
    </top>
    <center>
-      <ScrollPane   BorderPane.alignment="CENTER" fitToWidth="true">
+      <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
         <content>
           <FlowPane fx:id="requestPane" />
         </content>
       </ScrollPane>
    </center>
+   <bottom>
+   <Button fx:id="accepted" layoutX="612.0" mnemonicParsing="false" onAction="#goAcceptedOffer" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Accepted"  BorderPane.alignment="CENTER_RIGHT">
+      <effect>
+         <DropShadow />
+      </effect>
+         <BorderPane.margin>
+            <Insets bottom="10.0" right="16.0" />
+         </BorderPane.margin>
+   </Button>
+   </bottom>
 
 </BorderPane>

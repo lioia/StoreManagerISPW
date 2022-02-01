@@ -11,12 +11,15 @@ import com.example.shoppingpoint.singleton.LoggedInUser;
 
 public class RequestListController {
     public List<Request> getRequest()throws Exception{
-        return RequestDAO.getAllRequests();
+        return RequestDAO.getAllRequestsNotAccepted();
     }
     public Product getProduct(int productId)throws Exception{
         return ProductDAO.getProductById(productId);
     }
     public void saveOffer(int requestId, RequestListBean offerPrice)throws Exception{
         OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(),requestId,offerPrice.getOfferPrice());
+    }
+    public void checkedOffer()throws Exception{
+        OfferDAO.checkedOffer(LoggedInUser.getInstance().getUser().getUsername());
     }
 }

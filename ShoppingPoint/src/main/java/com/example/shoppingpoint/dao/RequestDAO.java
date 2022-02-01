@@ -58,7 +58,7 @@ public class RequestDAO {
         connection.close();
     }
 
-    public static List<Request> getAllRequests() throws SQLException {
+    public static List<Request> getAllRequestsNotAccepted() throws SQLException {
         ArrayList<Request> requests = new ArrayList<>();
 
         // Create Connection
@@ -66,7 +66,7 @@ public class RequestDAO {
         // Create statement
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         // Execute query
-        ResultSet rs = statement.executeQuery("SELECT * FROM Request");
+        ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE Accepted=0");
         while (rs.next()) {
             int requestId = rs.getInt("RequestId");
             float maxPrice = rs.getFloat("MaxPrice");

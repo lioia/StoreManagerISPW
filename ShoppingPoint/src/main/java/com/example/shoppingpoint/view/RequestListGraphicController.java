@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import com.example.shoppingpoint.bean.RequestListBean;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.dao.UserDAO;
+import com.example.shoppingpoint.dao.OfferDAO;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,8 +33,18 @@ public class RequestListGraphicController {
     private FlowPane requestPane;
 
     @FXML
+    private Button accepted;
+
+
+
+    @FXML
     public void initialize() throws Exception {
         createRequestPaneView();
+        int newAcceptedOffer=OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
+        if(newAcceptedOffer!=0){
+            System.out.printf("Hanno accettato %d offerte");
+
+        }
     }
 
     private void createRequestPaneView() {
@@ -102,5 +114,11 @@ public class RequestListGraphicController {
         LoggedInUser.getInstance().setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+    }
+    @FXML
+    private void goAcceptedOffer()throws Exception{
+        RequestListController controller = new RequestListController();
+        controller.checkedOffer();
+
     }
 }
