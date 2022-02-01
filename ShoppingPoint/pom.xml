@@ -58,6 +58,11 @@
             <artifactId>controlsfx</artifactId>
             <version>11.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.13.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -80,7 +85,8 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.shoppingpoint/com.example.shoppingpoint.ShoppingPointApplication</mainClass>
+                            <mainClass>com.example.shoppingpoint/com.example.shoppingpoint.ShoppingPointApplication
+                            </mainClass>
                         </configuration>
                     </execution>
                 </executions>

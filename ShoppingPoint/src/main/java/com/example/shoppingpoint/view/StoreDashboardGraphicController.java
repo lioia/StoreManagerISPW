@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
+import com.example.shoppingpoint.controller.AmazonController;
 import com.example.shoppingpoint.controller.StoreDashboardController;
 import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
@@ -36,6 +37,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 
 public class StoreDashboardGraphicController {
 
@@ -95,6 +97,20 @@ public class StoreDashboardGraphicController {
                 ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
                 if (product.getImage() != null)
                     ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
+                Label estimatedPriceLabel = (Label) pane.lookup("#estimatedPrice");
+                estimatedPriceLabel.setOnMouseClicked(event -> {
+                    AmazonController amazonController = new AmazonController();
+                    try {
+                        float estimatedPrice = amazonController.getEstimatedPrice(product.getName());
+                        estimatedPriceLabel.setText(String.format(Locale.US, "Estimated Price: %.02f€", estimatedPrice));
+                    } catch (IOException e) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Loading error");
+                        alert.setContentText("There was an error loading the prices...");
+                        alert.show();
+                    }
+
+                });
                 ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
                     ScrollPane scrollPane = new ScrollPane();
                     scrollPane.setMaxWidth(400.0);

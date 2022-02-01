@@ -7,6 +7,7 @@ module com.example.shoppingpoint {
     requires java.sql;
     requires mysql.connector.java;
     requires org.controlsfx.controls;
+    requires org.jsoup;
 
     opens com.example.shoppingpoint to javafx.fxml;
     opens com.example.shoppingpoint.view to javafx.fxml;
