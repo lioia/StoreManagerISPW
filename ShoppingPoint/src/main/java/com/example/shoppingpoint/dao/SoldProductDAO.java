@@ -15,144 +15,56 @@ public class SoldProductDAO {
     }
 
     public static List<SoldProduct> getSoldProducts() throws Exception {
-        Statement statement = null;
-        Connection connection = null;
         List<SoldProduct> products = new ArrayList<>();
 
-        try {
 //            Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
 //            Create Statement
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //            Execute query
-            ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
-            while (rs.next()) {
-                products.add(getSoldProduct(rs));
-            }
-            rs.close();
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
+        while (rs.next()) {
+            products.add(getSoldProduct(rs));
         }
+        rs.close();
+        statement.close();
+        connection.close();
         return products;
     }
 
     public static List<SoldProduct> getProductsOfClient(String client) throws Exception {
-        Statement statement = null;
-        Connection connection = null;
         List<SoldProduct> products = new ArrayList<>();
 
-        try {
 //            Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
 //            Create Statement
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //            Get item
-            String sql = String.format("SELECT * FROM SoldProduct WHERE Client='%s'", client);
+        String sql = String.format("SELECT * FROM SoldProduct WHERE Client='%s'", client);
 //            Execute query
-            ResultSet rs = statement.executeQuery(sql);
-            while (rs.next()) {
-                products.add(getSoldProduct(rs));
-            }
-            rs.close();
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+        ResultSet rs = statement.executeQuery(sql);
+        while (rs.next()) {
+            products.add(getSoldProduct(rs));
         }
+        rs.close();
+        statement.close();
+        connection.close();
         return products;
     }
 
-    public static SoldProduct getSoldProductById(Integer id) throws Exception {
-        Statement statement = null;
-        Connection connection = null;
-        SoldProduct soldProduct;
-
-        try {
-//            Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-//            Create Statement
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-//            Get item
-            String sql = String.format("SELECT * FROM SoldProduct WHERE SoldProductId=%d", id);
-//            Execute query
-            ResultSet rs = statement.executeQuery(sql);
-            if (!rs.first())
-                throw new Exception("No product found with id: " + id);
-
-            rs.first();
-            soldProduct = getSoldProduct(rs);
-            rs.close();
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-        return soldProduct;
-    }
-
-    public static void saveSoldProduct(Integer quantity, LocalDate date, Integer productId, String clientUsername) throws Exception {
-        PreparedStatement statement = null;
-        Connection connection = null;
-
-        try {
-            // Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-            // Create statement
-            statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)");
-            statement.setInt(1, quantity);
-            statement.setDate(2, Date.valueOf(date));
-            statement.setInt(3, productId);
-            statement.setString(4, clientUsername);
-            // Execute query
-            statement.executeUpdate();
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+    public static void saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername) throws SQLException {
+        // Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        // Create statement
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)");
+        statement.setInt(1, quantity);
+        statement.setDate(2, Date.valueOf(date));
+        statement.setInt(3, productId);
+        statement.setString(4, clientUsername);
+        // Execute query
+        statement.executeUpdate();
+        statement.close();
+        connection.close();
     }
 
     private static SoldProduct getSoldProduct(ResultSet rs) throws Exception {
