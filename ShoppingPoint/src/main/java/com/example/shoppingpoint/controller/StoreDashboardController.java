@@ -9,6 +9,7 @@ import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.ReviewDAO;
 import com.example.shoppingpoint.dao.StoreDAO;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.product.Product;
 import com.example.shoppingpoint.model.Store;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDashboardController {
-    public Store getStoreFromStoreOwnerName(String storeOwner) throws Exception {
+    public Store getStoreFromStoreOwnerName(String storeOwner) throws SQLException, DatabaseException {
         return StoreDAO.getStoreByStoreOwnerUsername(storeOwner);
     }
 

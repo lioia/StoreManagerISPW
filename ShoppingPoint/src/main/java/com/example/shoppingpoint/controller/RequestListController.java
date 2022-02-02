@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.example.shoppingpoint.bean.RequestListBean;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.dao.RequestDAO;
 import com.example.shoppingpoint.model.product.Product;
@@ -16,7 +17,7 @@ public class RequestListController {
         return RequestDAO.getAllRequestsNotAccepted();
     }
 
-    public Product getProduct(int productId) throws Exception {
+    public Product getProduct(int productId) throws SQLException, DatabaseException {
         return ProductDAO.getProductById(productId);
     }
 

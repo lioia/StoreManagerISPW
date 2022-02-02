@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Offer;
 
 import java.sql.*;
@@ -22,7 +23,7 @@ public class OfferDAO {
     }
 
 
-    public static Offer getAcceptedOfferOfRequest(int requestId) throws Exception {
+    public static Offer getAcceptedOfferOfRequest(int requestId) throws SQLException, DatabaseException {
         Offer offer;
 
         // Create Connection
@@ -31,8 +32,8 @@ public class OfferDAO {
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         // Execute query
         ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Offer WHERE RequestId = %d AND Accepted = 1", requestId));
-        if (!rs.first()) // TODO handle exception
-            throw new Exception("No accepted offer found");
+        if (!rs.first())
+            throw new DatabaseException("accepted offer");
         rs.first();
         offer = getOffer(rs);
         rs.close();

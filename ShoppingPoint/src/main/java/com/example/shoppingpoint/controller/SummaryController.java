@@ -2,10 +2,12 @@ package com.example.shoppingpoint.controller;
 
 import com.example.shoppingpoint.bean.SummaryBean;
 import com.example.shoppingpoint.dao.SoldProductDAO;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
 public class SummaryController {
 
-    public HashMap<String, List<SoldProduct>> getSoldProducts(SummaryBean bean) throws Exception {
+    public HashMap<String, List<SoldProduct>> getSoldProducts(SummaryBean bean) throws SQLException, DatabaseException {
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
         List<SoldProduct> products = SoldProductDAO.getSoldProducts();
         HashMap<String, List<SoldProduct>> filtered = new HashMap<>();

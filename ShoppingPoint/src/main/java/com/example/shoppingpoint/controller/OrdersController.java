@@ -3,14 +3,16 @@ package com.example.shoppingpoint.controller;
 import com.example.shoppingpoint.bean.OrdersBean;
 import com.example.shoppingpoint.dao.ReviewDAO;
 import com.example.shoppingpoint.dao.SoldProductDAO;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.SoldProduct;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersController {
-    public List<SoldProduct> getOrders(String client, String storeName) throws Exception {
+    public List<SoldProduct> getOrders(String client, String storeName) throws SQLException, DatabaseException {
         List<SoldProduct> products = SoldProductDAO.getProductsOfClient(client);
         List<SoldProduct> filteredProducts = new ArrayList<>();
 
@@ -21,11 +23,11 @@ public class OrdersController {
         return filteredProducts;
     }
 
-    public Review getReview(String client, int productId) throws Exception {
+    public Review getReview(String client, int productId) throws SQLException, DatabaseException {
         return ReviewDAO.getReviewFromClientAndProductId(client, productId);
     }
 
-    public void updateReview(OrdersBean bean, int reviewId, String client, int productId) throws Exception {
+    public void updateReview(OrdersBean bean, int reviewId, String client, int productId) throws SQLException {
         ReviewDAO.updateReview(reviewId, bean.getValue(), client, productId);
     }
 }

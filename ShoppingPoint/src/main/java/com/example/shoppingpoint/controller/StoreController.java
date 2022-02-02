@@ -6,6 +6,7 @@ import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.ReviewDAO;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.product.Product;
@@ -34,7 +35,7 @@ public class StoreController {
         return genericProducts;
     }
 
-    public LoyaltyCard getLoyaltyCard(String client, String storeName) throws Exception {
+    public LoyaltyCard getLoyaltyCard(String client, String storeName) throws SQLException, DatabaseException {
         return LoyaltyCardDAO.getLoyaltyCardFromClientAndStoreName(client, storeName);
     }
 

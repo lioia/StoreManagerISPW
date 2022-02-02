@@ -4,6 +4,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.RequestDAO;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.model.product.Product;
@@ -16,7 +17,7 @@ public class OffersController {
         return RequestDAO.getRequestsOfProduct(productId);
     }
 
-    public Offer getAcceptedOffer(int requestId) throws Exception {
+    public Offer getAcceptedOffer(int requestId) throws SQLException, DatabaseException {
         return OfferDAO.getAcceptedOfferOfRequest(requestId);
     }
 

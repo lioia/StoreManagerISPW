@@ -15,7 +15,7 @@ public class DatabaseException extends Exception {
         super(cause);
     }
 
-    public DatabaseException(String data, String reason, Throwable cause) {
+    public DatabaseException(String data, Throwable cause) {
         super("Not found: " + data, cause);
     }
 }
