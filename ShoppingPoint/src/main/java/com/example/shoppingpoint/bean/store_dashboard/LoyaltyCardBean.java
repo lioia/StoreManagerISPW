@@ -26,7 +26,7 @@ public class LoyaltyCardBean {
     }
 
     public void setPointsInEuro(Integer pointsInEuro) throws BeanException {
-        if (pointsInEuro < 0) throw new BeanException("points in euro", "it has to be more than 0");
+        if (pointsInEuro < 0) throw new BeanException("points in euro", BeanException.MORE_THAN_ZERO_REASON);
         if (active)
             this.pointsInEuro = pointsInEuro;
         else this.pointsInEuro = 0;
@@ -37,7 +37,7 @@ public class LoyaltyCardBean {
     }
 
     public void setEuroInPoints(Integer euroInPoints) throws BeanException {
-        if (euroInPoints < 0) throw new BeanException("euro in points", "it has to be more than 0");
+        if (euroInPoints < 0) throw new BeanException("euro in points", BeanException.MORE_THAN_ZERO_REASON);
         if (active)
             this.euroInPoints = euroInPoints;
         else this.euroInPoints = 0;

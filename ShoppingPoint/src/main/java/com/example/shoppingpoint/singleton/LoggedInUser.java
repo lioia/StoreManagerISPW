@@ -18,7 +18,7 @@ public class LoggedInUser {
         this.user = user;
     }
 
-    public synchronized static LoggedInUser getInstance() {
+    public static synchronized LoggedInUser getInstance() {
         if (LoggedInUser.instance == null)
             LoggedInUser.instance = new LoggedInUser();
         return instance;

@@ -55,10 +55,7 @@ public class ClientListGraphicController {
                 ((Label) pane.lookup("#clientNameText")).setText(client.getUsername());
                 Label email = (Label) pane.lookup("#clientEmailText");
                 email.setText(client.getEmail());
-                email.setOnMouseClicked(event -> {
-                    new SendEmailController().sendEmail(client.getEmail());
-
-                });
+                email.setOnMouseClicked(event -> new SendEmailController().sendEmail(client.getEmail()));
                 ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
 //            Add client to the view
                 clientPane.getChildren().add(pane);

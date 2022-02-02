@@ -85,7 +85,8 @@ public class StoreDashboardGraphicController {
 //            Set product data in the View
                 ((Label) pane.lookup("#name")).setText(product.getName());
                 String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-                ((Label) pane.lookup("#price")).setText("Price: " + formattedPrice);
+                Label priceLabel = (Label) pane.lookup("#price");
+                priceLabel.setText("Price: " + formattedPrice);
                 ((TextField) pane.lookup("#priceTextField")).setText(product.getPrice().toString());
                 String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
                 ((Label) pane.lookup("#discountedPrice")).setText("Discounted Price: " + formattedDiscountedPrice);
@@ -146,7 +147,7 @@ public class StoreDashboardGraphicController {
                         Parent node = loader.load();
                         ((Node) event.getSource()).getScene().setRoot(node);
                         OffersGraphicController offersGraphicController = loader.getController();
-                        offersGraphicController.initData(product);
+                        offersGraphicController.initialize(product);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -177,7 +178,7 @@ public class StoreDashboardGraphicController {
                             product.setPrice(bean.getPrice());
                             product.setDiscountedPrice(bean.getDiscountedPrice());
                             product.setQuantity(bean.getQuantity());
-                            ((Label) pane.lookup("#price")).setText(String.format("Price: %.02f€", product.getPrice()));
+                            priceLabel.setText(String.format("Price: %.02f€", product.getPrice()));
                             ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
                             ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
                         } catch (BeanException e) {

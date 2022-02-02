@@ -100,9 +100,10 @@ public class StoreGraphicController {
 
         createProductsView(new StoreBean(store.getName(), searchQuery));
     }
+
     @FXML
-    public void sendEmail()throws Exception{
-        String storeOwner= StoreDAO.getStoreOwnerUsernameByStoreName(store.getName());
+    public void sendEmail() throws Exception {
+        String storeOwner = StoreDAO.getStoreOwnerUsernameByStoreName(store.getName());
         new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
     }
 
@@ -124,7 +125,7 @@ public class StoreGraphicController {
             ((Label) pane.lookup("#status")).setText(product.getStatus());
             ((Label) pane.lookup("#description")).setText(product.getDescription());
             ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
-            if(product.getImage() != null)
+            if (product.getImage() != null)
                 ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
             ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
                 ScrollPane scrollPane = new ScrollPane();

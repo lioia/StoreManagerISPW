@@ -23,6 +23,7 @@ import com.example.shoppingpoint.dao.OfferDAO;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.example.shoppingpoint.model.Request;
@@ -36,19 +37,15 @@ public class RequestListGraphicController {
 
     @FXML
     private Label offersAccepted;
-    private PauseTransition transition;
-
-
-
 
     @FXML
     public void initialize() throws Exception {
         createRequestPaneView();
-        int newAcceptedOffer=OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
-        if(newAcceptedOffer!=0){
-            offersAccepted.setText(String.format("Hanno accettato %d offerte",newAcceptedOffer));
+        int newAcceptedOffer = OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
+        if (newAcceptedOffer != 0) {
+            offersAccepted.setText(String.format("Hanno accettato %d offerte", newAcceptedOffer));
             offersAccepted.setVisible(true);
-            transition = new PauseTransition(Duration.seconds(3));
+            PauseTransition transition = new PauseTransition(Duration.seconds(3));
             transition.setOnFinished(event -> offersAccepted.setVisible(false));
             transition.play();
 
@@ -89,12 +86,11 @@ public class RequestListGraphicController {
                     popOver.show(pane);
                 });
                 Text sendEmail = (Text) node.lookup("#sendEmail");
-                sendEmail.setOnMouseClicked(event ->{
+                sendEmail.setOnMouseClicked(event -> {
                     try {
-                        String storeOwner=StoreDAO.getStoreOwnerUsernameByStoreName(product.getStoreName());
+                        String storeOwner = StoreDAO.getStoreOwnerUsernameByStoreName(product.getStoreName());
                         new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
-                    }
-                    catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });
@@ -123,10 +119,14 @@ public class RequestListGraphicController {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
-    @FXML
-    private void goAcceptedOffer()throws Exception{
-        RequestListController controller = new RequestListController();
-        controller.checkedOffer();
 
+    @FXML
+    private void goAcceptedOffer() {
+        try {
+            RequestListController controller = new RequestListController();
+            controller.checkedOffer();
+        } catch (SQLException e) { // TODO handle exception
+            e.printStackTrace();
+        }
     }
 }

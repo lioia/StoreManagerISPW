@@ -9,8 +9,10 @@ import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ProductType;
 
+import java.sql.SQLException;
+
 public class AddProductController {
-    public void saveProduct(ProductType type, AddProductBean bean, AddProductCommonBean commonBean) throws Exception {
+    public void saveProduct(ProductType type, AddProductBean bean, AddProductCommonBean commonBean) throws SQLException {
         ProductFactory factory = new ProductFactory();
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
         Product product = factory.createProduct(type, 0, commonBean.getName(), commonBean.getPrice(), commonBean.getDiscountedPrice(), commonBean.getQuantity(),

@@ -29,7 +29,7 @@ public class OffersGraphicController {
     @FXML
     private FlowPane requestsPane;
 
-    public void initData(GenericProduct product) throws Exception {
+    public void initialize(GenericProduct product) throws Exception {
         OffersController controller = new OffersController();
         productNameText.setText(product.getName() + " Offers - Shopping Point");
 
@@ -81,10 +81,9 @@ public class OffersGraphicController {
         }
     }
 
-    public void goBack(ActionEvent actionEvent) throws Exception {
+    public void goBack(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-        Parent node = loader.load();
-        ((Node) actionEvent.getSource()).getScene().setRoot(node);
+        ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 
     @FXML

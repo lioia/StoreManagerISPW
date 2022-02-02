@@ -9,10 +9,11 @@ import com.example.shoppingpoint.dao.SoldProductDAO;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class PaymentController {
-    public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws Exception {
+    public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws SQLException {
         float total = bean.getQuantity() * product.getDiscountedPrice();
         int pointsUsed = 0;
         int pointsToBeAdded = (int) (total / store.getEuroInPoints());

@@ -5,10 +5,12 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 
 public class UploadImageController {
-    public File uploadImage(int productId) throws Exception {
+    public File uploadImage(int productId) throws IOException, SQLException {
         FileChooser chooser = new FileChooser();
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG

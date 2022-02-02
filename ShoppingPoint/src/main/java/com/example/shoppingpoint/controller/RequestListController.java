@@ -1,4 +1,6 @@
 package com.example.shoppingpoint.controller;
+
+import java.sql.SQLException;
 import java.util.List;
 
 import com.example.shoppingpoint.bean.RequestListBean;
@@ -10,16 +12,19 @@ import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 
 public class RequestListController {
-    public List<Request> getRequest()throws Exception{
+    public List<Request> getRequest() throws SQLException {
         return RequestDAO.getAllRequestsNotAccepted();
     }
-    public Product getProduct(int productId)throws Exception{
+
+    public Product getProduct(int productId) throws Exception {
         return ProductDAO.getProductById(productId);
     }
-    public void saveOffer(int requestId, RequestListBean offerPrice)throws Exception{
-        OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(),requestId,offerPrice.getOfferPrice());
+
+    public void saveOffer(int requestId, RequestListBean offerPrice) throws SQLException {
+        OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(), requestId, offerPrice.getOfferPrice());
     }
-    public void checkedOffer()throws Exception{
+
+    public void checkedOffer() throws SQLException {
         OfferDAO.checkedOffer(LoggedInUser.getInstance().getUser().getUsername());
     }
 }

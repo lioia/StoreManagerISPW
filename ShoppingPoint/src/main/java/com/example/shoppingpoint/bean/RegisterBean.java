@@ -36,14 +36,14 @@ public class RegisterBean {
     }
 
     public void setUsername(String user) throws BeanException {
-        if (user.length() < 4) throw new BeanException("register username", "too short");
-        if (user.length() > 16) throw new BeanException("register username", "too long");
+        if (user.length() < 4) throw new BeanException("register username", BeanException.TOO_SHORT_REASON);
+        if (user.length() > 16) throw new BeanException("register username", BeanException.TOO_LONG_REASON);
         this.username = user;
     }
 
     public void setPassword(String pass) throws BeanException {
-        if (pass.length() < 8) throw new BeanException("register password", "too short");
-        if (pass.length() > 16) throw new BeanException("register password", "too long");
+        if (pass.length() < 8) throw new BeanException("register password", BeanException.TOO_SHORT_REASON);
+        if (pass.length() > 16) throw new BeanException("register password", BeanException.TOO_LONG_REASON);
         this.password = pass;
     }
 

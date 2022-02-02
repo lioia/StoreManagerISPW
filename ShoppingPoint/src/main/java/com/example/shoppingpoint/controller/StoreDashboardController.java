@@ -15,7 +15,9 @@ import com.example.shoppingpoint.model.Store;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class StoreDashboardController {
         return StoreDAO.getStoreByStoreOwnerUsername(storeOwner);
     }
 
-    public List<GenericProduct> getProductsFromStore(Store store) throws Exception {
+    public List<GenericProduct> getProductsFromStore(Store store) throws SQLException {
         List<Product> products = ProductDAO.getProductsFromStore(store.getName());
 
         List<GenericProduct> genericProducts = new ArrayList<>();
@@ -35,13 +37,13 @@ public class StoreDashboardController {
         return genericProducts;
     }
 
-    public void updateLoyaltyCard(LoyaltyCardBean bean, Store store) throws Exception {
+    public void updateLoyaltyCard(LoyaltyCardBean bean, Store store) throws SQLException {
         StoreDAO.updatePoints(bean.getPointsInEuro(), bean.getEuroInPoints(), store.getName());
     }
 
     //    Return the average of the reviews (only if they are > 0)
     //    if there aren't any reviews, return 0
-    public float getReviewOfProduct(int productId) throws Exception {
+    public float getReviewOfProduct(int productId) throws SQLException {
         List<Review> reviews = ReviewDAO.getReviewsOfProduct(productId);
         float total = 0f;
         int count = 0;
@@ -53,12 +55,7 @@ public class StoreDashboardController {
         return (count > 0) ? total / count : 0f;
     }
 
-    public void editProduct(Integer id, EditProductBean bean) throws Exception {
+    public void editProduct(Integer id, EditProductBean bean) throws SQLException {
         ProductDAO.updateProduct(id, bean.getPrice(), bean.getDiscountedPrice(), bean.getQuantity());
-    }
-
-    public void setImageOfProduct(Integer id, File image) throws Exception {
-        InputStream stream = new FileInputStream(image);
-        ProductDAO.setImageOfProductId(id, stream);
     }
 }

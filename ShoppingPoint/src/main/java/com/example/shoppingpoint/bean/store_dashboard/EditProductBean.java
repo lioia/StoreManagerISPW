@@ -18,7 +18,7 @@ public class EditProductBean {
     }
 
     public void setPrice(float price) throws BeanException {
-        if (price < 0) throw new BeanException("price", "it has to be more than 0");
+        if (price < 0) throw new BeanException("price", BeanException.MORE_THAN_ZERO_REASON);
         this.price = price;
     }
 
@@ -27,7 +27,7 @@ public class EditProductBean {
     }
 
     public void setDiscountedPrice(float discountedPrice) throws BeanException {
-        if (discountedPrice < 0) throw new BeanException("discounted price", "it has to be more than 0");
+        if (discountedPrice < 0) throw new BeanException("discounted price", BeanException.MORE_THAN_ZERO_REASON);
         this.discountedPrice = discountedPrice;
     }
 
@@ -36,7 +36,7 @@ public class EditProductBean {
     }
 
     public void setQuantity(int quantity) throws BeanException {
-        if (quantity < 0) throw new BeanException("quantity", "it has to be more than 0");
+        if (quantity < 0) throw new BeanException("quantity", BeanException.MORE_THAN_ZERO_REASON);
         this.quantity = quantity;
     }
 }
