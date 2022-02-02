@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
 
 import java.sql.*;
@@ -31,7 +32,7 @@ public class ReviewDAO {
         return reviews;
     }
 
-    public static Review getReviewFromClientAndProductId(String client, int productId) throws Exception {
+    public static Review getReviewFromClientAndProductId(String client, int productId) throws SQLException, DatabaseException {
         Review review;
 
         // Create Connection
@@ -43,8 +44,8 @@ public class ReviewDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first()) // TODO handle exception
-            throw new Exception("No review found");
+        if (!rs.first())
+            throw new DatabaseException("review");
 
         rs.first();
         review = getReview(rs);

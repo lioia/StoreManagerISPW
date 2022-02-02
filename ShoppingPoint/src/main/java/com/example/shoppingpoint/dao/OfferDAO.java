@@ -70,6 +70,7 @@ public class OfferDAO {
         statement.close();
         connection.close();
     }
+
     public static void checkedOffer(String supplier) throws SQLException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
@@ -91,7 +92,7 @@ public class OfferDAO {
         return new Offer(offerId, requestId, offerPrice, accepted, supplierUsername);
     }
 
-    public static int countAcceptedOffer(String supplier)throws SQLException{
+    public static int countAcceptedOffer(String supplier) throws SQLException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -100,13 +101,10 @@ public class OfferDAO {
         ResultSet rs = statement.executeQuery(String.format("SELECT COUNT(*) AS total FROM Offer WHERE Supplier = '%s' and Checked=1", supplier));
 
         rs.next();
-        int n=rs.getInt("total");
+        int n = rs.getInt("total");
         rs.close();
         statement.close();
         connection.close();
         return n;
-
-
     }
-
 }

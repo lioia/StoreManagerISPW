@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.product.*;
 import com.example.shoppingpoint.model.user.Client;
@@ -14,7 +15,7 @@ public class SoldProductDAO {
         throw new IllegalStateException();
     }
 
-    public static List<SoldProduct> getSoldProducts() throws Exception {
+    public static List<SoldProduct> getSoldProducts() throws SQLException, DatabaseException {
         List<SoldProduct> products = new ArrayList<>();
 
 //            Create Connection
@@ -32,7 +33,7 @@ public class SoldProductDAO {
         return products;
     }
 
-    public static List<SoldProduct> getProductsOfClient(String client) throws Exception {
+    public static List<SoldProduct> getProductsOfClient(String client) throws SQLException, DatabaseException {
         List<SoldProduct> products = new ArrayList<>();
 
 //            Create Connection
@@ -67,7 +68,7 @@ public class SoldProductDAO {
         connection.close();
     }
 
-    private static SoldProduct getSoldProduct(ResultSet rs) throws Exception {
+    private static SoldProduct getSoldProduct(ResultSet rs) throws SQLException, DatabaseException {
         Date sqlDate = rs.getDate("Date");
         LocalDate date = sqlDate.toLocalDate();
         Integer quantity = rs.getInt("Quantity");

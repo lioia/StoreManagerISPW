@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.utils.StoreType;
 
@@ -32,7 +33,7 @@ public class StoreDAO {
         return stores;
     }
 
-    public static Store getStoreByName(String name) throws Exception {
+    public static Store getStoreByName(String name) throws SQLException, DatabaseException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -42,9 +43,9 @@ public class StoreDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first()) { // TODO handle exception
-            throw new Exception("No store found with name: " + name);
-        }
+        if (!rs.first())
+            throw new DatabaseException("store");
+
         rs.first();
         Store store = getStore(rs);
 
@@ -54,7 +55,7 @@ public class StoreDAO {
         return store;
     }
 
-    public static String getStoreOwnerUsernameByStoreName(String storeName) throws Exception {
+    public static String getStoreOwnerUsernameByStoreName(String storeName) throws SQLException, DatabaseException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -64,9 +65,9 @@ public class StoreDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first()) { // TODO handle exception
-            throw new Exception("Not found store owner of " + storeName);
-        }
+        if (!rs.first())
+            throw new DatabaseException("store owner username");
+
         rs.first();
         String storeOwnerUsername = rs.getString("StoreOwner");
 
@@ -76,7 +77,7 @@ public class StoreDAO {
         return storeOwnerUsername;
     }
 
-    public static Store getStoreByStoreOwnerUsername(String username) throws Exception {
+    public static Store getStoreByStoreOwnerUsername(String username) throws SQLException, DatabaseException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -86,9 +87,9 @@ public class StoreDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first()) { // TODO handle exception
-            throw new Exception("Not found " + username + "'store");
-        }
+        if (!rs.first())
+            throw new DatabaseException("store of " + username);
+
         rs.first();
         Store store = getStore(rs);
 

@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 
 import java.sql.*;
@@ -13,43 +14,25 @@ public class LoyaltyCardDAO {
         throw new IllegalStateException();
     }
 
-    public static LoyaltyCard getLoyaltyCardFromClientAndStoreName(String client, String storeName) throws Exception {
-        Statement statement = null;
-        Connection connection = null;
-        LoyaltyCard card;
+    public static LoyaltyCard getLoyaltyCardFromClientAndStoreName(String client, String storeName) throws SQLException, DatabaseException {
+        // Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        // Create statement
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        // Get user with specified username
+        String sql = String.format("SELECT * FROM LoyaltyCard WHERE Client='%s' AND Store = '%s'", client, storeName);
+        // Execute query
+        ResultSet rs = statement.executeQuery(sql);
+        // Empty result
+        if (!rs.first())
+            throw new DatabaseException("loyalty card");
 
-        try {
-            // Create Connection
-            connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-            // Create statement
-            statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            // Get user with specified username
-            String sql = String.format("SELECT * FROM LoyaltyCard WHERE Client='%s' AND Store = '%s'", client, storeName);
-            // Execute query
-            ResultSet rs = statement.executeQuery(sql);
-            // Empty result
-            if (!rs.first()) // TODO handle exception
-                throw new Exception("No loyalty card found");
-
-            rs.first();
-            Integer points = rs.getInt("Points");
-            card = new LoyaltyCard(points, client, storeName);
-            rs.close();
-        } finally {
-            // Clean-up dell'ambiente
-            try {
-                if (statement != null)
-                    statement.close();
-            } catch (SQLException se2) {
-                se2.printStackTrace();
-            }
-            try {
-                if (connection != null)
-                    connection.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+        rs.first();
+        Integer points = rs.getInt("Points");
+        LoyaltyCard card = new LoyaltyCard(points, client, storeName);
+        rs.close();
+        statement.close();
+        connection.close();
         return card;
     }
 
@@ -79,7 +62,7 @@ public class LoyaltyCardDAO {
         connection.close();
     }
 
-    public static List<ClientListData> getClientFromStoreName(String storeName) throws Exception {
+    public static List<ClientListData> getClientFromStoreName(String storeName) throws SQLException, DatabaseException {
         List<ClientListData> clients = new ArrayList<>();
 
         // Create Connection
@@ -102,7 +85,7 @@ public class LoyaltyCardDAO {
         return clients;
     }
 
-    public static String getLEmailFromUsername(String client) throws Exception {
+    public static String getLEmailFromUsername(String client) throws SQLException, DatabaseException {
         String email;
 
         // Create Connection
@@ -115,7 +98,7 @@ public class LoyaltyCardDAO {
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
         if (!rs.first())
-            throw new Exception("No client found");
+            throw new DatabaseException("client");
 
         rs.first();
         email = rs.getString("Email");

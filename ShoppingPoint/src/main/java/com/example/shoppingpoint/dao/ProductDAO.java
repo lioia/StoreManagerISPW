@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.factory.ProductFactory;
 import com.example.shoppingpoint.model.product.*;
 import com.example.shoppingpoint.utils.*;
@@ -34,7 +35,7 @@ public class ProductDAO {
         return products;
     }
 
-    public static Product getProductById(Integer id) throws Exception {
+    public static Product getProductById(Integer id) throws SQLException, DatabaseException {
         Product product;
 
 //            Create Connection
@@ -45,9 +46,9 @@ public class ProductDAO {
         String sql = String.format("SELECT * FROM Product WHERE ProductId=%d", id);
 //            Execute query
         ResultSet rs = statement.executeQuery(sql);
-        if (!rs.first()) { // TODO handle exception
-            throw new Exception("No product found with id: " + id);
-        }
+        if (!rs.first())
+            throw new DatabaseException("product");
+
         rs.first();
         product = getProduct(rs);
         statement.close();

@@ -49,7 +49,7 @@ public class NewRequestGraphicController {
             Parent node = loader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             OffersGraphicController offersGraphicController = loader.getController();
-            offersGraphicController.initData(product);
+            offersGraphicController.initialize(product);
         } catch (BeanException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText("Incorrect data");

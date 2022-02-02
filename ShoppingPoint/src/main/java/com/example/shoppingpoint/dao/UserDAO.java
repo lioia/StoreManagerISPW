@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
@@ -13,7 +14,7 @@ public class UserDAO {
         throw new IllegalStateException();
     }
 
-    public static String getEmailByUsername(String username) throws Exception {
+    public static String getEmailByUsername(String username) throws SQLException, DatabaseException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -23,9 +24,9 @@ public class UserDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first()) { // TODO handle exception
-            throw new Exception("No email found with username: " + username);
-        }
+        if (!rs.first())
+            throw new DatabaseException("email");
+
         rs.first();
         String email = rs.getString("Email");
 
@@ -35,7 +36,7 @@ public class UserDAO {
         return email;
     }
 
-    public static User getUserByUsername(String username) throws Exception {
+    public static User getUserByUsername(String username) throws SQLException, DatabaseException {
         // Create Connection
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
@@ -45,8 +46,8 @@ public class UserDAO {
         // Execute query
         ResultSet rs = statement.executeQuery(sql);
         // Empty result
-        if (!rs.first())  // TODO handle exception
-            throw new Exception("No user found with username: " + username);
+        if (!rs.first())
+            throw new DatabaseException("username");
 
         rs.first();
         String password = rs.getString("Password");
