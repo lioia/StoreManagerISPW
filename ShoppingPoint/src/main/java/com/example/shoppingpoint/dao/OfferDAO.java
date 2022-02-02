@@ -64,7 +64,7 @@ public class OfferDAO {
         Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
         // Create statement
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        String sql = String.format("UPDATE Offer SET Accepted = 1 AND Checked = 1 WHERE RequestId = %d", offerId);
+        String sql = String.format("UPDATE Offer SET Accepted = 1 , Checked = 1 WHERE OfferId = %d", offerId);
         // Execute query
         statement.executeUpdate(sql);
         statement.close();

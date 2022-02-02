@@ -21,11 +21,13 @@ import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.dao.OfferDAO;
 
+
 import java.io.IOException;
 import java.util.List;
 
 import com.example.shoppingpoint.model.Request;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
 
 public class RequestListGraphicController {
@@ -33,7 +35,9 @@ public class RequestListGraphicController {
     private FlowPane requestPane;
 
     @FXML
-    private Button accepted;
+    private Label offersAccepted;
+    private PauseTransition transition;
+
 
 
 
@@ -42,7 +46,11 @@ public class RequestListGraphicController {
         createRequestPaneView();
         int newAcceptedOffer=OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
         if(newAcceptedOffer!=0){
-            System.out.printf("Hanno accettato %d offerte");
+            offersAccepted.setText(String.format("Hanno accettato %d offerte",newAcceptedOffer));
+            offersAccepted.setVisible(true);
+            transition = new PauseTransition(Duration.seconds(3));
+            transition.setOnFinished(event -> offersAccepted.setVisible(false));
+            transition.play();
 
         }
     }
@@ -92,7 +100,7 @@ public class RequestListGraphicController {
                 });
                 ((Button) node.lookup("#offerButton")).setOnAction((ActionEvent event) -> {
                     try {
-                        controller.saveOffer(product.getId(), new RequestListBean(((TextField) node.lookup("#choosePriceTextField")).getText()));
+                        controller.saveOffer(request.getRequestId(), new RequestListBean(((TextField) node.lookup("#choosePriceTextField")).getText()));
                     } catch (BeanException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText("Incorrect data");
