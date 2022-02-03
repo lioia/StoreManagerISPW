@@ -23,6 +23,8 @@ public class RequestListController {
 
     public void saveOffer(int requestId, RequestListBean offerPrice) throws SQLException {
         OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(), requestId, offerPrice.getOfferPrice());
+
+
     }
 
     public void checkedOffer() throws SQLException {

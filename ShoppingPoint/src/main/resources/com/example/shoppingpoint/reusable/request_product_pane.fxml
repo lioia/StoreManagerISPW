@@ -11,7 +11,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="195.0" prefWidth="307.0"
+<AnchorPane prefHeight="200.0" prefWidth="307.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <effect>
@@ -45,6 +45,12 @@
     </HBox>
     <Text fx:id="store" layoutX="18.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0"
           text="store">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Text>
+    <Text fx:id="newAcceptedOffer" layoutX="18.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="NEW" visible="false">
         <font>
             <Font size="14.0"/>
         </font>

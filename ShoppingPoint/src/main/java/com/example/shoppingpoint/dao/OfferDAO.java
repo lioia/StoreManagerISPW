@@ -103,6 +103,21 @@ public class OfferDAO {
         }
     }
 
+    public static Boolean isOfferChecked(int offerId) throws SQLException{
+        Boolean checkedOffer;
+        // Create Connection
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Execute query
+                ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Offer WHERE offerId = %d and checked=0", offerId));
+                checkedOffer= rs.first();
+                rs.close();
+            }
+        }
+        return checkedOffer;
+    }
+
     private static Offer getOffer(ResultSet rs) throws SQLException {
         int offerId = rs.getInt("OfferId");
         int requestId = rs.getInt("RequestId");
@@ -128,4 +143,5 @@ public class OfferDAO {
         }
         return n;
     }
+    
 }

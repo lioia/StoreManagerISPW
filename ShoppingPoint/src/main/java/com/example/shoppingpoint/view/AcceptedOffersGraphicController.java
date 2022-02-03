@@ -73,6 +73,9 @@ public class AcceptedOffersGraphicController {
                 popOver.setCornerRadius(16);
                 popOver.show(pane);
             });
+            if (!controller.IsOfferChecked(acceptedOffer.getOfferId())){
+                (node.lookup("#newAcceptedOffer")).setVisible(true);
+            }
             Text sendEmail = (Text) node.lookup("#sendEmail");
             sendEmail.setOnMouseClicked(event -> {
                 try {

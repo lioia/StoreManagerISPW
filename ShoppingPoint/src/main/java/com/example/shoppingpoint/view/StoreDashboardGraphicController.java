@@ -277,7 +277,12 @@ public class StoreDashboardGraphicController {
         pane.lookup("#descriptionHbox").setVisible(visibility);
         pane.lookup("#rating").setVisible(visibility);
         pane.lookup("#offersButton").setVisible(visibility);
+        pane.lookup("#estimatedPrice").setVisible(visibility);
 
+
+        pane.lookup("#editPrice").setVisible(!visibility);
+        pane.lookup("#editDiscountedPrice").setVisible(!visibility);
+        pane.lookup("#editQuantity").setVisible(!visibility);
         pane.lookup("#priceTextField").setVisible(!visibility);
         pane.lookup("#discountedPriceTextField").setVisible(!visibility);
         pane.lookup("#quantityTextField").setVisible(!visibility);

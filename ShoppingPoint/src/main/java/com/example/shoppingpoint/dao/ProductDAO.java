@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductDAO {
     public ProductDAO() {
@@ -95,7 +96,7 @@ public class ProductDAO {
                 }
                 case SHOES -> {
                     ShoesProduct shoes = (ShoesProduct) product;
-                    statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Size, Material, ShoesType) VALUES (%s, ?, ?, ?", common, values));
+                    statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Size, Material, ShoesType) VALUES (%s, ?, ?, ?)", common, values));
                     statement.setString(9, shoes.getShoesSize());
                     statement.setString(10, shoes.getShoesMaterial());
                     statement.setString(11, shoes.getShoesType());
@@ -150,6 +151,7 @@ public class ProductDAO {
                 default -> throw new IllegalStateException("Unexpected value: " + product.getType());
             }
 
+
             statement.setString(1, product.getName());
             statement.setFloat(2, product.getPrice());
             statement.setFloat(3, product.getDiscountedPrice());
@@ -165,7 +167,6 @@ public class ProductDAO {
     }
 
     public static void updateProduct(int productId, float price, float discountedPrice, int quantity) throws SQLException {
-        // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {

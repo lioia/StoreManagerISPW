@@ -29,25 +29,28 @@
     </Pane>
     <TextField fx:id="priceTextField" layoutX="164.0" layoutY="64.0"
                style="-fx-font-size: 18px; -fx-background-color: WHITE; -fx-background-radius: 12px" text="Price"
-               visible="false" promptText="Price" prefWidth="128">
+               visible="false" promptText="Price" prefWidth="108">
         <effect>
             <DropShadow/>
         </effect>
     </TextField>
+    <Label fx:id="editPrice" layoutX="272" layoutY="74.0" text="€ Price" style="-fx-font-size: 16px" visible="false" />
     <TextField fx:id="discountedPriceTextField" layoutX="164.0" layoutY="128.0"
                style="-fx-font-size: 18px; -fx-background-color: WHITE; -fx-background-radius: 12px"
-               text="Discounted Price" visible="false" promptText="Discounted Price" prefWidth="128">
+               text="Discounted Price" visible="false" promptText="Discounted Price" prefWidth="108">
         <effect>
             <DropShadow/>
         </effect>
     </TextField>
+    <Label fx:id="editDiscountedPrice" layoutX="272" layoutY="138.0" text="€ Discount price" style="-fx-font-size: 16px" visible="false"/>
     <TextField fx:id="quantityTextField" layoutX="164.0" layoutY="192.0"
                style="-fx-font-size: 16px; -fx-background-color: WHITE; -fx-background-radius: 12px" text="Quantity"
-               visible="false" promptText="Quantity" prefWidth="128">
+               visible="false" promptText="Quantity" prefWidth="108">
         <effect>
             <DropShadow/>
         </effect>
     </TextField>
+    <Label fx:id="editQuantity" layoutX="272" layoutY="202.0" text="Quantity" style="-fx-font-size: 16px" visible="false"/>
 
     <Button fx:id="uploadImageButton" layoutX="192.0" layoutY="256.0" mnemonicParsing="false" prefHeight="52.0"
             style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Upload Image" visible="false">
