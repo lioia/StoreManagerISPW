@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.controller.LoginController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -56,8 +57,11 @@ public class LoginGraphicController {
             alert.setHeaderText("Incorrect data");
             alert.setContentText(e.getMessage());
             alert.show();
-        } catch (Exception ex) { // TODO handle controller exception
-            ex.printStackTrace();
+        } catch (ControllerException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Controller error");
+            alert.setContentText(ex.getMessage());
+            alert.show();
         }
     }
 }
