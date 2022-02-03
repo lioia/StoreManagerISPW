@@ -32,9 +32,14 @@ public class OffersGraphicController {
     @FXML
     private FlowPane requestsPane;
 
+    private final OffersController controller;
+
+    public OffersGraphicController() {
+        controller = new OffersController();
+    }
+
     public void initialize(GenericProduct product) throws IOException {
         try {
-            OffersController controller = new OffersController();
             productNameText.setText(product.getName() + " Offers - Shopping Point");
 
             List<Request> requests = controller.getRequestsOfProduct(product.getId());
@@ -50,42 +55,46 @@ public class OffersGraphicController {
                     Offer acceptedOffer = controller.getAcceptedOffer(req.getRequestId());
                     ((Label) node.lookup("#statusLabel")).setText(String.format("Accepted offer: %.02f by %s", acceptedOffer.getOfferPrice(), acceptedOffer.getSupplierUsername()));
                 } else {
-                    ((Label) node.lookup("#statusLabel")).setText("Not accepted");
-                    List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
-                    if (offers.size() > 0) {
-                        FlowPane offersPane = (FlowPane) node.lookup("#offersPane");
-                        FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
-                        Pane offer = offerLoader.load();
-                        for (Offer off : offers) {
-                            ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
-                            ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
-                            Text sendEmail = (Text) offer.lookup("#sendEmail");
-                            sendEmail.setOnMouseClicked(event -> {
-                                try {
-                                    String supplier = off.getSupplierUsername();
-                                    new SendEmailController().sendEmail(UserDAO.getEmailByUsername(supplier));
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            });
-                            ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
-                                try {
-                                    controller.acceptOffer(req, off.getOfferId());
-                                    goBack(event);
-                                } catch (ControllerException e) {
-                                    ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
-                                } catch (IOException e) {
-                                    ExceptionHandler.handleException("Could not go back", e.getMessage());
-                                }
-                            });
-                        }
-                        offersPane.getChildren().add(offer);
-                    }
+                    showOffers(node, req);
                 }
                 requestsPane.getChildren().add(node);
             }
         } catch (ControllerException e) {
             ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+        }
+    }
+
+    private void showOffers(VBox parentNode, Request req) throws IOException, ControllerException {
+        ((Label) parentNode.lookup("#statusLabel")).setText("Not accepted");
+        List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
+        if (offers.size() > 0) {
+            FlowPane offersPane = (FlowPane) parentNode.lookup("#offersPane");
+            FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
+            Pane offer = offerLoader.load();
+            for (Offer off : offers) {
+                ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
+                ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
+                Text sendEmail = (Text) offer.lookup("#sendEmail");
+                sendEmail.setOnMouseClicked(event -> {
+                    try {
+                        String supplier = off.getSupplierUsername();
+                        new SendEmailController().sendEmail(UserDAO.getEmailByUsername(supplier));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+                ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
+                    try {
+                        controller.acceptOffer(req, off.getOfferId());
+                        goBack(event);
+                    } catch (ControllerException e) {
+                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+                    } catch (IOException e) {
+                        ExceptionHandler.handleException("Could not go back", e.getMessage());
+                    }
+                });
+            }
+            offersPane.getChildren().add(offer);
         }
     }
 

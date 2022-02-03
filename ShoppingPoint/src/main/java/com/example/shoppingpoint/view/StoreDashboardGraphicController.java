@@ -49,6 +49,13 @@ import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER
 
 public class StoreDashboardGraphicController {
 
+    private static final String PRICE_LABEL_ID = "#price";
+    private static final String PRICE_TEXTFIELD_ID = "#priceTextField";
+    private static final String DISCOUNTED_PRICE_LABEL_ID = "#discountedPrice";
+    private static final String DISCOUNTED_PRICE_TEXTFIELD_ID = "#discountedPriceTextField";
+    private static final String QUANTITY_LABEL_ID = "#quantity";
+    private static final String QUANTITY_TEXTFIELD_ID = "#quantityTextField";
+
     private final StoreDashboardController controller;
 
     @FXML
@@ -94,21 +101,15 @@ public class StoreDashboardGraphicController {
 //            Set product data in the View
                 ((Label) pane.lookup("#name")).setText(product.getName());
                 String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-                Label priceLabel = (Label) pane.lookup("#price");
-                priceLabel.setText("Price: " + formattedPrice);
-                TextField priceTextField = (TextField) pane.lookup("#priceTextField");
-                priceTextField.setText(product.getPrice().toString());
+                ((Label) pane.lookup(PRICE_LABEL_ID)).setText("Price: " + formattedPrice);
+                ((TextField) pane.lookup(PRICE_TEXTFIELD_ID)).setText(product.getPrice().toString());
                 String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-                Label discountedPriceLabel = (Label) pane.lookup("#discountedPrice");
-                discountedPriceLabel.setText("Discounted Price: " + formattedDiscountedPrice);
-                TextField discountedPriceTextField = (TextField) pane.lookup("#discountedPriceTextField");
-                discountedPriceTextField.setText(product.getDiscountedPrice().toString());
+                ((Label) pane.lookup(DISCOUNTED_PRICE_LABEL_ID)).setText("Discounted Price: " + formattedDiscountedPrice);
+                ((TextField) pane.lookup(DISCOUNTED_PRICE_TEXTFIELD_ID)).setText(product.getDiscountedPrice().toString());
                 ((Label) pane.lookup("#status")).setText(product.getStatus());
                 ((Label) pane.lookup("#description")).setText(product.getDescription());
-                Label quantityLabel = (Label) pane.lookup("#quantity");
-                quantityLabel.setText(String.format("Quantity: %d", product.getQuantity()));
-                TextField quantityTextField = (TextField) pane.lookup("quantityTextField");
-                quantityTextField.setText(product.getQuantity().toString());
+                ((Label) pane.lookup(QUANTITY_LABEL_ID)).setText(String.format("Quantity: %d", product.getQuantity()));
+                ((TextField) pane.lookup(QUANTITY_TEXTFIELD_ID)).setText(product.getQuantity().toString());
                 ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
                 if (product.getImage() != null)
                     ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
@@ -119,10 +120,7 @@ public class StoreDashboardGraphicController {
                         float estimatedPrice = amazonController.getEstimatedPrice(product.getName());
                         estimatedPriceLabel.setText(String.format(Locale.US, "Estimated Price: %.02f€", estimatedPrice));
                     } catch (BoundaryException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("Loading error");
-                        alert.setContentText("There was an error loading the prices...");
-                        alert.show();
+                        ExceptionHandler.handleException("Loading error", "There was an error loading the prices...");
                     }
                 });
                 ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> DescriptionHandler.showDescription(event, product.getDescription()));
@@ -133,7 +131,7 @@ public class StoreDashboardGraphicController {
                         ((Node) event.getSource()).getScene().setRoot(node);
                         NewRequestGraphicController newRequestGraphicController = loader.getController();
                         newRequestGraphicController.initialize(product);
-                    } catch (Exception e) {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 });
@@ -148,42 +146,7 @@ public class StoreDashboardGraphicController {
                         e.printStackTrace();
                     }
                 });
-                ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> {
-                    setProductVisibility(pane, false);
-                    ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
-                        try {
-                            UploadImageController uploadImageController = new UploadImageController();
-                            File image = uploadImageController.uploadImage(product.getId());
-                            if (image != null) {
-                                InputStream stream = new FileInputStream(image);
-                                ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
-                    ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
-                        setProductVisibility(pane, true);
-                        String price = priceTextField.getText();
-                        String discountedPrice = discountedPriceTextField.getText();
-                        String quantity = quantityTextField.getText();
-                        try {
-                            EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
-                            controller.editProduct(product.getId(), bean);
-//                        Update local copy of product (and the relative labels)
-                            product.setPrice(bean.getNewPrice());
-                            product.setDiscountedPrice(bean.getNewDiscountedPrice());
-                            product.setQuantity(bean.getNewQuantity());
-                            priceLabel.setText(String.format("Price: %.02f€", product.getPrice()));
-                            discountedPriceLabel.setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
-                            quantityLabel.setText(String.format("Quantity: %d", product.getQuantity()));
-                        } catch (BeanException e) {
-                            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
-                        } catch (ControllerException e) {
-                            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
-                        }
-                    });
-                });
+                ((Button) pane.lookup("#editButton")).setOnAction((ActionEvent event) -> handleEditButton(pane, product));
 //            Add product to the view
                 productsPane.getChildren().add(pane);
             }
@@ -259,29 +222,6 @@ public class StoreDashboardGraphicController {
         popOver.show(node);
     }
 
-    private void setProductVisibility(AnchorPane pane, boolean visibility) {
-        pane.lookup("#price").setVisible(visibility);
-        pane.lookup("#discountedPrice").setVisible(visibility);
-        pane.lookup("#status").setVisible(visibility);
-        pane.lookup("#editButton").setVisible(visibility);
-        pane.lookup("#requestButton").setVisible(visibility);
-        pane.lookup("#quantity").setVisible(visibility);
-        pane.lookup("#descriptionHbox").setVisible(visibility);
-        pane.lookup("#rating").setVisible(visibility);
-        pane.lookup("#offersButton").setVisible(visibility);
-        pane.lookup("#estimatedPrice").setVisible(visibility);
-
-
-        pane.lookup("#editPrice").setVisible(!visibility);
-        pane.lookup("#editDiscountedPrice").setVisible(!visibility);
-        pane.lookup("#editQuantity").setVisible(!visibility);
-        pane.lookup("#priceTextField").setVisible(!visibility);
-        pane.lookup("#discountedPriceTextField").setVisible(!visibility);
-        pane.lookup("#quantityTextField").setVisible(!visibility);
-        pane.lookup("#saveButton").setVisible(!visibility);
-        pane.lookup("#uploadImageButton").setVisible(!visibility);
-    }
-
     @FXML
     protected void logout(ActionEvent event) throws IOException {
         LoggedInUser.getInstance().setUser(null);
@@ -299,5 +239,65 @@ public class StoreDashboardGraphicController {
     public void goToSummary(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("summary.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
+    }
+
+    private void setProductVisibility(AnchorPane pane, boolean visibility) {
+        pane.lookup(PRICE_LABEL_ID).setVisible(visibility);
+        pane.lookup(DISCOUNTED_PRICE_LABEL_ID).setVisible(visibility);
+        pane.lookup("#status").setVisible(visibility);
+        pane.lookup("#editButton").setVisible(visibility);
+        pane.lookup("#requestButton").setVisible(visibility);
+        pane.lookup(QUANTITY_LABEL_ID).setVisible(visibility);
+        pane.lookup("#descriptionHbox").setVisible(visibility);
+        pane.lookup("#rating").setVisible(visibility);
+        pane.lookup("#offersButton").setVisible(visibility);
+        pane.lookup("#estimatedPrice").setVisible(visibility);
+
+
+        pane.lookup("#editPrice").setVisible(!visibility);
+        pane.lookup("#editDiscountedPrice").setVisible(!visibility);
+        pane.lookup("#editQuantity").setVisible(!visibility);
+        pane.lookup(PRICE_TEXTFIELD_ID).setVisible(!visibility);
+        pane.lookup(DISCOUNTED_PRICE_TEXTFIELD_ID).setVisible(!visibility);
+        pane.lookup(QUANTITY_TEXTFIELD_ID).setVisible(!visibility);
+        pane.lookup("#saveButton").setVisible(!visibility);
+        pane.lookup("#uploadImageButton").setVisible(!visibility);
+    }
+
+    private void handleEditButton(AnchorPane pane, GenericProduct product) {
+        setProductVisibility(pane, false);
+        ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
+            try {
+                UploadImageController uploadImageController = new UploadImageController();
+                File image = uploadImageController.uploadImage(product.getId());
+                if (image != null) {
+                    InputStream stream = new FileInputStream(image);
+                    ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
+            setProductVisibility(pane, true);
+            String price = ((TextField) pane.lookup(PRICE_TEXTFIELD_ID)).getText();
+            String discountedPrice = ((TextField) pane.lookup(DISCOUNTED_PRICE_TEXTFIELD_ID)).getText();
+            String quantity = ((TextField) pane.lookup(QUANTITY_TEXTFIELD_ID)).getText();
+            try {
+                EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
+                controller.editProduct(product.getId(), bean);
+//                        Update local copy of product (and the relative labels)
+                product.setPrice(bean.getNewPrice());
+                product.setDiscountedPrice(bean.getNewDiscountedPrice());
+                product.setQuantity(bean.getNewQuantity());
+                ((Label) pane.lookup(PRICE_LABEL_ID)).setText(String.format("Price: %.02f€", product.getPrice()));
+                ((Label) pane.lookup(DISCOUNTED_PRICE_LABEL_ID)).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
+                ((Label) pane.lookup(QUANTITY_LABEL_ID)).setText(String.format("Quantity: %d", product.getQuantity()));
+            } catch (BeanException e) {
+                ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
+            } catch (ControllerException e) {
+                ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+            }
+        });
     }
 }
