@@ -15,33 +15,33 @@ public class BookProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setAuthor(author);
-        setPlot(plot);
-        setGenre(genre);
+        setBookAuthor(author);
+        setBookPlot(plot);
+        setBookGenre(genre);
         setType(ProductType.BOOK);
     }
 
-    public String getAuthor() {
+    public String getBookAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setBookAuthor(String author) {
         this.author = author;
     }
 
-    public String getPlot() {
+    public String getBookPlot() {
         return plot;
     }
 
-    public void setPlot(String plot) {
+    public void setBookPlot(String plot) {
         this.plot = plot;
     }
 
-    public String getGenre() {
+    public String getBookGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setBookGenre(String genre) {
         this.genre = genre;
     }
 }

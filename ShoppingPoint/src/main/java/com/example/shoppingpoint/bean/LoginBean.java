@@ -3,31 +3,31 @@ package com.example.shoppingpoint.bean;
 import com.example.shoppingpoint.exception.BeanException;
 
 public class LoginBean {
-    private String username;
-    private String password;
+    private String loginUsername;
+    private String loginPassword;
 
     public LoginBean(String username, String password) throws BeanException {
         setUsername(username);
         setPassword(password);
     }
 
-    public String getUsername() {
-        return username;
+    public String getLoginUsername() {
+        return loginUsername;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLoginPassword() {
+        return loginPassword;
     }
 
-    public void setUsername(String user) throws BeanException {
-        if (user.length() < 4) throw new BeanException("login username", BeanException.TOO_SHORT_REASON);
-        if (user.length() > 16) throw new BeanException("login username", BeanException.TOO_LONG_REASON);
-        this.username = user;
+    public void setUsername(String loginUser) throws BeanException {
+        if (loginUser.length() < 4) throw new BeanException("login username", BeanException.TOO_SHORT_REASON);
+        if (loginUser.length() > 16) throw new BeanException("login username", BeanException.TOO_LONG_REASON);
+        this.loginUsername = loginUser;
     }
 
-    public void setPassword(String pass) throws BeanException {
-        if (pass.length() < 8) throw new BeanException("login password", BeanException.TOO_SHORT_REASON);
-        if (pass.length() > 16) throw new BeanException("login password", BeanException.TOO_LONG_REASON);
-        this.password = pass;
+    public void setPassword(String loginPass) throws BeanException {
+        if (loginPass.length() < 8) throw new BeanException("login password", BeanException.TOO_SHORT_REASON);
+        if (loginPass.length() > 16) throw new BeanException("login password", BeanException.TOO_LONG_REASON);
+        this.loginPassword = loginPass;
     }
 }

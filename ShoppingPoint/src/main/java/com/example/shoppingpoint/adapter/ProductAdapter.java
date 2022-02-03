@@ -57,35 +57,35 @@ public class ProductAdapter implements GenericProduct {
         switch (product.getType()) {
             case CLOTHES -> {
                 ClothesProduct clothes = (ClothesProduct) product;
-                return String.format("Material: %s. Size: %s", clothes.getMaterial(), clothes.getSize());
+                return String.format("Material: %s. Size: %s", clothes.getClothesMaterial(), clothes.getClothesSize());
             }
             case SHOES -> {
                 ShoesProduct shoes = (ShoesProduct) product;
-                return String.format("Material: %s. Size: %s. Type: %s", shoes.getMaterial(), shoes.getSize(), shoes.getShoesType());
+                return String.format("Material: %s. Size: %s. Type: %s", shoes.getShoesMaterial(), shoes.getShoesSize(), shoes.getShoesType());
             }
             case BOOK -> {
                 BookProduct book = (BookProduct) product;
-                return String.format("Author: %s. Genre: %s\nPlot: %s", book.getAuthor(), book.getGenre(), book.getPlot());
+                return String.format("Author: %s. Genre: %s\nPlot: %s", book.getBookAuthor(), book.getBookGenre(), book.getBookPlot());
             }
             case COMICS -> {
                 ComicsProduct comics = (ComicsProduct) product;
-                return String.format("Author: %s. Artist: %s\nGenre: %s. Volume Number: %d. Plot: %s", comics.getAuthor(), comics.getArtist(), comics.getGenre(), comics.getVolume(), comics.getPlot());
+                return String.format("Author: %s. Artist: %s\nGenre: %s. Volume Number: %d. Plot: %s", comics.getComicsAuthor(), comics.getComicsArtist(), comics.getComicsGenre(), comics.getComicsVolume(), comics.getComicsPlot());
             }
             case VIDEOGAME -> {
                 VideoGameProduct videoGame = (VideoGameProduct) product;
-                return String.format("Genre: %s. Console: %s\nPlot: %s", videoGame.getGenre(), videoGame.getConsoleType(), videoGame.getPlot());
+                return String.format("Genre: %s. Console: %s\nPlot: %s", videoGame.getVideoGameGenre(), videoGame.getVideoGameConsoleType(), videoGame.getVideoGamePlot());
             }
             case GAMECONSOLE -> {
                 GameConsoleProduct console = (GameConsoleProduct) product;
-                return String.format("Name: %s. Digital Only: %s", console.getConsoleType(), console.isDigitalOnly() ? "Yes" : "No");
+                return String.format("Name: %s. Digital Only: %s", console.getGameConsoleType(), console.isDigitalOnly() ? "Yes" : "No");
             }
             case COMPUTER -> {
                 ComputerProduct computer = (ComputerProduct) product;
-                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d. CPU: %s. GPU: %s", computer.getComputerType(), computer.getBrand(), computer.getDisplaySize(), computer.getRam(), computer.getSsd(), computer.getBatterySize(), computer.getCpu(), computer.getGpu());
+                return String.format("Type: %s. Brand: %s. Display: %f\nRAM: %dGB. SSD: %dGB. Battery (mAh): %d. CPU: %s. GPU: %s", computer.getComputerType(), computer.getComputerBrand(), computer.getComputerDisplaySize(), computer.getComputerRam(), computer.getComputerSsd(), computer.getComputerBatterySize(), computer.getComputerCpu(), computer.getComputerGpu());
             }
             case HOMEAPPLIANCES -> {
                 HomeApplianceProduct homeAppliance = (HomeApplianceProduct) product;
-                return String.format("Energy Class: %s. Specs: %s", homeAppliance.getEnergyClass(), homeAppliance.getSpecs());
+                return String.format("Energy Class: %s. Specs: %s", homeAppliance.getHomeAppliancesEnergyClass(), homeAppliance.getHomeAppliancesSpecs());
             }
             default -> throw new IllegalStateException("Unexpected value: " + product.getType());
         }

@@ -17,51 +17,51 @@ public class ComicsProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setAuthor(author);
-        setArtist(artist);
-        setPlot(plot);
-        setGenre(genre);
-        setVolume(number);
+        setComicsAuthor(author);
+        setComicsArtist(artist);
+        setComicsPlot(plot);
+        setComicsGenre(genre);
+        setComicsVolume(number);
         setType(ProductType.COMICS);
     }
 
-    public String getAuthor() {
+    public String getComicsAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setComicsAuthor(String author) {
         this.author = author;
     }
 
-    public String getArtist() {
+    public String getComicsArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setComicsArtist(String artist) {
         this.artist = artist;
     }
 
-    public String getPlot() {
+    public String getComicsPlot() {
         return plot;
     }
 
-    public void setPlot(String plot) {
+    public void setComicsPlot(String plot) {
         this.plot = plot;
     }
 
-    public String getGenre() {
+    public String getComicsGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setComicsGenre(String genre) {
         this.genre = genre;
     }
 
-    public Integer getVolume() {
+    public Integer getComicsVolume() {
         return volume;
     }
 
-    public void setVolume(Integer volume) {
+    public void setComicsVolume(Integer volume) {
         this.volume = volume;
     }
 }

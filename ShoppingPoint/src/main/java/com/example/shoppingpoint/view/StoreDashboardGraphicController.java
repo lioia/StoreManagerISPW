@@ -175,9 +175,9 @@ public class StoreDashboardGraphicController {
                             EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
                             controller.editProduct(product.getId(), bean);
 //                        Update local copy of product (and the relative labels)
-                            product.setPrice(bean.getPrice());
-                            product.setDiscountedPrice(bean.getDiscountedPrice());
-                            product.setQuantity(bean.getQuantity());
+                            product.setPrice(bean.getNewPrice());
+                            product.setDiscountedPrice(bean.getNewDiscountedPrice());
+                            product.setQuantity(bean.getNewQuantity());
                             priceLabel.setText(String.format("Price: %.02f€", product.getPrice()));
                             ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
                             ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));

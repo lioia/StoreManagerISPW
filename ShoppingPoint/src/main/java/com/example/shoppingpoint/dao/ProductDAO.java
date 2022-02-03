@@ -90,62 +90,62 @@ public class ProductDAO {
             case CLOTHES -> {
                 ClothesProduct clothes = (ClothesProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product (%s, Size, Material) VALUES (%s, ?, ?)", common, values));
-                statement.setString(9, clothes.getSize());
-                statement.setString(10, clothes.getMaterial());
+                statement.setString(9, clothes.getClothesSize());
+                statement.setString(10, clothes.getClothesMaterial());
             }
             case SHOES -> {
                 ShoesProduct shoes = (ShoesProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Size, Material, ShoesType) VALUES (%s, ?, ?, ?", common, values));
-                statement.setString(9, shoes.getSize());
-                statement.setString(10, shoes.getMaterial());
+                statement.setString(9, shoes.getShoesSize());
+                statement.setString(10, shoes.getShoesMaterial());
                 statement.setString(11, shoes.getShoesType());
             }
             case BOOK -> {
                 BookProduct book = (BookProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Author, Plot, Genre) VALUES (%s, ?, ?, ?)", common, values));
-                statement.setString(9, book.getAuthor());
-                statement.setString(10, book.getPlot());
-                statement.setString(11, book.getGenre());
+                statement.setString(9, book.getBookAuthor());
+                statement.setString(10, book.getBookPlot());
+                statement.setString(11, book.getBookGenre());
             }
             case COMICS -> {
                 ComicsProduct comics = (ComicsProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Author, Artist, Plot, Genre, VolumeNumber) VALUES (%s, ?, ?, ?, ?, ?)", common, values));
-                statement.setString(9, comics.getAuthor());
-                statement.setString(10, comics.getArtist());
-                statement.setString(11, comics.getPlot());
-                statement.setString(12, comics.getGenre());
-                statement.setInt(13, comics.getVolume());
+                statement.setString(9, comics.getComicsAuthor());
+                statement.setString(10, comics.getComicsArtist());
+                statement.setString(11, comics.getComicsPlot());
+                statement.setString(12, comics.getComicsGenre());
+                statement.setInt(13, comics.getComicsVolume());
             }
             case VIDEOGAME -> {
                 VideoGameProduct videoGame = (VideoGameProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, Plot, Genre, ConsoleType) VALUES (%s, ?, ?, ?)", common, values));
-                statement.setString(9, videoGame.getPlot());
-                statement.setString(10, videoGame.getGenre());
-                statement.setString(11, videoGame.getConsoleType());
+                statement.setString(9, videoGame.getVideoGamePlot());
+                statement.setString(10, videoGame.getVideoGameGenre());
+                statement.setString(11, videoGame.getVideoGameConsoleType());
             }
             case GAMECONSOLE -> {
                 GameConsoleProduct gameConsole = (GameConsoleProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, ConsoleType, DigitalOnly) VALUES (%s, ?, ?)", common, values));
-                statement.setString(9, gameConsole.getConsoleType());
+                statement.setString(9, gameConsole.getGameConsoleType());
                 statement.setBoolean(10, gameConsole.isDigitalOnly());
             }
             case COMPUTER -> {
                 ComputerProduct computer = (ComputerProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, ComputerType, Ram, SSD, BatterySize, CPU, GPU, Brand, DisplaySize) VALUES (%s, ?, ?, ?, ?, ?, ?, ?, ?)", common, values));
                 statement.setString(9, computer.getComputerType());
-                statement.setInt(10, computer.getRam());
-                statement.setInt(11, computer.getSsd());
-                statement.setInt(12, computer.getBatterySize());
-                statement.setString(13, computer.getCpu());
-                statement.setString(14, computer.getGpu());
-                statement.setString(15, computer.getBrand());
-                statement.setFloat(16, computer.getDisplaySize());
+                statement.setInt(10, computer.getComputerRam());
+                statement.setInt(11, computer.getComputerSsd());
+                statement.setInt(12, computer.getComputerBatterySize());
+                statement.setString(13, computer.getComputerCpu());
+                statement.setString(14, computer.getComputerGpu());
+                statement.setString(15, computer.getComputerBrand());
+                statement.setFloat(16, computer.getComputerDisplaySize());
             }
             case HOMEAPPLIANCES -> {
                 HomeApplianceProduct homeAppliance = (HomeApplianceProduct) product;
                 statement = connection.prepareStatement(String.format("INSERT INTO Product(%s, EnergyClass, Specs) VALUES (%s, ?, ?)", common, values));
-                statement.setString(9, homeAppliance.getEnergyClass());
-                statement.setString(10, homeAppliance.getSpecs());
+                statement.setString(9, homeAppliance.getHomeAppliancesEnergyClass());
+                statement.setString(10, homeAppliance.getHomeAppliancesSpecs());
             }
             default -> throw new IllegalStateException("Unexpected value: " + product.getType());
         }

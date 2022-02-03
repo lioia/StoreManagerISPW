@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class RegisterController {
     public User register(RegisterBean bean) throws SQLException, DatabaseException {
-        UserDAO.saveUser(bean.getUsername(), bean.getEmail(), bean.getPassword(), bean.getUserType());
-        return UserDAO.getUserByUsername(bean.getUsername());
+        UserDAO.saveUser(bean.getRegisterUsername(), bean.getEmail(), bean.getRegisterPassword(), bean.getUserType());
+        return UserDAO.getUserByUsername(bean.getRegisterUsername());
     }
 }

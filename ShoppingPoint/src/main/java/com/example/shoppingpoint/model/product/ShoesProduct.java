@@ -15,25 +15,25 @@ public class ShoesProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setSize(size);
-        setMaterial(material);
+        setShoesSize(size);
+        setShoesMaterial(material);
         setShoesType(shoesType);
         setType(ProductType.SHOES);
     }
 
-    public String getSize() {
+    public String getShoesSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setShoesSize(String size) {
         this.size = size;
     }
 
-    public String getMaterial() {
+    public String getShoesMaterial() {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public void setShoesMaterial(String material) {
         this.material = material;
     }
 

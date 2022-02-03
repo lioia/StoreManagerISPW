@@ -14,24 +14,24 @@ public class ClothesProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setSize(size);
-        setMaterial(material);
+        setClothesSize(size);
+        setClothesMaterial(material);
         setType(ProductType.CLOTHES);
     }
 
-    public String getSize() {
+    public String getClothesSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setClothesSize(String size) {
         this.size = size;
     }
 
-    public String getMaterial() {
+    public String getClothesMaterial() {
         return material;
     }
 
-    public void setMaterial(String material) {
+    public void setClothesMaterial(String material) {
         this.material = material;
     }
 }

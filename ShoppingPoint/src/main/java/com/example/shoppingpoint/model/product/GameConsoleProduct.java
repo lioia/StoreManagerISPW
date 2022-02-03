@@ -14,16 +14,16 @@ public class GameConsoleProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setConsoleType(consoleType);
-        setDigitalOnly(digitalOnly);
+        setGameConsoleType(consoleType);
+        setGameConsoleDigitalOnly(digitalOnly);
         setType(ProductType.GAMECONSOLE);
     }
 
-    public String getConsoleType() {
+    public String getGameConsoleType() {
         return consoleType;
     }
 
-    public void setConsoleType(String consoleType) {
+    public void setGameConsoleType(String consoleType) {
         this.consoleType = consoleType;
     }
 
@@ -31,7 +31,7 @@ public class GameConsoleProduct extends Product {
         return digitalOnly;
     }
 
-    public void setDigitalOnly(boolean digitalOnly) {
+    public void setGameConsoleDigitalOnly(boolean digitalOnly) {
         this.digitalOnly = digitalOnly;
     }
 }

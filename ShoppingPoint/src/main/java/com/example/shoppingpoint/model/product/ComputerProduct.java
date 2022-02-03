@@ -21,13 +21,13 @@ public class ComputerProduct extends Product {
         setStatus(status);
         setStoreName(storeName);
         setComputerType(computerType);
-        setRam(ram);
-        setSsd(ssd);
-        setBatterySize(batterySize);
-        setCpu(cpu);
-        setGpu(gpu);
-        setBrand(brand);
-        setDisplaySize(displaySize);
+        setComputerRam(ram);
+        setComputerSsd(ssd);
+        setComputerBatterySize(batterySize);
+        setComputerCpu(cpu);
+        setComputerGpu(gpu);
+        setComputerBrand(brand);
+        setComputerDisplaySize(displaySize);
         setType(ProductType.COMPUTER);
     }
 
@@ -39,59 +39,59 @@ public class ComputerProduct extends Product {
         this.computerType = computerType;
     }
 
-    public Integer getRam() {
+    public Integer getComputerRam() {
         return ram;
     }
 
-    public void setRam(Integer ram) {
+    public void setComputerRam(Integer ram) {
         this.ram = ram;
     }
 
-    public Integer getSsd() {
+    public Integer getComputerSsd() {
         return ssd;
     }
 
-    public void setSsd(Integer ssd) {
+    public void setComputerSsd(Integer ssd) {
         this.ssd = ssd;
     }
 
-    public Integer getBatterySize() {
+    public Integer getComputerBatterySize() {
         return batterySize;
     }
 
-    public void setBatterySize(Integer batterySize) {
+    public void setComputerBatterySize(Integer batterySize) {
         this.batterySize = batterySize;
     }
 
-    public String getCpu() {
+    public String getComputerCpu() {
         return cpu;
     }
 
-    public void setCpu(String cpu) {
+    public void setComputerCpu(String cpu) {
         this.cpu = cpu;
     }
 
-    public String getGpu() {
+    public String getComputerGpu() {
         return gpu;
     }
 
-    public void setGpu(String gpu) {
+    public void setComputerGpu(String gpu) {
         this.gpu = gpu;
     }
 
-    public String getBrand() {
+    public String getComputerBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setComputerBrand(String brand) {
         this.brand = brand;
     }
 
-    public Float getDisplaySize() {
+    public Float getComputerDisplaySize() {
         return displaySize;
     }
 
-    public void setDisplaySize(Float displaySize) {
+    public void setComputerDisplaySize(Float displaySize) {
         this.displaySize = displaySize;
     }
 }

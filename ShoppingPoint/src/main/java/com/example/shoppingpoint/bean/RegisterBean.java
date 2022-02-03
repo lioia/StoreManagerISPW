@@ -13,9 +13,9 @@ public class RegisterBean {
 
     public RegisterBean(String email, String username, String userType, String password, String verifyPassword) throws BeanException {
         setEmail(email);
-        setUsername(username);
+        setRegisterUsername(username);
         setUserType(userType);
-        setPassword(password);
+        setRegisterPassword(password);
         setVerifyPassword(password, verifyPassword);
     }
 
@@ -23,7 +23,7 @@ public class RegisterBean {
         return email;
     }
 
-    public String getUsername() {
+    public String getRegisterUsername() {
         return username;
     }
 
@@ -31,17 +31,17 @@ public class RegisterBean {
         return userType;
     }
 
-    public String getPassword() {
+    public String getRegisterPassword() {
         return password;
     }
 
-    public void setUsername(String user) throws BeanException {
+    public void setRegisterUsername(String user) throws BeanException {
         if (user.length() < 4) throw new BeanException("register username", BeanException.TOO_SHORT_REASON);
         if (user.length() > 16) throw new BeanException("register username", BeanException.TOO_LONG_REASON);
         this.username = user;
     }
 
-    public void setPassword(String pass) throws BeanException {
+    public void setRegisterPassword(String pass) throws BeanException {
         if (pass.length() < 8) throw new BeanException("register password", BeanException.TOO_SHORT_REASON);
         if (pass.length() > 16) throw new BeanException("register password", BeanException.TOO_LONG_REASON);
         this.password = pass;

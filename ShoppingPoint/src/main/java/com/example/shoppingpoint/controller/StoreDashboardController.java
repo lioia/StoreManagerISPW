@@ -57,6 +57,6 @@ public class StoreDashboardController {
     }
 
     public void editProduct(Integer id, EditProductBean bean) throws SQLException {
-        ProductDAO.updateProduct(id, bean.getPrice(), bean.getDiscountedPrice(), bean.getQuantity());
+        ProductDAO.updateProduct(id, bean.getNewPrice(), bean.getNewDiscountedPrice(), bean.getNewQuantity());
     }
 }

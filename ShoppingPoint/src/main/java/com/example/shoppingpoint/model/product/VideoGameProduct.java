@@ -15,33 +15,33 @@ public class VideoGameProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setPlot(plot);
-        setGenre(genre);
-        setConsoleType(consoleType);
+        setVideoGamePlot(plot);
+        setVideoGameGenre(genre);
+        setVideoGameConsoleType(consoleType);
         setType(ProductType.VIDEOGAME);
     }
 
-    public String getPlot() {
+    public String getVideoGamePlot() {
         return plot;
     }
 
-    public void setPlot(String plot) {
+    public void setVideoGamePlot(String plot) {
         this.plot = plot;
     }
 
-    public String getGenre() {
+    public String getVideoGameGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setVideoGameGenre(String genre) {
         this.genre = genre;
     }
 
-    public String getConsoleType() {
+    public String getVideoGameConsoleType() {
         return consoleType;
     }
 
-    public void setConsoleType(String consoleType) {
+    public void setVideoGameConsoleType(String consoleType) {
         this.consoleType = consoleType;
     }
 }

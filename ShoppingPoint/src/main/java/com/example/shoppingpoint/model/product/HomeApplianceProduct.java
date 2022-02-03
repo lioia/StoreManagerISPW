@@ -14,24 +14,24 @@ public class HomeApplianceProduct extends Product {
         setQuantity(quantity);
         setStatus(status);
         setStoreName(storeName);
-        setEnergyClass(energyClass);
-        setSpecs(specs);
+        setHomeAppliancesEnergyClass(energyClass);
+        setHomeAppliancesSpecs(specs);
         setType(ProductType.HOMEAPPLIANCES);
     }
 
-    public String getEnergyClass() {
+    public String getHomeAppliancesEnergyClass() {
         return energyClass;
     }
 
-    public void setEnergyClass(String energyClass) {
+    public void setHomeAppliancesEnergyClass(String energyClass) {
         this.energyClass = energyClass;
     }
 
-    public String getSpecs() {
+    public String getHomeAppliancesSpecs() {
         return specs;
     }
 
-    public void setSpecs(String specs) {
+    public void setHomeAppliancesSpecs(String specs) {
         this.specs = specs;
     }
 }
