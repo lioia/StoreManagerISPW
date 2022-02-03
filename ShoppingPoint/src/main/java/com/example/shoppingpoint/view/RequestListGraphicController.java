@@ -6,12 +6,12 @@ import com.example.shoppingpoint.controller.OffersController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -29,7 +29,6 @@ import java.util.List;
 import com.example.shoppingpoint.model.Request;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.controlsfx.control.PopOver;
 
 import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
 import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
@@ -75,24 +74,7 @@ public class RequestListGraphicController {
                 ((Text) node.lookup("#maxPrice")).setText(String.format("Max Price:%.2f", request.getMaxPrice()));
                 ((Label) node.lookup("#description")).setText(product.getDescription());
                 ((Text) node.lookup("#store")).setText("Store: " + product.getStoreName());
-                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
-                    ScrollPane scrollPane = new ScrollPane();
-                    scrollPane.setMaxWidth(400.0);
-                    scrollPane.setMaxHeight(400.0);
-                    scrollPane.setPadding(new Insets(16));
-                    Label label = new Label();
-                    label.setText(product.getDescription());
-                    label.setStyle("-fx-font-size: 16px");
-                    label.setMaxWidth(350.0);
-                    label.setWrapText(true);
-                    scrollPane.setContent(label);
-                    PopOver popOver = new PopOver();
-                    Node pane = (Node) event.getSource();
-                    popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
-                    popOver.setContentNode(scrollPane);
-                    popOver.setCornerRadius(16);
-                    popOver.show(pane);
-                });
+                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, product.getDescription()));
                 Text sendEmail = (Text) node.lookup("#sendEmail");
                 sendEmail.setOnMouseClicked(event -> {
                     try {

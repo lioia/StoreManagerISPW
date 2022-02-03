@@ -5,17 +5,15 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.controller.StoreController;
-import com.example.shoppingpoint.dao.StoreDAO;
-import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -23,11 +21,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Label;
-import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 
 import java.io.IOException;
@@ -139,24 +135,7 @@ public class StoreGraphicController {
                 ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
                 if (product.getImage() != null)
                     ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
-                ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
-                    ScrollPane scrollPane = new ScrollPane();
-                    scrollPane.setMaxWidth(400.0);
-                    scrollPane.setMaxHeight(400.0);
-                    scrollPane.setPadding(new Insets(16));
-                    Label label = new Label();
-                    label.setText(product.getDescription());
-                    label.setStyle("-fx-font-size: 16px");
-                    label.setMaxWidth(350.0);
-                    label.setWrapText(true);
-                    scrollPane.setContent(label);
-                    PopOver popOver = new PopOver();
-                    Node node = (Node) event.getSource();
-                    popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
-                    popOver.setContentNode(scrollPane);
-                    popOver.setCornerRadius(16);
-                    popOver.show(node);
-                });
+                ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, product.getDescription()));
                 ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
                     try {
                         FXMLLoader paymentLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment.fxml"));

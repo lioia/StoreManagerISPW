@@ -110,7 +110,7 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void goBack(ActionEvent event) throws Exception {
+    public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);

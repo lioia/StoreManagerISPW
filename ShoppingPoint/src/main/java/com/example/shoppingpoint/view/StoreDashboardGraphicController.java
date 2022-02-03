@@ -11,6 +11,7 @@ import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -122,24 +123,7 @@ public class StoreDashboardGraphicController {
                         alert.show();
                     }
                 });
-                ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
-                    ScrollPane scrollPane = new ScrollPane();
-                    scrollPane.setMaxWidth(400.0);
-                    scrollPane.setMaxHeight(400.0);
-                    scrollPane.setPadding(new Insets(16));
-                    Label label = new Label();
-                    label.setText(product.getDescription());
-                    label.setStyle("-fx-font-size: 16px");
-                    label.setMaxWidth(350.0);
-                    label.setWrapText(true);
-                    scrollPane.setContent(label);
-                    PopOver popOver = new PopOver();
-                    Node node = (Node) event.getSource();
-                    popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
-                    popOver.setContentNode(scrollPane);
-                    popOver.setCornerRadius(16);
-                    popOver.show(node);
-                });
+                ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> DescriptionHandler.showDescription(event, product.getDescription()));
                 ((Button) pane.lookup("#requestButton")).setOnAction(event -> {
                     try {
                         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("new_request.fxml"));
