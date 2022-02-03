@@ -88,6 +88,9 @@ public class RequestListGraphicController {
                 ((Button) node.lookup("#offerButton")).setOnAction((ActionEvent event) -> {
                     try {
                         controller.saveOffer(request.getRequestId(), new RequestListBean(((TextField) node.lookup("#choosePriceTextField")).getText()));
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Offer successfully sent");
+                        alert.show();
                     } catch (BeanException e) {
                         ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
                     } catch (ControllerException e) {
