@@ -5,6 +5,7 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
 import com.example.shoppingpoint.controller.AmazonController;
+import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.controller.StoreDashboardController;
 import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
@@ -87,7 +88,8 @@ public class StoreDashboardGraphicController {
 
             for (GenericProduct product : products) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
-                float reviewAverage = controller.getReviewOfProduct(product.getId());
+                ReviewController reviewController = new ReviewController();
+                float reviewAverage = reviewController.getReviewOfProduct(product.getId());
                 AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
                 ((Label) pane.lookup("#name")).setText(product.getName());

@@ -3,6 +3,7 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.StoreBean;
+import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.exception.ControllerException;
@@ -121,7 +122,8 @@ public class StoreGraphicController {
 
             for (GenericProduct product : products) {
                 if (product.getQuantity() == 0) continue;
-                float reviewAverage = controller.getReviewOfProduct(product.getId());
+                ReviewController reviewController = new ReviewController();
+                float reviewAverage = reviewController.getReviewOfProduct(product.getId());
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_product_pane.fxml"));
                 AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
