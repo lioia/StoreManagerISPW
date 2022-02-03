@@ -68,34 +68,44 @@
             <Insets bottom="16.0" />
         </VBox.margin>
     </HBox>
-    <HBox alignment="TOP_RIGHT">
+    <HBox alignment="CENTER_LEFT">
         <VBox.margin>
 
         </VBox.margin>
-        <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
-            <font>
-                <Font size="18.0" />
-            </font>
-            <HBox.margin>
-                <Insets right="16.0" />
-            </HBox.margin>
-        </Label>
-        <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
-            <font>
-                <Font size="18.0" />
-            </font>
-            <effect>
-                <DropShadow />
-            </effect>
-        </Button>
-        <Label fx:id="currentPointsText" text="Points" visible="false">
-            <font>
-                <Font size="18.0" />
-            </font>
-            <HBox.margin>
-                <Insets right="16.0" />
-            </HBox.margin>
-        </Label>
+      <HBox prefWidth="612.0">
+         <HBox.margin>
+            <Insets left="24.0" />
+         </HBox.margin>
+         <children>
+              <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
+                  <font>
+                      <Font size="14.0" />
+                  </font>
+               <opaqueInsets>
+                  <Insets left="16.0" />
+               </opaqueInsets>
+              </Label>
+              <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+                  <font>
+                      <Font size="24.0" />
+                  </font>
+                  <effect>
+                      <DropShadow />
+                  </effect>
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+              </Button>
+              <Label fx:id="currentPointsText" text="Points" visible="false">
+                  <font>
+                      <Font size="14.0" />
+                  </font>
+                  <HBox.margin>
+                      <Insets left="50.0" right="16.0" />
+                  </HBox.margin>
+              </Label>
+         </children>
+      </HBox>
         <Button alignment="CENTER" mnemonicParsing="false" onAction="#goOrderList" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Order">
             <font>
                 <Font size="24.0" />
@@ -104,25 +114,24 @@
                 <DropShadow />
             </effect>
             <HBox.margin>
-                <Insets left="16.0" />
+                <Insets left="24.0" right="16.0" />
             </HBox.margin>
         </Button>
     </HBox>
-   <HBox>
+   <HBox spacing="20.0">
       <VBox.margin>
-         <Insets bottom="16.0" left="16.0" right="16.0" />
+         <Insets bottom="16.0" left="24.0" right="16.0" />
       </VBox.margin>
       <children>
           <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
               <font>
-                  <Font size="18.0" />
+                  <Font size="14.0" />
               </font>
           </Label>
       </children>
-       <Text fx:id="sendEmail" layoutX="18.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" onMouseClicked="#sendEmail"
-             text="send email to store" fill="#6EC6FF" >
+       <Text fx:id="sendEmail" fill="#6EC6FF" layoutX="18.0" layoutY="60.0" onMouseClicked="#sendEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="send email to store">
            <font>
-               <Font size="18.0"/>
+               <Font size="14.0" />
 
            </font>
        </Text>

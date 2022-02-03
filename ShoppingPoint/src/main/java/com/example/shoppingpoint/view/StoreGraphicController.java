@@ -83,7 +83,7 @@ public class StoreGraphicController {
         } else {
             ((HBox) loyaltyCardButton.getParent()).getChildren().remove(loyaltyCardButton);
             ((HBox) loyaltyCard1Text.getParent()).getChildren().remove(loyaltyCard1Text);
-            ((VBox) loyaltyCard2Text.getParent()).getChildren().remove(loyaltyCard2Text);
+            ((HBox) loyaltyCard2Text.getParent()).getChildren().remove(loyaltyCard2Text);
             ((HBox) currentPointsText.getParent()).getChildren().remove(currentPointsText);
         }
 
