@@ -17,112 +17,114 @@ public class StoreDAO {
         ArrayList<Store> stores = new ArrayList<>();
 
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Execute query
-        ResultSet rs = statement.executeQuery("SELECT * FROM Store");
-        while (rs.next()) {
-            Store store = getStore(rs);
-            stores.add(store);
-        }
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Execute query
+                ResultSet rs = statement.executeQuery("SELECT * FROM Store");
+                while (rs.next()) {
+                    Store store = getStore(rs);
+                    stores.add(store);
+                }
 
-        rs.close();
-        statement.close();
-        connection.close();
+                rs.close();
+            }
+        }
         return stores;
     }
 
     public static Store getStoreByName(String name) throws SQLException, DatabaseException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Get user with specified username
-        String sql = String.format("SELECT * FROM Store WHERE Name='%s'", name);
-        // Execute query
-        ResultSet rs = statement.executeQuery(sql);
-        // Empty result
-        if (!rs.first())
-            throw new DatabaseException("store");
+        Store store;
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Get user with specified username
+                String sql = String.format("SELECT * FROM Store WHERE Name='%s'", name);
+                // Execute query
+                ResultSet rs = statement.executeQuery(sql);
+                // Empty result
+                if (!rs.first())
+                    throw new DatabaseException("store");
 
-        rs.first();
-        Store store = getStore(rs);
-
-        rs.close();
-        statement.close();
-        connection.close();
+                rs.first();
+                store = getStore(rs);
+                rs.close();
+            }
+        }
         return store;
     }
 
     public static String getStoreOwnerUsernameByStoreName(String storeName) throws SQLException, DatabaseException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Get store with specified store owner
-        String sql = String.format("SELECT StoreOwner FROM Store WHERE Name='%s'", storeName);
-        // Execute query
-        ResultSet rs = statement.executeQuery(sql);
-        // Empty result
-        if (!rs.first())
-            throw new DatabaseException("store owner username");
+        String storeOwnerUsername;
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Get store with specified store owner
+                String sql = String.format("SELECT StoreOwner FROM Store WHERE Name='%s'", storeName);
+                // Execute query
+                ResultSet rs = statement.executeQuery(sql);
+                // Empty result
+                if (!rs.first())
+                    throw new DatabaseException("store owner username");
 
-        rs.first();
-        String storeOwnerUsername = rs.getString("StoreOwner");
+                rs.first();
+                storeOwnerUsername = rs.getString("StoreOwner");
 
-        rs.close();
-        statement.close();
-        connection.close();
+                rs.close();
+            }
+        }
         return storeOwnerUsername;
     }
 
     public static Store getStoreByStoreOwnerUsername(String username) throws SQLException, DatabaseException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Get store with specified store owner
-        String sql = String.format("SELECT * FROM Store WHERE StoreOwner='%s'", username);
-        // Execute query
-        ResultSet rs = statement.executeQuery(sql);
-        // Empty result
-        if (!rs.first())
-            throw new DatabaseException("store of " + username);
+        Store store;
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Get store with specified store owner
+                String sql = String.format("SELECT * FROM Store WHERE StoreOwner='%s'", username);
+                // Execute query
+                ResultSet rs = statement.executeQuery(sql);
+                // Empty result
+                if (!rs.first())
+                    throw new DatabaseException("store of " + username);
 
-        rs.first();
-        Store store = getStore(rs);
+                rs.first();
+                store = getStore(rs);
 
-        rs.close();
-        statement.close();
-        connection.close();
+                rs.close();
+            }
+        }
         return store;
     }
 
     public static void saveStore(String name, String address, StoreType type, String storeOwner) throws SQLException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Get user with specified username
-        String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, EuroInPoints,StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%d','%s')", name, address, type, 0, 0, storeOwner);
-        // Execute query
-        statement.executeUpdate(sql);
-        statement.close();
-        connection.close();
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Get user with specified username
+                String sql = String.format("INSERT INTO Store (Name, Address, Type, PointsInEuro, EuroInPoints,StoreOwner) VALUES ('%s', '%s', '%s', '%d', '%d','%s')", name, address, type, 0, 0, storeOwner);
+                // Execute query
+                statement.executeUpdate(sql);
+            }
+        }
     }
 
     public static void updatePoints(int pointsInEuro, int euroInPoints, String storeName) throws SQLException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        // Get user with specified username
-        String sql = String.format("UPDATE Store SET PointsInEuro = %d, EuroInPoints = %d WHERE Name = '%s'", pointsInEuro, euroInPoints, storeName);
-        // Execute query
-        statement.executeUpdate(sql);
-        statement.close();
-        connection.close();
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+                // Get user with specified username
+                String sql = String.format("UPDATE Store SET PointsInEuro = %d, EuroInPoints = %d WHERE Name = '%s'", pointsInEuro, euroInPoints, storeName);
+                // Execute query
+                statement.executeUpdate(sql);
+            }
+        }
     }
 
     private static Store getStore(ResultSet rs) throws SQLException {

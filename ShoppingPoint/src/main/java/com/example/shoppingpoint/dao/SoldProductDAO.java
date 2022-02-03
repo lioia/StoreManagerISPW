@@ -19,17 +19,17 @@ public class SoldProductDAO {
         List<SoldProduct> products = new ArrayList<>();
 
 //            Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
 //            Create Statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 //            Execute query
-        ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
-        while (rs.next()) {
-            products.add(getSoldProduct(rs));
+                ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
+                while (rs.next()) {
+                    products.add(getSoldProduct(rs));
+                }
+                rs.close();
+            }
         }
-        rs.close();
-        statement.close();
-        connection.close();
         return products;
     }
 
@@ -37,35 +37,35 @@ public class SoldProductDAO {
         List<SoldProduct> products = new ArrayList<>();
 
 //            Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
 //            Create Statement
-        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 //            Get item
-        String sql = String.format("SELECT * FROM SoldProduct WHERE Client='%s'", client);
+                String sql = String.format("SELECT * FROM SoldProduct WHERE Client='%s'", client);
 //            Execute query
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
-            products.add(getSoldProduct(rs));
+                ResultSet rs = statement.executeQuery(sql);
+                while (rs.next()) {
+                    products.add(getSoldProduct(rs));
+                }
+                rs.close();
+            }
         }
-        rs.close();
-        statement.close();
-        connection.close();
         return products;
     }
 
     public static void saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername) throws SQLException {
         // Create Connection
-        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
-        // Create statement
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)");
-        statement.setInt(1, quantity);
-        statement.setDate(2, Date.valueOf(date));
-        statement.setInt(3, productId);
-        statement.setString(4, clientUsername);
-        // Execute query
-        statement.executeUpdate();
-        statement.close();
-        connection.close();
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+            // Create statement
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)")) {
+                statement.setInt(1, quantity);
+                statement.setDate(2, Date.valueOf(date));
+                statement.setInt(3, productId);
+                statement.setString(4, clientUsername);
+                // Execute query
+                statement.executeUpdate();
+            }
+        }
     }
 
     private static SoldProduct getSoldProduct(ResultSet rs) throws SQLException, DatabaseException {
