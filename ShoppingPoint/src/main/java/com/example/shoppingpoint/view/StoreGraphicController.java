@@ -66,6 +66,7 @@ public class StoreGraphicController {
             try {
                 this.card = controller.getLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
             } catch (Exception ignored) {
+                this.card = null;
             }
             if (card != null) {
                 loyaltyCardButton.setVisible(false);
@@ -97,21 +98,26 @@ public class StoreGraphicController {
     }
 
     @FXML
-    public void search() throws Exception {
+    public void search() throws IOException {
         String searchQuery = searchTextField.getText();
 
         createProductsView(new StoreBean(store.getName(), searchQuery));
     }
 
     @FXML
-    public void sendEmail() throws Exception {
-        String storeOwner = StoreDAO.getStoreOwnerUsernameByStoreName(store.getName());
-        new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
+    public void sendEmail() {
+        SendEmailController emailController = new SendEmailController();
+        String username;
+        try {
+            username = emailController.getUsernameOfStore(store.getName());
+            emailController.sendEmail(username);
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+        }
     }
 
     private void createProductsView(StoreBean bean) throws IOException {
         try {
-
             productsPane.getChildren().clear();
             List<GenericProduct> products = controller.getProductsFromStore(bean);
 
@@ -164,7 +170,7 @@ public class StoreGraphicController {
                 productsPane.getChildren().add(pane);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 
@@ -173,7 +179,7 @@ public class StoreGraphicController {
         try {
             this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
         loyaltyCardButton.setVisible(false);
         currentPointsText.setVisible(true);

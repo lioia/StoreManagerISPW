@@ -53,7 +53,7 @@ public class RequestListGraphicController {
                 transition.play();
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 
@@ -104,15 +104,15 @@ public class RequestListGraphicController {
                     try {
                         controller.saveOffer(request.getRequestId(), new RequestListBean(((TextField) node.lookup("#choosePriceTextField")).getText()));
                     } catch (BeanException e) {
-                        ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+                        ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
                     } catch (ControllerException e) {
-                        ExceptionHandler.handleException("Controller Error", e.getMessage());
+                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }
                 });
                 requestPane.getChildren().add(node);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 
@@ -134,7 +134,7 @@ public class RequestListGraphicController {
             RequestListController controller = new RequestListController();
             controller.checkedOffer();
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 }

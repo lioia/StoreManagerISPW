@@ -127,9 +127,9 @@ public class AddProductContinueGraphicController {
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
             ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
         } catch (BeanException e) {
-            ExceptionHandler.handleException("Incorrect data", e.getMessage());
+            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
         } catch (Exception e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

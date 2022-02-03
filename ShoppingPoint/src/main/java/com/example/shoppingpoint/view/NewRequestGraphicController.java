@@ -51,9 +51,9 @@ public class NewRequestGraphicController {
             OffersGraphicController offersGraphicController = loader.getController();
             offersGraphicController.initialize(product);
         } catch (BeanException e) {
-            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

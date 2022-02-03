@@ -69,7 +69,7 @@ public class AddProductGraphicController {
             AddProductContinueGraphicController addProductContinueGraphicController = loader.getController();
             addProductContinueGraphicController.initialize(bean, type);
         } catch (BeanException e) {
-            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
         }
     }
 

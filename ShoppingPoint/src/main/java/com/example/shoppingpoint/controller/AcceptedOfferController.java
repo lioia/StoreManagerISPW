@@ -31,7 +31,7 @@ public class AcceptedOfferController {
         }
     }
 
-    public Boolean IsOfferChecked(int offerId) throws ControllerException {
+    public Boolean isOfferChecked(int offerId) throws ControllerException {
         try {
             return OfferDAO.isOfferChecked(offerId);
         } catch (SQLException e) {

@@ -83,7 +83,7 @@ public class SearchStoreGraphicController {
                 storesPane.getChildren().add(node);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

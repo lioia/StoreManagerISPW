@@ -71,7 +71,7 @@ public class OffersGraphicController {
                                     controller.acceptOffer(req, off.getOfferId());
                                     goBack(event);
                                 } catch (ControllerException e) {
-                                    ExceptionHandler.handleException("Controller Error", e.getMessage());
+                                    ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                                 } catch (IOException e) {
                                     ExceptionHandler.handleException("Could not go back", e.getMessage());
                                 }
@@ -83,7 +83,7 @@ public class OffersGraphicController {
                 requestsPane.getChildren().add(node);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

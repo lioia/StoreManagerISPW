@@ -60,7 +60,7 @@ public class ClientListGraphicController {
                     try {
                         new SendEmailController().sendEmail(client.getEmail());
                     } catch (ControllerException e) {
-                        ExceptionHandler.handleException("Controller Error", e.getMessage());
+                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }
                 });
                 ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
@@ -68,7 +68,7 @@ public class ClientListGraphicController {
                 clientPane.getChildren().add(pane);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

@@ -62,7 +62,7 @@ public class StoreDashboardGraphicController {
             ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
             labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
         createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
     }
@@ -90,14 +90,19 @@ public class StoreDashboardGraphicController {
                 String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
                 Label priceLabel = (Label) pane.lookup("#price");
                 priceLabel.setText("Price: " + formattedPrice);
-                ((TextField) pane.lookup("#priceTextField")).setText(product.getPrice().toString());
+                TextField priceTextField = (TextField) pane.lookup("#priceTextField");
+                priceTextField.setText(product.getPrice().toString());
                 String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-                ((Label) pane.lookup("#discountedPrice")).setText("Discounted Price: " + formattedDiscountedPrice);
-                ((TextField) pane.lookup("#discountedPriceTextField")).setText(product.getDiscountedPrice().toString());
+                Label discountedPriceLabel = (Label) pane.lookup("#discountedPrice");
+                discountedPriceLabel.setText("Discounted Price: " + formattedDiscountedPrice);
+                TextField discountedPriceTextField = (TextField) pane.lookup("#discountedPriceTextField");
+                discountedPriceTextField.setText(product.getDiscountedPrice().toString());
                 ((Label) pane.lookup("#status")).setText(product.getStatus());
                 ((Label) pane.lookup("#description")).setText(product.getDescription());
-                ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
-                ((TextField) pane.lookup("#quantityTextField")).setText(product.getQuantity().toString());
+                Label quantityLabel = (Label) pane.lookup("#quantity");
+                quantityLabel.setText(String.format("Quantity: %d", product.getQuantity()));
+                TextField quantityTextField = (TextField) pane.lookup("quantityTextField");
+                quantityTextField.setText(product.getQuantity().toString());
                 ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
                 if (product.getImage() != null)
                     ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
@@ -170,9 +175,9 @@ public class StoreDashboardGraphicController {
                     });
                     ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {
                         setProductVisibility(pane, true);
-                        String price = ((TextField) pane.lookup("#priceTextField")).getText();
-                        String discountedPrice = ((TextField) pane.lookup("#discountedPriceTextField")).getText();
-                        String quantity = ((TextField) pane.lookup("#quantityTextField")).getText();
+                        String price = priceTextField.getText();
+                        String discountedPrice = discountedPriceTextField.getText();
+                        String quantity = quantityTextField.getText();
                         try {
                             EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
                             controller.editProduct(product.getId(), bean);
@@ -181,21 +186,20 @@ public class StoreDashboardGraphicController {
                             product.setDiscountedPrice(bean.getNewDiscountedPrice());
                             product.setQuantity(bean.getNewQuantity());
                             priceLabel.setText(String.format("Price: %.02f€", product.getPrice()));
-                            ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
-                            ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
+                            discountedPriceLabel.setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
+                            quantityLabel.setText(String.format("Quantity: %d", product.getQuantity()));
                         } catch (BeanException e) {
-                            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+                            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
                         } catch (ControllerException e) {
-                            ExceptionHandler.handleException("Controller Error", e.getMessage());
+                            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                         }
                     });
-
                 });
 //            Add product to the view
                 productsPane.getChildren().add(pane);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 
@@ -248,11 +252,11 @@ public class StoreDashboardGraphicController {
                 popOver.hide();
             } catch (BeanException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Incorrect data");
+                alert.setHeaderText(BEAN_HEADER_TEXT);
                 alert.setContentText(e.getMessage());
                 alert.show();
             } catch (ControllerException e) {
-                ExceptionHandler.handleException("Controller Error", e.getMessage());
+                ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
             }
         });
 

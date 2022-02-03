@@ -53,17 +53,17 @@ public class OrdersGraphicController {
                         controller.updateReview(bean, review.getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
                     } catch (BeanException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("Incorrect data");
+                        alert.setHeaderText(BEAN_HEADER_TEXT);
                         alert.setContentText(e.getMessage());
                         alert.show();
                     } catch (ControllerException e) {
-                        ExceptionHandler.handleException("Controller Error", e.getMessage());
+                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }
                 });
                 ordersPane.getChildren().add(pane);
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 

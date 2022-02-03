@@ -53,9 +53,9 @@ public class LoginGraphicController {
                 ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
             }
         } catch (BeanException e) {
-            ExceptionHandler.handleException("Incorrect data", e.getMessage());
+            ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 }

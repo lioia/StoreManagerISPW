@@ -79,10 +79,10 @@ public class AcceptedOffersGraphicController {
                         String username = emailController.getUsernameOfStore(product.getStoreName());
                         emailController.sendEmail(username);
                     } catch (ControllerException e) {
-                        ExceptionHandler.handleException("Controller Error", e.getMessage());
+                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }
                 });
-                if (!controller.IsOfferChecked(acceptedOffer.getOfferId())) {
+                if (!controller.isOfferChecked(acceptedOffer.getOfferId())) {
                     (node.lookup("#newAcceptedOffer")).setVisible(true);
                 }
                 (node.lookup("#offerButton")).setVisible(false);
@@ -91,7 +91,7 @@ public class AcceptedOffersGraphicController {
 
             }
         } catch (ControllerException e) {
-            ExceptionHandler.handleException("Controller Error", e.getMessage());
+            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
 
