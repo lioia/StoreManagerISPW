@@ -42,6 +42,24 @@ public class OfferDAO {
         return offer;
     }
 
+    public static List<Offer> getAcceptedOffersOfSupplier(String supplier)throws SQLException{
+        ArrayList<Offer> offers = new ArrayList<>();
+
+        // Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+        // Create statement
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        // Execute query
+        ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Offer WHERE Supplier = '%s' AND Accepted=1", supplier));
+        while (rs.next()) {
+            offers.add(getOffer(rs));
+        }
+        rs.close();
+        statement.close();
+        connection.close();
+        return offers;
+    }
+
     public static List<Offer> getOffersOfRequest(int requestId) throws SQLException {
         ArrayList<Offer> offers = new ArrayList<>();
 

@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -37,7 +38,6 @@ public class RequestListGraphicController {
 
     @FXML
     private Label offersAccepted;
-
     @FXML
     public void initialize() throws Exception {
         createRequestPaneView();
@@ -121,12 +121,21 @@ public class RequestListGraphicController {
     }
 
     @FXML
-    private void goAcceptedOffer() {
+    private void goAcceptedOffer(ActionEvent actionEvent) throws Exception{
+        FXMLLoader acceptedOffersFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("AcceptedOffers.fxml"));
+        Parent acceptedOffersNode = acceptedOffersFxml.load();
+
+        ((Node) actionEvent.getSource()).getScene().setRoot(acceptedOffersNode);
+
+        AcceptedOffersGraphicController acceptedOffersGraphicController = acceptedOffersFxml.getController();
+
+        acceptedOffersGraphicController.initialize();
         try {
             RequestListController controller = new RequestListController();
             controller.checkedOffer();
         } catch (SQLException e) { // TODO handle exception
             e.printStackTrace();
         }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Request;
 
 import java.sql.*;
@@ -32,6 +33,27 @@ public class RequestDAO {
         statement.close();
         connection.close();
         return requests;
+    }
+
+    public static Request getRequestById(int id)throws SQLException, DatabaseException {
+        Request request;
+        //            Create Connection
+        Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS);
+//            Create Statement
+        Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//            Get item
+        String sql = String.format("SELECT * FROM Request WHERE RequestId=%d", id);
+//            Execute query
+        ResultSet rs = statement.executeQuery(sql);
+        if (!rs.first())
+            throw new DatabaseException("request");
+
+        rs.first();
+        request = new Request(id,rs.getInt("ProductId"),rs.getFloat("MaxPrice"),rs.getInt("Quantity"),rs.getBoolean("Accepted"));
+        statement.close();
+        connection.close();
+        return request;
+
     }
 
     public static void saveNewRequest(int productId, float maxPrice, int quantity) throws SQLException {

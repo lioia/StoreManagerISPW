@@ -11,7 +11,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="195.0" prefWidth="287.0"
+<AnchorPane prefHeight="195.0" prefWidth="307.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <effect>
@@ -43,13 +43,13 @@
             </graphic>
         </Button>
     </HBox>
-    <Text fx:id="store" layoutX="18.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0"
+    <Text fx:id="store" layoutX="18.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0"
           text="store">
         <font>
             <Font size="14.0"/>
         </font>
     </Text>
-    <HBox alignment="TOP_CENTER" layoutX="18.0" layoutY="125.0" spacing="-NaN">
+    <HBox fx:id="choosePriceHBox" alignment="TOP_CENTER" layoutX="18.0" layoutY="145.0" spacing="-NaN">
         <Text fx:id="choosePrice"  strokeType="OUTSIDE" strokeWidth="0.0"
               text="Make an offer">
             <font>
@@ -61,14 +61,14 @@
         </TextField>
 
     </HBox>
-    <Text fx:id="sendEmail" layoutX="18.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0"
+    <Text fx:id="sendEmail" layoutX="18.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0"
            text="send email to shop" fill="#6EC6FF">
         <font>
             <Font size="14.0"/>
 
         </font>
     </Text>
-    <Button layoutX="212.0" layoutY="150.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+    <Button layoutX="212.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0"
             style="-fx-background-radius: 16px; -fx-background-color: #6EC6FF;" fx:id="offerButton">
         <effect>
