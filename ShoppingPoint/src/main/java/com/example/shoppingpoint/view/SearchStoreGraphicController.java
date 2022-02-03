@@ -3,9 +3,11 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.controller.SearchStoreController;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -74,15 +76,14 @@ public class SearchStoreGraphicController {
                         StoreGraphicController storeController = storeFxml.getController();
 //                    Set the store on the controller and initialize data
                         storeController.initialize(store);
-                    } catch (Exception e) {
-//                    TODO handle controller exception
-                        e.printStackTrace();
+                    } catch (IOException e) {
+                        ExceptionHandler.handleException("Could not go to next screen", e.getMessage());
                     }
                 });
                 storesPane.getChildren().add(node);
             }
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

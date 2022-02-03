@@ -18,9 +18,9 @@ public class LoginController {
                 throw new ControllerException("Invalid input: password");
             }
         } catch (SQLException e) {
-            throw new ControllerException("SQL Error", e);
+            throw new ControllerException("SQL", e);
         } catch (DatabaseException e) {
-            throw new ControllerException("Database Error", e);
+            throw new ControllerException("Database", e);
         }
         return user;
     }

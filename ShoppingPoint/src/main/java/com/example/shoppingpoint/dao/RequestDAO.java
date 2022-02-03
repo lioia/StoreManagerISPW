@@ -12,6 +12,10 @@ public class RequestDAO {
         throw new IllegalStateException();
     }
 
+    private static final String MAX_PRICE = "MaxPrice";
+    private static final String QUANTITY = "Quantity";
+    private static final String ACCEPTED = "Accepted";
+
     public static List<Request> getRequestsOfProduct(int productId) throws SQLException {
         ArrayList<Request> requests = new ArrayList<>();
 
@@ -23,9 +27,9 @@ public class RequestDAO {
                 ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Request WHERE ProductId = %d", productId));
                 while (rs.next()) {
                     int requestId = rs.getInt("RequestId");
-                    float maxPrice = rs.getFloat("MaxPrice");
-                    int quantity = rs.getInt("Quantity");
-                    boolean accepted = rs.getBoolean("Accepted");
+                    float maxPrice = rs.getFloat(MAX_PRICE);
+                    int quantity = rs.getInt(QUANTITY);
+                    boolean accepted = rs.getBoolean(ACCEPTED);
                     requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
                 }
 
@@ -35,7 +39,7 @@ public class RequestDAO {
         return requests;
     }
 
-    public static Request getRequestById(int id)throws SQLException, DatabaseException {
+    public static Request getRequestById(int id) throws SQLException, DatabaseException {
         Request request;
         //            Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
@@ -49,7 +53,7 @@ public class RequestDAO {
                     throw new DatabaseException("request");
 
                 rs.first();
-                request = new Request(id, rs.getInt("ProductId"), rs.getFloat("MaxPrice"), rs.getInt("Quantity"), rs.getBoolean("Accepted"));
+                request = new Request(id, rs.getInt("ProductId"), rs.getFloat(MAX_PRICE), rs.getInt(QUANTITY), rs.getBoolean(ACCEPTED));
             }
         }
         return request;
@@ -91,9 +95,9 @@ public class RequestDAO {
                 ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE Accepted=0");
                 while (rs.next()) {
                     int requestId = rs.getInt("RequestId");
-                    float maxPrice = rs.getFloat("MaxPrice");
-                    int quantity = rs.getInt("Quantity");
-                    boolean accepted = rs.getBoolean("Accepted");
+                    float maxPrice = rs.getFloat(MAX_PRICE);
+                    int quantity = rs.getInt(QUANTITY);
+                    boolean accepted = rs.getBoolean(ACCEPTED);
                     int productId = rs.getInt("ProductId");
                     requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
                 }

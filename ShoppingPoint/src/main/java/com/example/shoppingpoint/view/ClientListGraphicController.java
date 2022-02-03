@@ -1,8 +1,9 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
-import javafx.application.HostServices;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,14 +36,14 @@ public class ClientListGraphicController {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
 
         labelStoreName.setText(storeName + " - Shopping Point");
         createClientListView(storeName);
     }
 
-    private void createClientListView(String storeName) {
+    private void createClientListView(String storeName) throws IOException {
         try {
             clientPane.getChildren().clear();
             ClientListController controller = new ClientListController();
@@ -55,13 +56,19 @@ public class ClientListGraphicController {
                 ((Label) pane.lookup("#clientNameText")).setText(client.getUsername());
                 Label email = (Label) pane.lookup("#clientEmailText");
                 email.setText(client.getEmail());
-                email.setOnMouseClicked(event -> new SendEmailController().sendEmail(client.getEmail()));
+                email.setOnMouseClicked(event -> {
+                    try {
+                        new SendEmailController().sendEmail(client.getEmail());
+                    } catch (ControllerException e) {
+                        ExceptionHandler.handleException("Controller Error", e.getMessage());
+                    }
+                });
                 ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));
 //            Add client to the view
                 clientPane.getChildren().add(pane);
             }
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

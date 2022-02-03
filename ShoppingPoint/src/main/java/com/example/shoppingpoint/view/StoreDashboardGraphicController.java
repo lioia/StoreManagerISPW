@@ -8,7 +8,10 @@ import com.example.shoppingpoint.controller.AmazonController;
 import com.example.shoppingpoint.controller.StoreDashboardController;
 import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.BoundaryException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,8 +61,8 @@ public class StoreDashboardGraphicController {
             Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
             ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
             labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
         createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
     }
@@ -73,7 +76,7 @@ public class StoreDashboardGraphicController {
         clientListGraphicController.initialize();
     }
 
-    private void createProductsView(Store store) {
+    private void createProductsView(Store store) throws IOException {
         try {
             productsPane.getChildren().clear();
             List<GenericProduct> products = controller.getProductsFromStore(store);
@@ -104,13 +107,12 @@ public class StoreDashboardGraphicController {
                     try {
                         float estimatedPrice = amazonController.getEstimatedPrice(product.getName());
                         estimatedPriceLabel.setText(String.format(Locale.US, "Estimated Price: %.02f€", estimatedPrice));
-                    } catch (IOException e) {
+                    } catch (BoundaryException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText("Loading error");
                         alert.setContentText("There was an error loading the prices...");
                         alert.show();
                     }
-
                 });
                 ((Button) pane.lookup("#descriptionButtonOfLabel")).setOnAction(event -> {
                     ScrollPane scrollPane = new ScrollPane();
@@ -182,12 +184,9 @@ public class StoreDashboardGraphicController {
                             ((Label) pane.lookup("#discountedPrice")).setText(String.format("Discounted Price: %.02f€", product.getDiscountedPrice()));
                             ((Label) pane.lookup("#quantity")).setText(String.format("Quantity: %d", product.getQuantity()));
                         } catch (BeanException e) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setHeaderText("Incorrect data");
-                            alert.setContentText(e.getMessage());
-                            alert.show();
-                        } catch (Exception e) { // TODO handle controller exception
-                            e.printStackTrace();
+                            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+                        } catch (ControllerException e) {
+                            ExceptionHandler.handleException("Controller Error", e.getMessage());
                         }
                     });
 
@@ -195,8 +194,8 @@ public class StoreDashboardGraphicController {
 //            Add product to the view
                 productsPane.getChildren().add(pane);
             }
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 
@@ -252,8 +251,8 @@ public class StoreDashboardGraphicController {
                 alert.setHeaderText("Incorrect data");
                 alert.setContentText(e.getMessage());
                 alert.show();
-            } catch (Exception e) { // TODO handle controller exception
-                e.printStackTrace();
+            } catch (ControllerException e) {
+                ExceptionHandler.handleException("Controller Error", e.getMessage());
             }
         });
 

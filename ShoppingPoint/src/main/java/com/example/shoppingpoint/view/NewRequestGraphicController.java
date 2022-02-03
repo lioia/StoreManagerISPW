@@ -5,14 +5,14 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.NewRequestBean;
 import com.example.shoppingpoint.controller.NewRequestController;
 import com.example.shoppingpoint.exception.BeanException;
-import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -40,7 +40,7 @@ public class NewRequestGraphicController {
     }
 
     @FXML
-    public void save(ActionEvent actionEvent) {
+    public void save(ActionEvent actionEvent) throws IOException {
         try {
             NewRequestBean bean = new NewRequestBean(maxPriceTextField.getText(), quantityTextField.getText());
             NewRequestController controller = new NewRequestController();
@@ -51,12 +51,9 @@ public class NewRequestGraphicController {
             OffersGraphicController offersGraphicController = loader.getController();
             offersGraphicController.initialize(product);
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

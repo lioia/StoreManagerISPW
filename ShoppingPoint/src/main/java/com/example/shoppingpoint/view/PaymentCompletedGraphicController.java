@@ -1,7 +1,9 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,25 +29,27 @@ public class PaymentCompletedGraphicController {
         this.store = store;
 
         transition = new PauseTransition(Duration.seconds(3));
-        transition.setOnFinished(event -> navigate(root));
+        transition.setOnFinished(event -> {
+            try {
+                navigate(root);
+            } catch (IOException e) {
+                ExceptionHandler.handleException("Could not go back", e.getMessage());
+            }
+        });
         transition.play();
     }
 
     @FXML
-    public void redirect(ActionEvent actionEvent) {
+    public void redirect(ActionEvent actionEvent) throws IOException {
         transition.stop();
         navigate((Node) actionEvent.getSource());
     }
 
-    private void navigate(Node parent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
-            Parent node = loader.load();
-            parent.getScene().setRoot(node);
-            StoreGraphicController storeGraphicController = loader.getController();
-            storeGraphicController.initialize(store);
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
-        }
+    private void navigate(Node parent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
+        Parent node = loader.load();
+        parent.getScene().setRoot(node);
+        StoreGraphicController storeGraphicController = loader.getController();
+        storeGraphicController.initialize(store);
     }
 }

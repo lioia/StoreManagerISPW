@@ -4,11 +4,13 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.RegisterBean;
 import com.example.shoppingpoint.controller.RegisterController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,12 +74,9 @@ public class RegisterGraphicController {
                 requestListGraphicControllerController.initialize();
             }
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (Exception ex) { // TODO handle controller exception
-            ex.printStackTrace();
+            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 }

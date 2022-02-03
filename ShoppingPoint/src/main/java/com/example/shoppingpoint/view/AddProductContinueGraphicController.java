@@ -6,6 +6,7 @@ import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.controller.AddProductController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -126,12 +127,9 @@ public class AddProductContinueGraphicController {
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
             ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+            ExceptionHandler.handleException("Incorrect data", e.getMessage());
+        } catch (Exception e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

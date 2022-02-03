@@ -1,5 +1,6 @@
 package com.example.shoppingpoint.controller;
 
+import com.example.shoppingpoint.exception.BoundaryException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,9 +11,14 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class AmazonController {
-    public float getEstimatedPrice(String name) throws IOException {
+    public float getEstimatedPrice(String name) throws BoundaryException {
         String url = "https://amazon.it/s?k=" + URLEncoder.encode(name, StandardCharsets.UTF_8);
-        Document doc = Jsoup.connect(url).get();
+        Document doc;
+        try {
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            throw new BoundaryException("Could not load page");
+        }
         Elements prices = doc.select("span.a-price-whole");
         int i = 0;
         float total = 0;

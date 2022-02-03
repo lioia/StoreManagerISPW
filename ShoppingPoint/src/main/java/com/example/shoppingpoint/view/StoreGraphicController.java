@@ -7,9 +7,11 @@ import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.controller.StoreController;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.dao.UserDAO;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +58,7 @@ public class StoreGraphicController {
     }
 
     @FXML
-    public void initialize(Store store) throws Exception {
+    public void initialize(Store store) throws IOException {
         this.store = store;
         storeNameText.setText(store.getName() + " - Shopping Point");
 
@@ -107,63 +109,72 @@ public class StoreGraphicController {
         new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
     }
 
-    private void createProductsView(StoreBean bean) throws Exception {
-        productsPane.getChildren().clear();
-        List<GenericProduct> products = controller.getProductsFromStore(bean);
+    private void createProductsView(StoreBean bean) throws IOException {
+        try {
 
-        for (GenericProduct product : products) {
-            if (product.getQuantity() == 0) continue;
-            float reviewAverage = controller.getReviewOfProduct(product.getId());
-            FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_product_pane.fxml"));
-            AnchorPane pane = fxmlLoader.load();
+            productsPane.getChildren().clear();
+            List<GenericProduct> products = controller.getProductsFromStore(bean);
+
+            for (GenericProduct product : products) {
+                if (product.getQuantity() == 0) continue;
+                float reviewAverage = controller.getReviewOfProduct(product.getId());
+                FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_product_pane.fxml"));
+                AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
-            ((Label) pane.lookup("#name")).setText(product.getName());
-            String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#price")).setText(formattedPrice);
-            String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
-            ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
-            ((Label) pane.lookup("#status")).setText(product.getStatus());
-            ((Label) pane.lookup("#description")).setText(product.getDescription());
-            ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
-            if (product.getImage() != null)
-                ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
-            ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
-                ScrollPane scrollPane = new ScrollPane();
-                scrollPane.setMaxWidth(400.0);
-                scrollPane.setMaxHeight(400.0);
-                scrollPane.setPadding(new Insets(16));
-                Label label = new Label();
-                label.setText(product.getDescription());
-                label.setStyle("-fx-font-size: 16px");
-                label.setMaxWidth(350.0);
-                label.setWrapText(true);
-                scrollPane.setContent(label);
-                PopOver popOver = new PopOver();
-                Node node = (Node) event.getSource();
-                popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
-                popOver.setContentNode(scrollPane);
-                popOver.setCornerRadius(16);
-                popOver.show(node);
-            });
-            ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
-                try {
-                    FXMLLoader paymentLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment.fxml"));
-                    Parent node = paymentLoader.load();
-                    ((Node) event.getSource()).getScene().setRoot(node);
-                    PaymentGraphicController paymentController = paymentLoader.getController();
-                    paymentController.initialize(product, store, card);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+                ((Label) pane.lookup("#name")).setText(product.getName());
+                String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
+                ((Label) pane.lookup("#price")).setText(formattedPrice);
+                String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
+                ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
+                ((Label) pane.lookup("#status")).setText(product.getStatus());
+                ((Label) pane.lookup("#description")).setText(product.getDescription());
+                ((Rating) pane.lookup("#rating")).setRating(reviewAverage);
+                if (product.getImage() != null)
+                    ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
+                ((Button) pane.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> {
+                    ScrollPane scrollPane = new ScrollPane();
+                    scrollPane.setMaxWidth(400.0);
+                    scrollPane.setMaxHeight(400.0);
+                    scrollPane.setPadding(new Insets(16));
+                    Label label = new Label();
+                    label.setText(product.getDescription());
+                    label.setStyle("-fx-font-size: 16px");
+                    label.setMaxWidth(350.0);
+                    label.setWrapText(true);
+                    scrollPane.setContent(label);
+                    PopOver popOver = new PopOver();
+                    Node node = (Node) event.getSource();
+                    popOver.setArrowLocation(PopOver.ArrowLocation.TOP_LEFT);
+                    popOver.setContentNode(scrollPane);
+                    popOver.setCornerRadius(16);
+                    popOver.show(node);
+                });
+                ((Button) pane.lookup("#buyButton")).setOnAction((ActionEvent event) -> {
+                    try {
+                        FXMLLoader paymentLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment.fxml"));
+                        Parent node = paymentLoader.load();
+                        ((Node) event.getSource()).getScene().setRoot(node);
+                        PaymentGraphicController paymentController = paymentLoader.getController();
+                        paymentController.initialize(product, store, card);
+                    } catch (IOException e) {
+                        ExceptionHandler.handleException("Could not go to next scene", e.getMessage());
+                    }
+                });
 //            Add product to the view
-            productsPane.getChildren().add(pane);
+                productsPane.getChildren().add(pane);
+            }
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 
     @FXML
-    public void activate() throws Exception {
-        this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
+    public void activate() {
+        try {
+            this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
+        }
         loyaltyCardButton.setVisible(false);
         currentPointsText.setVisible(true);
         currentPointsText.setText(String.format("You have %d points.", card.getPoints()));

@@ -9,6 +9,7 @@ import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.ReviewDAO;
 import com.example.shoppingpoint.dao.StoreDAO;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.product.Product;
@@ -23,12 +24,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDashboardController {
-    public Store getStoreFromStoreOwnerName(String storeOwner) throws SQLException, DatabaseException {
-        return StoreDAO.getStoreByStoreOwnerUsername(storeOwner);
+    public Store getStoreFromStoreOwnerName(String storeOwner) throws ControllerException {
+        try {
+            return StoreDAO.getStoreByStoreOwnerUsername(storeOwner);
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
+        }
     }
 
-    public List<GenericProduct> getProductsFromStore(Store store) throws SQLException {
-        List<Product> products = ProductDAO.getProductsFromStore(store.getName());
+    public List<GenericProduct> getProductsFromStore(Store store) throws ControllerException {
+        List<Product> products;
+        try {
+            products = ProductDAO.getProductsFromStore(store.getName());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
 
         List<GenericProduct> genericProducts = new ArrayList<>();
         for (Product product : products) {
@@ -38,14 +50,23 @@ public class StoreDashboardController {
         return genericProducts;
     }
 
-    public void updateLoyaltyCard(LoyaltyCardBean bean, Store store) throws SQLException {
-        StoreDAO.updatePoints(bean.getPointsInEuro(), bean.getEuroInPoints(), store.getName());
+    public void updateLoyaltyCard(LoyaltyCardBean bean, Store store) throws ControllerException {
+        try {
+            StoreDAO.updatePoints(bean.getPointsInEuro(), bean.getEuroInPoints(), store.getName());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 
     //    Return the average of the reviews (only if they are > 0)
     //    if there aren't any reviews, return 0
-    public float getReviewOfProduct(int productId) throws SQLException {
-        List<Review> reviews = ReviewDAO.getReviewsOfProduct(productId);
+    public float getReviewOfProduct(int productId) throws ControllerException {
+        List<Review> reviews;
+        try {
+            reviews = ReviewDAO.getReviewsOfProduct(productId);
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
         float total = 0f;
         int count = 0;
         for (Review r : reviews) {
@@ -56,7 +77,11 @@ public class StoreDashboardController {
         return (count > 0) ? total / count : 0f;
     }
 
-    public void editProduct(Integer id, EditProductBean bean) throws SQLException {
-        ProductDAO.updateProduct(id, bean.getNewPrice(), bean.getNewDiscountedPrice(), bean.getNewQuantity());
+    public void editProduct(Integer id, EditProductBean bean) throws ControllerException {
+        try {
+            ProductDAO.updateProduct(id, bean.getNewPrice(), bean.getNewDiscountedPrice(), bean.getNewQuantity());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 }

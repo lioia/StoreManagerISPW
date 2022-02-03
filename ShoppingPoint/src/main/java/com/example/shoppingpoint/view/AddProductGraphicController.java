@@ -5,13 +5,13 @@ import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import com.example.shoppingpoint.utils.ProductType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -46,7 +46,7 @@ public class AddProductGraphicController {
     }
 
     @FXML
-    public void goNext(ActionEvent actionEvent) {
+    public void goNext(ActionEvent actionEvent) throws IOException {
         try {
             AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
             bean.setImage(image);
@@ -69,12 +69,7 @@ public class AddProductGraphicController {
             AddProductContinueGraphicController addProductContinueGraphicController = loader.getController();
             addProductContinueGraphicController.initialize(bean, type);
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
         }
     }
 

@@ -6,6 +6,7 @@ import com.example.shoppingpoint.dao.LoyaltyCardDAO;
 import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.ReviewDAO;
 import com.example.shoppingpoint.dao.SoldProductDAO;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class PaymentController {
-    public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws SQLException {
+    public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws ControllerException {
         float total = bean.getQuantity() * product.getDiscountedPrice();
         int pointsUsed = 0;
         int pointsToBeAdded = (int) (total / store.getEuroInPoints());
@@ -28,11 +29,15 @@ public class PaymentController {
             }
         }
 
-        if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0 && card != null)
-            LoyaltyCardDAO.updateLoyaltyCard(clientUsername, store.getName(), card.getPoints() - pointsUsed + pointsToBeAdded);
+        try {
+            if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0 && card != null)
+                LoyaltyCardDAO.updateLoyaltyCard(clientUsername, store.getName(), card.getPoints() - pointsUsed + pointsToBeAdded);
 
-        ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() - bean.getQuantity());
-        SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername);
-        ReviewDAO.addReview(0f, clientUsername, product.getId());
+            ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() - bean.getQuantity());
+            SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername);
+            ReviewDAO.addReview(0f, clientUsername, product.getId());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 }

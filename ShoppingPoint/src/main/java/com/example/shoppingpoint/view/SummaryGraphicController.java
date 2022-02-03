@@ -4,8 +4,10 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.SummaryBean;
 import com.example.shoppingpoint.controller.SummaryController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,12 +53,9 @@ public class SummaryGraphicController {
                 barChart.getData().add(series);
             }
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+            ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

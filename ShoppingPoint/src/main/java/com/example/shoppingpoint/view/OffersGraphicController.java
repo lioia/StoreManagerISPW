@@ -5,14 +5,15 @@ import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.controller.OffersController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.dao.UserDAO;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -29,55 +30,60 @@ public class OffersGraphicController {
     @FXML
     private FlowPane requestsPane;
 
-    public void initialize(GenericProduct product) throws Exception {
-        OffersController controller = new OffersController();
-        productNameText.setText(product.getName() + " Offers - Shopping Point");
+    public void initialize(GenericProduct product) throws IOException {
+        try {
+            OffersController controller = new OffersController();
+            productNameText.setText(product.getName() + " Offers - Shopping Point");
 
-        List<Request> requests = controller.getRequestsOfProduct(product.getId());
+            List<Request> requests = controller.getRequestsOfProduct(product.getId());
 
-        for (Request req : requests) {
-            FXMLLoader reqLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/request.fxml"));
-            VBox node = reqLoader.load();
-            ((Label) node.lookup("#requestIdLabel")).setText("Request: " + req.getRequestId());
-            ((Label) node.lookup("#maxPriceLabel")).setText("Max Price: " + req.getMaxPrice() + "€");
-            ((Label) node.lookup("#quantityLabel")).setText("Quantity: " + req.getQuantity());
+            for (Request req : requests) {
+                FXMLLoader reqLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/request.fxml"));
+                VBox node = reqLoader.load();
+                ((Label) node.lookup("#requestIdLabel")).setText("Request: " + req.getRequestId());
+                ((Label) node.lookup("#maxPriceLabel")).setText("Max Price: " + req.getMaxPrice() + "€");
+                ((Label) node.lookup("#quantityLabel")).setText("Quantity: " + req.getQuantity());
 
-            if (req.isAccepted()) {
-                Offer acceptedOffer = controller.getAcceptedOffer(req.getRequestId());
-                ((Label) node.lookup("#statusLabel")).setText(String.format("Accepted offer: %.02f by %s", acceptedOffer.getOfferPrice(), acceptedOffer.getSupplierUsername()));
-            } else {
-                ((Label) node.lookup("#statusLabel")).setText("Not accepted");
-                List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
-                if (offers.size() > 0) {
-                    FlowPane offersPane = (FlowPane) node.lookup("#offersPane");
-                    FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
-                    Pane offer = offerLoader.load();
-                    for (Offer off : offers) {
-                        ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
-                        ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
-                        Text sendEmail = (Text) offer.lookup("#sendEmail");
-                        sendEmail.setOnMouseClicked(event ->{
-                            try {
-                                String supplier= off.getSupplierUsername();
-                                new SendEmailController().sendEmail(UserDAO.getEmailByUsername(supplier));
-                            }
-                            catch (Exception e){
-                                e.printStackTrace();
-                            }
-                        });
-                        ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
-                            try {
-                                controller.acceptOffer(req, off.getOfferId());
-                                goBack(event);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        });
+                if (req.isAccepted()) {
+                    Offer acceptedOffer = controller.getAcceptedOffer(req.getRequestId());
+                    ((Label) node.lookup("#statusLabel")).setText(String.format("Accepted offer: %.02f by %s", acceptedOffer.getOfferPrice(), acceptedOffer.getSupplierUsername()));
+                } else {
+                    ((Label) node.lookup("#statusLabel")).setText("Not accepted");
+                    List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
+                    if (offers.size() > 0) {
+                        FlowPane offersPane = (FlowPane) node.lookup("#offersPane");
+                        FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
+                        Pane offer = offerLoader.load();
+                        for (Offer off : offers) {
+                            ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
+                            ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
+                            Text sendEmail = (Text) offer.lookup("#sendEmail");
+                            sendEmail.setOnMouseClicked(event -> {
+                                try {
+                                    String supplier = off.getSupplierUsername();
+                                    new SendEmailController().sendEmail(UserDAO.getEmailByUsername(supplier));
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
+                                try {
+                                    controller.acceptOffer(req, off.getOfferId());
+                                    goBack(event);
+                                } catch (ControllerException e) {
+                                    ExceptionHandler.handleException("Controller Error", e.getMessage());
+                                } catch (IOException e) {
+                                    ExceptionHandler.handleException("Could not go back", e.getMessage());
+                                }
+                            });
+                        }
+                        offersPane.getChildren().add(offer);
                     }
-                    offersPane.getChildren().add(offer);
                 }
+                requestsPane.getChildren().add(node);
             }
-            requestsPane.getChildren().add(node);
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.shoppingpoint.controller;
 
 import com.example.shoppingpoint.bean.SummaryBean;
 import com.example.shoppingpoint.dao.SoldProductDAO;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.user.StoreOwner;
@@ -19,9 +20,16 @@ import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
 public class SummaryController {
 
-    public HashMap<String, List<SoldProduct>> getSoldProducts(SummaryBean bean) throws SQLException, DatabaseException {
+    public HashMap<String, List<SoldProduct>> getSoldProducts(SummaryBean bean) throws ControllerException {
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
-        List<SoldProduct> products = SoldProductDAO.getSoldProducts();
+        List<SoldProduct> products = null;
+        try {
+            products = SoldProductDAO.getSoldProducts();
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
+        }
         HashMap<String, List<SoldProduct>> filtered = new HashMap<>();
 
         for (SoldProduct p : products) {

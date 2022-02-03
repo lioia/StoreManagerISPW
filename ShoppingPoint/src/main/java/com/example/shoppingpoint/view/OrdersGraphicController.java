@@ -4,10 +4,12 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.OrdersBean;
 import com.example.shoppingpoint.controller.OrdersController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +33,7 @@ public class OrdersGraphicController {
     private Store store;
 
     @FXML
-    public void initialize(Store store) {
+    public void initialize(Store store) throws IOException {
         this.store = store;
 
         try {
@@ -54,19 +56,19 @@ public class OrdersGraphicController {
                         alert.setHeaderText("Incorrect data");
                         alert.setContentText(e.getMessage());
                         alert.show();
-                    } catch (Exception e) { // TODO handle controller exception
-                        e.printStackTrace();
+                    } catch (ControllerException e) {
+                        ExceptionHandler.handleException("Controller Error", e.getMessage());
                     }
                 });
                 ordersPane.getChildren().add(pane);
             }
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 
     @FXML
-    public void goBack(ActionEvent actionEvent) throws Exception {
+    public void goBack(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
         Parent node = loader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);

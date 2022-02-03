@@ -2,8 +2,11 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
+import com.example.shoppingpoint.controller.OffersController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,13 +21,9 @@ import com.example.shoppingpoint.controller.RequestListController;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.RequestListBean;
 import com.example.shoppingpoint.controller.SendEmailController;
-import com.example.shoppingpoint.dao.StoreDAO;
-import com.example.shoppingpoint.dao.UserDAO;
-import com.example.shoppingpoint.dao.OfferDAO;
 
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.example.shoppingpoint.model.Request;
@@ -38,21 +37,27 @@ public class RequestListGraphicController {
 
     @FXML
     private Label offersAccepted;
-    @FXML
-    public void initialize() throws Exception {
-        createRequestPaneView();
-        int newAcceptedOffer = OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
-        if (newAcceptedOffer != 0) {
-            offersAccepted.setText(String.format("Hanno accettato %d offerte", newAcceptedOffer));
-            offersAccepted.setVisible(true);
-            PauseTransition transition = new PauseTransition(Duration.seconds(3));
-            transition.setOnFinished(event -> offersAccepted.setVisible(false));
-            transition.play();
 
+    @FXML
+    public void initialize() throws IOException {
+        try {
+            createRequestPaneView();
+            OffersController controller = new OffersController();
+            int newAcceptedOffer;
+            newAcceptedOffer = controller.countAcceptedOffers();
+            if (newAcceptedOffer != 0) {
+                offersAccepted.setText(String.format("Hanno accettato %d offerte", newAcceptedOffer));
+                offersAccepted.setVisible(true);
+                PauseTransition transition = new PauseTransition(Duration.seconds(3));
+                transition.setOnFinished(event -> offersAccepted.setVisible(false));
+                transition.play();
+            }
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 
-    private void createRequestPaneView() {
+    private void createRequestPaneView() throws IOException {
         try {
             requestPane.getChildren().clear();
             RequestListController controller = new RequestListController();
@@ -88,8 +93,9 @@ public class RequestListGraphicController {
                 Text sendEmail = (Text) node.lookup("#sendEmail");
                 sendEmail.setOnMouseClicked(event -> {
                     try {
-                        String storeOwner = StoreDAO.getStoreOwnerUsernameByStoreName(product.getStoreName());
-                        new SendEmailController().sendEmail(UserDAO.getEmailByUsername(storeOwner));
+                        SendEmailController emailController = new SendEmailController();
+                        String username = emailController.getUsernameOfStore(product.getStoreName());
+                        emailController.sendEmail(username);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -98,18 +104,15 @@ public class RequestListGraphicController {
                     try {
                         controller.saveOffer(request.getRequestId(), new RequestListBean(((TextField) node.lookup("#choosePriceTextField")).getText()));
                     } catch (BeanException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText("Incorrect data");
-                        alert.setContentText(e.getMessage());
-                        alert.show();
-                    } catch (Exception e) { // TODO handle controller exception
-                        e.printStackTrace();
+                        ExceptionHandler.handleException("Incorrect Data", e.getMessage());
+                    } catch (ControllerException e) {
+                        ExceptionHandler.handleException("Controller Error", e.getMessage());
                     }
                 });
                 requestPane.getChildren().add(node);
             }
-        } catch (Exception e) { // TODO handle controller exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
     }
 
@@ -121,21 +124,17 @@ public class RequestListGraphicController {
     }
 
     @FXML
-    private void goAcceptedOffer(ActionEvent actionEvent) throws Exception{
-        FXMLLoader acceptedOffersFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("AcceptedOffers.fxml"));
-        Parent acceptedOffersNode = acceptedOffersFxml.load();
-
-        ((Node) actionEvent.getSource()).getScene().setRoot(acceptedOffersNode);
-
-        AcceptedOffersGraphicController acceptedOffersGraphicController = acceptedOffersFxml.getController();
-
-        acceptedOffersGraphicController.initialize();
+    private void goAcceptedOffer(ActionEvent actionEvent) throws IOException {
         try {
+            FXMLLoader acceptedOffersFxml = new FXMLLoader(ShoppingPointApplication.class.getResource("AcceptedOffers.fxml"));
+            Parent acceptedOffersNode = acceptedOffersFxml.load();
+            ((Node) actionEvent.getSource()).getScene().setRoot(acceptedOffersNode);
+            AcceptedOffersGraphicController acceptedOffersGraphicController = acceptedOffersFxml.getController();
+            acceptedOffersGraphicController.initialize();
             RequestListController controller = new RequestListController();
             controller.checkedOffer();
-        } catch (SQLException e) { // TODO handle exception
-            e.printStackTrace();
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller Error", e.getMessage());
         }
-
     }
 }

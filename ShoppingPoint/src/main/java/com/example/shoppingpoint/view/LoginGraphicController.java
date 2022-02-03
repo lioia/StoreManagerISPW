@@ -8,11 +8,11 @@ import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.*;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -53,15 +53,9 @@ public class LoginGraphicController {
                 ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
             }
         } catch (BeanException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Incorrect data");
-            alert.setContentText(e.getMessage());
-            alert.show();
-        } catch (ControllerException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Controller error");
-            alert.setContentText(ex.getMessage());
-            alert.show();
+            ExceptionHandler.handleException("Incorrect data", e.getMessage());
+        } catch (ControllerException e) {
+            ExceptionHandler.handleException("Controller error", e.getMessage());
         }
     }
 }

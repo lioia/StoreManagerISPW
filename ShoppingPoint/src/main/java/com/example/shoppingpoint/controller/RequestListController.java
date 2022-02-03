@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.example.shoppingpoint.bean.RequestListBean;
+import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.dao.RequestDAO;
@@ -13,21 +14,39 @@ import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 
 public class RequestListController {
-    public List<Request> getRequest() throws SQLException {
-        return RequestDAO.getAllRequestsNotAccepted();
+    public List<Request> getRequest() throws ControllerException {
+        try {
+            return RequestDAO.getAllRequestsNotAccepted();
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 
-    public Product getProduct(int productId) throws SQLException, DatabaseException {
-        return ProductDAO.getProductById(productId);
+    public Product getProduct(int productId) throws ControllerException {
+        try {
+            return ProductDAO.getProductById(productId);
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
+        }
     }
 
-    public void saveOffer(int requestId, RequestListBean offerPrice) throws SQLException {
-        OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(), requestId, offerPrice.getOfferPrice());
+    public void saveOffer(int requestId, RequestListBean offerPrice) throws ControllerException {
+        try {
+            OfferDAO.saveOffer(LoggedInUser.getInstance().getUser().getUsername(), requestId, offerPrice.getOfferPrice());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
 
 
     }
 
-    public void checkedOffer() throws SQLException {
-        OfferDAO.checkedOffer(LoggedInUser.getInstance().getUser().getUsername());
+    public void checkedOffer() throws ControllerException {
+        try {
+            OfferDAO.checkedOffer(LoggedInUser.getInstance().getUser().getUsername());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 }
