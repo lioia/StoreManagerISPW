@@ -15,13 +15,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
 
 public class PaymentGraphicController {
     private GenericProduct product;

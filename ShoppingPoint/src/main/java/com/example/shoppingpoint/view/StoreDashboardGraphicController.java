@@ -42,6 +42,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class StoreDashboardGraphicController {
 
     private final StoreDashboardController controller;

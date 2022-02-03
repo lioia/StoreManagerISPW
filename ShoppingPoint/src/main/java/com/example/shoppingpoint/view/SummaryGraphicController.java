@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class SummaryGraphicController {
 
     @FXML

@@ -18,6 +18,8 @@ import javafx.stage.FileChooser;
 
 import java.io.*;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+
 public class AddProductGraphicController {
     @FXML
     private TextField nameTextField;

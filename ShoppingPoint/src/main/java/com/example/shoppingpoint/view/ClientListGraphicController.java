@@ -21,6 +21,8 @@ import com.example.shoppingpoint.controller.SendEmailController;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class ClientListGraphicController {
 
     @FXML

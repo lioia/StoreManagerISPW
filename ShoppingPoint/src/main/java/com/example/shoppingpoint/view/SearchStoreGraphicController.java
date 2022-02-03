@@ -29,6 +29,8 @@ import javafx.scene.text.TextAlignment;
 import org.controlsfx.control.PopOver;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class SearchStoreGraphicController {
 
     @FXML

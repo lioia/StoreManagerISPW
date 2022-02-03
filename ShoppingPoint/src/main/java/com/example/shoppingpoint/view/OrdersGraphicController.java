@@ -24,6 +24,9 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class OrdersGraphicController {
     @FXML
     private Label titleLabel;
@@ -52,10 +55,7 @@ public class OrdersGraphicController {
                         OrdersBean bean = new OrdersBean(newValue.floatValue());
                         controller.updateReview(bean, review.getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
                     } catch (BeanException e) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setHeaderText(BEAN_HEADER_TEXT);
-                        alert.setContentText(e.getMessage());
-                        alert.show();
+                        ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }

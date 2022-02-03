@@ -20,6 +20,9 @@ import javafx.scene.text.Font;
 
 import java.io.IOException;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class AddProductContinueGraphicController {
     private AddProductCommonBean commonBean;
     private ProductType type;

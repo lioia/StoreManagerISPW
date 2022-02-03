@@ -33,6 +33,8 @@ import org.controlsfx.control.Rating;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class StoreGraphicController {
     private Store store;
     private final StoreController controller;

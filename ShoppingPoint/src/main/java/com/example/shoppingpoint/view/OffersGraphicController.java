@@ -24,6 +24,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class OffersGraphicController {
     @FXML
     private Label productNameText;

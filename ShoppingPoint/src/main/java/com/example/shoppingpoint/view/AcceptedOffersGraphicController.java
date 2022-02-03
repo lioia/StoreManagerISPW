@@ -27,6 +27,8 @@ import org.controlsfx.control.PopOver;
 import java.io.IOException;
 import java.util.List;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class AcceptedOffersGraphicController {
 
     @FXML

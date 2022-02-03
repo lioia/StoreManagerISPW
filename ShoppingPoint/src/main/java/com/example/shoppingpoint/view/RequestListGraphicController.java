@@ -31,6 +31,9 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class RequestListGraphicController {
     @FXML
     private FlowPane requestPane;

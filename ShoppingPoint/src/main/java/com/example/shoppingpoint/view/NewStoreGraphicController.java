@@ -17,6 +17,9 @@ import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 
+import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
+import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
+
 public class NewStoreGraphicController {
 
     private StoreOwner storeOwner;
