@@ -6,11 +6,17 @@ import com.example.shoppingpoint.exception.BeanException;
 import java.io.IOException;
 
 public class RequestListGraphicControllerCLI {
-    private RequestListViewCli requestListView;
-    public RequestListGraphicControllerCLI(){ requestListView = new RequestListViewCli();}
+    private final RequestListViewCli requestListView;
 
-    public void initialize()throws BeanException, IOException {
-        requestListView.requestList();
+    public RequestListGraphicControllerCLI() {
+        requestListView = new RequestListViewCli();
+    }
 
+    public void initialize() throws IOException {
+        try {
+            requestListView.requestList();
+        } catch (BeanException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

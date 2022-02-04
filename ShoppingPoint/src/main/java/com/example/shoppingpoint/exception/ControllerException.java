@@ -16,6 +16,6 @@ public class ControllerException extends Exception {
     }
 
     public ControllerException(String reason, Throwable cause) {
-        super(reason, cause);
+        super(reason + " - " + cause.getMessage(), cause);
     }
 }

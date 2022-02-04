@@ -26,8 +26,7 @@ public class CLIApplication {
                 registerCli.register();
                 exit = true;
             } else {
-                System.out.println("Invalid input");
-                exit = false;
+                System.out.println("Invalid input.");
             }
         }
     }
