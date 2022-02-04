@@ -3,6 +3,7 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.cli.view.LoginViewCLI;
 import com.example.shoppingpoint.controller.LoginController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
@@ -18,7 +19,7 @@ public class LoginGraphicControllerCLI {
         loginView = new LoginViewCLI();
     }
 
-    public void login() throws IOException {
+    public void login() throws IOException, BeanException,ControllerException{
         User user;
         while (true) {
             try {
