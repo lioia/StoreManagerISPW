@@ -55,6 +55,6 @@ public class StoreController {
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         }
-        return new LoyaltyCard(0, client, storeName);
+        return new LoyaltyCard(0,  storeName);
     }
 }

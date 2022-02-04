@@ -30,7 +30,7 @@ public class LoyaltyCardDAO {
 
                 rs.first();
                 Integer points = rs.getInt("Points");
-                card = new LoyaltyCard(points, client, storeName);
+                card = new LoyaltyCard(points,  storeName);
                 rs.close();
             }
         }
