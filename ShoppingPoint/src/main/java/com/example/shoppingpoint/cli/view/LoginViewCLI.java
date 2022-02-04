@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class LoginViewCLI {
     public LoginBean getLoginInformation() throws BeanException, IOException {
+        System.out.println("Login");
         System.out.println("Insert username: ");
         String login = CLIReader.readline();
         System.out.println("Insert password: ");

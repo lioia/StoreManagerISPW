@@ -1,6 +1,7 @@
 package com.example.shoppingpoint;
 
 import com.example.shoppingpoint.cli.graphic_controller.LoginGraphicControllerCLI;
+import com.example.shoppingpoint.cli.graphic_controller.RegisterGraphicControllerCLI;
 import com.example.shoppingpoint.cli.utils.CLIReader;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
@@ -21,7 +22,8 @@ public class CLIApplication {
                 loginCli.login();
                 exit = true;
             } else if (selected == 2) {
-//                TODO go to register
+                RegisterGraphicControllerCLI registerCli = new RegisterGraphicControllerCLI();
+                registerCli.register();
                 exit = true;
             } else {
                 System.out.println("Invalid input");
