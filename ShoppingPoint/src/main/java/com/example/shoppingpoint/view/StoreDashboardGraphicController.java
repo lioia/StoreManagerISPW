@@ -4,10 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.store_dashboard.EditProductBean;
 import com.example.shoppingpoint.bean.store_dashboard.LoyaltyCardBean;
-import com.example.shoppingpoint.controller.AmazonController;
-import com.example.shoppingpoint.controller.ReviewController;
-import com.example.shoppingpoint.controller.StoreDashboardController;
-import com.example.shoppingpoint.controller.UploadImageController;
+import com.example.shoppingpoint.controller.*;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
@@ -56,26 +53,16 @@ public class StoreDashboardGraphicController {
     private static final String QUANTITY_LABEL_ID = "#quantity";
     private static final String QUANTITY_TEXTFIELD_ID = "#quantityTextField";
 
-    private final StoreDashboardController controller;
-
     @FXML
     private Label labelStoreName;
     @FXML
     private FlowPane productsPane;
 
-    public StoreDashboardGraphicController() {
-        controller = new StoreDashboardController();
-    }
-
     @FXML
     public void initialize() throws IOException {
-        try {
-            Store store = controller.getStoreFromStoreOwnerName(LoggedInUser.getInstance().getUser().getUsername());
-            ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
-            labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
-        } catch (ControllerException e) {
-            ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
-        }
+        Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
+        ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
+        labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
         createProductsView(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
     }
 
@@ -91,7 +78,8 @@ public class StoreDashboardGraphicController {
     private void createProductsView(Store store) throws IOException {
         try {
             productsPane.getChildren().clear();
-            List<GenericProduct> products = controller.getProductsFromStore(store);
+            ViewProductsController viewProductsController = new ViewProductsController();
+            List<GenericProduct> products = viewProductsController.getProductsFromStore(store);
 
             for (GenericProduct product : products) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
@@ -115,7 +103,7 @@ public class StoreDashboardGraphicController {
                     ((ImageView) pane.lookup("#imageView")).setImage(new Image(product.getImage()));
                 Label estimatedPriceLabel = (Label) pane.lookup("#estimatedPrice");
                 estimatedPriceLabel.setOnMouseClicked(event -> {
-                    AmazonController amazonController = new AmazonController();
+                    EstimatedPriceController amazonController = new EstimatedPriceController();
                     try {
                         float estimatedPrice = amazonController.getEstimatedPrice(product.getName());
                         estimatedPriceLabel.setText(String.format(Locale.US, "Estimated Price: %.02f€", estimatedPrice));
@@ -198,7 +186,8 @@ public class StoreDashboardGraphicController {
         updateButton.setOnAction(event -> {
             try {
                 LoyaltyCardBean bean = new LoyaltyCardBean(activeBox.isSelected(), pointInEuroTextField.getText(), euroInPointsTextField.getText());
-                controller.updateLoyaltyCard(bean, ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
+                EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
+                editLoyaltyCardController.updateLoyaltyCard(bean, ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
                 ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setPointsInEuro(bean.getPointsInEuro());
                 ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().setEuroInPoints(bean.getEuroInPoints());
                 popOver.hide();
@@ -285,6 +274,7 @@ public class StoreDashboardGraphicController {
             String quantity = ((TextField) pane.lookup(QUANTITY_TEXTFIELD_ID)).getText();
             try {
                 EditProductBean bean = new EditProductBean(price, discountedPrice, quantity);
+                EditProductController controller = new EditProductController();
                 controller.editProduct(product.getId(), bean);
 //                        Update local copy of product (and the relative labels)
                 product.setPrice(bean.getNewPrice());

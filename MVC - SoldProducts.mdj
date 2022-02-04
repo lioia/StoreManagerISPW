@@ -3492,6 +3492,7 @@
 											"model": {
 												"$ref": "AAAAAAF9yU0lzTdejGc="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 21,
 											"top": 612,
@@ -3505,7 +3506,7 @@
 									"left": 16,
 									"top": 577,
 									"width": 186.64892578125,
-									"height": 53
+									"height": 38
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3528,7 +3529,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 635,
+											"top": 620,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+getUsername(): String",
@@ -3545,7 +3546,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 650,
+											"top": 635,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+setUsername(user: String)",
@@ -3562,7 +3563,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 665,
+											"top": 650,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+getPassword(): String",
@@ -3579,7 +3580,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 680,
+											"top": 665,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+setPassword(pass: String)",
@@ -3594,9 +3595,10 @@
 											"model": {
 												"$ref": "AAAAAAF9yU0lzjdn3ag="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 695,
+											"top": 680,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+getUserType(): UserType",
@@ -3611,9 +3613,10 @@
 											"model": {
 												"$ref": "AAAAAAF9yU0lzjdp75U="
 											},
+											"visible": false,
 											"font": "Arial;13;0",
 											"left": 21,
-											"top": 710,
+											"top": 695,
 											"width": 176.64892578125,
 											"height": 13,
 											"text": "+setUserType(type: UserType)",
@@ -3622,9 +3625,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 16,
-									"top": 630,
+									"top": 615,
 									"width": 186.64892578125,
-									"height": 98
+									"height": 68
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",

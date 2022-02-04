@@ -60,7 +60,7 @@ public class ClientListGraphicController {
                 email.setText(client.getEmail());
                 email.setOnMouseClicked(event -> {
                     try {
-                        new SendEmailController().sendEmail(client.getEmail());
+                        new SendEmailController().sendEmail(client.getUsername());
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
                     }

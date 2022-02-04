@@ -4,7 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.controller.AcceptedOfferController;
-import com.example.shoppingpoint.controller.RequestListController;
+import com.example.shoppingpoint.controller.MakeOfferController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Offer;
@@ -47,7 +47,7 @@ public class AcceptedOffersGraphicController {
                 AnchorPane node = fxmlLoader.load();
                 int requestId = acceptedOffer.getRequestId();
                 Request request = controller.getRequestById(requestId);
-                RequestListController controller2 = new RequestListController();
+                MakeOfferController controller2 = new MakeOfferController();
                 GenericProduct product = new ProductAdapter(controller2.getProduct(request.getProductId()));
                 ((Text) node.lookup("#ProductName")).setText(product.getName());
                 ((Text) node.lookup("#quantity")).setText(String.format("Quantity: %d", request.getQuantity()));

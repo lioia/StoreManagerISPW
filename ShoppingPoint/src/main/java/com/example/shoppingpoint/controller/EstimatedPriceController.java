@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class AmazonController {
+public class EstimatedPriceController {
     public float getEstimatedPrice(String name) throws BoundaryException {
         String url = "https://amazon.it/s?k=" + URLEncoder.encode(name, StandardCharsets.UTF_8);
         Document doc;

@@ -2,7 +2,7 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
-import com.example.shoppingpoint.controller.OffersController;
+import com.example.shoppingpoint.controller.AcceptOfferController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.exception.ControllerException;
@@ -32,16 +32,11 @@ public class OffersGraphicController {
     @FXML
     private FlowPane requestsPane;
 
-    private final OffersController controller;
-
-    public OffersGraphicController() {
-        controller = new OffersController();
-    }
-
     public void initialize(GenericProduct product) throws IOException {
         try {
             productNameText.setText(product.getName() + " Offers - Shopping Point");
 
+            AcceptOfferController controller = new AcceptOfferController();
             List<Request> requests = controller.getRequestsOfProduct(product.getId());
 
             for (Request req : requests) {
@@ -66,6 +61,7 @@ public class OffersGraphicController {
 
     private void showOffers(VBox parentNode, Request req) throws IOException, ControllerException {
         ((Label) parentNode.lookup("#statusLabel")).setText("Not accepted");
+        AcceptOfferController controller = new AcceptOfferController();
         List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
         if (offers.size() > 0) {
             FlowPane offersPane = (FlowPane) parentNode.lookup("#offersPane");

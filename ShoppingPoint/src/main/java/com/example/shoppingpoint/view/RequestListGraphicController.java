@@ -2,7 +2,6 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
-import com.example.shoppingpoint.controller.OffersController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -17,7 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import com.example.shoppingpoint.controller.RequestListController;
+import com.example.shoppingpoint.controller.MakeOfferController;
 import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.RequestListBean;
 import com.example.shoppingpoint.controller.SendEmailController;
@@ -44,9 +43,8 @@ public class RequestListGraphicController {
     public void initialize() throws IOException {
         try {
             createRequestPaneView();
-            OffersController controller = new OffersController();
-            int newAcceptedOffer;
-            newAcceptedOffer = controller.countAcceptedOffers();
+            MakeOfferController controller = new MakeOfferController();
+            int newAcceptedOffer = controller.countAcceptedOffers();
             if (newAcceptedOffer != 0) {
                 offersAccepted.setText(String.format("Hanno accettato %d offerte", newAcceptedOffer));
                 offersAccepted.setVisible(true);
@@ -62,7 +60,7 @@ public class RequestListGraphicController {
     private void createRequestPaneView() throws IOException {
         try {
             requestPane.getChildren().clear();
-            RequestListController controller = new RequestListController();
+            MakeOfferController controller = new MakeOfferController();
             List<Request> requestList = controller.getRequest();
             for (Request request : requestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/request_product_pane.fxml"));
@@ -119,7 +117,7 @@ public class RequestListGraphicController {
             ((Node) actionEvent.getSource()).getScene().setRoot(acceptedOffersNode);
             AcceptedOffersGraphicController acceptedOffersGraphicController = acceptedOffersFxml.getController();
             acceptedOffersGraphicController.initialize();
-            RequestListController controller = new RequestListController();
+            MakeOfferController controller = new MakeOfferController();
             controller.checkedOffer();
         } catch (ControllerException e) {
             ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());

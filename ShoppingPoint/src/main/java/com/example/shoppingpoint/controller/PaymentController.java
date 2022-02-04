@@ -1,19 +1,81 @@
 package com.example.shoppingpoint.controller;
 
 import com.example.shoppingpoint.adapter.GenericProduct;
+import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.bean.PaymentBean;
-import com.example.shoppingpoint.dao.LoyaltyCardDAO;
-import com.example.shoppingpoint.dao.ProductDAO;
-import com.example.shoppingpoint.dao.ReviewDAO;
-import com.example.shoppingpoint.dao.SoldProductDAO;
+import com.example.shoppingpoint.bean.SearchStoreBean;
+import com.example.shoppingpoint.bean.StoreBean;
+import com.example.shoppingpoint.dao.*;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.product.Product;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentController {
+    public List<Store> getStores(SearchStoreBean bean) throws ControllerException {
+        List<Store> stores;
+        List<Store> filteredStores = new ArrayList<>();
+        try {
+            stores = StoreDAO.getAllStores();
+
+            if (bean.getTypeFilter() == null && bean.getSearchQuery().isEmpty()) return stores;
+
+            if (bean.getTypeFilter() != null) {
+                for (Store store : stores) {
+                    if (store.getType() == bean.getTypeFilter()) filteredStores.add(store);
+                }
+            }
+
+            if (!bean.getSearchQuery().isEmpty()) {
+                filteredStores.removeIf(store -> !store.getName().toLowerCase().contains(bean.getSearchQuery().toLowerCase()));
+            }
+
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
+        return filteredStores;
+    }
+
+    public List<GenericProduct> getProductsFromStore(StoreBean bean) throws ControllerException {
+        List<GenericProduct> genericProducts = new ArrayList<>();
+        try {
+            List<Product> products = ProductDAO.getProductsFromStore(bean.getStoreName());
+            List<Product> filteredProducts = new ArrayList<>();
+            if (bean.getSearchQuery().isEmpty()) filteredProducts = products;
+            else {
+                for (Product product : products) {
+                    if (product.getName().toLowerCase().contains(bean.getSearchQuery().toLowerCase())) {
+                        filteredProducts.add(product);
+                    }
+                }
+            }
+            for (Product product : filteredProducts) {
+                genericProducts.add(new ProductAdapter(product));
+            }
+
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
+
+        return genericProducts;
+    }
+
+    public LoyaltyCard getLoyaltyCard(String client, String storeName) throws ControllerException {
+        try {
+            return LoyaltyCardDAO.getLoyaltyCardFromClientAndStoreName(client, storeName);
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
+        }
+    }
+
     public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws ControllerException {
         float total = bean.getQuantity() * product.getDiscountedPrice();
         int pointsUsed = 0;

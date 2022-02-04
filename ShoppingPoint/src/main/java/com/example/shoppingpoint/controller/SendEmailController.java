@@ -22,7 +22,7 @@ public class SendEmailController {
     }
 
     public void sendEmail(String user) throws ControllerException {
-        String email = null;
+        String email;
         try {
             email = UserDAO.getEmailByUsername(user);
         } catch (SQLException e) {

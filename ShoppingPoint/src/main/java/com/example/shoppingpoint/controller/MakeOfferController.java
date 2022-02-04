@@ -13,7 +13,7 @@ import com.example.shoppingpoint.dao.ProductDAO;
 import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 
-public class RequestListController {
+public class MakeOfferController {
     public List<Request> getRequest() throws ControllerException {
         try {
             return RequestDAO.getAllRequestsNotAccepted();
@@ -38,13 +38,19 @@ public class RequestListController {
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         }
-
-
     }
 
     public void checkedOffer() throws ControllerException {
         try {
             OfferDAO.checkedOffer(LoggedInUser.getInstance().getUser().getUsername());
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
+    }
+
+    public int countAcceptedOffers() throws ControllerException {
+        try {
+            return OfferDAO.countAcceptedOffer(LoggedInUser.getInstance().getUser().getUsername());
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         }

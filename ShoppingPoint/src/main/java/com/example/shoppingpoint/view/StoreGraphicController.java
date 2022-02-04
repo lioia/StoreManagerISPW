@@ -3,9 +3,7 @@ package com.example.shoppingpoint.view;
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.bean.StoreBean;
-import com.example.shoppingpoint.controller.ReviewController;
-import com.example.shoppingpoint.controller.SendEmailController;
-import com.example.shoppingpoint.controller.StoreController;
+import com.example.shoppingpoint.controller.*;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
@@ -34,7 +32,6 @@ import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER
 
 public class StoreGraphicController {
     private Store store;
-    private final StoreController controller;
     private LoyaltyCard card;
 
     @FXML
@@ -52,10 +49,6 @@ public class StoreGraphicController {
     @FXML
     private Label currentPointsText;
 
-    public StoreGraphicController() {
-        controller = new StoreController();
-    }
-
     @FXML
     public void initialize(Store store) throws IOException {
         this.store = store;
@@ -63,6 +56,7 @@ public class StoreGraphicController {
 
         if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) {
             try {
+                PaymentController controller = new PaymentController();
                 this.card = controller.getLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
             } catch (Exception ignored) {
                 this.card = null;
@@ -118,6 +112,7 @@ public class StoreGraphicController {
     private void createProductsView(StoreBean bean) throws IOException {
         try {
             productsPane.getChildren().clear();
+            PaymentController controller = new PaymentController();
             List<GenericProduct> products = controller.getProductsFromStore(bean);
 
             for (GenericProduct product : products) {
@@ -160,7 +155,8 @@ public class StoreGraphicController {
     @FXML
     public void activate() {
         try {
-            this.card = controller.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
+            LoyaltyCardController loyaltyCardController = new LoyaltyCardController();
+            this.card = loyaltyCardController.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
         } catch (ControllerException e) {
             ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
