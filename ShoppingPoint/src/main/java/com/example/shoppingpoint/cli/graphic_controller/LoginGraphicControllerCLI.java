@@ -5,6 +5,7 @@ import com.example.shoppingpoint.cli.view.LoginViewCLI;
 import com.example.shoppingpoint.controller.LoginController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -31,6 +32,10 @@ public class LoginGraphicControllerCLI {
                 System.out.println("[ERR] " + e.getMessage());
                 System.out.println("Please retry.");
             }
+        }
+        if (user instanceof StoreOwner){
+            StoreDashboardGraphicControllerCLI storeDashboardGraphicControllerCLI = new StoreDashboardGraphicControllerCLI();
+            storeDashboardGraphicControllerCLI.initialize();
         }
         if (user instanceof Supplier) {
             RequestListGraphicControllerCLI requestListCli = new RequestListGraphicControllerCLI();

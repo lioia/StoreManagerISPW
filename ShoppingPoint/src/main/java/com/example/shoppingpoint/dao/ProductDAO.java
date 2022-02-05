@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductDAO {
     public ProductDAO() {
@@ -169,7 +170,7 @@ public class ProductDAO {
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-                String sql = String.format("UPDATE Product SET Price = %f, DiscountedPrice = %f, Quantity = %d WHERE ProductId =  %d", price, discountedPrice, quantity, productId);
+                String sql = String.format(Locale.US,"UPDATE Product SET Price = %f, DiscountedPrice = %f, Quantity = %d WHERE ProductId =  %d", price, discountedPrice, quantity, productId);
                 // Execute query
                 statement.executeUpdate(sql);
             }
