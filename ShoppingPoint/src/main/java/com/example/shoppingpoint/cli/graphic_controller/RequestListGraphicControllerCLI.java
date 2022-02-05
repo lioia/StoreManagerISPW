@@ -1,12 +1,17 @@
 package com.example.shoppingpoint.cli.graphic_controller;
 
+import com.example.shoppingpoint.bean.RequestListBean;
 import com.example.shoppingpoint.cli.view.RequestListViewCli;
+import com.example.shoppingpoint.controller.AcceptOfferController;
+import com.example.shoppingpoint.controller.AcceptedOfferController;
 import com.example.shoppingpoint.controller.MakeOfferController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 
 import java.io.IOException;
 import java.util.List;
+
+import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
 
 public class RequestListGraphicControllerCLI {
@@ -19,11 +24,23 @@ public class RequestListGraphicControllerCLI {
 
 
         MakeOfferController controller = new MakeOfferController();
-        int acceptedOffers = controller.countAcceptedOffers();
+        int nAcceptedOffers = controller.countAcceptedOffers();
         List<Request> requestList = controller.getRequest();
-        requestListView.requestList(acceptedOffers,requestList);
-        int choice = requestListView.getChoiceSupplier();
-        System.out.println(choice);
+        requestListView.requestList(nAcceptedOffers,requestList);
+        int choice=0;
+        while(choice!=3) {
+            choice=requestListView.getChoiceSupplier();
+            if (choice == 1) {
+                int requestId = requestListView.makeAnOfferInput();
+                RequestListBean price = requestListView.priceOfOfferInput();
+                controller.saveOffer(requestId, price);
+            }
+            if(choice==2) {
+                AcceptedOfferGraphicControllerCLI acceptedOfferGraphicControllerCLI = new AcceptedOfferGraphicControllerCLI();
+                acceptedOfferGraphicControllerCLI.initialize();
+
+            }
+        }
 
     }
 }
