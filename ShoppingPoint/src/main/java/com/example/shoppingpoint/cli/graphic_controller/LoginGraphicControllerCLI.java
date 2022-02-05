@@ -9,7 +9,6 @@ import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 
-
 import java.io.IOException;
 
 public class LoginGraphicControllerCLI {

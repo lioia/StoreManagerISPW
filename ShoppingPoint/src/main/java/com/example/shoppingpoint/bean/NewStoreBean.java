@@ -1,9 +1,7 @@
 package com.example.shoppingpoint.bean;
 
 import com.example.shoppingpoint.exception.BeanException;
-import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.utils.StoreType;
-import com.example.shoppingpoint.utils.UserType;
 
 public class NewStoreBean {
     private String name;

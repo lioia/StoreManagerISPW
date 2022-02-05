@@ -8,6 +8,8 @@ import com.example.shoppingpoint.controller.*;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
@@ -24,12 +26,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-
-
-import com.example.shoppingpoint.model.user.*;
-import com.example.shoppingpoint.model.Store;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;

@@ -1,17 +1,17 @@
 package com.example.shoppingpoint.controller;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import com.example.shoppingpoint.bean.RequestListBean;
+import com.example.shoppingpoint.dao.OfferDAO;
+import com.example.shoppingpoint.dao.ProductDAO;
+import com.example.shoppingpoint.dao.RequestDAO;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Request;
-import com.example.shoppingpoint.dao.RequestDAO;
 import com.example.shoppingpoint.model.product.Product;
-import com.example.shoppingpoint.dao.ProductDAO;
-import com.example.shoppingpoint.dao.OfferDAO;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class MakeOfferController {
     public List<Request> getRequest() throws ControllerException {
@@ -19,6 +19,8 @@ public class MakeOfferController {
             return RequestDAO.getAllRequestsNotAccepted();
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
         }
     }
 

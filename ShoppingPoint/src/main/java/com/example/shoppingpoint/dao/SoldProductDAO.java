@@ -2,7 +2,7 @@ package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.SoldProduct;
-import com.example.shoppingpoint.model.product.*;
+import com.example.shoppingpoint.model.product.Product;
 import com.example.shoppingpoint.model.user.Client;
 
 import java.sql.*;

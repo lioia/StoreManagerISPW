@@ -16,6 +16,8 @@ public class AcceptOfferController {
             return RequestDAO.getRequestsOfProduct(productId);
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
         }
     }
 
@@ -34,6 +36,8 @@ public class AcceptOfferController {
             return OfferDAO.getOffersOfRequest(requestId);
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
         }
     }
 

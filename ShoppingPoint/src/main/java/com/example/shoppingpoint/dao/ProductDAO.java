@@ -3,13 +3,12 @@ package com.example.shoppingpoint.dao;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.factory.ProductFactory;
 import com.example.shoppingpoint.model.product.*;
-import com.example.shoppingpoint.utils.*;
+import com.example.shoppingpoint.utils.ProductType;
 
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ProductDAO {
     public ProductDAO() {

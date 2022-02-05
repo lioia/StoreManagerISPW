@@ -1,7 +1,11 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import com.example.shoppingpoint.controller.ClientListController;
+import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.ClientListData;
+import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
@@ -9,14 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-
-
-import com.example.shoppingpoint.model.user.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import com.example.shoppingpoint.model.ClientListData;
-import com.example.shoppingpoint.controller.ClientListController;
-import com.example.shoppingpoint.controller.SendEmailController;
 
 import java.io.IOException;
 import java.util.List;

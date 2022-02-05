@@ -2,17 +2,13 @@ package com.example.shoppingpoint.cli.graphic_controller;
 
 import com.example.shoppingpoint.bean.RequestListBean;
 import com.example.shoppingpoint.cli.view.RequestListViewCli;
-import com.example.shoppingpoint.controller.AcceptOfferController;
-import com.example.shoppingpoint.controller.AcceptedOfferController;
 import com.example.shoppingpoint.controller.MakeOfferController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.Request;
 
 import java.io.IOException;
 import java.util.List;
-
-import com.example.shoppingpoint.model.Offer;
-import com.example.shoppingpoint.model.Request;
 
 public class RequestListGraphicControllerCLI {
     private final RequestListViewCli requestListView;

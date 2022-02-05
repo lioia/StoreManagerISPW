@@ -1,15 +1,17 @@
 package com.example.shoppingpoint.model;
 
+import com.example.shoppingpoint.adapter.GenericProduct;
+
 public class Request {
     private int requestId;
-    private int productId;
+    private GenericProduct product;
     private float maxPrice;
     private int quantity;
     private boolean accepted;
 
-    public Request(int requestId, int productId, float maxPrice, int quantity, boolean accepted) {
+    public Request(int requestId, GenericProduct product, float maxPrice, int quantity, boolean accepted) {
         setRequestId(requestId);
-        setProductId(productId);
+        setProduct(product);
         setMaxPrice(maxPrice);
         setQuantity(quantity);
         setAccepted(accepted);
@@ -23,12 +25,12 @@ public class Request {
         this.requestId = requestId;
     }
 
-    public int getProductId() {
-        return productId;
+    public GenericProduct getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(GenericProduct product) {
+        this.product = product;
     }
 
     public float getMaxPrice() {

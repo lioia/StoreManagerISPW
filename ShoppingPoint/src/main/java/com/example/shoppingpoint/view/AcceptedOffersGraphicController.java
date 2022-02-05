@@ -1,14 +1,10 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
-import com.example.shoppingpoint.adapter.GenericProduct;
-import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.controller.AcceptedOfferController;
-import com.example.shoppingpoint.controller.MakeOfferController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Offer;
-import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
@@ -45,21 +41,17 @@ public class AcceptedOffersGraphicController {
             for (Offer acceptedOffer : acceptedOffersList) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/request_product_pane.fxml"));
                 AnchorPane node = fxmlLoader.load();
-                int requestId = acceptedOffer.getRequestId();
-                Request request = controller.getRequestById(requestId);
-                MakeOfferController controller2 = new MakeOfferController();
-                GenericProduct product = new ProductAdapter(controller2.getProduct(request.getProductId()));
-                ((Text) node.lookup("#ProductName")).setText(product.getName());
-                ((Text) node.lookup("#quantity")).setText(String.format("Quantity: %d", request.getQuantity()));
+                ((Text) node.lookup("#ProductName")).setText(acceptedOffer.getRequest().getProduct().getName());
+                ((Text) node.lookup("#quantity")).setText(String.format("Quantity: %d", acceptedOffer.getRequest().getQuantity()));
                 ((Text) node.lookup("#maxPrice")).setText(String.format("Offer Price:%.2f", acceptedOffer.getOfferPrice()));
-                ((Label) node.lookup("#description")).setText(product.getDescription());
-                ((Text) node.lookup("#store")).setText("Store: " + product.getStoreName());
-                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, product.getDescription()));
+                ((Label) node.lookup("#description")).setText(acceptedOffer.getRequest().getProduct().getDescription());
+                ((Text) node.lookup("#store")).setText("Store: " + acceptedOffer.getRequest().getProduct().getStoreName());
+                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, acceptedOffer.getRequest().getProduct().getDescription()));
                 Text sendEmail = (Text) node.lookup("#sendEmail");
                 sendEmail.setOnMouseClicked(event -> {
                     try {
                         SendEmailController emailController = new SendEmailController();
-                        String username = emailController.getUsernameOfStore(product.getStoreName());
+                        String username = emailController.getUsernameOfStore(acceptedOffer.getRequest().getProduct().getStoreName());
                         emailController.sendEmail(username);
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());

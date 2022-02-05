@@ -1,9 +1,8 @@
 package com.example.shoppingpoint.cli.view;
 
-import com.example.shoppingpoint.bean.LoginBean;
+import com.example.shoppingpoint.bean.RegisterBean;
 import com.example.shoppingpoint.cli.utils.CLIReader;
 import com.example.shoppingpoint.exception.BeanException;
-import com.example.shoppingpoint.bean.RegisterBean;
 
 import java.io.IOException;
 

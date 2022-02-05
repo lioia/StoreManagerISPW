@@ -3,7 +3,8 @@ package com.example.shoppingpoint.bean;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.utils.UserType;
 
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterBean {
     private String username;

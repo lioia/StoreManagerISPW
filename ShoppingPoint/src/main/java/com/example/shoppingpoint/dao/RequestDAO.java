@@ -1,7 +1,9 @@
 package com.example.shoppingpoint.dao;
 
+import com.example.shoppingpoint.adapter.ProductAdapter;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Request;
+import com.example.shoppingpoint.model.product.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,11 +14,7 @@ public class RequestDAO {
         throw new IllegalStateException();
     }
 
-    private static final String MAX_PRICE = "MaxPrice";
-    private static final String QUANTITY = "Quantity";
-    private static final String ACCEPTED = "Accepted";
-
-    public static List<Request> getRequestsOfProduct(int productId) throws SQLException {
+    public static List<Request> getRequestsOfProduct(int productId) throws SQLException, DatabaseException {
         ArrayList<Request> requests = new ArrayList<>();
 
         // Create Connection
@@ -26,11 +24,7 @@ public class RequestDAO {
                 // Execute query
                 ResultSet rs = statement.executeQuery(String.format("SELECT * FROM Request WHERE ProductId = %d", productId));
                 while (rs.next()) {
-                    int requestId = rs.getInt("RequestId");
-                    float maxPrice = rs.getFloat(MAX_PRICE);
-                    int quantity = rs.getInt(QUANTITY);
-                    boolean accepted = rs.getBoolean(ACCEPTED);
-                    requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
+                    requests.add(getRequest(rs));
                 }
 
                 rs.close();
@@ -41,7 +35,7 @@ public class RequestDAO {
 
     public static Request getRequestById(int id) throws SQLException, DatabaseException {
         Request request;
-        //            Create Connection
+//            Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
 //            Create Statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
@@ -51,9 +45,9 @@ public class RequestDAO {
                 ResultSet rs = statement.executeQuery(sql);
                 if (!rs.first())
                     throw new DatabaseException("request");
-
                 rs.first();
-                request = new Request(id, rs.getInt("ProductId"), rs.getFloat(MAX_PRICE), rs.getInt(QUANTITY), rs.getBoolean(ACCEPTED));
+                request = getRequest(rs);
+                rs.close();
             }
         }
         return request;
@@ -84,7 +78,7 @@ public class RequestDAO {
         }
     }
 
-    public static List<Request> getAllRequestsNotAccepted() throws SQLException {
+    public static List<Request> getAllRequestsNotAccepted() throws SQLException, DatabaseException {
         ArrayList<Request> requests = new ArrayList<>();
 
         // Create Connection
@@ -94,17 +88,21 @@ public class RequestDAO {
                 // Execute query
                 ResultSet rs = statement.executeQuery("SELECT * FROM Request WHERE Accepted=0");
                 while (rs.next()) {
-                    int requestId = rs.getInt("RequestId");
-                    float maxPrice = rs.getFloat(MAX_PRICE);
-                    int quantity = rs.getInt(QUANTITY);
-                    boolean accepted = rs.getBoolean(ACCEPTED);
-                    int productId = rs.getInt("ProductId");
-                    requests.add(new Request(requestId, productId, maxPrice, quantity, accepted));
+                    requests.add(getRequest(rs));
                 }
 
                 rs.close();
             }
         }
         return requests;
+    }
+
+    private static Request getRequest(ResultSet rs) throws SQLException, DatabaseException {
+        int id = rs.getInt("RequestId");
+        float maxPrice = rs.getFloat("MaxPrice");
+        int quantity = rs.getInt("Quantity");
+        boolean accepted = rs.getBoolean("Accepted");
+        Product product = ProductDAO.getProductById(rs.getInt("ProductId"));
+        return new Request(id, new ProductAdapter(product), maxPrice, quantity, accepted);
     }
 }

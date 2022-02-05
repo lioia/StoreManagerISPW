@@ -1,9 +1,12 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
-import com.example.shoppingpoint.adapter.GenericProduct;
+import com.example.shoppingpoint.bean.RequestListBean;
+import com.example.shoppingpoint.controller.MakeOfferController;
+import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.Request;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.DescriptionHandler;
 import com.example.shoppingpoint.utils.ExceptionHandler;
@@ -13,21 +16,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import com.example.shoppingpoint.controller.MakeOfferController;
-import com.example.shoppingpoint.adapter.ProductAdapter;
-import com.example.shoppingpoint.bean.RequestListBean;
-import com.example.shoppingpoint.controller.SendEmailController;
-
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.List;
-
-import com.example.shoppingpoint.model.Request;
-import javafx.scene.text.Text;
-import javafx.util.Duration;
 
 import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
 import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER_TEXT;
@@ -65,19 +64,18 @@ public class RequestListGraphicController {
             for (Request request : requestList) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/request_product_pane.fxml"));
                 AnchorPane node = fxmlLoader.load();
-                GenericProduct product = new ProductAdapter(controller.getProduct(request.getProductId()));
 
-                ((Text) node.lookup("#ProductName")).setText(product.getName());
+                ((Text) node.lookup("#ProductName")).setText(request.getProduct().getName());
                 ((Text) node.lookup("#quantity")).setText(String.format("Quantity: %d", request.getQuantity()));
                 ((Text) node.lookup("#maxPrice")).setText(String.format("Max Price:%.2f", request.getMaxPrice()));
-                ((Label) node.lookup("#description")).setText(product.getDescription());
-                ((Text) node.lookup("#store")).setText("Store: " + product.getStoreName());
-                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, product.getDescription()));
+                ((Label) node.lookup("#description")).setText(request.getProduct().getDescription());
+                ((Text) node.lookup("#store")).setText("Store: " + request.getProduct().getStoreName());
+                ((Button) node.lookup("#descriptionButton")).setOnAction((ActionEvent event) -> DescriptionHandler.showDescription(event, request.getProduct().getDescription()));
                 Text sendEmail = (Text) node.lookup("#sendEmail");
                 sendEmail.setOnMouseClicked(event -> {
                     try {
                         SendEmailController emailController = new SendEmailController();
-                        String username = emailController.getUsernameOfStore(product.getStoreName());
+                        String username = emailController.getUsernameOfStore(request.getProduct().getStoreName());
                         emailController.sendEmail(username);
                     } catch (Exception e) {
                         e.printStackTrace();

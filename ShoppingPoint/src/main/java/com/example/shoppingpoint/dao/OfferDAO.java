@@ -2,6 +2,7 @@ package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Offer;
+import com.example.shoppingpoint.model.Request;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class OfferDAO {
         return offer;
     }
 
-    public static List<Offer> getAcceptedOffersOfSupplier(String supplier) throws SQLException {
+    public static List<Offer> getAcceptedOffersOfSupplier(String supplier) throws SQLException, DatabaseException {
         ArrayList<Offer> offers = new ArrayList<>();
 
         // Create Connection
@@ -61,7 +62,7 @@ public class OfferDAO {
         return offers;
     }
 
-    public static List<Offer> getOffersOfRequest(int requestId) throws SQLException {
+    public static List<Offer> getOffersOfRequest(int requestId) throws SQLException, DatabaseException {
         ArrayList<Offer> offers = new ArrayList<>();
 
         // Create Connection
@@ -104,7 +105,7 @@ public class OfferDAO {
     }
 
     public static Boolean isOfferChecked(int offerId) throws SQLException{
-        Boolean checkedOffer;
+        boolean checkedOffer;
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
@@ -118,13 +119,15 @@ public class OfferDAO {
         return checkedOffer;
     }
 
-    private static Offer getOffer(ResultSet rs) throws SQLException {
+    private static Offer getOffer(ResultSet rs) throws SQLException, DatabaseException {
         int offerId = rs.getInt("OfferId");
-        int requestId = rs.getInt("RequestId");
+//        int requestId = rs.getInt("RequestId");
+        Request request = RequestDAO.getRequestById(rs.getInt("RequestId"));
         float offerPrice = rs.getFloat("OfferPrice");
         boolean accepted = rs.getBoolean("Accepted");
         String supplierUsername = rs.getString("Supplier");
-        return new Offer(offerId, requestId, offerPrice, accepted, supplierUsername);
+        boolean checked = rs.getBoolean("Checked");
+        return new Offer(offerId, request, offerPrice, accepted, supplierUsername, checked);
     }
 
     public static int countAcceptedOffer(String supplier) throws SQLException {

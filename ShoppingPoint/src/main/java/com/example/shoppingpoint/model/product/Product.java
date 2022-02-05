@@ -1,7 +1,6 @@
 package com.example.shoppingpoint.model.product;
 
 import com.example.shoppingpoint.utils.ProductType;
-import javafx.scene.image.Image;
 
 import java.io.InputStream;
 

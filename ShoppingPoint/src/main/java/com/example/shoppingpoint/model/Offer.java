@@ -1,20 +1,20 @@
 package com.example.shoppingpoint.model;
 
-import com.example.shoppingpoint.model.user.Supplier;
-
 public class Offer {
     private int offerId;
-    private int requestId;
+    private Request request;
     private float offerPrice;
     private boolean accepted;
     private String supplierUsername;
+    private boolean checked;
 
-    public Offer(int offerId, int requestId, float offerPrice, boolean accepted, String supplierUsername) {
+    public Offer(int offerId, Request request, float offerPrice, boolean accepted, String supplierUsername, boolean checked) {
         setOfferId(offerId);
-        setRequestId(requestId);
+        setRequest(request);
         setOfferPrice(offerPrice);
         setAccepted(accepted);
         setSupplierUsername(supplierUsername);
+        setChecked(checked);
     }
 
     public int getOfferId() {
@@ -23,14 +23,6 @@ public class Offer {
 
     public void setOfferId(int offerId) {
         this.offerId = offerId;
-    }
-
-    public int getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(int requestId) {
-        this.requestId = requestId;
     }
 
     public float getOfferPrice() {
@@ -49,12 +41,27 @@ public class Offer {
         this.accepted = accepted;
     }
 
-
     public String getSupplierUsername() {
         return supplierUsername;
     }
 
     public void setSupplierUsername(String supplierUsername) {
         this.supplierUsername = supplierUsername;
+    }
+
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

@@ -1,13 +1,12 @@
 package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.exception.DatabaseException;
+import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.model.LoyaltyCard;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.example.shoppingpoint.model.ClientListData;
 
 public class LoyaltyCardDAO {
     private LoyaltyCardDAO() {
