@@ -24,28 +24,24 @@ public class StoreDashboardViewCLI {
         while (!exit) {
             String option = CLIReader.readline();
             selected = Integer.parseInt(option);
-            if(selected>0&&selected<=10)
-                exit=true;
+            if (selected > 0 && selected <= 10)
+                exit = true;
             else System.out.println("Invalid input.");
         }
         return selected;
     }
 
-    public void createProductView(List<GenericProduct> productList){
-
+    public void createProductView(List<GenericProduct> productList) {
         System.out.println("\nProduct list\n");
 
-        for(GenericProduct product : productList){
-            System.out.printf("Product ID: %d\n",product.getId());
-            System.out.printf("Name: %s\n",product.getName());
-            System.out.printf("Price: %.2f\n",product.getPrice());
-            System.out.printf("Discounted price: %.2f\n",product.getDiscountedPrice());
-            System.out.printf("Status: %s\n",product.getStatus());
-            System.out.printf("Quantity: %d\n",product.getQuantity());
-            System.out.printf("Description: %s\n\n\n",product.getDescription());
-
+        for (GenericProduct product : productList) {
+            System.out.printf("Product ID: %d\n", product.getId());
+            System.out.printf("Name: %s\n", product.getName());
+            System.out.printf("Price: %.2f\n", product.getPrice());
+            System.out.printf("Discounted price: %.2f\n", product.getDiscountedPrice());
+            System.out.printf("Status: %s\n", product.getStatus());
+            System.out.printf("Quantity: %d\n", product.getQuantity());
+            System.out.printf("Description: %s\n\n\n", product.getDescription());
         }
-
-
     }
 }

@@ -9,12 +9,11 @@ import com.example.shoppingpoint.exception.ControllerException;
 import java.io.IOException;
 
 public class EditProductGraphicControllerCLI {
-    public void initialize() throws IOException, BeanException , ControllerException {
+    public void initialize() throws IOException, BeanException, ControllerException {
         EditProductViewCLI editProductViewCLI = new EditProductViewCLI();
         int productId = editProductViewCLI.editProductID();
         EditProductBean editProductBean = editProductViewCLI.editProductInput();
         EditProductController editProductController = new EditProductController();
-        editProductController.editProduct(productId,editProductBean);
-
+        editProductController.editProduct(productId, editProductBean);
     }
 }

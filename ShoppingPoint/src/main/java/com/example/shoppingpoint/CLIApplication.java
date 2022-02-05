@@ -7,27 +7,24 @@ import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CLIApplication {
     public static void main(String[] args) throws BeanException, ControllerException, IOException {
         System.out.println("Shopping Point CLI");
-        System.out.println("1) Login");
-        System.out.println("2) Register");
-        boolean exit = false;
-        while(!exit) {
-            String option = CLIReader.readline();
-            int selected = Integer.parseInt(option);
-            if(selected == 1) {
+
+        int selected = CLIReader.multiChoice(Arrays.asList("Login", "Register"));
+        switch (selected) {
+            case 1 -> {
                 LoginGraphicControllerCLI loginCli = new LoginGraphicControllerCLI();
                 loginCli.login();
-                exit = true;
-            } else if (selected == 2) {
+            }
+            case 2 -> {
                 RegisterGraphicControllerCLI registerCli = new RegisterGraphicControllerCLI();
                 registerCli.register();
-                exit = true;
-            } else {
-                System.out.println("Invalid input.");
             }
+            default -> throw new IllegalStateException("Unexpected value: " + selected);
         }
     }
 }
