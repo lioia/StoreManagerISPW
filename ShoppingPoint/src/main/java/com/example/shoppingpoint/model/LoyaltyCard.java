@@ -1,7 +1,7 @@
 package com.example.shoppingpoint.model;
 
 public class LoyaltyCard {
-    private Integer points;
+    private final int points;
     private final String storeName;
 
     public LoyaltyCard(Integer points, String storeName) {

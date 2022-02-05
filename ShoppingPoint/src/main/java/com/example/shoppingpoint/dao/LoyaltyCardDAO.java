@@ -24,12 +24,14 @@ public class LoyaltyCardDAO {
                 // Execute query
                 ResultSet rs = statement.executeQuery(sql);
                 // Empty result
-                if (!rs.first())
-                    throw new DatabaseException("loyalty card");
+                if (!rs.first()) {
+                    rs.close();
+                    return null;
+                }
 
                 rs.first();
                 Integer points = rs.getInt("Points");
-                card = new LoyaltyCard(points,  storeName);
+                card = new LoyaltyCard(points, storeName);
                 rs.close();
             }
         }
