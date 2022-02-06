@@ -5,6 +5,7 @@ import com.example.shoppingpoint.bean.StoreBean;
 import com.example.shoppingpoint.cli.view.StoreViewCLI;
 import com.example.shoppingpoint.controller.LoyaltyCardController;
 import com.example.shoppingpoint.controller.PaymentController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
@@ -22,39 +23,29 @@ public class StoreGraphicControllerCLI {
         view.showLoyaltyCardInfo(store, card);
         List<GenericProduct> products = controller.getProductsFromStore(new StoreBean(store.getName()));
         view.showProducts(products);
-        // Label to exit the while loop inside the switch
-        loop:
         while (true) {
-            switch (view.getStoreAction()) {
-//                Buy product
-                case 1 -> {
+            int action = view.getStoreAction();
+            if (action == 1) { // Buy product
 //                    TODO controllo sull'id
-                    int productId = view.getProduct();
-                    GenericProduct product = products.stream().filter(el -> el.getId().equals(productId)).findFirst().orElse(null);
-                    if (product == null) {
-                        System.out.println("Invalid Product ID");
-                        continue;
-                    }
-                    PaymentGraphicControllerCLI paymentGraphicControllerCLI = new PaymentGraphicControllerCLI();
-                    paymentGraphicControllerCLI.initialize(product);
+                int productId = view.getProduct();
+                GenericProduct product = products.stream().filter(el -> el.getId().equals(productId)).findFirst().orElse(null);
+                if (product == null) {
+                    System.out.println("Invalid Product ID");
+                    continue;
                 }
-//                Orders
-                case 2 -> {
-//                    TODO goto orders
+                PaymentGraphicControllerCLI paymentGraphicControllerCLI = new PaymentGraphicControllerCLI();
+                paymentGraphicControllerCLI.initialize(store, product);
+            } else if (action == 2) { // Orders
+//                TODO go to orders
+                System.out.println("Unimplemented");
+            } else if (action == 3) { // Activate loyalty card
+                if (card == null) {
+                    LoyaltyCardController loyaltyCardController = new LoyaltyCardController();
+                    loyaltyCardController.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
+                    view.showSuccessActivation();
                 }
-//                Activate loyalty card
-                case 3 -> {
-                    if (card == null) {
-                        LoyaltyCardController loyaltyCardController = new LoyaltyCardController();
-                        loyaltyCardController.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
-                        view.showSuccessActivation();
-                    }
-                }
-                case 4 -> {
-                    break loop;
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + view.getStoreAction());
-            }
+            } else // Go back
+                if (action == 4) break;
         }
     }
 }

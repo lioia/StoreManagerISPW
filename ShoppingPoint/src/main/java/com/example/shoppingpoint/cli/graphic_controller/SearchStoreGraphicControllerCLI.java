@@ -3,6 +3,7 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.cli.view.SearchStoreViewCLI;
 import com.example.shoppingpoint.controller.PaymentController;
+import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
 
@@ -17,14 +18,14 @@ public class SearchStoreGraphicControllerCLI {
         view.createStoresView(stores);
         while (true) {
             int action = view.getAction();
-            if (action == 1) {
+            if (action == 1) { // Select a store
                 String storeName = view.getStore();
                 Store store = stores.stream().filter(el -> el.getName().equals(storeName)).findFirst().orElse(null);
                 if (store == null)
                     continue;
                 StoreGraphicControllerCLI storeGraphicControllerCLI = new StoreGraphicControllerCLI();
                 storeGraphicControllerCLI.initialize(store);
-            } else if (action == 2) {
+            } else if (action == 2) { // Go back
                 break;
             }
         }

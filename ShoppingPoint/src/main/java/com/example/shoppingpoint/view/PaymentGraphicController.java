@@ -88,7 +88,7 @@ public class PaymentGraphicController {
             paymentCompletedGraphicController.initialize(store);
         } catch (BeanException e) {
             ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
-        } catch(ControllerException e) {
+        } catch (ControllerException e) {
             ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
         }
     }
@@ -130,7 +130,6 @@ public class PaymentGraphicController {
         total = total + product.getDiscountedPrice();
         String formattedTotal = String.format(DECIMAL_FORMAT, total);
         totalText.setText(formattedTotal);
-
     }
 
     @FXML
