@@ -11,7 +11,7 @@
       prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.shoppingpoint.view.ClientListGraphicController">
     <BorderPane prefHeight="80.0" prefWidth="200.0"
-                style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
+                style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
         <center>
             <Label fx:id="labelStoreName" text="Client List - Shopping Point" BorderPane.alignment="CENTER">
                 <font>
@@ -41,9 +41,6 @@
                 </BorderPane.margin>
             </Button>
         </left>
-        <effect>
-            <DropShadow/>
-        </effect>
     </BorderPane>
     <ScrollPane style="-fx-background-color: #ffffff;" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="clientPane"/>

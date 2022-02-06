@@ -12,7 +12,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.shoppingpoint.view.AddProductGraphicController">
     <top>
-        <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
+        <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59);" BorderPane.alignment="CENTER">
             <center>
                 <Label text="Add product - Shopping Point">
                     <font>

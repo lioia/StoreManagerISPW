@@ -57,16 +57,18 @@
         </AnchorPane>
     </center>
     <top>
-        <BorderPane prefHeight="80.0" style="-fx-background-color: #ff6e6e;" BorderPane.alignment="CENTER">
+        <BorderPane prefHeight="80.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16"
+                    BorderPane.alignment="CENTER">
             <center>
-                <Label text="New Store - Shopping Point">
+                <Label text="New store - Shopping Point">
                     <font>
                         <Font size="36.0"/>
                     </font>
                 </Label>
             </center>
             <left>
-                <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent">
+                <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent"
+                        onAction="#goBack">
                     <graphic>
                         <FontIcon iconLiteral="mdal-arrow_back" iconSize="32"/>
                     </graphic>
@@ -75,16 +77,6 @@
                     </BorderPane.margin>
                 </Button>
             </left>
-            <right>
-                <Button mnemonicParsing="false" BorderPane.alignment="CENTER" style="-fx-background-color: transparent">
-                    <graphic>
-                        <FontIcon iconLiteral="mdal-account_circle" iconSize="32"/>
-                    </graphic>
-                    <BorderPane.margin>
-                        <Insets right="48.0"/>
-                    </BorderPane.margin>
-                </Button>
-            </right>
         </BorderPane>
     </top>
 </BorderPane>

@@ -8,7 +8,7 @@
 <?import org.kordamp.ikonli.javafx.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.NewRequestGraphicController">
-    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16;">
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
         <left>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                 <graphic>
@@ -36,9 +36,6 @@
                 </BorderPane.margin>
             </Button>
         </right>
-        <effect>
-            <DropShadow />
-        </effect>
     </BorderPane>
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
         <Label fx:id="productNameLabel" layoutX="324.0" layoutY="14.0" text="Product Name" AnchorPane.leftAnchor="324.0" AnchorPane.topAnchor="14.0">

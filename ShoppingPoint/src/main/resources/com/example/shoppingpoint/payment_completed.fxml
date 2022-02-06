@@ -13,10 +13,8 @@
             fx:controller="com.example.shoppingpoint.view.PaymentCompletedGraphicController">
     <top>
         <HBox alignment="CENTER" prefHeight="80.0" prefWidth="200.0"
-              style="-fx-background-color: #ff6e6e; -fx-background-radius: 0 0 16 16" BorderPane.alignment="CENTER">
-            <effect>
-                <DropShadow/>
-            </effect>
+              style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16" BorderPane.alignment="CENTER">
+
             <Label text="Payment Completed - Shopping Point">
                 <font>
                     <Font size="36.0"/>

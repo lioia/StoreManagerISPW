@@ -11,7 +11,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="200.0" prefWidth="307.0"
+<AnchorPane prefHeight="210.0" prefWidth="300.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <effect>

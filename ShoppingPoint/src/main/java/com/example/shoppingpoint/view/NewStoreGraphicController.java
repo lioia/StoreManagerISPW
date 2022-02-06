@@ -57,4 +57,12 @@ public class NewStoreGraphicController {
     public void setStoreOwnerName(StoreOwner storeOwner) {
         this.storeOwner = storeOwner;
     }
+
+    @FXML
+    public void goBack(ActionEvent event) throws IOException{
+        //TODO gestione eccezzione quando non viene creato il negozio ma solo store owner
+        FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("register.fxml"));
+        ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
+
+    }
 }
