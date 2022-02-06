@@ -54,7 +54,8 @@ public class StoreDashboardViewCLI {
             System.out.printf("Discounted price: %.2f\n", product.getDiscountedPrice());
             System.out.printf("Status: %s\n", product.getStatus());
             System.out.printf("Quantity: %d\n", product.getQuantity());
-            System.out.printf("Description: %s\n\n\n", product.getDescription());
+            System.out.printf("Description: %s\n", product.getDescription());
+            System.out.println("---------------");
         }
     }
 }

@@ -4,6 +4,7 @@ import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.cli.view.LoginViewCLI;
 import com.example.shoppingpoint.controller.LoginController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.StoreOwner;
@@ -20,7 +21,7 @@ public class LoginGraphicControllerCLI {
         loginView = new LoginViewCLI();
     }
 
-    public void login() throws IOException, BeanException,ControllerException{
+    public void login() throws IOException, BeanException,ControllerException, BoundaryException {
         User user;
         while (true) {
             try {

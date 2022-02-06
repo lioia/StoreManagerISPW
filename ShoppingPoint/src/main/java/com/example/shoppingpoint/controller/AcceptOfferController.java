@@ -41,9 +41,10 @@ public class AcceptOfferController {
         }
     }
 
-    public void acceptOffer(Request request, int offerId) throws ControllerException {
+    public void acceptOffer(int requestId, int offerId) throws ControllerException {
         try {
-            RequestDAO.acceptRequest(request.getRequestId());
+
+            RequestDAO.acceptRequest(requestId);
             OfferDAO.acceptOffer(offerId);
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);

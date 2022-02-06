@@ -81,7 +81,7 @@ public class OffersGraphicController {
                 });
                 ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
                     try {
-                        controller.acceptOffer(req, off.getOfferId());
+                        controller.acceptOffer(req.getRequestId(), off.getOfferId());
                         goBack(event);
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());

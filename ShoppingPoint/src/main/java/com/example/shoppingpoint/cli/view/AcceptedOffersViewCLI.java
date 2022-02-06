@@ -15,7 +15,8 @@ public class AcceptedOffersViewCLI {
             System.out.printf("Quantity: %d\n", offer.getRequest().getQuantity());
             System.out.printf("Offer price: %.2f\n", offer.getOfferPrice());
             System.out.printf("Description: %s\n", offer.getRequest().getProduct().getDescription());
-            System.out.printf("Store: %s\n\n\n", offer.getRequest().getProduct().getStoreName());
+            System.out.printf("Store: %s\n", offer.getRequest().getProduct().getStoreName());
+            System.out.println("---------------");
         }
     }
 }

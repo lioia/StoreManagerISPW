@@ -7,6 +7,7 @@ public class LoyaltyCardBean {
     private Integer pointsInEuro;
     private Integer euroInPoints;
 
+    //TODO son uguali?
     public LoyaltyCardBean(boolean active, String pointsInEuro, String euroInPoints) throws BeanException {
         this(active, Integer.parseInt(pointsInEuro), Integer.parseInt(euroInPoints));
     }

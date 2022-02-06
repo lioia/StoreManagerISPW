@@ -15,7 +15,7 @@ public class AcceptOfferViewCLI {
         return Integer.parseInt(productId);
     }
 
-    public int acceptOfferRequestId() throws IOException {
+    public int getOfferRequestId() throws IOException {
         System.out.println("Request ID:");
         String productId = CLIReader.readline();
         return Integer.parseInt(productId);
@@ -32,7 +32,7 @@ public class AcceptOfferViewCLI {
 
     public int getChoice() throws IOException {
         System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("View offer of request", "Go back"));
+        return CLIReader.multiChoice(List.of("View offers of request","View accepted offer of request", "Go back"));
 //        System.out.println("1) View offer of request");
 //        System.out.println("2) Back");
 //        boolean exit = false;
@@ -47,12 +47,29 @@ public class AcceptOfferViewCLI {
 //        return selected;
     }
 
+    public int getChoice2() throws  IOException{
+        System.out.println("What do you want to do?");
+        return CLIReader.multiChoice(List.of("Accept offer","Go back"));
+    }
+
     public void viewOffersOfProduct(List<Offer> offerList) {
         System.out.println("Offer list");
         for (Offer offer : offerList) {
-            System.out.printf("Offer ID: %d", offer.getOfferId());
-            System.out.printf("Price: %.2f", offer.getOfferPrice());
-            System.out.printf("Supplier: %s", offer.getSupplierUsername());
+            System.out.printf("Offer ID: %d - ", offer.getOfferId());
+            System.out.printf("Price: %.2f - ", offer.getOfferPrice());
+            System.out.printf("Supplier: %s\n", offer.getSupplierUsername());
         }
+    }
+
+    public int acceptOffer() throws IOException{
+        System.out.println("Offer ID:");
+        String productId = CLIReader.readline();
+        return Integer.parseInt(productId);
+    }
+
+    public void viewAcceptedOfferOfProduct(Offer offer) {
+        System.out.printf("Offer ID: %d - ", offer.getOfferId());
+        System.out.printf("Price: %.2f - ", offer.getOfferPrice());
+        System.out.printf("Supplier: %s\n", offer.getSupplierUsername());
     }
 }

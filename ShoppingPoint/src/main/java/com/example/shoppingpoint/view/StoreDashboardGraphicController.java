@@ -183,6 +183,7 @@ public class StoreDashboardGraphicController {
         updateButton.setPrefSize(120, 48);
         updateButton.setOnAction(event -> {
             try {
+                //TODO a che serve mettere nella bean selected?
                 LoyaltyCardBean bean = new LoyaltyCardBean(activeBox.isSelected(), pointInEuroTextField.getText(), euroInPointsTextField.getText());
                 EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
                 editLoyaltyCardController.updateLoyaltyCard(bean, ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
