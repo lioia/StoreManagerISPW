@@ -5,6 +5,7 @@ import com.example.shoppingpoint.cli.utils.CLIReader;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,14 +26,17 @@ public class StoreViewCLI {
         }
     }
 
-    public void showProducts(List<GenericProduct> products) {
+    public void showProducts(List<Pair<GenericProduct, Float>> products) {
         System.out.println("Products");
-        for (GenericProduct product : products) {
+        for (Pair<GenericProduct, Float> productWithReview : products) {
+            GenericProduct product = productWithReview.getKey();
+            float review = productWithReview.getValue();
             System.out.printf("ID: %d - %s\n", product.getId(), product.getName());
             System.out.printf("Price: %.2f€\n", product.getPrice());
             System.out.printf("Discounted Price: %.2f€\n", product.getDiscountedPrice());
             System.out.printf("Status: %s\n", product.getStatus());
             System.out.printf("Description: %s\n", product.getDescription());
+            System.out.printf("Review: %.1f/5\n", review);
             System.out.println("---------------");
         }
     }
