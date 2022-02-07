@@ -7,7 +7,7 @@ import com.example.shoppingpoint.controller.ViewProductsController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
-import com.example.shoppingpoint.model.Review;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -18,17 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDashboardGraphicControllerCLI {
-    public void initialize() throws ControllerException, IOException, BeanException, BoundaryException {
+    public void initialize() throws EmailException,ControllerException, IOException, BeanException, BoundaryException {
         StoreDashboardViewCLI storeDashboardViewCLI = new StoreDashboardViewCLI();
-        ViewProductsController viewProductsController = new ViewProductsController();
-        Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
-        List<GenericProduct> productList = viewProductsController.getProductsFromStore(store);
-        List<Pair<GenericProduct, Float>> productsWithReview = new ArrayList<>();
-        for (GenericProduct product : productList) {
-            ReviewController controller = new ReviewController();
-            float review = controller.getReviewOfProduct(product.getId());
-            productsWithReview.add(new Pair<>(product, review));
-        }
+        List<GenericProduct> productList = getProductList();
+        List<Pair<GenericProduct, Float>> productsWithReview = getProductsWithReview(productList);
         storeDashboardViewCLI.createProductView(productsWithReview);
         int choice;
         boolean exit = false;
@@ -41,6 +34,7 @@ public class StoreDashboardGraphicControllerCLI {
                 }
                 case 2 -> { // Select a product
                     int productId = storeDashboardViewCLI.getProduct();
+                    productList = getProductList();
                     GenericProduct product = productList.stream().filter(el -> el.getId().equals(productId)).findFirst().orElse(null);
                     if (product == null) {
                         System.out.println("Invalid product ID");
@@ -61,8 +55,29 @@ public class StoreDashboardGraphicControllerCLI {
                     System.out.println("Sold product");
                     //TODO
                 }
+                case 6 -> {
+                    productList = getProductList();
+                    productsWithReview = getProductsWithReview(productList);
+                    storeDashboardViewCLI.createProductView(productsWithReview);
+                }
                 default -> exit = true;
             }
         }
+    }
+
+    private List<GenericProduct> getProductList() throws ControllerException{
+        ViewProductsController viewProductsController = new ViewProductsController();
+        Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
+        return viewProductsController.getProductsFromStore(store);
+    }
+
+    private List<Pair<GenericProduct, Float>> getProductsWithReview(List<GenericProduct> productList) throws ControllerException {
+        List<Pair<GenericProduct, Float>> productsWithReview = new ArrayList<>();
+        for (GenericProduct product : productList) {
+            ReviewController controller = new ReviewController();
+            float review = controller.getReviewOfProduct(product.getId());
+            productsWithReview.add(new Pair<>(product, review));
+        }
+        return productsWithReview;
     }
 }

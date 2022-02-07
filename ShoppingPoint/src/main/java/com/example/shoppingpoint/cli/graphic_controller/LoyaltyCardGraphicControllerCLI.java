@@ -18,6 +18,7 @@ public class LoyaltyCardGraphicControllerCLI {
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         int choice;
         if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) { // Loyalty Card Enabled
+            loyaltyCardViewCLI.viewCardDetails(store.getPointsInEuro(),store.getEuroInPoints());
             choice = loyaltyCardViewCLI.getChoiceIfActive();
             if (choice == 1) updatePoints(loyaltyCardViewCLI, store);
             if (choice == 2) {

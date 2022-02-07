@@ -16,6 +16,7 @@ public class StoreDashboardViewCLI {
                 "Change your loyalty card details",
                 "View client list",
                 "View sold products",
+                "View products list",
                 "Quit"
         ));
     }

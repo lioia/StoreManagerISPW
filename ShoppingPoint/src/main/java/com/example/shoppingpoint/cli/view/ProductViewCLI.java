@@ -11,7 +11,7 @@ public class ProductViewCLI {
         return CLIReader.multiChoice(List.of(
                 "Edit",
                 "Make request",
-                "View offers",
+                "View requests",
                 "View estimated price",
                 "Go back"
         ));

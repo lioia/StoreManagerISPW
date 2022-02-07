@@ -31,4 +31,8 @@ public class LoyaltyCardViewCLI {
         System.out.println("What do you want to do?");
         return CLIReader.yesOrNo("Activate loyalty card? [y/n]");
     }
+
+    public void viewCardDetails(int pointsInEuro,int eurosInPoint){
+        System.out.printf("%d points spent = 1€ discount%n%d€ spent = 1 point earned",pointsInEuro,eurosInPoint);
+    }
 }

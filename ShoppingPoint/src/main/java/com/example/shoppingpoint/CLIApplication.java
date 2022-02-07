@@ -6,13 +6,14 @@ import com.example.shoppingpoint.cli.utils.CLIReader;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CLIApplication {
-    public static void main(String[] args) throws BoundaryException,BeanException, ControllerException, IOException {
+    public static void main(String[] args) throws EmailException,BoundaryException,BeanException, ControllerException, IOException {
         System.out.println("Shopping Point CLI");
 
         int selected = CLIReader.multiChoice(Arrays.asList("Login", "Register"));

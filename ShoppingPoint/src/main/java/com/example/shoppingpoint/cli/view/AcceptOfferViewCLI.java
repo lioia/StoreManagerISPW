@@ -28,8 +28,18 @@ public class AcceptOfferViewCLI {
         return CLIReader.yesOrNo("Do you want to view offers? [y/n]");
     }
 
-    public boolean getOfferChoice() throws IOException {
-        return CLIReader.yesOrNo("Do you want to accept an offer? [y/n]");
+    public int getOfferChoice() throws IOException {
+        return CLIReader.multiChoice(List.of("Do you want to accept an offer?","Do you want to send an email to a supplier?"));
+
+    }
+
+    public String getSupplier()throws IOException{
+        System.out.println("Supplier username:");
+        return CLIReader.readline();
+    }
+
+    public boolean getChoiceEmail()throws IOException {
+        return CLIReader.yesOrNo("Do you want to send an email to a customer?? [y/n]");
     }
 
     public void viewOffersOfProduct(List<Offer> offerList) {

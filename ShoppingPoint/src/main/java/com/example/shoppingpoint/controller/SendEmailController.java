@@ -5,6 +5,7 @@ import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.exception.EmailException;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 
 import java.awt.*;
 import java.io.IOException;
@@ -37,7 +38,9 @@ public class SendEmailController {
             throw new EmailException("Not supported");
         }
         try {
-            Desktop.getDesktop().mail(new URI("mailto:" + email));
+            URI mailto = new URI("mailto:"+email+"?subject=[Shopping%20Point]%20You%20received%20an%20email%20from%20"+LoggedInUser.getInstance().getUser().getUsername());
+            Desktop.getDesktop().mail(mailto);
+            //Desktop.getDesktop().mail(new URI("mailto:" + email+"?subject=[Shopping Point]"));
         } catch (URISyntaxException e) {
             throw new EmailException("Incorrect email format");
         } catch (IOException e) {
