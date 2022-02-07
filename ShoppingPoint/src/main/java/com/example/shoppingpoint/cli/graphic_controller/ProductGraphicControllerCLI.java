@@ -3,12 +3,13 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.cli.view.ProductViewCLI;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
 
 import java.io.IOException;
 
 public class ProductGraphicControllerCLI {
-    public void initialize(GenericProduct product) throws IOException, ControllerException, BeanException {
+    public void initialize(GenericProduct product) throws IOException, ControllerException, BeanException, BoundaryException {
         ProductViewCLI view = new ProductViewCLI();
         boolean exit = false;
         while (!exit) {
@@ -26,15 +27,11 @@ public class ProductGraphicControllerCLI {
                     AcceptOfferGraphicControllerCLI acceptOfferGraphicControllerCLI = new AcceptOfferGraphicControllerCLI();
                     acceptOfferGraphicControllerCLI.initialize(product);
                 }
-                case 4 -> { // View rating
-                    RatingProductGraphicControllerCLI ratingProductGraphicControllerCLI = new RatingProductGraphicControllerCLI();
-                    ratingProductGraphicControllerCLI.initialize();
-                }
-                case 5 -> { // View estimated price
+                case 4 -> { // View estimated price
                     EstimatePriceGraphicControllerCLI estimatePriceGraphicControllerCLI = new EstimatePriceGraphicControllerCLI();
                     estimatePriceGraphicControllerCLI.initialize();
                 }
-                case 6 -> exit = true;
+                default -> exit = true;
             }
         }
     }

@@ -2,15 +2,19 @@ package com.example.shoppingpoint.cli.graphic_controller;
 
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.cli.view.StoreDashboardViewCLI;
+import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.controller.ViewProductsController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
+import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StoreDashboardGraphicControllerCLI {
@@ -19,7 +23,13 @@ public class StoreDashboardGraphicControllerCLI {
         ViewProductsController viewProductsController = new ViewProductsController();
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         List<GenericProduct> productList = viewProductsController.getProductsFromStore(store);
-        storeDashboardViewCLI.createProductView(productList);
+        List<Pair<GenericProduct, Float>> productsWithReview = new ArrayList<>();
+        for(GenericProduct product : productList) {
+            ReviewController controller = new ReviewController();
+            float review = controller.getReviewOfProduct(product.getId());
+            productsWithReview.add(new Pair<>(product, review));
+        }
+        storeDashboardViewCLI.createProductView(productsWithReview);
         int choice;
         boolean exit = false;
         while (!exit) {

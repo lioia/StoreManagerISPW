@@ -12,7 +12,6 @@ public class ProductViewCLI {
                 "Edit",
                 "Make request",
                 "View offers",
-                "View Rating",
                 "View estimated price",
                 "Go back"
         ));
