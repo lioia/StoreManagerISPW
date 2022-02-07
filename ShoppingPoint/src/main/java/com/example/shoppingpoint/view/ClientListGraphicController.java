@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.controller.ClientListController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -61,6 +62,8 @@ public class ClientListGraphicController {
                         new SendEmailController().sendEmail(client.getUsername());
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+                    } catch (EmailException e) {
+                        ExceptionHandler.handleException("Email", e.getMessage());
                     }
                 });
                 ((Label) pane.lookup("#clientPointsText")).setText(String.format("Points: %d", client.getPoints()));

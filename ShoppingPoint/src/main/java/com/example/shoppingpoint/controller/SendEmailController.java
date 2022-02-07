@@ -1,13 +1,15 @@
 package com.example.shoppingpoint.controller;
 
-import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.dao.StoreDAO;
 import com.example.shoppingpoint.dao.UserDAO;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
-import com.example.shoppingpoint.singleton.LoggedInUser;
-import javafx.application.HostServices;
+import com.example.shoppingpoint.exception.EmailException;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 
 public class SendEmailController {
@@ -21,7 +23,7 @@ public class SendEmailController {
         }
     }
 
-    public void sendEmail(String user) throws ControllerException {
+    public void sendEmail(String user) throws ControllerException, EmailException {
         String email;
         try {
             email = UserDAO.getEmailByUsername(user);
@@ -30,8 +32,16 @@ public class SendEmailController {
         } catch (DatabaseException e) {
             throw new ControllerException("Database", e);
         }
-        HostServices hostServices = ShoppingPointApplication.getInstance().getHostServices();
-
-        hostServices.showDocument("mailto:" + email + "?Subject=[Shopping Point] You received an email from " + LoggedInUser.getInstance().getUser().getUsername());
+        Desktop.getDesktop();
+        if (!Desktop.isDesktopSupported()) {
+            throw new EmailException("Not supported");
+        }
+        try {
+            Desktop.getDesktop().mail(new URI("mailto:" + email));
+        } catch (URISyntaxException e) {
+            throw new EmailException("Incorrect email format");
+        } catch (IOException e) {
+            throw new EmailException("Unable to send email");
+        }
     }
 }

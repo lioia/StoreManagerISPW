@@ -8,6 +8,7 @@ import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -109,6 +110,8 @@ public class StoreGraphicController {
             emailController.sendEmail(username);
         } catch (ControllerException e) {
             ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+        } catch (EmailException e) {
+            ExceptionHandler.handleException("Email", e.getMessage());
         }
     }
 

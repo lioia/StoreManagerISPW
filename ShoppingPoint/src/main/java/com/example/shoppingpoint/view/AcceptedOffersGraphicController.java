@@ -4,6 +4,7 @@ import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.controller.AcceptedOfferController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.DescriptionHandler;
@@ -55,6 +56,8 @@ public class AcceptedOffersGraphicController {
                         emailController.sendEmail(username);
                     } catch (ControllerException e) {
                         ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+                    } catch (EmailException e) {
+                        ExceptionHandler.handleException("Email", e.getMessage());
                     }
                 });
                 if (!controller.isOfferChecked(acceptedOffer.getOfferId())) {
