@@ -67,7 +67,7 @@
          <Insets bottom="16.0" />
       </VBox.margin>
       <children>
-         <HBox spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="50.0">
+         <HBox spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
                     <font>
@@ -81,6 +81,14 @@
       
                        </font>
              </Text>
+                 <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+                  <font>
+                      <Font size="24.0" />
+                  </font>
+                  <effect>
+                      <DropShadow />
+                  </effect>
+              </Button>
          </HBox>
          <HBox prefWidth="612.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="50.0">
             <children>
@@ -92,17 +100,6 @@
                      <Insets left="16.0" />
                   </opaqueInsets>
                  </Label>
-                 <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
-                     <font>
-                         <Font size="24.0" />
-                     </font>
-                     <effect>
-                         <DropShadow />
-                     </effect>
-                  <HBox.margin>
-                     <Insets left="30.0" />
-                  </HBox.margin>
-                 </Button>
                  <Label fx:id="currentPointsText" text="Points" visible="false">
                      <font>
                          <Font size="14.0" />
