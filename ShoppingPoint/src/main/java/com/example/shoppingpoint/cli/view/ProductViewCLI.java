@@ -16,4 +16,8 @@ public class ProductViewCLI {
                 "Go back"
         ));
     }
+
+    public void viewEstimatedPrice(float estimatedPrice){
+        System.out.printf("Estimated price: %.2f\n",estimatedPrice);
+    }
 }

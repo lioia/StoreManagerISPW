@@ -2,6 +2,7 @@ package com.example.shoppingpoint.cli.graphic_controller;
 
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.cli.view.ProductViewCLI;
+import com.example.shoppingpoint.controller.EstimatedPriceController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
@@ -29,8 +30,9 @@ public class ProductGraphicControllerCLI {
                     acceptOfferGraphicControllerCLI.initialize(product);
                 }
                 case 4 -> { // View estimated price
-                    EstimatePriceGraphicControllerCLI estimatePriceGraphicControllerCLI = new EstimatePriceGraphicControllerCLI();
-                    estimatePriceGraphicControllerCLI.initialize();
+                    EstimatedPriceController controller = new EstimatedPriceController();
+                    float estimatedPrice = controller.getEstimatedPrice(product.getName());
+                    view.viewEstimatedPrice(estimatedPrice);
                 }
                 default -> exit = true;
             }
