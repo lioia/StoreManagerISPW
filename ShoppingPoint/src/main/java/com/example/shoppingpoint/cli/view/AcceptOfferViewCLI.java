@@ -9,12 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AcceptOfferViewCLI {
-    public int acceptOfferProductId() throws IOException {
-        System.out.println("Product ID:");
-        String productId = CLIReader.readline();
-        return Integer.parseInt(productId);
-    }
-
     public int getOfferRequestId() throws IOException {
         System.out.println("Request ID:");
         String productId = CLIReader.readline();
@@ -30,26 +24,12 @@ public class AcceptOfferViewCLI {
         }
     }
 
-    public int getChoice() throws IOException {
-        System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("View offers of request","View accepted offer of request", "Go back"));
-//        System.out.println("1) View offer of request");
-//        System.out.println("2) Back");
-//        boolean exit = false;
-//        int selected = 0;
-//        while (!exit) {
-//            String option = CLIReader.readline();
-//            selected = Integer.parseInt(option);
-//            if (selected == 1 || selected == 2)
-//                exit = true;
-//            else System.out.println("Invalid input.");
-//        }
-//        return selected;
+    public boolean getChoice() throws IOException {
+        return CLIReader.yesOrNo("Do you want to view offers? [y/n]");
     }
 
-    public int getChoice2() throws  IOException{
-        System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("Accept offer","Go back"));
+    public boolean getOfferChoice() throws IOException {
+        return CLIReader.yesOrNo("Do you want to accept an offer? [y/n]");
     }
 
     public void viewOffersOfProduct(List<Offer> offerList) {
@@ -61,13 +41,13 @@ public class AcceptOfferViewCLI {
         }
     }
 
-    public int acceptOffer() throws IOException{
+    public int acceptOffer() throws IOException {
         System.out.println("Offer ID:");
         String productId = CLIReader.readline();
         return Integer.parseInt(productId);
     }
 
-    public void viewAcceptedOfferOfProduct(Offer offer) {
+    public void viewAcceptedOfferOfRequest(Offer offer) {
         System.out.printf("Offer ID: %d - ", offer.getOfferId());
         System.out.printf("Price: %.2f - ", offer.getOfferPrice());
         System.out.printf("Supplier: %s\n", offer.getSupplierUsername());

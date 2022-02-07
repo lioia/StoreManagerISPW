@@ -26,10 +26,8 @@ public class LoyaltyCardViewCLI {
     }
 
     //TODO meglio una funzione per prendere si o no?
-    public  int getChoiceIfNotActive() throws IOException{
+    public  boolean getChoiceIfNotActive() throws IOException{
         System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of(
-                "activate loyalty card",
-                "Go back"));
+        return CLIReader.yesOrNo("Activate loyalty card? [y/n]");
     }
 }

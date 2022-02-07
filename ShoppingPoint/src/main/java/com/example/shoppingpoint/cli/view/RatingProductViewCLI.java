@@ -12,6 +12,6 @@ public class RatingProductViewCLI {
 
     }
     public void viewRating(float rating){
-        System.out.printf("Rating value: %.2f\n",rating);
+        System.out.printf("Rating value: %.2f%n",rating);
     }
 }

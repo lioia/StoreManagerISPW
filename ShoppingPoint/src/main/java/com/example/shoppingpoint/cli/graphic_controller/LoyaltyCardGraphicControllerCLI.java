@@ -17,30 +17,24 @@ public class LoyaltyCardGraphicControllerCLI {
         LoyaltyCardViewCLI loyaltyCardViewCLI = new LoyaltyCardViewCLI();
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         int choice;
-        //TODO non possiamo fare nel edit carta una funzione apposita?
+//        Loyalty card enabled
         if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) {
             choice = loyaltyCardViewCLI.getChoiceIfActive();
-            if (choice == 1) {
-                LoyaltyCardBean bean = loyaltyCardViewCLI.detailsInput();
-                EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
-                editLoyaltyCardController.updateLoyaltyCard(bean, store);
-            }
+            if (choice == 1) updatePoints(loyaltyCardViewCLI, store);
             if (choice == 2) {
-                LoyaltyCardBean bean = new LoyaltyCardBean(true, 0, 0);
                 EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
-                editLoyaltyCardController.updateLoyaltyCard(bean, store);
+                editLoyaltyCardController.disableLoyaltyCard(store);
             }
+        } else { // disabled
+            boolean activate = loyaltyCardViewCLI.getChoiceIfNotActive();
+            if (activate) updatePoints(loyaltyCardViewCLI, store);
         }
-        else {
-            choice = loyaltyCardViewCLI.getChoiceIfNotActive();
-            if(choice==1) {
-                LoyaltyCardBean bean = loyaltyCardViewCLI.detailsInput();
-                EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
-                editLoyaltyCardController.updateLoyaltyCard(bean, store);
-            }
+    }
 
-
-        }
+    private void updatePoints(LoyaltyCardViewCLI view, Store store) throws BeanException, IOException, ControllerException {
+        LoyaltyCardBean bean = view.detailsInput();
+        EditLoyaltyCardController editLoyaltyCardController = new EditLoyaltyCardController();
+        editLoyaltyCardController.updateLoyaltyCard(bean, store);
 
     }
 }

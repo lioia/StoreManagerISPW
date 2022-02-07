@@ -28,38 +28,11 @@ public class RequestListViewCli {
     public int getChoiceSupplier() throws IOException {
         System.out.println("What do you want to do?");
         return CLIReader.multiChoice(List.of("Make an offer", "View acceopted offer", "Quit"));
-//        System.out.println("1) Make an offer");
-//        System.out.println("2) View accepted offer");
-//        System.out.println("3) Quit");
-//        boolean exit = false;
-//        int selected = 0;
-//        while (!exit) {
-//            String option = CLIReader.readline();
-//            selected = Integer.parseInt(option);
-//            if (selected == 1) {
-//                System.out.println("Request Id:");
-//
-//                exit = true;
-//            } else if (selected == 2) {
-//                System.out.println("Accepted offers");
-//
-//                exit = true;
-//            } else if (selected == 3) {
-//                System.out.println("Quit");
-//
-//                exit = true;
-//            } else {
-//                System.out.println("Invalid input.");
-//            }
-//        }
-//        return selected;
     }
 
     public int makeAnOfferInput() throws IOException {
         System.out.println("Enter the requestId of the product you want to bid on:");
         String requestId = CLIReader.readline();
-        //TODO contorllo input
-
         return Integer.parseInt(requestId);
     }
 

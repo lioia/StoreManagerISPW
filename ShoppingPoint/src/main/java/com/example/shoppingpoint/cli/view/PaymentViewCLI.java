@@ -17,12 +17,12 @@ public class PaymentViewCLI {
         if (card != null && loyaltyCardCheck)
             total = quantity * product.getDiscountedPrice() - (float) card.getPoints() / store.getPointsInEuro();
         if (total < 0) total = 0;
-        System.out.printf("%s\t\t%d (max: %d) x %.02f€\n", product.getName(), quantity, product.getQuantity(), product.getDiscountedPrice());
-        System.out.printf("Total Price: %.02f€\n", total);
+        System.out.printf("%s\t\t%d (max: %d) x %.02f€%n", product.getName(), quantity, product.getQuantity(), product.getDiscountedPrice());
+        System.out.printf("Total Price: %.02f€%n", total);
         if (card == null)
             System.out.println("Loyalty card unavailable");
         else
-            System.out.printf("You have %d points in your loyalty card (being used: %b)\n", card.getPoints(), loyaltyCardCheck);
+            System.out.printf("You have %d points in your loyalty card (being used: %b)%n", card.getPoints(), loyaltyCardCheck);
     }
 
     public int selectAction() throws IOException {

@@ -20,31 +20,36 @@ public class PaymentGraphicControllerCLI {
         PaymentViewCLI view = new PaymentViewCLI();
         int quantity = 1;
         boolean loyaltyCardCheck = false;
-        while (true) {
+        boolean exit = false;
+        while (!exit) {
             view.showPaymentInformation(product, card, store, quantity, loyaltyCardCheck);
             int action = view.selectAction();
-            if (action == 1) { // Check loyalty card
-                loyaltyCardCheck = !loyaltyCardCheck;
-            } else if (action == 2) { // Increase quantity by 1
-                if (quantity < product.getQuantity()) quantity++;
-            } else if (action == 3) { // Decrease quantity by 1
-                if (quantity > 1) quantity--;
-            } else if (action == 4) { // Buy
-                try {
-                    controller.buy(new PaymentBean(quantity, loyaltyCardCheck), card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
-                } catch (BeanException e) {
-                    System.out.println("Incorrect input: " + e.getMessage());
-                    continue;
+            switch (action) {
+                case 1 -> loyaltyCardCheck = !loyaltyCardCheck;
+                case 2 -> {
+                    if (quantity < product.getQuantity()) quantity++;
                 }
-                view.showPaymentCompleted();
-                try {
-                    TimeUnit.SECONDS.sleep(2); // wait for 2 seconds
-                } catch (InterruptedException e) {
-                    System.out.printf("Unable to wait (reason: %s)\nYou will be redirected now\n", e.getMessage());
-                    break;
+                case 3 -> {
+                    if (quantity > 1) quantity--;
                 }
-                break;
-            } else if (action == 5) break;
+                case 4 -> {
+                    try {
+                        controller.buy(new PaymentBean(quantity, loyaltyCardCheck), card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
+                    } catch (BeanException e) {
+                        System.out.println("Incorrect input: " + e.getMessage());
+                        continue;
+                    }
+                    view.showPaymentCompleted();
+                    try {
+                        TimeUnit.SECONDS.sleep(2); // wait for 2 seconds
+                    } catch (InterruptedException e) {
+                        System.out.printf("Unable to wait (reason: %s)\nYou will be redirected now%n", e.getMessage());
+                        Thread.currentThread().interrupt();
+                    }
+                    exit = true;
+                }
+                case 5 -> exit = true;
+            }
         }
     }
 }

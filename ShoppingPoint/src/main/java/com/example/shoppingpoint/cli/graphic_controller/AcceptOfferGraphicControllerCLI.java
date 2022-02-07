@@ -1,50 +1,61 @@
 package com.example.shoppingpoint.cli.graphic_controller;
 
+import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.cli.view.AcceptOfferViewCLI;
 import com.example.shoppingpoint.controller.AcceptOfferController;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
+import com.example.shoppingpoint.model.Store;
+import com.example.shoppingpoint.model.product.Product;
+import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AcceptOfferGraphicControllerCLI {
-    public void initialize() throws IOException, ControllerException {
+    public void initialize(GenericProduct product) throws IOException, ControllerException {
         AcceptOfferViewCLI acceptOfferViewCLI = new AcceptOfferViewCLI();
-        int productId = acceptOfferViewCLI.acceptOfferProductId();
         AcceptOfferController acceptOfferController = new AcceptOfferController();
-        List<Request> requestsList = acceptOfferController.getRequestsOfProduct(productId);
+        List<Request> requestsList = acceptOfferController.getRequestsOfProduct(product.getId());
         acceptOfferViewCLI.viewRequestsOfProduct(requestsList);
-        Boolean exit = false;
-        while (!exit)exit=acceptOfferAction();
-
+        boolean exit = false;
+        while (!exit) exit = acceptOfferAction(requestsList);
     }
 
-    private Boolean acceptOfferAction() throws IOException, ControllerException{
+    private boolean acceptOfferAction(List<Request> requestsList) throws IOException, ControllerException {
         AcceptOfferViewCLI acceptOfferViewCLI = new AcceptOfferViewCLI();
         AcceptOfferController acceptOfferController = new AcceptOfferController();
-        int choice = acceptOfferViewCLI.getChoice();
-        if(choice==1){
-            //TODO controlo se la richiesta è stata già accettata
-            int requestID = acceptOfferViewCLI.getOfferRequestId();
-            List<Offer> offerList = acceptOfferController.getOffersOfRequest(requestID);
-            acceptOfferViewCLI.viewOffersOfProduct(offerList);
-            int choice2 = acceptOfferViewCLI.getChoice2();
-            if(choice2==1){
-                int offerId = acceptOfferViewCLI.acceptOffer();
-                acceptOfferController.acceptOffer(requestID,offerId);
+        boolean offerSelection = acceptOfferViewCLI.getChoice();
+        if(offerSelection) {
+            int requestId = acceptOfferViewCLI.getOfferRequestId();
+            Request request = requestsList.stream().filter(el -> el.getRequestId() == requestId).findFirst().orElse(null);
+            if(request == null) {
+                System.out.println("Invalid input");
+                return false;
             }
-            else
+            if(request.isAccepted()) {
+                Offer offer = acceptOfferController.getAcceptedOffer(request.getRequestId());
+                acceptOfferViewCLI.viewAcceptedOfferOfRequest(offer);
                 return true;
+            }
+//            Show offers
+            List<Offer> offers = acceptOfferController.getOffersOfRequest(request.getRequestId());
+            acceptOfferViewCLI.viewOffersOfProduct(offers);
+            boolean acceptOffer = acceptOfferViewCLI.getOfferChoice();
+            if(acceptOffer) {
+                int offerId = acceptOfferViewCLI.acceptOffer();
+                Offer offer = offers.stream().filter(el -> el.getOfferId() == offerId).findFirst().orElse(null);
+                if(offer == null) {
+                    System.out.println("Invalid input");
+                    return false;
+                }
+                acceptOfferController.acceptOffer(request.getRequestId(), offer.getOfferId());
+                System.out.println("Offer accepted");
+            }
         }
-        if(choice==2){
-            int requestID = acceptOfferViewCLI.getOfferRequestId();
-            Offer offer = acceptOfferController.getAcceptedOffer(requestID);
-            acceptOfferViewCLI.viewAcceptedOfferOfProduct(offer);
-        }
-        if(choice==3)
-            return true;
-        return false;
+        return true;
     }
 }

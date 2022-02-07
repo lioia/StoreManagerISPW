@@ -15,4 +15,12 @@ public class EditLoyaltyCardController {
             throw new ControllerException("SQL", e);
         }
     }
+
+    public void disableLoyaltyCard(Store store) throws ControllerException {
+        try {
+            StoreDAO.updatePoints(0, 0, store.getName());
+        } catch(SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
+    }
 }

@@ -3,7 +3,6 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.cli.view.SearchStoreViewCLI;
 import com.example.shoppingpoint.controller.PaymentController;
-import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
 
@@ -16,17 +15,21 @@ public class SearchStoreGraphicControllerCLI {
         PaymentController controller = new PaymentController();
         List<Store> stores = controller.getStores(new SearchStoreBean());
         view.createStoresView(stores);
-        while (true) {
+        boolean exit = false;
+        while (!exit) {
             int action = view.getAction();
-            if (action == 1) { // Select a store
-                String storeName = view.getStore();
-                Store store = stores.stream().filter(el -> el.getName().equals(storeName)).findFirst().orElse(null);
-                if (store == null)
-                    continue;
-                StoreGraphicControllerCLI storeGraphicControllerCLI = new StoreGraphicControllerCLI();
-                storeGraphicControllerCLI.initialize(store);
-            } else if (action == 2) { // Go back
-                break;
+            switch (action) {
+                case 1 -> {
+                    String storeName = view.getStore();
+                    Store store = stores.stream().filter(el -> el.getName().equals(storeName)).findFirst().orElse(null);
+                    if (store == null) {
+                        System.out.println("Invalid input");
+                        break;
+                    }
+                    StoreGraphicControllerCLI storeGraphicControllerCLI = new StoreGraphicControllerCLI();
+                    storeGraphicControllerCLI.initialize(store);
+                }
+                case 2 -> exit = true;
             }
         }
     }

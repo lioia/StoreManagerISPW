@@ -21,12 +21,8 @@ public class OrdersViewCLI {
         }
     }
 
-    public int selectAction() throws IOException {
-        System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of(
-                "Make review for a product",
-                "Go Back"
-        ));
+    public boolean selectAction() throws IOException {
+        return CLIReader.yesOrNo("DO you want to make a review? [y/n]");
     }
 
     public String getProduct() throws IOException {

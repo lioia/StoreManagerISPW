@@ -26,23 +26,21 @@ public class OrdersGraphicControllerCLI {
             ordersWithReview.add(new Pair<>(order, review));
         }
         view.showOrdersList(ordersWithReview);
-        while (true) {
-            int action = view.selectAction();
-            if (action == 1) { // Make review
-                int id = Integer.parseInt(view.getProduct());
-                Pair<SoldProduct, Review> pair = ordersWithReview.stream().filter(el -> el.getValue().getReviewId() == id).findFirst().orElse(null);
-                if (pair == null) {
-                    System.out.println("Invalid input");
-                    continue;
-                }
-                String newReview = view.getReview();
-                try {
-                    OrdersBean bean = new OrdersBean(Float.parseFloat(newReview));
-                    controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey().getProduct().getId());
-                } catch (BeanException e) {
-                    System.out.println("Invalid input");
-                }
-            } else if (action == 2) break;
+        boolean action = view.selectAction();
+        if (action) {
+            int id = Integer.parseInt(view.getProduct());
+            Pair<SoldProduct, Review> pair = ordersWithReview.stream().filter(el -> el.getValue().getReviewId() == id).findFirst().orElse(null);
+            if (pair == null) {
+                System.out.println("Invalid input");
+                return;
+            }
+            String newReview = view.getReview();
+            try {
+                OrdersBean bean = new OrdersBean(Float.parseFloat(newReview));
+                controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey().getProduct().getId());
+            } catch (BeanException e) {
+                System.out.println("Invalid input");
+            }
         }
     }
 }

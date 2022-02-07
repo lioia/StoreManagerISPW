@@ -13,7 +13,5 @@ public class AcceptedOfferGraphicControllerCLI {
         List<Offer> acceptedOffersList = acceptedOfferController.getAcceptedOffersOfSupplier();
         AcceptedOffersViewCLI acceptedOffersViewCLI = new AcceptedOffersViewCLI();
         acceptedOffersViewCLI.viewAcceptedOffer(acceptedOffersList);
-        //TODO credo vada spostata da MakeAnOfferController a Accepted...
-        //acceptedOfferController.checkedOffer
     }
 }

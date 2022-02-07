@@ -30,49 +30,33 @@ public class StoreDashboardGraphicControllerCLI {
                     //TODO
                     AddProductGraphicControllerCLI addProductGraphicControllerCLI = new AddProductGraphicControllerCLI();
                 }
-                case 2 -> {
-                    System.out.println("Edit product");
-                    EditProductGraphicControllerCLI editProductGraphicControllerCLI = new EditProductGraphicControllerCLI();
-                    editProductGraphicControllerCLI.initialize();
+                case 2 -> { // Select a product
+                    int productId = storeDashboardViewCLI.getProduct();
+                    GenericProduct product = productList.stream().filter(el -> el.getId().equals(productId)).findFirst().orElse(null);
+                    if (product == null) {
+                        System.out.println("Invalid product ID");
+                        continue;
+                    }
+                    ProductGraphicControllerCLI productGraphicControllerCLI = new ProductGraphicControllerCLI();
+                    productGraphicControllerCLI.initialize(product);
                 }
                 case 3 -> {
-                    System.out.println("Make a new request");
-                    NewRequestGraphicControllerCLI newRequestGraphicControllerCLI = new NewRequestGraphicControllerCLI();
-                    newRequestGraphicControllerCLI.initialize();
-                }
-                case 4 -> {
-                    System.out.println("View request for a product");
-                    AcceptOfferGraphicControllerCLI acceptOfferGraphicControllerCLI = new AcceptOfferGraphicControllerCLI();
-                    acceptOfferGraphicControllerCLI.initialize();
-                }
-                case 5 -> {
                     System.out.println("Loyalty card");
-                    //TODO
                     LoyaltyCardGraphicControllerCLI loyaltyCardGraphicControllerCLI = new LoyaltyCardGraphicControllerCLI();
                     loyaltyCardGraphicControllerCLI.initialize();
                 }
-                case 6 -> {
+                case 4 -> {
                     System.out.println("Client list");
                     ClientListGraphicControllerCLI clientListGraphicControllerCLI = new ClientListGraphicControllerCLI();
                     clientListGraphicControllerCLI.initialize();
                 }
-                case 7 -> {
+                case 5 -> {
                     System.out.println("Sold product");
                     //TODO
                 }
-                case 8 -> {
-                    System.out.println("Rating");
-                    RatingProductGraphicControllerCLI ratingProductGraphicControllerCLI = new RatingProductGraphicControllerCLI();
-                    ratingProductGraphicControllerCLI.initialize();
-                }
-                case 9 -> {
-                    System.out.println("Price");
-                    EstimatePriceGraphicControllerCLI estimatePriceGraphicControllerCLI = new EstimatePriceGraphicControllerCLI();
-                    estimatePriceGraphicControllerCLI.initialize();
-                }
-                case 10 -> {
+                case 6 -> {
                     System.out.println("quit");
-                    exit=true;
+                    exit = true;
                 }
             }
         }
