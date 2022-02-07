@@ -1,47 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 <?import org.kordamp.ikonli.javafx.*?>
 
 
-<VBox xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.PaymentGraphicController">
-   <children>
-       <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
-           <left>
-               <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
-                   <graphic>
-                       <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
-                   </graphic>
-                   <BorderPane.margin>
-                       <Insets left="48.0" />
-                   </BorderPane.margin>
-               </Button>
-           </left>
-           <center>
-               <Label  text="Buy - Shopping Point" BorderPane.alignment="CENTER">
-                   <font>
-                       <Font size="36.0" />
-                   </font>
-               </Label>
-           </center>
-           <right>
-               <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
-
-                   <graphic>
-                       <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
-                   </graphic>
-                   <BorderPane.margin>
-                       <Insets right="16.0" />
-                   </BorderPane.margin>
-               </Button>
-           </right>
-       </BorderPane>
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.PaymentGraphicController">
+   <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
           <Text layoutX="70.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Name" wrappingWidth="223.28955078125">
               <font>
@@ -79,7 +48,7 @@
                   <Font size="14.0" />
               </font>
           </CheckBox>
-          <Button layoutX="640.0" layoutY="524.0" mnemonicParsing="false" onAction="#buy" prefHeight="51.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy">
+          <Button layoutX="640.0" layoutY="524.0" mnemonicParsing="false" onAction="#buy" prefHeight="51.0" prefWidth="105.0" style="-fx-background-radius: 15px; -fx-background-color: #6EC6FF;" text="Buy" AnchorPane.bottomAnchor="108.66666666666666" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="440.0">
               <effect>
                   <DropShadow offsetY="2.0" />
               </effect>
@@ -103,5 +72,37 @@
       
       
       </AnchorPane>
-   </children>
-</VBox>
+   </center>
+   <top>
+       <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;" BorderPane.alignment="CENTER">
+           <left>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                   <graphic>
+                       <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                   </graphic>
+                   <BorderPane.margin>
+                       <Insets left="48.0" />
+                   </BorderPane.margin>
+               </Button>
+           </left>
+           <center>
+               <Label text="Buy - Shopping Point" BorderPane.alignment="CENTER">
+                   <font>
+                       <Font size="36.0" />
+                   </font>
+               </Label>
+           </center>
+           <right>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+
+                         <graphic>
+                       <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
+                   </graphic>
+                   <BorderPane.margin>
+                       <Insets right="16.0" />
+                   </BorderPane.margin>
+               </Button>
+           </right>
+       </BorderPane>
+   </top>
+</BorderPane>

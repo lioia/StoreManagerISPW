@@ -9,23 +9,21 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.RequestListGraphicController">
    <top>
-      <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
-                  style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
+      <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
          <center>
             <Label text="Request List - Shopping Point">
                <font>
-                  <Font size="36.0"/>
+                  <Font size="36.0" />
                </font>
             </Label>
          </center>
          <right>
-            <Button alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: transparent"
-                    BorderPane.alignment="CENTER" onAction="#logout">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
                <graphic>
-                  <FontIcon iconLiteral="mdal-log_out" iconSize="32"/>
+                  <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
                </graphic>
                <BorderPane.margin>
-                  <Insets right="16.0"/>
+                  <Insets right="16.0" />
                </BorderPane.margin>
             </Button>
          </right>
@@ -45,7 +43,7 @@
             <Insets bottom="10.0" right="16.0" />
          </BorderPane.margin>
          <children>
-         <Button fx:id="accepted" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#goAcceptedOffer" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Accepted" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="6.0">
+         <Button fx:id="accepted" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#goAcceptedOffer" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Accepted" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="6.0">
             <effect>
                <DropShadow />
             </effect>

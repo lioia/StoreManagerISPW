@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="16.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.StoreGraphicController">
     <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
         <left>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
@@ -61,78 +61,68 @@
                 <Font size="24.0" />
             </font>
         </Button>
-        <VBox.margin>
-            <Insets bottom="16.0" />
-        </VBox.margin>
     </HBox>
-    <HBox alignment="CENTER_LEFT">
-        <VBox.margin>
-
-        </VBox.margin>
-      <HBox prefWidth="612.0">
-         <HBox.margin>
-            <Insets left="24.0" />
-         </HBox.margin>
-         <children>
-              <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
-                  <font>
-                      <Font size="14.0" />
-                  </font>
-               <opaqueInsets>
-                  <Insets left="16.0" />
-               </opaqueInsets>
-              </Label>
-              <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
-                  <font>
-                      <Font size="24.0" />
-                  </font>
-                  <effect>
-                      <DropShadow />
-                  </effect>
-               <HBox.margin>
-                  <Insets left="30.0" />
-               </HBox.margin>
-              </Button>
-              <Label fx:id="currentPointsText" text="Points" visible="false">
-                  <font>
-                      <Font size="14.0" />
-                  </font>
-                  <HBox.margin>
-                      <Insets left="50.0" right="16.0" />
-                  </HBox.margin>
-              </Label>
-         </children>
-      </HBox>
-        <Button alignment="CENTER" mnemonicParsing="false" onAction="#goOrderList" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Order">
-            <font>
-                <Font size="24.0" />
-            </font>
-            <effect>
-                <DropShadow />
-            </effect>
-            <HBox.margin>
-                <Insets left="24.0" right="16.0" />
-            </HBox.margin>
-        </Button>
-    </HBox>
-   <HBox spacing="20.0">
+   <AnchorPane>
       <VBox.margin>
-         <Insets bottom="16.0" left="24.0" right="16.0" />
+         <Insets bottom="16.0" />
       </VBox.margin>
       <children>
-          <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
-              <font>
-                  <Font size="14.0" />
-              </font>
-          </Label>
+         <HBox spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="50.0">
+            <children>
+                <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </children>
+             <Text fx:id="sendEmail" fill="#6EC6FF" layoutX="18.0" layoutY="60.0" onMouseClicked="#sendEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="send email to store">
+                 <font>
+                     <Font size="14.0" />
+      
+                       </font>
+             </Text>
+         </HBox>
+         <HBox prefWidth="612.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="50.0">
+            <children>
+                 <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                  <opaqueInsets>
+                     <Insets left="16.0" />
+                  </opaqueInsets>
+                 </Label>
+                 <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+                     <font>
+                         <Font size="24.0" />
+                     </font>
+                     <effect>
+                         <DropShadow />
+                     </effect>
+                  <HBox.margin>
+                     <Insets left="30.0" />
+                  </HBox.margin>
+                 </Button>
+                 <Label fx:id="currentPointsText" text="Points" visible="false">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                         <Insets left="50.0" right="16.0" />
+                     </HBox.margin>
+                 </Label>
+            </children>
+         </HBox>
+           <Button alignment="CENTER" mnemonicParsing="false" onAction="#goOrderList" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Order" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+               <font>
+                   <Font size="24.0" />
+               </font>
+               <effect>
+                   <DropShadow />
+               </effect>
+           </Button>
       </children>
-       <Text fx:id="sendEmail" fill="#6EC6FF" layoutX="18.0" layoutY="60.0" onMouseClicked="#sendEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="send email to store">
-           <font>
-               <Font size="14.0" />
-
-           </font>
-       </Text>
-   </HBox>
+   </AnchorPane>
     <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="productsPane" />
     </ScrollPane>
