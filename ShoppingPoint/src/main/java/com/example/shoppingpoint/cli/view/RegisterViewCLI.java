@@ -20,7 +20,6 @@ public class RegisterViewCLI {
         System.out.println("Choose type (Client,Store Owner,Supplier");
         String type = CLIReader.readline();
 
-
         return new RegisterBean(email,username,type,password,verifyPassword);
     }
 }

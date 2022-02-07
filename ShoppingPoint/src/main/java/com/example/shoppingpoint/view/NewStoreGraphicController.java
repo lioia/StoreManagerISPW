@@ -2,11 +2,15 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.NewStoreBean;
+import com.example.shoppingpoint.bean.RegisterBean;
 import com.example.shoppingpoint.controller.NewStoreController;
+import com.example.shoppingpoint.controller.RegisterController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.StoreOwner;
+import com.example.shoppingpoint.model.user.User;
+import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +26,7 @@ import static com.example.shoppingpoint.utils.ExceptionHandler.CONTROLLER_HEADER
 
 public class NewStoreGraphicController {
 
-    private StoreOwner storeOwner;
+    private RegisterBean registerBean;
 
     @FXML
     private TextField nameTextField;
@@ -34,6 +38,11 @@ public class NewStoreGraphicController {
     private ComboBox<String> typeComboBoxField;
 
     @FXML
+    public void initialize(RegisterBean bean) {
+        this.registerBean = bean;
+    }
+
+    @FXML
     protected void registerNewStore(ActionEvent actionEvent) throws IOException {
         try {
             String name = nameTextField.getText();
@@ -42,9 +51,13 @@ public class NewStoreGraphicController {
 
             NewStoreBean bean = new NewStoreBean(name, address, type);
 
-            NewStoreController controller = new NewStoreController();
-            Store store = controller.register(bean, storeOwner.getUsername());
-            storeOwner.setStore(store);
+            RegisterController registerController = new RegisterController();
+            StoreOwner user = (StoreOwner) registerController.register(registerBean);
+            NewStoreController newStoreController = new NewStoreController();
+
+            Store store = newStoreController.register(bean, user.getUsername());
+            user.setStore(store);
+            LoggedInUser.getInstance().setUser(user);
             FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
             ((Node) actionEvent.getSource()).getScene().setRoot(fxmlLoader.load());
         } catch (BeanException e) {
@@ -54,15 +67,9 @@ public class NewStoreGraphicController {
         }
     }
 
-    public void setStoreOwnerName(StoreOwner storeOwner) {
-        this.storeOwner = storeOwner;
-    }
-
     @FXML
-    public void goBack(ActionEvent event) throws IOException{
-        //TODO gestione eccezzione quando non viene creato il negozio ma solo store owner
+    public void goBack(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("register.fxml"));
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
-
     }
 }
