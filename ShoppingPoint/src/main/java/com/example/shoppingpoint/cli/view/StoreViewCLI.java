@@ -13,16 +13,16 @@ import java.util.List;
 public class StoreViewCLI {
     public void showStoreInfo(Store store) {
         System.out.println("-------------------");
-        System.out.printf("%s\n", store.getName());
-        System.out.printf("Email: %s\n", LoggedInUser.getInstance().getUser().getEmail());
+        System.out.printf("%s%n", store.getName());
+        System.out.printf("Email: %s%n", LoggedInUser.getInstance().getUser().getEmail());
     }
 
     public void showLoyaltyCardInfo(Store store, LoyaltyCard card) {
         if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0) {
-            System.out.printf("Every %d points used, you will have a discount of 1€\n", store.getPointsInEuro());
-            System.out.printf("Every %d€ spent, you will receive 1 point\n", store.getEuroInPoints());
+            System.out.printf("Every %d points used, you will have a discount of 1€%n", store.getPointsInEuro());
+            System.out.printf("Every %d€ spent, you will receive 1 point%n", store.getEuroInPoints());
             if (card == null) System.out.println("Loyalty card not activated.");
-            else System.out.printf("You have %d points\n", card.getPoints());
+            else System.out.printf("You have %d points%n", card.getPoints());
         }
     }
 
@@ -31,12 +31,12 @@ public class StoreViewCLI {
         for (Pair<GenericProduct, Float> productWithReview : products) {
             GenericProduct product = productWithReview.getKey();
             float review = productWithReview.getValue();
-            System.out.printf("ID: %d - %s\n", product.getId(), product.getName());
-            System.out.printf("Price: %.2f€\n", product.getPrice());
-            System.out.printf("Discounted Price: %.2f€\n", product.getDiscountedPrice());
-            System.out.printf("Status: %s\n", product.getStatus());
-            System.out.printf("Description: %s\n", product.getDescription());
-            System.out.printf("Review: %.1f/5\n", review);
+            System.out.printf("ID: %d - %s%n", product.getId(), product.getName());
+            System.out.printf("Price: %.2f€%n", product.getPrice());
+            System.out.printf("Discounted Price: %.2f€%n", product.getDiscountedPrice());
+            System.out.printf("Status: %s%n", product.getStatus());
+            System.out.printf("Description: %s%n", product.getDescription());
+            System.out.printf("Review: %.1f/5%n", review);
             System.out.println("---------------");
         }
     }

@@ -13,21 +13,21 @@ public class RequestListViewCli {
     public void requestList(int acceptedOffer, List<Request> requestList) {
         System.out.println("Request list");
         if (acceptedOffer > 0) {
-            System.out.printf("They accepted %d offers\n", acceptedOffer);
+            System.out.printf("They accepted %d offers%n", acceptedOffer);
         }
         for (Request request : requestList) {
-            System.out.printf("RequestId: %d\n", request.getRequestId());
-            System.out.printf("Product name: %s\n", request.getProduct().getName());
-            System.out.printf("Quantity: %d\n", request.getQuantity());
-            System.out.printf("Max price: %.2f\n", request.getMaxPrice());
-            System.out.printf("Description: %s\n", request.getProduct().getDescription());
-            System.out.printf("Store: %s\n\n\n", request.getProduct().getStoreName());
+            System.out.printf("RequestId: %d%n", request.getRequestId());
+            System.out.printf("Product name: %s%n", request.getProduct().getName());
+            System.out.printf("Quantity: %d%n", request.getQuantity());
+            System.out.printf("Max price: %.2f%n", request.getMaxPrice());
+            System.out.printf("Description: %s%n", request.getProduct().getDescription());
+            System.out.printf("Store: %s%n%n%n", request.getProduct().getStoreName());
         }
     }
 
     public int getChoiceSupplier() throws IOException {
         System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("Make an offer", "View acceopted offer", "Quit"));
+        return CLIReader.multiChoice(List.of("Make an offer", "View accepted offer", "Quit"));
     }
 
     public int makeAnOfferInput() throws IOException {

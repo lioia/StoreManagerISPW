@@ -56,7 +56,7 @@ public class StoreGraphicControllerCLI {
                         view.showSuccessActivation();
                     }
                     break;
-                case 4: // Go back
+                default: // Go back
                     exit = true;
                     break;
             }
