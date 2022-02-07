@@ -6,7 +6,9 @@ import com.example.shoppingpoint.cli.view.StoreViewCLI;
 import com.example.shoppingpoint.controller.LoyaltyCardController;
 import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.controller.ReviewController;
+import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreGraphicControllerCLI {
-    public void initialize(Store store) throws ControllerException, IOException {
+    public void initialize(Store store) throws ControllerException, IOException, EmailException {
         StoreViewCLI view = new StoreViewCLI();
         PaymentController controller = new PaymentController();
         LoyaltyCard card = controller.getLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
@@ -55,6 +57,11 @@ public class StoreGraphicControllerCLI {
                         loyaltyCardController.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
                         view.showSuccessActivation();
                     }
+                case 4: //send email to store
+                    SendEmailController sendEmailController = new SendEmailController();
+                    String storeOwner = sendEmailController.getUsernameOfStore(store.getName());
+                    sendEmailController.sendEmail(storeOwner);
+
                     break;
                 default: // Go back
                     exit = true;

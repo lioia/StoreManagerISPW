@@ -6,7 +6,6 @@ import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.model.Request;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 public class RequestListViewCli {
@@ -27,7 +26,7 @@ public class RequestListViewCli {
 
     public int getChoiceSupplier() throws IOException {
         System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("Make an offer", "View accepted offer", "Quit"));
+        return CLIReader.multiChoice(List.of("Make an offer", "View accepted offer","Send email to store", "Quit"));
     }
 
     public int makeAnOfferInput() throws IOException {
@@ -40,5 +39,11 @@ public class RequestListViewCli {
         System.out.println("Choose the price in €:");
         String price = CLIReader.readline();
         return new RequestListBean(price);
+    }
+
+    public int getRequestId()throws IOException{
+        System.out.println("For which request?");
+        System.out.println("Request ID:");
+        return Integer.parseInt(CLIReader.readline());
     }
 }

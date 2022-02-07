@@ -47,6 +47,7 @@ public class StoreViewCLI {
                 "Buy product",
                 "Orders",
                 "Activate loyalty card",
+                "Send email to store",
                 "Go back"
         ));
     }

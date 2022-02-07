@@ -5,6 +5,7 @@ import com.example.shoppingpoint.cli.view.RegisterViewCLI;
 import com.example.shoppingpoint.controller.RegisterController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
@@ -20,7 +21,7 @@ public class RegisterGraphicControllerCLI {
         registerView = new RegisterViewCLI();
     }
 
-    public void register() throws BeanException, ControllerException, IOException {
+    public void register() throws EmailException,BeanException, ControllerException, IOException {
         RegisterBean bean = registerView.getLoginInformation();
         if(bean.getUserType() == UserType.STOREOWNER) {
             NewStoreGraphicControllerCLI newStore = new NewStoreGraphicControllerCLI();

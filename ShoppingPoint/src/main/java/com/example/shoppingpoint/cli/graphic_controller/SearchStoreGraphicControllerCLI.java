@@ -4,13 +4,14 @@ import com.example.shoppingpoint.bean.SearchStoreBean;
 import com.example.shoppingpoint.cli.view.SearchStoreViewCLI;
 import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.Store;
 
 import java.io.IOException;
 import java.util.List;
 
 public class SearchStoreGraphicControllerCLI {
-    public void initialize() throws ControllerException, IOException {
+    public void initialize() throws EmailException,ControllerException, IOException {
         SearchStoreViewCLI view = new SearchStoreViewCLI();
         PaymentController controller = new PaymentController();
         List<Store> stores = controller.getStores(new SearchStoreBean());
