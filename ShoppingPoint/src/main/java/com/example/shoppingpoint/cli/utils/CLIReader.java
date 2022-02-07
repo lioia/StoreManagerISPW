@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 import java.util.List;
 
 public class CLIReader {
-    private CLIReader() {}
+    private CLIReader() {
+    }
 
     public static String readline() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,7 +37,19 @@ public class CLIReader {
                 return true;
             else if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("no"))
                 return false;
-            else System.out.println("Invalid input");
+            else System.out.println("Invalid input. Try again.");
+        }
+    }
+
+    public static String multiChoiceString(List<String> choices) throws IOException {
+        for (String choice : choices) {
+            System.out.println(choice);
+        }
+        while (true) {
+            System.out.print("Insert a valid input: ");
+            String value = readline();
+            if (choices.contains(value)) return value;
+            else System.out.println("Invalid input. Try again.");
         }
     }
 }

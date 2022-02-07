@@ -105,13 +105,13 @@ public class AddProductContinueGraphicController {
             }
             case GAMECONSOLE -> {
                 consoleType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
-                digitalOnly = ((CheckBox) pane.lookup("Digital")).isSelected();
+                digitalOnly = ((CheckBox) pane.lookup("#Digital")).isSelected();
             }
             case COMPUTER -> {
-                computerType = ((TextField) pane.lookup("#Type")).getText();
+                computerType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
                 ram = ((TextField) pane.lookup("#RAM")).getText();
                 ssd = ((TextField) pane.lookup("#SSD")).getText();
-                cpu = ((TextArea) pane.lookup("#CPU")).getText();
+                cpu = ((TextField) pane.lookup("#CPU")).getText();
                 gpu = ((TextField) pane.lookup("#GPU")).getText();
                 batterySize = ((TextField) pane.lookup("#Battery")).getText();
                 displaySize = ((TextField) pane.lookup("#Display")).getText();

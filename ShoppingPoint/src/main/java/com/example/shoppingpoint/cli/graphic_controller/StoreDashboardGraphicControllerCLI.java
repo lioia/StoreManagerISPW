@@ -24,7 +24,7 @@ public class StoreDashboardGraphicControllerCLI {
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         List<GenericProduct> productList = viewProductsController.getProductsFromStore(store);
         List<Pair<GenericProduct, Float>> productsWithReview = new ArrayList<>();
-        for(GenericProduct product : productList) {
+        for (GenericProduct product : productList) {
             ReviewController controller = new ReviewController();
             float review = controller.getReviewOfProduct(product.getId());
             productsWithReview.add(new Pair<>(product, review));
@@ -35,10 +35,9 @@ public class StoreDashboardGraphicControllerCLI {
         while (!exit) {
             choice = storeDashboardViewCLI.getChoiceStoreOwner();
             switch (choice) {
-                case 1 -> {
-                    System.out.println("Add product");
-                    //TODO
+                case 1 -> { // Add product
                     AddProductGraphicControllerCLI addProductGraphicControllerCLI = new AddProductGraphicControllerCLI();
+                    addProductGraphicControllerCLI.initialize();
                 }
                 case 2 -> { // Select a product
                     int productId = storeDashboardViewCLI.getProduct();
@@ -50,13 +49,11 @@ public class StoreDashboardGraphicControllerCLI {
                     ProductGraphicControllerCLI productGraphicControllerCLI = new ProductGraphicControllerCLI();
                     productGraphicControllerCLI.initialize(product);
                 }
-                case 3 -> {
-                    System.out.println("Loyalty card");
+                case 3 -> { // Loyalty Card
                     LoyaltyCardGraphicControllerCLI loyaltyCardGraphicControllerCLI = new LoyaltyCardGraphicControllerCLI();
                     loyaltyCardGraphicControllerCLI.initialize();
                 }
-                case 4 -> {
-                    System.out.println("Client list");
+                case 4 -> { // Client List
                     ClientListGraphicControllerCLI clientListGraphicControllerCLI = new ClientListGraphicControllerCLI();
                     clientListGraphicControllerCLI.initialize();
                 }
@@ -64,10 +61,7 @@ public class StoreDashboardGraphicControllerCLI {
                     System.out.println("Sold product");
                     //TODO
                 }
-                case 6 -> {
-                    System.out.println("quit");
-                    exit = true;
-                }
+                default -> exit = true;
             }
         }
     }

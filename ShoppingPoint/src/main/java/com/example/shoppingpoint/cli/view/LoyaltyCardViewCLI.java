@@ -13,20 +13,21 @@ public class LoyaltyCardViewCLI {
         String pointsInEuro = CLIReader.readline();
         System.out.println("How many euros spent are equivalent to 1 point?");
         String euroInPoints = CLIReader.readline();
-        return new LoyaltyCardBean(true,pointsInEuro,euroInPoints);
+        return new LoyaltyCardBean(true, pointsInEuro, euroInPoints);
 
     }
 
-    public int getChoiceIfActive() throws IOException{
+    public int getChoiceIfActive() throws IOException {
+        System.out.println("Loyalty Card Information");
         System.out.println("What do you want to do?");
         return CLIReader.multiChoice(List.of(
-                "update loyalty card details",
-                "deactivate loyalty card",
+                "Update loyalty card details",
+                "Deactivate loyalty card",
                 "Go back"));
     }
 
-    //TODO meglio una funzione per prendere si o no?
-    public  boolean getChoiceIfNotActive() throws IOException{
+    public boolean getChoiceIfNotActive() throws IOException {
+        System.out.println("Loyalty Card Information");
         System.out.println("What do you want to do?");
         return CLIReader.yesOrNo("Activate loyalty card? [y/n]");
     }

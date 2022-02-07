@@ -52,19 +52,18 @@ public class AddProductGraphicController {
         try {
             AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
             bean.setImage(image);
-            ProductType type;
-            switch (typeComboBox.getValue()) {
-                case "Clothes" -> type = ProductType.CLOTHES;
-                case "Shoes" -> type = ProductType.SHOES;
-                case "Book" -> type = ProductType.BOOK;
-                case "Comics" -> type = ProductType.COMICS;
-                case "Video Game" -> type = ProductType.VIDEOGAME;
-                case "Game Console" -> type = ProductType.GAMECONSOLE;
-                case "Home Appliances" -> type = ProductType.HOMEAPPLIANCES;
-                case "Computer" -> type = ProductType.COMPUTER;
-                default -> throw new IllegalStateException("Unexpected value: " + typeComboBox.getValue());
-            }
-
+            ProductType type = ProductType.valueOf(typeComboBox.getValue().toUpperCase().replace(" ", ""));
+//            switch (typeComboBox.getValue()) {
+//                case "Clothes" -> type = ProductType.CLOTHES;
+//                case "Shoes" -> type = ProductType.SHOES;
+//                case "Book" -> type = ProductType.BOOK;
+//                case "Comics" -> type = ProductType.COMICS;
+//                case "Video Game" -> type = ProductType.VIDEOGAME;
+//                case "Game Console" -> type = ProductType.GAMECONSOLE;
+//                case "Home Appliances" -> type = ProductType.HOMEAPPLIANCES;
+//                case "Computer" -> type = ProductType.COMPUTER;
+//                default -> throw new IllegalStateException("Unexpected value: " + typeComboBox.getValue());
+//            }
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product_continue.fxml"));
             Parent node = loader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
