@@ -16,13 +16,5 @@ public class EditProductViewCLI {
         System.out.println("Quantity:");
         String quantity = CLIReader.readline();
         return new EditProductBean(price,discountedPrice,quantity);
-
-
-    }
-    //TODO controllo che il prodotto è veramente del negozio
-    public int editProductID() throws IOException {
-        System.out.println("Product ID:");
-        String productId = CLIReader.readline();
-        return Integer.parseInt(productId);
     }
 }

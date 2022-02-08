@@ -27,7 +27,6 @@ public class NewStoreBean {
     }
 
 
-    // TODO: bean exception
     public void setName(String name) throws BeanException {
         if (name.length() < 4) throw new BeanException("store name", "it has to be longer than 4 characters");
         if (name.length() > 30) throw new BeanException("store name", "it has to be shorter than 30 characters");
