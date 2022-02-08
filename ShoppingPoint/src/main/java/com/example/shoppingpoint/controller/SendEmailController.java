@@ -38,9 +38,8 @@ public class SendEmailController {
             throw new EmailException("Not supported");
         }
         try {
-            URI mailto = new URI("mailto:"+email+"?subject=[Shopping%20Point]%20You%20received%20an%20email%20from%20"+LoggedInUser.getInstance().getUser().getUsername());
+            URI mailto = new URI("mailto:" + email + "?subject=[Shopping%20Point]%20You%20received%20an%20email%20from%20" + LoggedInUser.getInstance().getUser().getUsername());
             Desktop.getDesktop().mail(mailto);
-            //Desktop.getDesktop().mail(new URI("mailto:" + email+"?subject=[Shopping Point]"));
         } catch (URISyntaxException e) {
             throw new EmailException("Incorrect email format");
         } catch (IOException e) {
