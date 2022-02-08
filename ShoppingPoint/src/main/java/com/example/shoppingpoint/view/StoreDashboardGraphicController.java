@@ -8,6 +8,7 @@ import com.example.shoppingpoint.controller.*;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.ImageException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -32,8 +33,6 @@ import javafx.scene.text.Font;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -256,13 +255,13 @@ public class StoreDashboardGraphicController {
         ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
             try {
                 UploadImageController uploadImageController = new UploadImageController();
-                File image = uploadImageController.uploadImage(product.getId());
-                if (image != null) {
-                    InputStream stream = new FileInputStream(image);
-                    ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+                InputStream stream = uploadImageController.chooseImage();
+                uploadImageController.uploadImage(stream, product.getId());
+                ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
+            } catch (ImageException e) {
+                ExceptionHandler.handleException("Image", e.getMessage());
+            } catch (ControllerException e) {
+                ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
             }
         });
         ((Button) pane.lookup("#saveButton")).setOnAction((ActionEvent actionEvent) -> {

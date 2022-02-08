@@ -1,16 +1,15 @@
 package com.example.shoppingpoint.controller;
 
 import com.example.shoppingpoint.dao.ProductDAO;
+import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.ImageException;
 import javafx.stage.FileChooser;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.SQLException;
 
 public class UploadImageController {
-    public File uploadImage(int productId) throws IOException, SQLException {
+    public InputStream chooseImage() throws ImageException {
         FileChooser chooser = new FileChooser();
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG
@@ -24,10 +23,20 @@ public class UploadImageController {
         chooser.getExtensionFilters()
                 .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
         File image = chooser.showOpenDialog(null);
-        if (image != null) {
-            InputStream stream = new FileInputStream(image);
-            ProductDAO.setImageOfProductId(productId, stream);
+        if(image == null)
+            throw new ImageException("No image selected");
+        try {
+            return new FileInputStream(image);
+        } catch (FileNotFoundException e) {
+            throw new ImageException("Image not found");
         }
-        return image;
+    }
+
+    public void uploadImage(InputStream stream, int productId) throws ControllerException {
+        try {
+            ProductDAO.setImageOfProductId(productId, stream);
+        } catch (SQLException e) {
+            throw new ControllerException("SQL", e);
+        }
     }
 }

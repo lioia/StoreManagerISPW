@@ -2,7 +2,9 @@ package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
+import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
+import com.example.shoppingpoint.exception.ImageException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ExceptionHandler;
@@ -14,7 +16,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 
@@ -53,17 +54,6 @@ public class AddProductGraphicController {
             AddProductCommonBean bean = new AddProductCommonBean(nameTextField.getText(), priceTextField.getText(), discountedPriceTextField.getText(), quantityTextField.getText(), statusComboBox.getValue());
             bean.setImage(image);
             ProductType type = ProductType.valueOf(typeComboBox.getValue().toUpperCase().replace(" ", ""));
-//            switch (typeComboBox.getValue()) {
-//                case "Clothes" -> type = ProductType.CLOTHES;
-//                case "Shoes" -> type = ProductType.SHOES;
-//                case "Book" -> type = ProductType.BOOK;
-//                case "Comics" -> type = ProductType.COMICS;
-//                case "Video Game" -> type = ProductType.VIDEOGAME;
-//                case "Game Console" -> type = ProductType.GAMECONSOLE;
-//                case "Home Appliances" -> type = ProductType.HOMEAPPLIANCES;
-//                case "Computer" -> type = ProductType.COMPUTER;
-//                default -> throw new IllegalStateException("Unexpected value: " + typeComboBox.getValue());
-//            }
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("add_product_continue.fxml"));
             Parent node = loader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
@@ -87,20 +77,13 @@ public class AddProductGraphicController {
         ((Node) event.getSource()).getScene().setRoot(fxmlLoader.load());
     }
 
-    public void uploadImage() throws FileNotFoundException {
-        FileChooser chooser = new FileChooser();
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilterJPG
-                = new FileChooser.ExtensionFilter("JPG files (*.JPG)", "*.JPG");
-        FileChooser.ExtensionFilter extFilterjpg
-                = new FileChooser.ExtensionFilter("jpg files (*.jpg)", "*.jpg");
-        FileChooser.ExtensionFilter extFilterPNG
-                = new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG");
-        FileChooser.ExtensionFilter extFilterpng
-                = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-        chooser.getExtensionFilters()
-                .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
-        File file = chooser.showOpenDialog(null);
-        image = new FileInputStream(file);
+    @FXML
+    public void uploadImage() {
+        try {
+            UploadImageController controller = new UploadImageController();
+            image = controller.chooseImage();
+        } catch (ImageException e) {
+            ExceptionHandler.handleException("Image", e.getMessage());
+        }
     }
 }
