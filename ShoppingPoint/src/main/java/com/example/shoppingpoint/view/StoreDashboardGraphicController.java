@@ -33,6 +33,7 @@ import javafx.scene.text.Font;
 import org.controlsfx.control.PopOver;
 import org.controlsfx.control.Rating;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -255,7 +256,8 @@ public class StoreDashboardGraphicController {
         ((Button) pane.lookup("#uploadImageButton")).setOnAction((ActionEvent uploadEvent) -> {
             try {
                 UploadImageController uploadImageController = new UploadImageController();
-                InputStream stream = uploadImageController.chooseImage();
+                File image = uploadImageController.chooseImage();
+                InputStream stream = uploadImageController.validateImage(image);
                 uploadImageController.uploadImage(stream, product.getId());
                 ((ImageView) pane.lookup("#imageView")).setImage(new Image(stream));
             } catch (ImageException e) {

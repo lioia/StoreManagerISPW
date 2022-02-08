@@ -1,6 +1,5 @@
 package com.example.shoppingpoint.cli.view;
 
-import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.cli.utils.CLIReader;
 import com.example.shoppingpoint.exception.BeanException;
@@ -52,6 +51,11 @@ public class AddProductViewCLI {
     }
 
     public boolean getYesOrNo(String name) throws IOException {
-        return CLIReader.yesOrNo(String.format("%s?", name));
+        return CLIReader.yesOrNo(String.format("%s? [y/n]", name));
+    }
+
+    public String getImagePath() throws IOException {
+        System.out.print("Insert path of the image you want to upload: ");
+        return CLIReader.readline();
     }
 }

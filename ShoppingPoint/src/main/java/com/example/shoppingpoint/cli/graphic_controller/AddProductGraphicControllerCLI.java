@@ -4,13 +4,17 @@ import com.example.shoppingpoint.bean.add_product.AddProductBean;
 import com.example.shoppingpoint.bean.add_product.AddProductCommonBean;
 import com.example.shoppingpoint.cli.view.AddProductViewCLI;
 import com.example.shoppingpoint.controller.AddProductController;
+import com.example.shoppingpoint.controller.UploadImageController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.ImageException;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ProductType;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public class AddProductGraphicControllerCLI {
@@ -85,6 +89,20 @@ public class AddProductGraphicControllerCLI {
                 specs = view.getInformation("Specs");
             }
             default -> throw new IllegalStateException("Unexpected value: " + type);
+        }
+
+        boolean shouldUpload = view.getYesOrNo("Do you want to upload an image");
+        while(shouldUpload) {
+            String path = view.getImagePath();
+            File file = new File(path);
+            UploadImageController imageController = new UploadImageController();
+            try {
+                InputStream stream = imageController.validateImage(file);
+                bean.setImage(stream);
+                shouldUpload = false;
+            } catch (ImageException e) {
+                System.out.println("Invalid file. Try again");
+            }
         }
 
         AddProductBean newBean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);

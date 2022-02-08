@@ -9,7 +9,7 @@ import java.io.*;
 import java.sql.SQLException;
 
 public class UploadImageController {
-    public InputStream chooseImage() throws ImageException {
+    public File chooseImage() {
         FileChooser chooser = new FileChooser();
         //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG
@@ -22,8 +22,11 @@ public class UploadImageController {
                 = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
         chooser.getExtensionFilters()
                 .addAll(extFilterJPG, extFilterjpg, extFilterPNG, extFilterpng);
-        File image = chooser.showOpenDialog(null);
-        if(image == null)
+        return chooser.showOpenDialog(null);
+    }
+
+    public InputStream validateImage(File image) throws ImageException {
+        if (image == null)
             throw new ImageException("No image selected");
         try {
             return new FileInputStream(image);

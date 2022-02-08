@@ -81,7 +81,8 @@ public class AddProductGraphicController {
     public void uploadImage() {
         try {
             UploadImageController controller = new UploadImageController();
-            image = controller.chooseImage();
+            File img = controller.chooseImage();
+            image = controller.validateImage(img);
         } catch (ImageException e) {
             ExceptionHandler.handleException("Image", e.getMessage());
         }
