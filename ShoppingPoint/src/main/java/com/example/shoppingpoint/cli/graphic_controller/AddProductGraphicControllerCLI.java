@@ -22,77 +22,59 @@ public class AddProductGraphicControllerCLI {
         AddProductViewCLI view = new AddProductViewCLI();
         AddProductCommonBean bean = view.getProductInformation();
         ProductType type = view.getType(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore());
-        String size = null;
-        String material = null;
-        String shoesType = null;
-        String author = null;
-        String artist = null;
-        String plot = null;
-        String genre = null;
-        String volumeNumber = null;
-        String consoleType = null;
-        boolean digitalOnly = false;
-        String computerType = null;
-        String ram = null;
-        String ssd = null;
-        String cpu = null;
-        String gpu = null;
-        String batterySize = null;
-        String displaySize = null;
-        String brand = null;
-        String energyClass = null;
-        String specs = null;
+
+        AddProductBean newBean = new AddProductBean();
 
         switch (type) {
             case CLOTHES -> {
-                size = view.getInformation("Size");
-                material = view.getInformation("Material");
+                newBean.setSize(view.getInformation("Size"));
+                newBean.setMaterial(view.getInformation("Material"));
             }
             case SHOES -> {
-                size = view.getInformation("Size");
-                material = view.getInformation("Material");
-                shoesType = view.getInformation("Type");
+                newBean.setSize( view.getInformation("Size"));
+                newBean.setMaterial( view.getInformation("Material"));
+                newBean.setShoesType( view.getInformation("Type"));
             }
             case BOOK -> {
-                author = view.getInformation("Author");
-                genre = view.getInformation("Genre");
-                plot = view.getInformation("Plot");
+                newBean.setAuthor(view.getInformation("Author"));
+                newBean.setGenre(view.getInformation("Genre"));
+                newBean.setPlot(view.getInformation("Plot"));
             }
             case COMICS -> {
-                author = view.getInformation("Author");
-                artist = view.getInformation("Artist");
-                genre = view.getInformation("Genre");
-                plot = view.getInformation("Plot");
-                volumeNumber = view.getInformation("Volume");
+                newBean.setAuthor(view.getInformation("Author"));
+                newBean.setArtist(view.getInformation("Artist"));
+                newBean.setGenre(view.getInformation("Genre"));
+                newBean.setPlot(view.getInformation("Plot"));
+                newBean.setVolumeNumber(Integer.parseInt(view.getInformation("Volume")));
             }
             case VIDEOGAME -> {
-                genre = view.getInformation("Genre");
-                plot = view.getInformation("Plot");
-                consoleType = view.getChoiceInformation("Console Type", List.of("PS5", "PS4", "Xbox Series X", "Xbox Series S", "Xbox One", "Nintendo Switch"));
+                newBean.setGenre(view.getInformation("Genre"));
+                newBean.setPlot(view.getInformation("Plot"));
+                newBean.setConsoleType(view.getChoiceInformation("Console Type", List.of("PS5", "PS4", "Xbox Series X", "Xbox Series S", "Xbox One", "Nintendo Switch")));
             }
             case GAMECONSOLE -> {
-                consoleType = view.getChoiceInformation("Console Type", List.of("PS5", "PS4", "Xbox Series X", "Xbox Series S", "Xbox One", "Nintendo Switch"));
-                digitalOnly = view.getYesOrNo("Digital");
+                newBean.setConsoleType(view.getChoiceInformation("Console Type", List.of("PS5", "PS4", "Xbox Series X", "Xbox Series S", "Xbox One", "Nintendo Switch")));
+                newBean.setDigitalOnly(view.getYesOrNo("Digital"));
             }
             case COMPUTER -> {
-                computerType = view.getChoiceInformation("Computer Type", List.of("Laptop", "Desktop", "2in1", "Touch Screen"));
-                ram = view.getInformation("RAM");
-                ssd = view.getInformation("SSD");
-                cpu = view.getInformation("CPU");
-                gpu = view.getInformation("GPU");
-                batterySize = view.getInformation("Battery");
-                displaySize = view.getInformation("Display");
-                brand = view.getInformation("Brand");
+                newBean.setComputerType(view.getChoiceInformation("Computer Type", List.of("Laptop", "Desktop", "2in1", "Touch Screen")));
+                newBean.setRam(Integer.parseInt(view.getInformation("RAM")));
+                newBean.setSsd(Integer.parseInt(view.getInformation("SSD")));
+                newBean.setCpu(view.getInformation("CPU"));
+                newBean.setGpu(view.getInformation("GPU"));
+                newBean.setBatterySize(Integer.parseInt(view.getInformation("Battery")));
+                newBean.setDisplaySize(Float.parseFloat(view.getInformation("Display")));
+                newBean.setBrand(view.getInformation("Brand"));
             }
             case HOMEAPPLIANCES -> {
-                energyClass = view.getInformation("Energy Class");
-                specs = view.getInformation("Specs");
+                newBean.setEnergyClass( view.getInformation("Energy Class"));
+                newBean.setSpecs( view.getInformation("Specs"));
             }
             default -> throw new IllegalStateException("Unexpected value: " + type);
         }
 
         boolean shouldUpload = view.getYesOrNo("Do you want to upload an image");
-        while(shouldUpload) {
+        while (shouldUpload) {
             String path = view.getImagePath();
             File file = new File(path);
             UploadImageController imageController = new UploadImageController();
@@ -105,7 +87,6 @@ public class AddProductGraphicControllerCLI {
             }
         }
 
-        AddProductBean newBean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
         AddProductController controller = new AddProductController();
         controller.saveProduct(type, newBean, bean);
     }

@@ -25,58 +25,6 @@ public class AddProductBean {
     private String energyClass;
     private String specs;
 
-    public AddProductBean(ProductType type, String size, String material, String shoesType, String author, String artist, String plot, String genre,
-                          String volumeNumber, String consoleType, boolean digitalOnly, String computerType, String ram, String ssd, String cpu,
-                          String gpu, String batterySize, String displaySize, String brand, String energyClass, String specs) throws BeanException {
-        switch (type) {
-            case CLOTHES -> {
-                setSize(size);
-                setMaterial(material);
-            }
-            case SHOES -> {
-                setSize(size);
-                setMaterial(material);
-                setShoesType(shoesType);
-            }
-            case BOOK -> {
-                setAuthor(author);
-                setPlot(plot);
-                setGenre(genre);
-            }
-            case COMICS -> {
-                setAuthor(author);
-                setArtist(artist);
-                setPlot(plot);
-                setGenre(genre);
-                setVolumeNumber(Integer.parseInt(volumeNumber));
-            }
-            case VIDEOGAME -> {
-                setPlot(plot);
-                setGenre(genre);
-                setConsoleType(consoleType);
-            }
-            case GAMECONSOLE -> {
-                setConsoleType(consoleType);
-                setDigitalOnly(digitalOnly);
-            }
-            case COMPUTER -> {
-                setComputerType(computerType);
-                setRam(Integer.parseInt(ram));
-                setSsd(Integer.parseInt(ssd));
-                setCpu(cpu);
-                setGpu(gpu);
-                setBatterySize(Integer.parseInt(batterySize));
-                setDisplaySize(Float.parseFloat(displaySize));
-                setBrand(brand);
-            }
-            case HOMEAPPLIANCES -> {
-                setEnergyClass(energyClass);
-                setSpecs(specs);
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
-        }
-    }
-
     public String getSize() {
         return size;
     }

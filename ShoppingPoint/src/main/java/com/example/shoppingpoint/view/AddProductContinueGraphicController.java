@@ -55,76 +55,55 @@ public class AddProductContinueGraphicController {
 
     @FXML
     public void add(ActionEvent actionEvent) {
-        String size = null;
-        String material = null;
-        String shoesType = null;
-        String author = null;
-        String artist = null;
-        String plot = null;
-        String genre = null;
-        String volumeNumber = null;
-        String consoleType = null;
-        boolean digitalOnly = false;
-        String computerType = null;
-        String ram = null;
-        String ssd = null;
-        String cpu = null;
-        String gpu = null;
-        String batterySize = null;
-        String displaySize = null;
-        String brand = null;
-        String energyClass = null;
-        String specs = null;
-
-        switch (type) {
-            case CLOTHES -> {
-                size = ((TextField) pane.lookup("#Size")).getText();
-                material = ((TextField) pane.lookup("#Material")).getText();
-            }
-            case SHOES -> {
-                size = ((TextField) pane.lookup("#Size")).getText();
-                material = ((TextField) pane.lookup("#Material")).getText();
-                shoesType = ((TextField) pane.lookup("#Type")).getText();
-            }
-            case BOOK -> {
-                author = ((TextField) pane.lookup("#Author")).getText();
-                genre = ((TextField) pane.lookup("#Genre")).getText();
-                plot = ((TextArea) pane.lookup("#Plot")).getText();
-            }
-            case COMICS -> {
-                author = ((TextField) pane.lookup("#Author")).getText();
-                artist = ((TextField) pane.lookup("#Artist")).getText();
-                genre = ((TextField) pane.lookup("#Genre")).getText();
-                plot = ((TextArea) pane.lookup("#Plot")).getText();
-                volumeNumber = ((TextField) pane.lookup("#Volume")).getText();
-            }
-            case VIDEOGAME -> {
-                genre = ((TextField) pane.lookup("#Genre")).getText();
-                plot = ((TextArea) pane.lookup("#Plot")).getText();
-                consoleType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
-            }
-            case GAMECONSOLE -> {
-                consoleType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
-                digitalOnly = ((CheckBox) pane.lookup("#Digital")).isSelected();
-            }
-            case COMPUTER -> {
-                computerType = ((ComboBox<String>) pane.lookup("#Type")).getValue();
-                ram = ((TextField) pane.lookup("#RAM")).getText();
-                ssd = ((TextField) pane.lookup("#SSD")).getText();
-                cpu = ((TextField) pane.lookup("#CPU")).getText();
-                gpu = ((TextField) pane.lookup("#GPU")).getText();
-                batterySize = ((TextField) pane.lookup("#Battery")).getText();
-                displaySize = ((TextField) pane.lookup("#Display")).getText();
-                brand = ((TextField) pane.lookup("#Brand")).getText();
-            }
-            case HOMEAPPLIANCES -> {
-                energyClass = ((TextField) pane.lookup("#Energy Class")).getText();
-                specs = ((TextField) pane.lookup("#Specs")).getText();
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + type);
-        }
         try {
-            AddProductBean bean = new AddProductBean(type, size, material, shoesType, author, artist, plot, genre, volumeNumber, consoleType, digitalOnly, computerType, ram, ssd, cpu, gpu, batterySize, displaySize, brand, energyClass, specs);
+            AddProductBean bean = new AddProductBean();
+            switch (type) {
+                case CLOTHES -> {
+                    bean.setSize(((TextField) pane.lookup("#Size")).getText());
+                    bean.setMaterial(((TextField) pane.lookup("#Material")).getText());
+                }
+                case SHOES -> {
+                    bean.setSize(((TextField) pane.lookup("#Size")).getText());
+                    bean.setMaterial(((TextField) pane.lookup("#Material")).getText());
+                    bean.setShoesType(((TextField) pane.lookup("#Type")).getText());
+                }
+                case BOOK -> {
+                    bean.setAuthor(((TextField) pane.lookup("#Author")).getText());
+                    bean.setGenre(((TextField) pane.lookup("#Genre")).getText());
+                    bean.setPlot(((TextArea) pane.lookup("#Plot")).getText());
+                }
+                case COMICS -> {
+                    bean.setAuthor(((TextField) pane.lookup("#Author")).getText());
+                    bean.setArtist(((TextField) pane.lookup("#Artist")).getText());
+                    bean.setGenre(((TextField) pane.lookup("#Genre")).getText());
+                    bean.setPlot(((TextArea) pane.lookup("#Plot")).getText());
+                    bean.setVolumeNumber(Integer.parseInt(((TextField) pane.lookup("#Volume")).getText()));
+                }
+                case VIDEOGAME -> {
+                    bean.setGenre(((TextField) pane.lookup("#Genre")).getText());
+                    bean.setPlot(((TextArea) pane.lookup("#Plot")).getText());
+                    bean.setConsoleType(((ComboBox<String>) pane.lookup("#Type")).getValue());
+                }
+                case GAMECONSOLE -> {
+                    bean.setConsoleType(((ComboBox<String>) pane.lookup("#Type")).getValue());
+                    bean.setDigitalOnly(((CheckBox) pane.lookup("#Digital")).isSelected());
+                }
+                case COMPUTER -> {
+                    bean.setComputerType(((ComboBox<String>) pane.lookup("#Type")).getValue());
+                    bean.setRam(Integer.parseInt(((TextField) pane.lookup("#RAM")).getText()));
+                    bean.setSsd(Integer.parseInt(((TextField) pane.lookup("#SSD")).getText()));
+                    bean.setCpu(((TextField) pane.lookup("#CPU")).getText());
+                    bean.setGpu(((TextField) pane.lookup("#GPU")).getText());
+                    bean.setBatterySize(Integer.parseInt(((TextField) pane.lookup("#Battery")).getText()));
+                    bean.setDisplaySize(Float.parseFloat(((TextField) pane.lookup("#Display")).getText()));
+                    bean.setBrand(((TextField) pane.lookup("#Brand")).getText());
+                }
+                case HOMEAPPLIANCES -> {
+                    bean.setEnergyClass(((TextField) pane.lookup("#Energy Class")).getText());
+                    bean.setSpecs(((TextField) pane.lookup("#Specs")).getText());
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + type);
+            }
             AddProductController controller = new AddProductController();
             controller.saveProduct(type, bean, commonBean);
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
