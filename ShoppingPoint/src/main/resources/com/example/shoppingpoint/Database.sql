@@ -80,11 +80,13 @@ CREATE TABLE LoyaltyCard (
 
 CREATE TABLE Review (
     ReviewId INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    SoldProductId INT NOT NULL,
     ProductId INT NOT NULL,
     Client VARCHAR(16) NOT NULL,
     Value FLOAT,
 
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId),
+    FOREIGN KEY (SoldProductId) REFERENCES SoldProduct(SoldProductId),
     FOREIGN KEY (Client) REFERENCES User(Username)
 );
 

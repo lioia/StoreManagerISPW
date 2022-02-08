@@ -32,9 +32,9 @@ public class ReviewController {
         }
     }
 
-    public Review getReview(String client, int productId) throws ControllerException {
+    public Review getReview(String client, SoldProduct soldProduct) throws ControllerException {
         try {
-            return ReviewDAO.getReviewFromClientAndProductId(client, productId);
+            return ReviewDAO.getReviewFromClientAndSoldProductId(client, soldProduct.getSoldProductId() );
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         } catch (DatabaseException e) {
@@ -42,9 +42,9 @@ public class ReviewController {
         }
     }
 
-    public void updateReview(OrdersBean bean, int reviewId, String client, int productId) throws ControllerException {
+    public void updateReview(OrdersBean bean, int reviewId, String client, SoldProduct soldProduct) throws ControllerException {
         try {
-            ReviewDAO.updateReview(reviewId, bean.getValue(), client, productId);
+            ReviewDAO.updateReview(reviewId, bean.getValue(), client, soldProduct.getSoldProductId());
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         }
@@ -52,12 +52,15 @@ public class ReviewController {
 
     //    Return the average of the reviews (only if they are > 0)
     //    if there aren't any reviews, return 0
-    public float getReviewOfProduct(int productId) throws ControllerException {
+    public float getAverageReviewOfProduct(int productId) throws ControllerException {
         List<Review> reviews;
         try {
             reviews = ReviewDAO.getReviewsOfProduct(productId);
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        }
+        catch (DatabaseException e){
+            throw new ControllerException("Product",e);
         }
         float total = 0f;
         int count = 0;

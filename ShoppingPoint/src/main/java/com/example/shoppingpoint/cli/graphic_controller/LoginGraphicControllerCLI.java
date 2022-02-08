@@ -3,10 +3,7 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.bean.LoginBean;
 import com.example.shoppingpoint.cli.view.LoginViewCLI;
 import com.example.shoppingpoint.controller.LoginController;
-import com.example.shoppingpoint.exception.BeanException;
-import com.example.shoppingpoint.exception.BoundaryException;
-import com.example.shoppingpoint.exception.ControllerException;
-import com.example.shoppingpoint.exception.EmailException;
+import com.example.shoppingpoint.exception.*;
 import com.example.shoppingpoint.model.user.Client;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
@@ -22,7 +19,7 @@ public class LoginGraphicControllerCLI {
         loginView = new LoginViewCLI();
     }
 
-    public void login() throws EmailException,IOException, BeanException,ControllerException, BoundaryException {
+    public void login() throws EmailException, IOException, BeanException, ControllerException, BoundaryException, DatabaseException {
         User user;
         while (true) {
             try {

@@ -1,6 +1,7 @@
 package com.example.shoppingpoint.view;
 
 import com.example.shoppingpoint.ShoppingPointApplication;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.animation.PauseTransition;
@@ -24,7 +25,7 @@ public class PaymentCompletedGraphicController {
     private Store store;
 
     @FXML
-    public void initialize(Store store) {
+    public void initialize(Store store)  {
         this.store = store;
 
         transition = new PauseTransition(Duration.seconds(3));

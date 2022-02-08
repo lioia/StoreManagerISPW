@@ -6,6 +6,7 @@ import com.example.shoppingpoint.bean.PaymentBean;
 import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -110,7 +111,7 @@ public class PaymentGraphicController {
     }
 
     @FXML
-    public void goBack(ActionEvent event) throws IOException {
+    public void goBack(ActionEvent event) throws IOException, DatabaseException {
         FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
         Parent node = fxmlLoader.load();
         ((Node) event.getSource()).getScene().setRoot(node);

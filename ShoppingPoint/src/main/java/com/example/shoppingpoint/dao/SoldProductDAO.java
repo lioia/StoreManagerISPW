@@ -53,17 +53,29 @@ public class SoldProductDAO {
         return products;
     }
 
-    public static void saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername) throws SQLException {
+    public static int saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername) throws SQLException {
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)")) {
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS)) {
                 statement.setInt(1, quantity);
                 statement.setDate(2, Date.valueOf(date));
                 statement.setInt(3, productId);
                 statement.setString(4, clientUsername);
                 // Execute query
-                statement.executeUpdate();
+                int affectedRows = statement.executeUpdate();
+                if(affectedRows==0){
+                    System.out.println("databaseEx");
+                }
+                try(ResultSet generatedKeys = statement.getGeneratedKeys()){
+                    if (generatedKeys.next()){
+                        return generatedKeys.getInt(1);
+                    }
+                    else{
+                        // TODO
+                        throw new SQLException("");
+                    }
+                }
             }
         }
     }
@@ -74,9 +86,33 @@ public class SoldProductDAO {
         Integer quantity = rs.getInt("Quantity");
         Integer productId = rs.getInt("ProductId");
         String clientUsername = rs.getString("Client");
+
+        int soldProductId = rs.getInt("SoldProductId");
+
+
         Product product = ProductDAO.getProductById(productId);
         Client client = (Client) UserDAO.getUserByUsername(clientUsername);
 
-        return new SoldProduct(client, product, date, quantity);
+        return new SoldProduct(client, product, date, quantity,soldProductId);
+    }
+
+    public static SoldProduct getSoldProductById(int soldProductId)throws SQLException,DatabaseException{
+        SoldProduct soldProduct = null;
+//            Create Connection
+        try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
+//            Create Statement
+            try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+//            Get item
+                String sql = String.format("SELECT * FROM SoldProduct WHERE SoldProductId=%d", soldProductId);
+//            Execute query
+                ResultSet rs = statement.executeQuery(sql);
+                if(!rs.first()){
+                    throw new DatabaseException("Sold product");
+                }
+                soldProduct = getSoldProduct(rs);
+                rs.close();
+            }
+        }
+        return soldProduct;
     }
 }

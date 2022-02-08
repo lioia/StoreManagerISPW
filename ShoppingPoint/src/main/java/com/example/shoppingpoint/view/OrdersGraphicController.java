@@ -5,6 +5,7 @@ import com.example.shoppingpoint.bean.OrdersBean;
 import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.Store;
@@ -43,7 +44,7 @@ public class OrdersGraphicController {
             ReviewController controller = new ReviewController();
             List<SoldProduct> orders = controller.getOrders(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
             for (SoldProduct order : orders) {
-                Review review = controller.getReview(LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
+                Review review = controller.getReview(LoggedInUser.getInstance().getUser().getUsername(), order);
                 FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/order.fxml"));
                 AnchorPane pane = loader.load();
                 ((Label) pane.lookup("#name")).setText(order.getProduct().getName());
@@ -52,7 +53,7 @@ public class OrdersGraphicController {
                 ((Rating) pane.lookup("#rating")).ratingProperty().addListener((observable, oldValue, newValue) -> {
                     try {
                         OrdersBean bean = new OrdersBean(newValue.floatValue());
-                        controller.updateReview(bean, review.getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
+                        controller.updateReview(bean, review.getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), order);
                     } catch (BeanException e) {
                         ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
                     } catch (ControllerException e) {
@@ -67,7 +68,7 @@ public class OrdersGraphicController {
     }
 
     @FXML
-    public void goBack(ActionEvent actionEvent) throws IOException {
+    public void goBack(ActionEvent actionEvent) throws IOException, DatabaseException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store.fxml"));
         Parent node = loader.load();
         ((Node) actionEvent.getSource()).getScene().setRoot(node);

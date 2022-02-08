@@ -6,16 +6,20 @@ import com.example.shoppingpoint.model.user.Client;
 import java.time.LocalDate;
 
 public class SoldProduct {
+    private int soldProductId;
+
     private Product product;
     private Client client;
     private LocalDate date;
     private Integer quantity;
 
-    public SoldProduct(Client client, Product product, LocalDate date, Integer quantity) {
+    public SoldProduct(Client client, Product product, LocalDate date, Integer quantity, int soldProductId) {
         setClient(client);
         setProduct(product);
         setDate(date);
         setQuantity(quantity);
+        setSoldProductId(soldProductId);
+
     }
 
     public Product getProduct() {
@@ -48,5 +52,13 @@ public class SoldProduct {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public int getSoldProductId() {
+        return soldProductId;
+    }
+
+    public void setSoldProductId(int soldProductId) {
+        this.soldProductId = soldProductId;
     }
 }

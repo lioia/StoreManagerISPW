@@ -2,6 +2,7 @@ package com.example.shoppingpoint.dao;
 
 import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.model.Review;
+import com.example.shoppingpoint.model.SoldProduct;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class ReviewDAO {
         throw new IllegalStateException();
     }
 
-    public static List<Review> getReviewsOfProduct(int productId) throws SQLException {
+    public static List<Review> getReviewsOfProduct(int productId) throws SQLException, DatabaseException {
         ArrayList<Review> reviews = new ArrayList<>();
 
         // Create Connection
@@ -32,7 +33,7 @@ public class ReviewDAO {
         return reviews;
     }
 
-    public static Review getReviewFromClientAndProductId(String client, int productId) throws SQLException, DatabaseException {
+    public static Review getReviewFromClientAndSoldProductId(String client, int soldProductId) throws SQLException, DatabaseException {
         Review review;
 
         // Create Connection
@@ -40,7 +41,7 @@ public class ReviewDAO {
             // Create statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
                 // Get user with specified username
-                String sql = String.format("SELECT * FROM Review WHERE Client='%s' AND ProductId = %d", client, productId);
+                String sql = String.format("SELECT * FROM Review WHERE Client='%s' AND soldProductId = %d", client, soldProductId);
                 // Execute query
                 ResultSet rs = statement.executeQuery(sql);
                 // Empty result
@@ -55,36 +56,38 @@ public class ReviewDAO {
         return review;
     }
 
-    public static void addReview(float value, String client, int productId) throws SQLException {
+    public static void addReview(float value, String client, int soldProductId, int productId) throws SQLException {
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
-                String sql = String.format(java.util.Locale.US, "INSERT INTO Review (Value, Client, ProductId) VALUES (%f, '%s', %d)", value, client, productId);
+                String sql = String.format(java.util.Locale.US, "INSERT INTO Review (Value, Client, SoldProductId, ProductId) VALUES (%f, '%s', %d, %d)", value, client, soldProductId, productId);
                 // Execute query
                 statement.executeUpdate(sql);
             }
         }
     }
 
-    public static void updateReview(int reviewId, float value, String client, int productId) throws SQLException {
+    public static void updateReview(int reviewId, float value, String client, int soldProductId) throws SQLException {
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
                 // Get user with specified username
-                String sql = String.format(java.util.Locale.US, "UPDATE Review SET Value = %s WHERE ReviewId = %d AND Client = '%s' AND ProductId = %d", value, reviewId, client, productId);
+                String sql = String.format(java.util.Locale.US, "UPDATE Review SET Value = %s WHERE ReviewId = %d AND Client = '%s' AND SoldProductId = %d", value, reviewId, client, soldProductId);
                 // Execute query
                 statement.executeUpdate(sql);
             }
         }
     }
 
-    private static Review getReview(ResultSet rs) throws SQLException {
+    private static Review getReview(ResultSet rs) throws SQLException, DatabaseException {
         int id = rs.getInt("ReviewId");
         int productId = rs.getInt("ProductId");
+        int soldProductId = rs.getInt("SoldProductId");
+        SoldProduct soldProduct = SoldProductDAO.getSoldProductById(soldProductId);
         String client = rs.getString("Client");
         float value = rs.getInt("Value");
-        return new Review(id, value, client, productId);
+        return new Review(id, value, client,soldProduct, productId);
     }
 }

@@ -8,6 +8,7 @@ import com.example.shoppingpoint.controller.PaymentController;
 import com.example.shoppingpoint.controller.ReviewController;
 import com.example.shoppingpoint.controller.SendEmailController;
 import com.example.shoppingpoint.exception.ControllerException;
+import com.example.shoppingpoint.exception.DatabaseException;
 import com.example.shoppingpoint.exception.EmailException;
 import com.example.shoppingpoint.model.LoyaltyCard;
 import com.example.shoppingpoint.model.Store;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoreGraphicControllerCLI {
-    public void initialize(Store store) throws ControllerException, IOException, EmailException {
+    public void initialize(Store store) throws ControllerException, IOException, EmailException, DatabaseException {
         StoreViewCLI view = new StoreViewCLI();
         PaymentController controller = new PaymentController();
         LoyaltyCard card = controller.getLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
@@ -29,7 +30,7 @@ public class StoreGraphicControllerCLI {
         ReviewController reviewController = new ReviewController();
         List<Pair<GenericProduct, Float>> productsWithReviews = new ArrayList<>();
         for (GenericProduct p : products) {
-            float review = reviewController.getReviewOfProduct(p.getId());
+            float review = reviewController.getAverageReviewOfProduct(p.getId());
             productsWithReviews.add(new Pair<>(p, review));
         }
         view.showProducts(productsWithReviews);

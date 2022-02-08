@@ -22,7 +22,7 @@ public class OrdersGraphicControllerCLI {
         List<SoldProduct> orders = controller.getOrders(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
         List<Pair<SoldProduct, Review>> ordersWithReview = new ArrayList<>();
         for (SoldProduct order : orders) {
-            Review review = controller.getReview(LoggedInUser.getInstance().getUser().getUsername(), order.getProduct().getId());
+            Review review = controller.getReview(LoggedInUser.getInstance().getUser().getUsername(), order);
             ordersWithReview.add(new Pair<>(order, review));
         }
         view.showOrdersList(ordersWithReview);
@@ -37,7 +37,7 @@ public class OrdersGraphicControllerCLI {
             String newReview = view.getReview();
             try {
                 OrdersBean bean = new OrdersBean(Float.parseFloat(newReview));
-                controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey().getProduct().getId());
+                controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey());
             } catch (BeanException e) {
                 System.out.println("Invalid input");
             }
