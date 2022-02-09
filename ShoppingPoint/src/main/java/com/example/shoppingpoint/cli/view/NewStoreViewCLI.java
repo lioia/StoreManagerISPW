@@ -8,6 +8,8 @@ import java.io.IOException;
 
 public class NewStoreViewCLI {
     public NewStoreBean getStoreInformation() throws IOException, BeanException {
+        System.out.println("--------------------");
+        System.out.println("New Store");
         System.out.println("Insert store name: ");
         String storeName = CLIReader.readline();
         System.out.println("Insert store address: ");

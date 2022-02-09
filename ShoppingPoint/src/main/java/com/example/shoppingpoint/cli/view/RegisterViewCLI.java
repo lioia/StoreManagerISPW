@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class RegisterViewCLI {
     public RegisterBean getLoginInformation() throws BeanException, IOException {
+        System.out.println("--------------------");
         System.out.println("Register");
         System.out.println("Insert username: ");
         String username = CLIReader.readline();
@@ -20,6 +21,6 @@ public class RegisterViewCLI {
         System.out.println("Choose type (Client,Store Owner,Supplier");
         String type = CLIReader.readline();
 
-        return new RegisterBean(email,username,type,password,verifyPassword);
+        return new RegisterBean(email, username, type, password, verifyPassword);
     }
 }

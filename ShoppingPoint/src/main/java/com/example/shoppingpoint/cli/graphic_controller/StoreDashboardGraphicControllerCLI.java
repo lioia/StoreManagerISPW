@@ -50,9 +50,11 @@ public class StoreDashboardGraphicControllerCLI {
                 }
                 case 5 -> {
                     System.out.println("Sold product");
+                    SummaryGraphicControllerCLI summaryGraphicControllerCLI = new SummaryGraphicControllerCLI();
+                    summaryGraphicControllerCLI.initialize();
                     //TODO
                 }
-                case 6 -> {
+                case 6 -> { // View products
                     productList = getProductList();
                     productsWithReview = getProductsWithReview(productList);
                     storeDashboardViewCLI.createProductView(productsWithReview);

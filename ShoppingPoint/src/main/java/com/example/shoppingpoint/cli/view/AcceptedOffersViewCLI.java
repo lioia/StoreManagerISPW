@@ -8,12 +8,13 @@ import java.util.List;
 
 public class AcceptedOffersViewCLI {
     public void viewAcceptedOffer(List<Offer> acceptedOffers) {
+        System.out.println("--------------------");
         System.out.println("Accepted offer list");
 
         for (Offer offer : acceptedOffers) {
             if (offer.isChecked())
                 System.out.println("NEW");
-            System.out.printf("Offer ID: %d%n",offer.getOfferId());
+            System.out.printf("Offer ID: %d%n", offer.getOfferId());
             System.out.printf("Product name: %s%n", offer.getRequest().getProduct().getName());
             System.out.printf("Quantity: %d%n", offer.getRequest().getQuantity());
             System.out.printf("Offer price: %.2f%n", offer.getOfferPrice());
@@ -23,11 +24,11 @@ public class AcceptedOffersViewCLI {
         }
     }
 
-    public boolean getEmailChoice()throws IOException {
+    public boolean getEmailChoice() throws IOException {
         return CLIReader.yesOrNo("Do you want send email to store?");
     }
 
-    public int getAcceptedOfferId()throws IOException{
+    public int getAcceptedOfferId() throws IOException {
         System.out.println("For which offer?");
         System.out.println("OfferId:");
         return Integer.parseInt(CLIReader.readline());

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class AddProductViewCLI {
     public AddProductCommonBean getProductInformation() throws IOException, BeanException {
+        System.out.println("--------------------");
         System.out.println("Add Product");
         System.out.println("Insert name: ");
         String name = CLIReader.readline();

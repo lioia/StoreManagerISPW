@@ -5,7 +5,6 @@ import com.example.shoppingpoint.model.Offer;
 import com.example.shoppingpoint.model.Request;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 public class AcceptOfferViewCLI {
@@ -16,6 +15,7 @@ public class AcceptOfferViewCLI {
     }
 
     public void viewRequestsOfProduct(List<Request> requests) {
+        System.out.println("--------------------");
         System.out.println("Request list");
         for (Request request : requests) {
             System.out.printf("RequestId: %d - Max Price: %.2f - Quantity: %d | ", request.getRequestId(), request.getMaxPrice(), request.getQuantity());
@@ -29,16 +29,16 @@ public class AcceptOfferViewCLI {
     }
 
     public int getOfferChoice() throws IOException {
-        return CLIReader.multiChoice(List.of("Do you want to accept an offer?","Do you want to send an email to a supplier?"));
+        return CLIReader.multiChoice(List.of("Do you want to accept an offer?", "Do you want to send an email to a supplier?"));
 
     }
 
-    public String getSupplier()throws IOException{
+    public String getSupplier() throws IOException {
         System.out.println("Supplier username:");
         return CLIReader.readline();
     }
 
-    public boolean getChoiceEmail()throws IOException {
+    public boolean getChoiceEmail() throws IOException {
         return CLIReader.yesOrNo("Do you want to send an email to a customer?? [y/n]");
     }
 

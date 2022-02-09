@@ -18,6 +18,7 @@ public class LoyaltyCardViewCLI {
     }
 
     public int getChoiceIfActive() throws IOException {
+        System.out.println("--------------------");
         System.out.println("Loyalty Card Information");
         System.out.println("What do you want to do?");
         return CLIReader.multiChoice(List.of(
@@ -32,7 +33,7 @@ public class LoyaltyCardViewCLI {
         return CLIReader.yesOrNo("Activate loyalty card? [y/n]");
     }
 
-    public void viewCardDetails(int pointsInEuro,int eurosInPoint){
-        System.out.printf("%d points spent = 1€ discount%n%d€ spent = 1 point earned",pointsInEuro,eurosInPoint);
+    public void viewCardDetails(int pointsInEuro, int eurosInPoint) {
+        System.out.printf("%d points spent = 1€ discount%n%d€ spent = 1 point earned", pointsInEuro, eurosInPoint);
     }
 }

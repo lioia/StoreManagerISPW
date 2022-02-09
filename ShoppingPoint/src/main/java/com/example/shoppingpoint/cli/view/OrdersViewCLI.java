@@ -10,6 +10,7 @@ import java.util.List;
 
 public class OrdersViewCLI {
     public void showOrdersList(List<Pair<SoldProduct, Review>> ordersWithReview) {
+        System.out.println("--------------------");
         System.out.println("Orders List");
         for (Pair<SoldProduct, Review> p : ordersWithReview) {
             SoldProduct soldProduct = p.getKey();

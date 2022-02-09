@@ -27,7 +27,8 @@ public class StoreDashboardViewCLI {
     }
 
     public void createProductView(List<Pair<GenericProduct, Float>> productList) {
-        System.out.println("\nProduct list\n");
+        System.out.println("--------------------");
+        System.out.println("Product list");
 
         for (Pair<GenericProduct, Float> productWithReview : productList) {
             GenericProduct product = productWithReview.getKey();

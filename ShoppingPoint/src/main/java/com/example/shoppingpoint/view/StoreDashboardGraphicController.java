@@ -57,7 +57,7 @@ public class StoreDashboardGraphicController {
     private FlowPane productsPane;
 
     @FXML
-    public void initialize() throws IOException, DatabaseException {
+    public void initialize() throws IOException {
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
         labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
@@ -73,7 +73,7 @@ public class StoreDashboardGraphicController {
         clientListGraphicController.initialize();
     }
 
-    private void createProductsView(Store store) throws IOException, DatabaseException {
+    private void createProductsView(Store store) throws IOException {
         try {
             productsPane.getChildren().clear();
             ViewProductsController viewProductsController = new ViewProductsController();

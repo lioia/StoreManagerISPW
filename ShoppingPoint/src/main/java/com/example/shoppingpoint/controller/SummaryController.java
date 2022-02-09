@@ -4,7 +4,6 @@ import com.example.shoppingpoint.bean.SummaryBean;
 import com.example.shoppingpoint.dao.SoldProductDAO;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.DatabaseException;
-import com.example.shoppingpoint.model.ClientListData;
 import com.example.shoppingpoint.model.SoldProduct;
 import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.singleton.LoggedInUser;
@@ -20,9 +19,7 @@ import static java.time.temporal.TemporalAdjusters.nextOrSame;
 import static java.time.temporal.TemporalAdjusters.previousOrSame;
 
 public class SummaryController {
-
     public HashMap<String, List<SoldProduct>> getHashSoldProducts(SummaryBean bean) throws ControllerException {
-
         List<SoldProduct> products = getSoldProducts();
         HashMap<String, List<SoldProduct>> filtered = new HashMap<>();
 

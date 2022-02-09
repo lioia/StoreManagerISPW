@@ -33,9 +33,9 @@ public class StoreGraphicControllerCLI {
             float review = reviewController.getAverageReviewOfProduct(p.getId());
             productsWithReviews.add(new Pair<>(p, review));
         }
-        view.showProducts(productsWithReviews);
         boolean exit = false;
         while (!exit) {
+            view.showProducts(productsWithReviews);
             int action = view.getStoreAction();
             switch (action) {
                 case 1:  // Buy product

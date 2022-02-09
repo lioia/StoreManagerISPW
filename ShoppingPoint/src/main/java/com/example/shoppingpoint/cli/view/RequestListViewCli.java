@@ -10,6 +10,7 @@ import java.util.List;
 
 public class RequestListViewCli {
     public void requestList(int acceptedOffer, List<Request> requestList) {
+        System.out.println("--------------------");
         System.out.println("Request list");
         if (acceptedOffer > 0) {
             System.out.printf("They accepted %d offers%n", acceptedOffer);
@@ -26,7 +27,7 @@ public class RequestListViewCli {
 
     public int getChoiceSupplier() throws IOException {
         System.out.println("What do you want to do?");
-        return CLIReader.multiChoice(List.of("Make an offer", "View accepted offer","Send email to store", "Quit"));
+        return CLIReader.multiChoice(List.of("Make an offer", "View accepted offer", "Send email to store", "Quit"));
     }
 
     public int makeAnOfferInput() throws IOException {
@@ -41,7 +42,7 @@ public class RequestListViewCli {
         return new RequestListBean(price);
     }
 
-    public int getRequestId()throws IOException{
+    public int getRequestId() throws IOException {
         System.out.println("For which request?");
         System.out.println("Request ID:");
         return Integer.parseInt(CLIReader.readline());

@@ -12,8 +12,8 @@ import java.util.List;
 
 public class StoreViewCLI {
     public void showStoreInfo(Store store) {
-        System.out.println("-------------------");
-        System.out.printf("%s%n", store.getName());
+        System.out.println("--------------------");
+        System.out.println(store.getName());
         System.out.printf("Email: %s%n", LoggedInUser.getInstance().getUser().getEmail());
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class PaymentViewCLI {
     public void showPaymentInformation(GenericProduct product, LoyaltyCard card, Store store, int quantity, boolean loyaltyCardCheck) {
-        System.out.println("--------------");
+        System.out.println("--------------------");
         System.out.println("Payment");
         System.out.println("Product Name\t\tQuantity x Price");
         float total = quantity * product.getDiscountedPrice();

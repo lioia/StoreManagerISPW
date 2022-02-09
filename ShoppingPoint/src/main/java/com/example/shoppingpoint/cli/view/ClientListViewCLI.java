@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ClientListViewCLI {
     public void viewClientList(List<ClientListData> clientList) {
+        System.out.println("--------------------");
         System.out.println("Client List");
         for (ClientListData client : clientList) {
             System.out.printf("%s - ", client.getUsername());
@@ -16,11 +17,11 @@ public class ClientListViewCLI {
         }
     }
 
-    public boolean getChoice()throws IOException {
+    public boolean getChoice() throws IOException {
         return CLIReader.yesOrNo("Do you want to send an email to a customer?? [y/n]");
     }
 
-    public String getClient()throws IOException{
+    public String getClient() throws IOException {
         System.out.println("Client username:");
         return CLIReader.readline();
     }
