@@ -15,7 +15,7 @@ public class SoldProductDAO {
         throw new IllegalStateException();
     }
 
-    public static List<SoldProduct> getSoldProducts() throws SQLException, DatabaseException {
+    public static List<SoldProduct> getSoldProducts(String storeName) throws SQLException, DatabaseException {
         List<SoldProduct> products = new ArrayList<>();
 
 //            Create Connection
@@ -23,7 +23,7 @@ public class SoldProductDAO {
 //            Create Statement
             try (Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 //            Execute query
-                ResultSet rs = statement.executeQuery("SELECT * FROM SoldProduct");
+                ResultSet rs = statement.executeQuery(String.format("SELECT * FROM SoldProduct WHERE Store = '%s'", storeName));
                 while (rs.next()) {
                     products.add(getSoldProduct(rs));
                 }
@@ -53,15 +53,16 @@ public class SoldProductDAO {
         return products;
     }
 
-    public static int saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername) throws SQLException {
+    public static int saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername, String storeName) throws SQLException {
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client) VALUES (?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client, Store) VALUES (?, ?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS)) {
                 statement.setInt(1, quantity);
                 statement.setDate(2, Date.valueOf(date));
                 statement.setInt(3, productId);
                 statement.setString(4, clientUsername);
+                statement.setString(5, storeName);
                 // Execute query
                 int affectedRows = statement.executeUpdate();
                 if(affectedRows==0){

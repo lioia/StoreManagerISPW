@@ -57,7 +57,7 @@ public class StoreDashboardGraphicController {
     private FlowPane productsPane;
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() throws IOException, DatabaseException {
         Store store = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore();
         ((StoreOwner) LoggedInUser.getInstance().getUser()).setStore(store);
         labelStoreName.setText(((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName() + " - Shopping Point");
@@ -73,7 +73,7 @@ public class StoreDashboardGraphicController {
         clientListGraphicController.initialize();
     }
 
-    private void createProductsView(Store store) throws IOException {
+    private void createProductsView(Store store) throws IOException, DatabaseException {
         try {
             productsPane.getChildren().clear();
             ViewProductsController viewProductsController = new ViewProductsController();
@@ -82,7 +82,7 @@ public class StoreDashboardGraphicController {
             for (GenericProduct product : products) {
                 FXMLLoader fxmlLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/store_dashboard_product_pane.fxml"));
                 ReviewController reviewController = new ReviewController();
-                float reviewAverage = reviewController.getReviewOfProduct(product.getId());
+                float reviewAverage = reviewController.getAverageReviewOfProduct(product.getId());
                 AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
                 ((Label) pane.lookup("#name")).setText(product.getName());

@@ -96,7 +96,7 @@ public class PaymentController {
                 LoyaltyCardDAO.updateLoyaltyCard(clientUsername, store.getName(), card.getPoints() - pointsUsed + pointsToBeAdded);
 
             ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() - bean.getQuantity());
-            int soldProductId = SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername);
+            int soldProductId = SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername, store.getName());
             ReviewDAO.addReview(0f, clientUsername, soldProductId,product.getId());
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);

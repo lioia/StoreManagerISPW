@@ -61,6 +61,9 @@ CREATE TABLE SoldProduct (
     Quantity INT NOT NULL,
     Date DATE NOT NULL,
 
+    Store VARCHAR (50),
+    FOREIGN KEY (Store) REFERENCES Store(Name),
+
     ProductId INT NOT NULL,
     FOREIGN KEY (ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE,
 

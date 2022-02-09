@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Label?>
+<AnchorPane prefHeight="165.0" prefWidth="287.0"
+            style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
+            xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <effect>
+        <DropShadow/>
+    </effect>
+    <Label fx:id="productName" layoutX="16.0" layoutY="16.0" text="Client Name">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <Label fx:id="clientName" layoutX="16.0" layoutY="64.0" text="Client Email" textFill="#6EC6FF">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="quantity" layoutX="16.0" layoutY="96.0" text="Client Points">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Label fx:id="date" layoutX="16.0" layoutY="128.0" text="Client Points">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+
+    <FlowPane.margin>
+        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0"/>
+    </FlowPane.margin>
+    <effect>
+        <DropShadow/>
+    </effect>
+</AnchorPane>

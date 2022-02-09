@@ -45,7 +45,7 @@ public class SummaryGraphicController {
         try {
             barChart.getData().clear();
             SummaryController controller = new SummaryController();
-            HashMap<String, List<SoldProduct>> products = controller.getSoldProducts(new SummaryBean(selected));
+            HashMap<String, List<SoldProduct>> products = controller.getHashSoldProducts(new SummaryBean(selected));
             for (String key : products.keySet()) {
                 XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.setName(key);
@@ -72,5 +72,11 @@ public class SummaryGraphicController {
         LoggedInUser.getInstance().setUser(null);
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
         ((Node) actionEvent.getSource()).getScene().setRoot(loader.load());
+    }
+
+    @FXML
+    public void goToList(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("sold_products_list.fxml"));
+        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
     }
 }
