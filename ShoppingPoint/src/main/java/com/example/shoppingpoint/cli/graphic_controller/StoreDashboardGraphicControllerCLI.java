@@ -48,11 +48,9 @@ public class StoreDashboardGraphicControllerCLI {
                     ClientListGraphicControllerCLI clientListGraphicControllerCLI = new ClientListGraphicControllerCLI();
                     clientListGraphicControllerCLI.initialize();
                 }
-                case 5 -> {
-                    System.out.println("Sold product");
+                case 5 -> { // Sold Products
                     SummaryGraphicControllerCLI summaryGraphicControllerCLI = new SummaryGraphicControllerCLI();
                     summaryGraphicControllerCLI.initialize();
-                    //TODO
                 }
                 case 6 -> { // View products
                     productList = getProductList();

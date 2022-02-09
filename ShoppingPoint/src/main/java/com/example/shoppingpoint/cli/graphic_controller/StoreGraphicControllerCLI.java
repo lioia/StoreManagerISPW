@@ -58,11 +58,11 @@ public class StoreGraphicControllerCLI {
                         loyaltyCardController.createLoyaltyCard(LoggedInUser.getInstance().getUser().getUsername(), store.getName());
                         view.showSuccessActivation();
                     }
-                case 4: //send email to store
+                    break;
+                case 4: // Send email to store
                     SendEmailController sendEmailController = new SendEmailController();
                     String storeOwner = sendEmailController.getUsernameOfStore(store.getName());
                     sendEmailController.sendEmail(storeOwner);
-
                     break;
                 default: // Go back
                     exit = true;

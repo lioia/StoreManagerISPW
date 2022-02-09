@@ -50,9 +50,8 @@ public class PaymentController {
             if (bean.getSearchQuery().isEmpty()) filteredProducts = products;
             else {
                 for (Product product : products) {
-                    if (product.getName().toLowerCase().contains(bean.getSearchQuery().toLowerCase())) {
+                    if (product.getName().toLowerCase().contains(bean.getSearchQuery().toLowerCase()))
                         filteredProducts.add(product);
-                    }
                 }
             }
             for (Product product : filteredProducts) {
@@ -97,9 +96,11 @@ public class PaymentController {
 
             ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() - bean.getQuantity());
             int soldProductId = SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername, store.getName());
-            ReviewDAO.addReview(0f, clientUsername, soldProductId,product.getId());
+            ReviewDAO.addReview(0f, clientUsername, soldProductId, product.getId());
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Database", e);
         }
     }
 }

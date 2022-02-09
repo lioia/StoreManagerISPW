@@ -6,11 +6,11 @@ import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.model.SoldProduct;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SummaryViewCLI {
-    public void showChart(HashMap<String, List<SoldProduct>> soldProducts, SummaryBean bean) {
+    public void showChart(Map<String, List<SoldProduct>> soldProducts, SummaryBean bean) {
         System.out.println("--------------------");
         System.out.println("Sold Products");
         System.out.println(bean.getSelected());

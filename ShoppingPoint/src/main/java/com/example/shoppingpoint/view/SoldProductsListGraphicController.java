@@ -28,13 +28,13 @@ public class SoldProductsListGraphicController {
         SummaryController controller = new SummaryController();
         try {
             List<SoldProduct> products = controller.getSoldProducts();
-            for(SoldProduct p : products) {
+            for (SoldProduct p : products) {
                 FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/sold_product_item.fxml"));
                 AnchorPane pane = loader.load();
-                ((Label)pane.lookup("#productName")).setText(p.getProduct().getName());
-                ((Label)pane.lookup("#clientName")).setText(p.getClient().getUsername());
-                ((Label)pane.lookup("#quantity")).setText("Quantity: " + p.getQuantity());
-                ((Label)pane.lookup("#date")).setText(p.getDate().toString());
+                ((Label) pane.lookup("#productName")).setText(p.getProduct().getName());
+                ((Label) pane.lookup("#clientName")).setText(p.getClient().getUsername());
+                ((Label) pane.lookup("#quantity")).setText("Quantity: " + p.getQuantity());
+                ((Label) pane.lookup("#date")).setText(p.getDate().toString());
                 soldProductsPane.getChildren().add(pane);
             }
         } catch (ControllerException e) {
@@ -43,15 +43,15 @@ public class SoldProductsListGraphicController {
     }
 
     @FXML
-    public void goBack(ActionEvent actionEvent) throws IOException {
+    public void goBack(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("store_dashboard.fxml"));
-        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
+        ((Node) event.getSource()).getScene().setRoot(loader.load());
     }
 
     @FXML
-    public void logout(ActionEvent actionEvent) throws IOException {
+    public void logout(ActionEvent event) throws IOException {
         LoggedInUser.getInstance().setUser(null);
         FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("login.fxml"));
-        ((Node)actionEvent.getSource()).getScene().setRoot(loader.load());
+        ((Node) event.getSource()).getScene().setRoot(loader.load());
     }
 }

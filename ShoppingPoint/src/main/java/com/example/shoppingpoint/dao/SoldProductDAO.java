@@ -53,11 +53,11 @@ public class SoldProductDAO {
         return products;
     }
 
-    public static int saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername, String storeName) throws SQLException {
+    public static int saveSoldProduct(int quantity, LocalDate date, int productId, String clientUsername, String storeName) throws SQLException, DatabaseException {
         // Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
             // Create statement
-            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client, Store) VALUES (?, ?, ?, ?, ?)",Statement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO SoldProduct (Quantity, Date, ProductId, Client, Store) VALUES (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS)) {
                 statement.setInt(1, quantity);
                 statement.setDate(2, Date.valueOf(date));
                 statement.setInt(3, productId);
@@ -65,17 +65,10 @@ public class SoldProductDAO {
                 statement.setString(5, storeName);
                 // Execute query
                 int affectedRows = statement.executeUpdate();
-                if(affectedRows==0){
-                    System.out.println("databaseEx");
-                }
-                try(ResultSet generatedKeys = statement.getGeneratedKeys()){
-                    if (generatedKeys.next()){
-                        return generatedKeys.getInt(1);
-                    }
-                    else{
-                        // TODO
-                        throw new SQLException("");
-                    }
+                if (affectedRows == 0) throw new DatabaseException("Could not insert");
+                try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) return generatedKeys.getInt(1);
+                    else throw new DatabaseException("Could not insert");
                 }
             }
         }
@@ -94,10 +87,10 @@ public class SoldProductDAO {
         Product product = ProductDAO.getProductById(productId);
         Client client = (Client) UserDAO.getUserByUsername(clientUsername);
 
-        return new SoldProduct(client, product, date, quantity,soldProductId);
+        return new SoldProduct(client, product, date, quantity, soldProductId);
     }
 
-    public static SoldProduct getSoldProductById(int soldProductId)throws SQLException,DatabaseException{
+    public static SoldProduct getSoldProductById(int soldProductId) throws SQLException, DatabaseException {
         SoldProduct soldProduct = null;
 //            Create Connection
         try (Connection connection = DriverManager.getConnection(Database.DB_URL, Database.USER, Database.PASS)) {
@@ -107,7 +100,7 @@ public class SoldProductDAO {
                 String sql = String.format("SELECT * FROM SoldProduct WHERE SoldProductId=%d", soldProductId);
 //            Execute query
                 ResultSet rs = statement.executeQuery(sql);
-                if(!rs.first()){
+                if (!rs.first()) {
                     throw new DatabaseException("Sold product");
                 }
                 soldProduct = getSoldProduct(rs);
