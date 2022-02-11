@@ -6,7 +6,6 @@ import com.example.shoppingpoint.controller.RegisterController;
 import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.user.Client;
-import com.example.shoppingpoint.model.user.StoreOwner;
 import com.example.shoppingpoint.model.user.Supplier;
 import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.singleton.LoggedInUser;

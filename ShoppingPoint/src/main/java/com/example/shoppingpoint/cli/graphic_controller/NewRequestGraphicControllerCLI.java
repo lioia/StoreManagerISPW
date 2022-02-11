@@ -10,10 +10,16 @@ import com.example.shoppingpoint.exception.ControllerException;
 import java.io.IOException;
 
 public class NewRequestGraphicControllerCLI {
-    public void initialize(GenericProduct product) throws IOException, BeanException, ControllerException {
-        NewRequestViewCLI newRequestViewCLI = new NewRequestViewCLI();
-        NewRequestBean newRequestBean = newRequestViewCLI.newRequestInput();
-        NewRequestController controller = new NewRequestController();
-        controller.saveRequest(newRequestBean, product.getId());
+    public void initialize(GenericProduct product) throws IOException {
+        try {
+            NewRequestViewCLI newRequestViewCLI = new NewRequestViewCLI();
+            NewRequestBean newRequestBean = newRequestViewCLI.newRequestInput();
+            NewRequestController controller = new NewRequestController();
+            controller.saveRequest(newRequestBean, product.getId());
+        } catch (ControllerException e) {
+            System.out.println("[ERR] " + e.getMessage());
+        } catch (BeanException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+        }
     }
 }

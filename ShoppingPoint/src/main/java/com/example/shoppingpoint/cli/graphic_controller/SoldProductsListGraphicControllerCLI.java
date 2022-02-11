@@ -8,10 +8,14 @@ import com.example.shoppingpoint.model.SoldProduct;
 import java.util.List;
 
 public class SoldProductsListGraphicControllerCLI {
-    public void initialize() throws ControllerException {
+    public void initialize() {
         SoldProductsListViewCLI view = new SoldProductsListViewCLI();
         SummaryController controller = new SummaryController();
-        List<SoldProduct> soldProducts = controller.getSoldProducts();
-        view.showLists(soldProducts);
+        try {
+            List<SoldProduct> soldProducts = controller.getSoldProducts();
+            view.showLists(soldProducts);
+        } catch (ControllerException e) {
+            System.out.println("[ERR] " + e.getMessage());
+        }
     }
 }

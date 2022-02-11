@@ -3,15 +3,12 @@ package com.example.shoppingpoint.cli.graphic_controller;
 import com.example.shoppingpoint.adapter.GenericProduct;
 import com.example.shoppingpoint.cli.view.ProductViewCLI;
 import com.example.shoppingpoint.controller.EstimatedPriceController;
-import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.BoundaryException;
-import com.example.shoppingpoint.exception.ControllerException;
-import com.example.shoppingpoint.exception.EmailException;
 
 import java.io.IOException;
 
 public class ProductGraphicControllerCLI {
-    public void initialize(GenericProduct product) throws EmailException,IOException, ControllerException, BeanException, BoundaryException {
+    public void initialize(GenericProduct product) throws IOException {
         ProductViewCLI view = new ProductViewCLI();
         boolean exit = false;
         while (!exit) {
@@ -31,8 +28,13 @@ public class ProductGraphicControllerCLI {
                 }
                 case 4 -> { // View estimated price
                     EstimatedPriceController controller = new EstimatedPriceController();
-                    float estimatedPrice = controller.getEstimatedPrice(product.getName());
-                    view.viewEstimatedPrice(estimatedPrice);
+                    float estimatedPrice = 0;
+                    try {
+                        estimatedPrice = controller.getEstimatedPrice(product.getName());
+                        view.viewEstimatedPrice(estimatedPrice);
+                    } catch (BoundaryException e) {
+                        System.out.println("[ERR] " + e.getMessage());
+                    }
                 }
                 default -> exit = true;
             }

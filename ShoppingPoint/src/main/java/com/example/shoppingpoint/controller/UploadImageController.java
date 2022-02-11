@@ -5,7 +5,10 @@ import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.exception.ImageException;
 import javafx.stage.FileChooser;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 public class UploadImageController {

@@ -7,7 +7,7 @@ import com.example.shoppingpoint.exception.BeanException;
 import java.io.IOException;
 
 public class RegisterViewCLI {
-    public RegisterBean getLoginInformation() throws BeanException, IOException {
+    public RegisterBean getLoginInformation() throws IOException, BeanException {
         System.out.println("--------------------");
         System.out.println("Register");
         System.out.println("Insert username: ");

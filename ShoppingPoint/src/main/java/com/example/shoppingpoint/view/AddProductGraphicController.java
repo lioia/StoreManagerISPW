@@ -17,7 +17,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.example.shoppingpoint.utils.ExceptionHandler.BEAN_HEADER_TEXT;
 

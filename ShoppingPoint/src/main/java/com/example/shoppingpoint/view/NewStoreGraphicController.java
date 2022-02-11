@@ -9,7 +9,6 @@ import com.example.shoppingpoint.exception.BeanException;
 import com.example.shoppingpoint.exception.ControllerException;
 import com.example.shoppingpoint.model.Store;
 import com.example.shoppingpoint.model.user.StoreOwner;
-import com.example.shoppingpoint.model.user.User;
 import com.example.shoppingpoint.singleton.LoggedInUser;
 import com.example.shoppingpoint.utils.ExceptionHandler;
 import javafx.event.ActionEvent;

@@ -1,7 +1,6 @@
 package com.example.shoppingpoint.bean.add_product;
 
 import com.example.shoppingpoint.exception.BeanException;
-import com.example.shoppingpoint.utils.ProductType;
 
 public class AddProductBean {
     private String size;
