@@ -130,9 +130,9 @@ public class StoreGraphicController {
                 AnchorPane pane = fxmlLoader.load();
 //            Set product data in the View
                 ((Label) pane.lookup("#name")).setText(product.getName());
-                String formattedPrice = String.format("%.02f€", product.getPrice()); // Price with 2 decimal points
+                String formattedPrice = String.format("Price: %.02f€", product.getPrice()); // Price with 2 decimal points
                 ((Label) pane.lookup("#price")).setText(formattedPrice);
-                String formattedDiscountedPrice = String.format("%.02f€", product.getDiscountedPrice()); // Price with 2 decimal points
+                String formattedDiscountedPrice = String.format("Discount: %.02f€ (%.02f%%)", product.getDiscountedPrice(),controller.calculateDiscountPercentage(product.getPrice(),product.getDiscountedPrice())); // Price with 2 decimal points
                 ((Label) pane.lookup("#discountedPrice")).setText(formattedDiscountedPrice);
                 ((Label) pane.lookup("#status")).setText(product.getStatus());
                 ((Label) pane.lookup("#description")).setText(product.getDescription());

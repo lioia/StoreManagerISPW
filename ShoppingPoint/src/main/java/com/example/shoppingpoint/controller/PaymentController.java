@@ -103,4 +103,8 @@ public class PaymentController {
             throw new ControllerException("Database", e);
         }
     }
+
+    public float calculateDiscountPercentage(float price, float discountPrice){
+        return 100-(discountPrice/price)*100;
+    }
 }
