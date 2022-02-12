@@ -8,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestSummaryController {
+    // Lioi Alessandro
     @Test
     public void testCalculateIncrementalProfit() {
         SummaryController controller = new SummaryController();

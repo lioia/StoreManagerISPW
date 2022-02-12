@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestLoginBean {
+    // Lioi Alessandro
     @Test
     public void testLoginBean() {
         assertAll("LoginBean",

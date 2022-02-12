@@ -8,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestReviewController {
+    // Lioi Alessandro
     @Test
     public void testReviewAverage() {
         ReviewController controller = new ReviewController();

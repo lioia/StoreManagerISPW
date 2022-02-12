@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPaymentController {
+    // Ronzello Gianluca
     @Test
     public void testDiscountPercentage() {
         PaymentController controller = new PaymentController();
@@ -13,6 +14,7 @@ public class TestPaymentController {
         assertEquals(20.0, output);
     }
 
+    // Ronzello Gianluca
     @Test
     public void testPointsUsed() {
         PaymentController controller = new PaymentController();
