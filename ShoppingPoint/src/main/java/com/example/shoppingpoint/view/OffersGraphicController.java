@@ -63,36 +63,35 @@ public class OffersGraphicController {
         ((Label) parentNode.lookup("#statusLabel")).setText("Not accepted");
         AcceptOfferController controller = new AcceptOfferController();
         List<Offer> offers = controller.getOffersOfRequest(req.getRequestId());
-        if (offers.size() > 0) {
-            FlowPane offersPane = (FlowPane) parentNode.lookup("#offersPane");
-            for (Offer off : offers) {
-                FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
-                AnchorPane offer = offerLoader.load();
-                ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
-                ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
-                ((Label) offer.lookup("#incrementPriceLabel")).setText(String.format("You pay %.2f%% of the price", controller.getIncrementOfRequestPrice(req.getMaxPrice(), off.getOfferPrice())));
-                Text sendEmail = (Text) offer.lookup("#sendEmail");
-                sendEmail.setOnMouseClicked(event -> {
-                    try {
-                        new SendEmailController().sendEmail(off.getSupplierUsername());
-                    } catch (EmailException e) {
-                        ExceptionHandler.handleException("Email", e.getMessage());
-                    } catch (ControllerException e) {
-                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
-                    }
-                });
-                ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
-                    try {
-                        controller.acceptOffer(req.getRequestId(), off.getOfferId());
-                        goBack(event);
-                    } catch (ControllerException e) {
-                        ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
-                    } catch (IOException e) {
-                        ExceptionHandler.handleException("Could not go back", e.getMessage());
-                    }
-                });
-                offersPane.getChildren().add(offer);
-            }
+        if (offers.size() == 0) return;
+        FlowPane offersPane = (FlowPane) parentNode.lookup("#offersPane");
+        for (Offer off : offers) {
+            FXMLLoader offerLoader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/offer.fxml"));
+            AnchorPane offer = offerLoader.load();
+            ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
+            ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
+            ((Label) offer.lookup("#incrementPriceLabel")).setText(String.format("You pay %.2f%% of the price", controller.getIncrementOfRequestPrice(req.getMaxPrice(), off.getOfferPrice())));
+            Text sendEmail = (Text) offer.lookup("#sendEmail");
+            sendEmail.setOnMouseClicked(event -> {
+                try {
+                    new SendEmailController().sendEmail(off.getSupplierUsername());
+                } catch (EmailException e) {
+                    ExceptionHandler.handleException("Email", e.getMessage());
+                } catch (ControllerException e) {
+                    ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+                }
+            });
+            ((Button) offer.lookup("#acceptButton")).setOnAction(event -> {
+                try {
+                    controller.acceptOffer(req.getRequestId(), off.getOfferId());
+                    goBack(event);
+                } catch (ControllerException e) {
+                    ExceptionHandler.handleException(CONTROLLER_HEADER_TEXT, e.getMessage());
+                } catch (IOException e) {
+                    ExceptionHandler.handleException("Could not go back", e.getMessage());
+                }
+            });
+            offersPane.getChildren().add(offer);
         }
     }
 

@@ -81,12 +81,12 @@ public class PaymentGraphicController {
         try {
             PaymentController controller = new PaymentController();
             PaymentBean bean = new PaymentBean(quantityLabel.getText(), checkLoyaltyCard.isSelected());
-            float total = controller.buy(bean, card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
+            float totalSpent = controller.buy(bean, card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
             FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("payment_completed.fxml"));
             Parent node = loader.load();
             ((Node) actionEvent.getSource()).getScene().setRoot(node);
             PaymentCompletedGraphicController paymentCompletedGraphicController = loader.getController();
-            paymentCompletedGraphicController.initialize(store, total);
+            paymentCompletedGraphicController.initialize(store, totalSpent);
         } catch (BeanException e) {
             ExceptionHandler.handleException(BEAN_HEADER_TEXT, e.getMessage());
         } catch (ControllerException e) {

@@ -35,18 +35,22 @@ public class OrdersGraphicControllerCLI {
                     System.out.println("Invalid input");
                     return;
                 }
-                String newReview = view.getReview();
-                try {
-                    OrdersBean bean = new OrdersBean(Float.parseFloat(newReview));
-                    controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey());
-                } catch (BeanException e) {
-                    System.out.println("Invalid input");
-                } catch (ControllerException e) {
-                    System.out.println("[ERR] " + e.getMessage());
-                }
+                updateReview(pair, view.getReview());
             }
         } catch (ControllerException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void updateReview(Pair<SoldProduct, Review> pair, String newReview) {
+        try {
+            OrdersBean bean = new OrdersBean(Float.parseFloat(newReview));
+            ReviewController controller = new ReviewController();
+            controller.updateReview(bean, pair.getValue().getReviewId(), LoggedInUser.getInstance().getUser().getUsername(), pair.getKey());
+        } catch (BeanException e) {
+            System.out.println("Invalid input");
+        } catch (ControllerException e) {
+            System.out.println("[ERR] " + e.getMessage());
         }
     }
 }

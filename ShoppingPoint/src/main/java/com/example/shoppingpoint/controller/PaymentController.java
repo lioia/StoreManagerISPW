@@ -102,7 +102,7 @@ public class PaymentController {
     }
 
     public int calculatePointsUsed(float fullTotal, int cardPoints, int pointsInEuro) {
-        float total = fullTotal - (float) (cardPoints / pointsInEuro);
+        float total = (float) (fullTotal - ((double) cardPoints / pointsInEuro));
         if (total < 0) return (int) Math.floor(fullTotal * pointsInEuro);
         return cardPoints;
     }
