@@ -8,7 +8,6 @@
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.shoppingpoint.view.PaymentGraphicController">
    <center>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
@@ -64,7 +63,7 @@
              </graphic>
          </Button>
          <Button fx:id="removeButton" layoutX="505.0" layoutY="146.0" mnemonicParsing="false" onAction="#removeQuantity" prefHeight="25.0" prefWidth="28.0" text="-" visible="false" />
-         <Text fx:id="pointText" disable="true" layoutX="69.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have">
+         <Text fx:id="pointText" disable="true" layoutX="69.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You have" visible="false">
             <font>
                <Font size="18.0" />
             </font>
