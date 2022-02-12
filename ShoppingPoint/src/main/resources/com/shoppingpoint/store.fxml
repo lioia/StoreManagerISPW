@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" spacing="16.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shoppingpoint.graphic_controller.StoreGraphicController">
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
+        <left>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                <graphic>
+                    <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                </graphic>
+                <BorderPane.margin>
+                    <Insets left="48.0" />
+                </BorderPane.margin>
+            </Button>
+        </left>
+        <center>
+            <Label fx:id="storeNameText" text="Store - Shopping Point" BorderPane.alignment="CENTER">
+                <font>
+                    <Font size="36.0" />
+                </font>
+            </Label>
+        </center>
+        <right>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+
+                <graphic>
+                    <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
+                </graphic>
+                <BorderPane.margin>
+                    <Insets right="16.0" />
+                </BorderPane.margin>
+            </Button>
+        </right>
+    </BorderPane>
+    <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+        <TextField fx:id="searchTextField" prefHeight="64.0" prefWidth="544.0" promptText="Search for a product" style="-fx-background-radius: 12; -fx-background-color: #ffffff;" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets left="24.0" top="16.0" />
+            </HBox.margin>
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font size="18.0" />
+            </font>
+        </TextField>
+        <Button mnemonicParsing="false" onAction="#search" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Search">
+            <HBox.margin>
+                <Insets left="24.0" right="20.0" top="20.0" />
+            </HBox.margin>
+            <effect>
+                <DropShadow />
+            </effect>
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+    </HBox>
+   <AnchorPane>
+      <VBox.margin>
+         <Insets bottom="16.0" />
+      </VBox.margin>
+      <children>
+         <HBox spacing="20.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="loyaltyCard2Text" text="Loyalty Card" visible="false">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </children>
+             <Text fx:id="sendEmail" fill="#6EC6FF" layoutX="18.0" layoutY="60.0" onMouseClicked="#sendEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="send email to store">
+                 <font>
+                     <Font size="14.0" />
+      
+                       </font>
+             </Text>
+                 <Button fx:id="loyaltyCardButton" mnemonicParsing="false" onAction="#activate" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Activate" visible="false">
+                  <font>
+                      <Font size="24.0" />
+                  </font>
+                  <effect>
+                      <DropShadow />
+                  </effect>
+              </Button>
+         </HBox>
+         <HBox prefWidth="612.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="50.0">
+            <children>
+                 <Label fx:id="loyaltyCard1Text" text="Loyalty Card" visible="false">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                  <opaqueInsets>
+                     <Insets left="16.0" />
+                  </opaqueInsets>
+                 </Label>
+                 <Label fx:id="currentPointsText" text="Points" visible="false">
+                     <font>
+                         <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                         <Insets left="50.0" right="16.0" />
+                     </HBox.margin>
+                 </Label>
+            </children>
+         </HBox>
+           <Button alignment="CENTER" mnemonicParsing="false" onAction="#goOrderList" prefHeight="48.0" prefWidth="120.0" style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;" text="Order" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
+               <font>
+                   <Font size="24.0" />
+               </font>
+               <effect>
+                   <DropShadow />
+               </effect>
+           </Button>
+      </children>
+   </AnchorPane>
+    <ScrollPane fitToWidth="true" style="-fx-background: #ffffff;" VBox.vgrow="ALWAYS">
+        <FlowPane fx:id="productsPane" />
+    </ScrollPane>
+</VBox>

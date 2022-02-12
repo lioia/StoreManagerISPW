@@ -85,7 +85,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.shoppingpoint/com.example.shoppingpoint.ShoppingPointApplication
+                            <mainClass>com.example.shoppingpoint/com.shoppingpoint.ShoppingPointApplication
                             </mainClass>
                         </configuration>
                     </execution>

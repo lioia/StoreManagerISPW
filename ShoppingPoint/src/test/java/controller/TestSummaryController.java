@@ -1,6 +1,6 @@
 package controller;
 
-import com.example.shoppingpoint.controller.SummaryController;
+import com.shoppingpoint.controller.SummaryController;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

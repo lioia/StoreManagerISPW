@@ -10,19 +10,19 @@ module com.example.shoppingpoint {
     requires org.jsoup;
     requires java.desktop;
 
-    opens com.example.shoppingpoint to javafx.fxml;
-    opens com.example.shoppingpoint.view to javafx.fxml;
-    exports com.example.shoppingpoint;
-    exports com.example.shoppingpoint.view;
-    exports com.example.shoppingpoint.model;
-    exports com.example.shoppingpoint.model.user;
-    exports com.example.shoppingpoint.model.product;
-    exports com.example.shoppingpoint.adapter;
-    exports com.example.shoppingpoint.bean;
-    exports com.example.shoppingpoint.bean.store_dashboard;
-    exports com.example.shoppingpoint.bean.add_product;
-    exports com.example.shoppingpoint.utils;
-    exports com.example.shoppingpoint.exception;
-    exports com.example.shoppingpoint.controller;
+    opens com.shoppingpoint to javafx.fxml;
+    opens com.shoppingpoint.graphic_controller to javafx.fxml;
+    exports com.shoppingpoint;
+    exports com.shoppingpoint.graphic_controller;
+    exports com.shoppingpoint.model;
+    exports com.shoppingpoint.model.user;
+    exports com.shoppingpoint.model.product;
+    exports com.shoppingpoint.adapter;
+    exports com.shoppingpoint.bean;
+    exports com.shoppingpoint.bean.store_dashboard;
+    exports com.shoppingpoint.bean.add_product;
+    exports com.shoppingpoint.utils;
+    exports com.shoppingpoint.exception;
+    exports com.shoppingpoint.controller;
 }
 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shoppingpoint.graphic_controller.NewRequestGraphicController">
+   <center>
+       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="520.0" prefWidth="800.0">
+           <Label fx:id="productNameLabel" layoutX="324.0" layoutY="14.0" text="Product Name" AnchorPane.leftAnchor="324.0" AnchorPane.topAnchor="14.0">
+               <font>
+                   <Font size="24.0" />
+               </font>
+           </Label>
+           <Label layoutX="100.0" layoutY="91.0" text="Max Price (in €)" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="91.0">
+               <font>
+                   <Font size="24.0" />
+               </font>
+           </Label>
+           <Label layoutX="159.0" layoutY="253.0" text="Quantity" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="230.0">
+               <font>
+                   <Font size="24.0" />
+               </font>
+           </Label>
+           <TextField fx:id="maxPriceTextField" layoutX="360.0" layoutY="38.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="88.0">
+               <effect>
+                   <DropShadow />
+               </effect>
+           </TextField>
+           <TextField fx:id="quantityTextField" layoutX="370.0" layoutY="248.0" prefHeight="40.0" prefWidth="384.0" style="-fx-background-color: WHITE; -fx-background-radius: 12px" AnchorPane.leftAnchor="360.0" AnchorPane.topAnchor="228.0">
+               <effect>
+                   <DropShadow />
+               </effect>
+           </TextField>
+           <Button defaultButton="true" layoutX="612.0" layoutY="480.0" mnemonicParsing="false" onAction="#save" prefHeight="42.0" prefWidth="132.0" style="-fx-background-color: #6EC6FF; -fx-font-size: 24px; -fx-background-radius: 16px;" text="Save" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="440.0">
+               <effect>
+                   <DropShadow />
+               </effect>
+           </Button>
+       </AnchorPane>
+   </center>
+   <top>
+       <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0" style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;" BorderPane.alignment="CENTER">
+           <left>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                   <graphic>
+                       <FontIcon iconLiteral="mdal-arrow_back" iconSize="32" />
+                   </graphic>
+                   <BorderPane.margin>
+                       <Insets left="48.0" />
+                   </BorderPane.margin>
+               </Button>
+           </left>
+           <center>
+               <Label text="New Request - Shopping Point" BorderPane.alignment="CENTER">
+                   <font>
+                       <Font size="36.0" />
+                   </font>
+               </Label>
+           </center>
+           <right>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: transparent" BorderPane.alignment="CENTER">
+                   <graphic>
+                       <FontIcon iconLiteral="mdal-log_out" iconSize="32" />
+                   </graphic>
+                   <BorderPane.margin>
+                       <Insets right="16.0" />
+                   </BorderPane.margin>
+               </Button>
+           </right>
+       </BorderPane>
+   </top>
+</BorderPane>

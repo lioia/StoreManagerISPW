@@ -1,6 +1,6 @@
 package controller;
 
-import com.example.shoppingpoint.controller.PaymentController;
+import com.shoppingpoint.controller.PaymentController;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

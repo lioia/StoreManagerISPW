@@ -1,6 +1,6 @@
 package controller;
 
-import com.example.shoppingpoint.controller.AcceptOfferController;
+import com.shoppingpoint.controller.AcceptOfferController;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
