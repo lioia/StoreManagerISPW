@@ -9,6 +9,13 @@ public class TestSelenium {
     public void testGetPascalFromAtm() throws InterruptedException {
         TestSeleniumLioiAlessandro testSeleniumLioiAlessandro = new TestSeleniumLioiAlessandro();
         float output = testSeleniumLioiAlessandro.getPascalFromAtm();
-        assertEquals(output, 101325);
+        assertEquals(101325,output);
+    }
+
+    @Test
+    public void testGetKmPerHoursFromMetersPerSecond(){
+        TestSeleniumGianlucaRonzello testSeleniumGianlucaRonzello = new TestSeleniumGianlucaRonzello();
+        float output = testSeleniumGianlucaRonzello.getKmPerHoursFromMetersPerSecond();
+        assertEquals(54, output);
     }
 }
