@@ -7,14 +7,15 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestLoginBean {
+    private static final String RIGHT_LENGTH = "right_length";
     // Lioi Alessandro
     @Test
     public void testLoginBean() {
         assertAll("LoginBean",
                 () -> assertThrows(BeanException.class, () -> new LoginBean("a", "b")),
-                () -> assertThrows(BeanException.class, () -> new LoginBean("right_length", "short")),
-                () -> assertThrows(BeanException.class, () -> new LoginBean("a", "right_length")),
-                () -> assertDoesNotThrow(() -> new LoginBean("right_length", "right_length"))
+                () -> assertThrows(BeanException.class, () -> new LoginBean(RIGHT_LENGTH, "short")),
+                () -> assertThrows(BeanException.class, () -> new LoginBean("a", RIGHT_LENGTH)),
+                () -> assertDoesNotThrow(() -> new LoginBean(RIGHT_LENGTH, RIGHT_LENGTH))
         );
     }
 }
