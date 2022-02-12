@@ -48,6 +48,7 @@ public class OrdersGraphicController {
                 FXMLLoader loader = new FXMLLoader(ShoppingPointApplication.class.getResource("reusable/order.fxml"));
                 AnchorPane pane = loader.load();
                 ((Label) pane.lookup("#name")).setText(order.getProduct().getName());
+                ((Label) pane.lookup("#date")).setText(order.getDate().toString());
                 ((Label) pane.lookup("#price")).setText(String.format("Total Price: %.02f€", order.getProduct().getDiscountedPrice() * order.getQuantity()));
                 ((Rating) pane.lookup("#rating")).setRating(review.getValue());
                 ((Rating) pane.lookup("#rating")).ratingProperty().addListener((observable, oldValue, newValue) -> {
