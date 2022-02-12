@@ -52,7 +52,7 @@ public class SummaryController {
         return filtered;
     }
 
-    public List<SoldProduct> getSoldProducts() throws ControllerException{
+    public List<SoldProduct> getSoldProducts() throws ControllerException {
         String storeName = ((StoreOwner) LoggedInUser.getInstance().getUser()).getStore().getName();
         List<SoldProduct> products;
         try {
@@ -63,5 +63,42 @@ public class SummaryController {
             throw new ControllerException("Database", e);
         }
         return products;
+    }
+
+    public float getIncrementalProfit() throws ControllerException {
+        List<SoldProduct> soldProducts = getSoldProducts();
+        List<SoldProduct> lastWeekProducts = new ArrayList<>();
+        List<SoldProduct> thisWeekProducts = new ArrayList<>();
+        for (SoldProduct p : soldProducts) {
+            LocalDate mondayOfCurrentWeek = p.getDate().with(previousOrSame(DayOfWeek.MONDAY));
+            LocalDate mondayOfLastWeek = mondayOfCurrentWeek.minusWeeks(1);
+            LocalDate sundayOfCurrentWeek = p.getDate().with(nextOrSame(DayOfWeek.SUNDAY));
+            LocalDate sundayOfLastWeek = sundayOfCurrentWeek.minusWeeks(1);
+            if (p.getDate().isAfter(mondayOfCurrentWeek) && p.getDate().isBefore(sundayOfCurrentWeek))
+                thisWeekProducts.add(p);
+            else if (p.getDate().isAfter(mondayOfLastWeek) && p.getDate().isBefore(sundayOfLastWeek))
+                lastWeekProducts.add(p);
+        }
+        List<Float> lastWeekProfit = new ArrayList<>();
+        List<Float> thisWeekProfit = new ArrayList<>();
+        for (SoldProduct p : lastWeekProducts) {
+            lastWeekProfit.add(p.getQuantity() * p.getProduct().getDiscountedPrice());
+        }
+        for (SoldProduct p : thisWeekProducts) {
+            thisWeekProfit.add(p.getQuantity() * p.getProduct().getDiscountedPrice());
+        }
+        return calculateIncrementalProfit(lastWeekProfit, thisWeekProfit);
+    }
+
+    public float calculateIncrementalProfit(List<Float> lastWeek, List<Float> thisWeek) {
+        float totalLast = 0;
+        float totalThis = 0;
+        for (float last : lastWeek) {
+            totalLast += last;
+        }
+        for (float thisValue : thisWeek) {
+            totalThis += thisValue;
+        }
+        return ((totalThis - totalLast) / totalLast) * 100;
     }
 }

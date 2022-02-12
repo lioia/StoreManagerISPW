@@ -51,4 +51,8 @@ public class AcceptOfferController {
             throw new ControllerException("SQL", e);
         }
     }
+
+    public float getIncrementOfRequestPrice(float maxPrice, float offerPrice) {
+        return (offerPrice / maxPrice) * 100;
+    }
 }

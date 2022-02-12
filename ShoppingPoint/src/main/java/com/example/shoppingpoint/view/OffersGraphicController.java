@@ -70,6 +70,7 @@ public class OffersGraphicController {
             for (Offer off : offers) {
                 ((Label) offer.lookup("#supplierNameLabel")).setText(off.getSupplierUsername());
                 ((Label) offer.lookup("#offerPriceLabel")).setText(String.format("Offer price: %.02f€", off.getOfferPrice()));
+                ((Label) offer.lookup("#incrementPriceLabel")).setText(String.format("You pay %.2f%% of the chosen price", controller.getIncrementOfRequestPrice(req.getMaxPrice(), off.getOfferPrice())));
                 Text sendEmail = (Text) offer.lookup("#sendEmail");
                 sendEmail.setOnMouseClicked(event -> {
                     try {

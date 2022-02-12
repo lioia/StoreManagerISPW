@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ReviewController {
     public List<SoldProduct> getOrders(String client, String storeName) throws ControllerException {
-        List<SoldProduct> products = null;
+        List<SoldProduct> products;
         try {
             products = SoldProductDAO.getProductsOfClient(client);
 
@@ -34,7 +34,7 @@ public class ReviewController {
 
     public Review getReview(String client, SoldProduct soldProduct) throws ControllerException {
         try {
-            return ReviewDAO.getReviewFromClientAndSoldProductId(client, soldProduct.getSoldProductId() );
+            return ReviewDAO.getReviewFromClientAndSoldProductId(client, soldProduct.getSoldProductId());
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         } catch (DatabaseException e) {
@@ -58,16 +58,24 @@ public class ReviewController {
             reviews = ReviewDAO.getReviewsOfProduct(productId);
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
+        } catch (DatabaseException e) {
+            throw new ControllerException("Product", e);
         }
-        catch (DatabaseException e){
-            throw new ControllerException("Product",e);
+        List<Float> reviewsValue = new ArrayList<>();
+        for (Review r : reviews) {
+            reviewsValue.add(r.getValue());
         }
+
+        return calculateAverage(reviewsValue);
+    }
+
+    public float calculateAverage(List<Float> reviews) {
         float total = 0f;
         int count = 0;
-        for (Review r : reviews) {
-            if (r.getValue() == 0) continue;
+        for (float r : reviews) {
+            if (r == 0) continue;
             count += 1;
-            total += r.getValue();
+            total += r;
         }
         return (count > 0) ? total / count : 0f;
     }

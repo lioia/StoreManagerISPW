@@ -24,10 +24,9 @@ public class EstimatedPriceController {
         float total = 0;
         for (Element element : prices) {
 //            considering the first 5 results (not everything is exact)
-            System.out.printf("%s%n",element.text());
-            if(i > 5) break;
-            float price = Float.parseFloat(element.text().replace(",", "."));
-            if(price > 0) {
+            if (i > 5) break;
+            float price = Float.parseFloat(element.text().replace(".", "").replace(",", "."));
+            if (price > 0) {
                 total += price;
                 i++;
             }

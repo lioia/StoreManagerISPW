@@ -75,28 +75,25 @@ public class PaymentController {
         }
     }
 
-    public void buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws ControllerException {
-        float total = bean.getQuantity() * product.getDiscountedPrice();
+    public float buy(PaymentBean bean, LoyaltyCard card, String clientUsername, Store store, GenericProduct product) throws ControllerException {
+        float fullTotal = bean.getQuantity() * product.getDiscountedPrice();
+        float total = fullTotal;
         int pointsUsed = 0;
-        int pointsToBeAdded = (int) (total / store.getEuroInPoints());
         if (bean.isLoyaltyCardUsed()) {
-            pointsUsed = card.getPoints();
-            total = bean.getQuantity() * product.getDiscountedPrice() - (float) pointsUsed / store.getPointsInEuro();
-            if (total < 0) {
-                pointsUsed = (int) (product.getDiscountedPrice() * store.getPointsInEuro());
-                pointsToBeAdded = 0;
-            } else {
-                pointsToBeAdded = (int) (total / store.getEuroInPoints());
-            }
+            pointsUsed = calculatePointsUsed(fullTotal, card.getPoints(), store.getPointsInEuro());
+            total = fullTotal - (float) (pointsUsed / store.getPointsInEuro());
         }
 
         try {
-            if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0 && card != null)
+            if (store.getPointsInEuro() != 0 && store.getEuroInPoints() != 0 && card != null) {
+                int pointsToBeAdded = (int) Math.floor(total / store.getEuroInPoints());
                 LoyaltyCardDAO.updateLoyaltyCard(clientUsername, store.getName(), card.getPoints() - pointsUsed + pointsToBeAdded);
+            }
 
             ProductDAO.updateProduct(product.getId(), product.getPrice(), product.getDiscountedPrice(), product.getQuantity() - bean.getQuantity());
             int soldProductId = SoldProductDAO.saveSoldProduct(bean.getQuantity(), LocalDate.now(), product.getId(), clientUsername, store.getName());
             ReviewDAO.addReview(0f, clientUsername, soldProductId, product.getId());
+            return total;
         } catch (SQLException e) {
             throw new ControllerException("SQL", e);
         } catch (DatabaseException e) {
@@ -104,7 +101,13 @@ public class PaymentController {
         }
     }
 
-    public float calculateDiscountPercentage(float price, float discountPrice){
-        return 100-(discountPrice/price)*100;
+    public int calculatePointsUsed(float fullTotal, int cardPoints, int pointsInEuro) {
+        float total = fullTotal - (float) (cardPoints / pointsInEuro);
+        if (total < 0) return (int) Math.floor(fullTotal * pointsInEuro);
+        return cardPoints;
+    }
+
+    public float calculateDiscountPercentage(float price, float discountPrice) {
+        return 100 - (discountPrice / price) * 100;
     }
 }

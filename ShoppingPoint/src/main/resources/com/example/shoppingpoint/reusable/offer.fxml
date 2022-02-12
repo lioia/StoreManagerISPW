@@ -10,7 +10,7 @@
 
 <?import javafx.scene.effect.DropShadow?>
 
-<Pane prefHeight="160.0" prefWidth="256.0"
+<Pane prefHeight="192.0" prefWidth="256.0"
       style="-fx-background-color: #E0E0E0; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="supplierNameLabel" layoutX="16.0" layoutY="16.0" style="-fx-fill: #6EC6FF;" text="Supplier Name">
@@ -30,7 +30,12 @@
             <Font size="16.0"/>
         </font>
     </Label>
-    <Button fx:id="acceptButton" layoutX="128.0" layoutY="96.0" mnemonicParsing="false" prefWidth="96.0"
+    <Label fx:id="incrementPriceLabel" layoutX="16.0" layoutY="96.0" text="Offer Price:">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Label>
+    <Button fx:id="acceptButton" layoutX="128.0" layoutY="128.0" mnemonicParsing="false" prefWidth="96.0"
             style="-fx-background-color: #6EC6FF; -fx-background-radius: 16;"
             text="Accept">
         <effect>
