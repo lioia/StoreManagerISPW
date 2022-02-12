@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import org.kordamp.ikonli.javafx.*?>
@@ -46,6 +45,6 @@
         <VBox.margin>
             <Insets top="8"/>
         </VBox.margin>
-        <FlowPane fx:id="requestsPane"/>
+        <VBox fx:id="requestsPane"/>
     </ScrollPane>
 </VBox>

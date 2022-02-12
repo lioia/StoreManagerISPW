@@ -46,6 +46,6 @@
             <Font size="18"/>
         </font>
     </Label>
+
     <FlowPane fx:id="offersPane"/>
-    <Separator/>
 </VBox>

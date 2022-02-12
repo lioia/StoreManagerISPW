@@ -10,19 +10,18 @@
 
 <?import javafx.scene.effect.DropShadow?>
 
-<Pane prefHeight="192.0" prefWidth="256.0"
-      style="-fx-background-color: #E0E0E0; -fx-background-radius: 16; -fx-border-radius: 12; -fx-border-color: #000000;"
+<AnchorPane prefHeight="192.0" prefWidth="256.0"
+      style="-fx-background-color: #E0E0E0; -fx-background-radius: 16;"
       xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="supplierNameLabel" layoutX="16.0" layoutY="16.0" style="-fx-fill: #6EC6FF;" text="Supplier Name">
         <font>
             <Font size="18.0"/>
         </font>
     </Label>
-    <Text fx:id="sendEmail" layoutX="18.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"
-          text="send email to supplier" fill="#6EC6FF">
+    <Text fx:id="sendEmail" layoutX="16.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Send email to supplier" fill="#6EC6FF">
         <font>
             <Font size="18.0"/>
-
         </font>
     </Text>
     <Label fx:id="offerPriceLabel" layoutX="16.0" layoutY="64.0" text="Offer Price:">
@@ -30,7 +29,7 @@
             <Font size="16.0"/>
         </font>
     </Label>
-    <Label fx:id="incrementPriceLabel" layoutX="16.0" layoutY="96.0" text="Offer Price:">
+    <Label fx:id="incrementPriceLabel" layoutX="16.0" layoutY="96.0">
         <font>
             <Font size="16.0"/>
         </font>
@@ -48,4 +47,7 @@
     <FlowPane.margin>
         <Insets top="8" left="32"/>
     </FlowPane.margin>
-</Pane>
+    <effect>
+        <DropShadow/>
+    </effect>
+</AnchorPane>

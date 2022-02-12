@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
@@ -11,7 +8,7 @@
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane prefHeight="210.0" prefWidth="300.0"
+<AnchorPane prefHeight="240.0" prefWidth="300.0"
             style="-fx-background-color: #e4e3e3; -fx-background-radius: 24;"
             xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <effect>
@@ -36,7 +33,7 @@
     <HBox alignment="TOP_CENTER" layoutX="18.0" layoutY="85.0" spacing="-NaN">
         <Label fx:id="description" style="-fx-font-size: 14px" text="Description" maxWidth="204"/>
 
-        <Button fx:id="descriptionButton"  mnemonicParsing="false"
+        <Button fx:id="descriptionButton" mnemonicParsing="false"
                 style="-fx-background-color: transparent">
             <graphic>
                 <FontIcon iconLiteral="mdal-control_point" iconSize="18"/>
@@ -55,30 +52,31 @@
             <Font size="14.0"/>
         </font>
     </Text>
-    <HBox fx:id="choosePriceHBox" alignment="TOP_CENTER" layoutX="18.0" layoutY="145.0" spacing="-NaN">
-        <Text fx:id="choosePrice"  strokeType="OUTSIDE" strokeWidth="0.0"
+    <HBox fx:id="choosePriceHBox" alignment="TOP_CENTER" layoutX="18.0" layoutY="145.0" spacing="16">
+        <Text fx:id="choosePrice" strokeType="OUTSIDE" strokeWidth="0.0"
               text="Make an offer">
             <font>
                 <Font size="14.0"/>
             </font>
         </Text>
-        <TextField fx:id="choosePriceTextField" maxWidth="80.0" maxHeight="20.0">
-
+        <TextField fx:id="choosePriceTextField" maxWidth="80.0" maxHeight="20.0"
+                   style="-fx-background-color: WHITE; -fx-background-radius: 12px">
+            <effect>
+                <DropShadow/>
+            </effect>
         </TextField>
-
     </HBox>
-    <Text fx:id="sendEmail" layoutX="18.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0"
-           text="send email to shop" fill="#6EC6FF">
+    <Text fx:id="sendEmail" layoutX="18.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0"
+          text="Send email to shop" fill="#6EC6FF">
         <font>
             <Font size="14.0"/>
-
         </font>
     </Text>
-    <Button layoutX="212.0" layoutY="170.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+    <Button layoutX="212.0" layoutY="180.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" mnemonicParsing="false" prefHeight="35.0" prefWidth="61.0"
             style="-fx-background-radius: 16px; -fx-background-color: #6EC6FF;" fx:id="offerButton">
         <effect>
-            <DropShadow offsetY="2.0"/>
+            <DropShadow/>
         </effect>
         <font>
             <Font size="24.0"/>
