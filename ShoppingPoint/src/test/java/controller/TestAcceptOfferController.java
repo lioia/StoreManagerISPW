@@ -10,6 +10,6 @@ public class TestAcceptOfferController {
     public void testIncrementOfRequestPrice() {
         AcceptOfferController controller = new AcceptOfferController();
         float output = controller.getIncrementOfRequestPrice(150, 75);
-        assertEquals(output, 50f);
+        assertEquals(50f, output);
     }
 }

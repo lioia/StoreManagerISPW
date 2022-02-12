@@ -10,7 +10,7 @@ public class TestPaymentController {
     public void testDiscountPercentage() {
         PaymentController controller = new PaymentController();
         float output = controller.calculateDiscountPercentage(100, 80);
-        assertEquals(output, 20.0);
+        assertEquals(20.0, output);
     }
 
     @Test
