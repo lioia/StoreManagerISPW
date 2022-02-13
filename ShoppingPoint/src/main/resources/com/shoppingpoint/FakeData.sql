@@ -61,6 +61,10 @@ VALUES ('La Dedica', 'Via Garda 4', 'BOOKS', 'Valeria43'),
 # Clothes Product
 INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Status`, `Store`, `Size`, `Material`)
 VALUES ('T-Shirt', 30, 20, 53, 'CLOTHES', 'New', 'Prixy', 'M', 'Cotton'),
+       ('Jeans', 20, 15, 66, 'CLOTHES', 'New', 'Prixy', '44', 'Jeans'),
+       ('Cardigan', 70, 55, 24, 'CLOTHES', 'New', 'Prixy', 'L', 'Lana'),
+       ('Maglione', 45, 33, 12, 'CLOTHES', 'New', 'Prixy', '44', 'Cotone'),
+       ('Gilet', 18, 9, 37, 'CLOTHES', 'New', 'Prixy', 'M', 'Poliammide'),
        ('Jeans', 20, 15, 66, 'CLOTHES', 'New', 'Prixy', '44', 'Jeans');
 
 # Shoes Product
@@ -73,7 +77,23 @@ INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Sta
                     `Genre`)
 VALUES ('Il pendolo di Foucault', 16, 15.20, 10, 'BOOK', 'New', 'Prefelibro', 'Umberto Eco',
         'Questo romanzo si svolge dall''inizio degli anni sessanta al 1984 tra una casa editrice milanese e un museo parigino dove è esposto il pendolo di Foucault. Si svolge dal 1943 al 1945 in un paesino tra Langhe e Monferrato. Si svolge tra il 1344 e il 2000 lungo il percorso del piano dei Templari e dei Rosa-Croce per la conquista del mondo. Si svolge interamente la notte del 23 giugno 1984, prima in piedi nella garitta del periscopio, poi in piedi nella garitta della statua della Libertà al Conservatoire des Arts et Métiers di Parigi. Si svolge la notte tra il 26 e il 27 giugno dello stesso anno nella stessa casa di campagna che Jacopo Belbo, il protagonista, ha ereditato da suo zio Carlo, mentre Pim rievoca le sequenze temporali di cui si è detto sopra. In sintesi: tre redattori editoriali, a Milano, dopo avere frequentato troppo a lungo autori "a proprie spese" che si dilettano di scienze occulte, società segrete e complotti cosmici, decidono di inventare, senza alcun senso di responsabilità, un Piano. Ma qualcuno li prende sul serio.',
-        'Romanzo');
+        'Romanzo'),
+        ('1984',12.35,8.50,21,'BOOK','New','Prefelibro','George Orwell','Nel superstato di Oceania, la società è controllata da un Partito che basa il suo potere sui principi del Socing, un socialismo estremo, il cui comandante supremo è il Grande Fratello, misterioso dittatore il cui viso compare ovunque nei teleschermi e nei manifesti di propaganda.'
+        ,'Romanzo'),
+        ('La fattoria degli animali',16.75,12.99,15,'BOOK','New','Prefelibro','George Orwell','Gli animali si stufano di essere sotto il controllo degli umani, così quando il Vecchio Maggiore (maiale anziano a cui tutti danno ascolto) racconta il sogno di libertà, gli animali si ribellano sotto la guida di maiali. I due personaggi principali sono Palla di neve e Napoleon.'
+         ,'Romanzo'),
+        ('L''Africano',19.20,16.50,24,'BOOK','Used','Prefelibro','Santiago Posteguillo','Roma, 235 a.C. Il senatore Publio Cornelio Scipione, avido lettore di tragedie greche, è pronto ad assistere a una delle prime rappresentazioni teatrali messe in scena nella capitale. Non sa che quel giorno si sta compiendo la Storia. Perché poco dopo l''inizio dello spettacolo, un servo arriva a chiamarlo. È nato suo figlio: si chiamerà come lui, Publio Cornelio Scipione, ma sarà ricordato nei secoli a venire con un altro nome: l''Africano. L''uomo destinato a salvare l''Impero, e impedire che la civiltà romana venga cancellata.',
+            'Romanzo storico'),
+        ('Invicta Legio',22.30,18.20,12,'BOOK','New','Prefelibro','Santiago Posteguillo','In un momento terribile per la Repubblica, spetta a Publio Cornelio Scipione, l''Africano, il compito di proteggere i territori romani dalla minaccia più grande: quella di Cartagine. Così Quinto Fabio Massimo pianifica, in realtà, di disfarsi dell''Africano.',
+        'Romanzo storico'),
+        ('Il gioco del trono',22.50,22.50,24,'BOOK','New','Prefelibro','George R. R. Martin','Al di là della Barriera, tre ranger in pattuglia dei Guardiani della notte hanno uno scontro con un Estraneo, una creatura fatta interamente di ghiaccio e pericolosissima, ritenuta leggendaria e mai esistita: uno degli uomini viene ucciso dal mostro, il secondo uomo viene ucciso dal commilitone tornato in vita come non-morto, il terzo uomo scappa e diviene un disertore.',
+        'Fantasy'),
+        ('Eragon',16.30,16.30,12,'BOOK','Used','Prefelibro','Christopher Paolini','Eragon è un ragazzo di diciassette anni che vive con lo zio Garrow e il cugino Roran nel piccolo villaggio di Carvahall, situato nella Valle Palancar tra i monti della Grande Dorsale in Alagaësia. È coraggioso e abile nel cacciare e proprio durante una battuta di caccia sulla Dorsale dal nulla vede comparire con un lampo una grossa pietra blu cobalto davanti a sé. Con il passare del tempo Eragon capisce che in realtà la pietra è un uovo di drago e quando questo si schiude chiama la dragonessa Saphira. Dopo l''uccisione dello zio Garrow, Eragon e Saphira decidono di inseguire i Ra''zac per vendicarne la morte. In questo viaggio sono accompagnati da Brom, cantastorie del villaggio, grande conoscente di draghi, spade e magia.',
+        'Fantasy'),
+        ('Frankenstein',12.30,8.20,12,'BOOK','Used','Prefelibro','Mary Shelley','Victor Frankenstein è un giovane scienziato ginevrino, che, spinto dall''ardore della ricerca scientifica, trova il modo di creare la vita. Costruisce così una creatura umana con pezzi di cadaveri, ma è atterrito dalla mostruosità della sua creazione. ... Qui sposa Elizabeth, che il mostro uccide la sera stessa delle nozze.',
+        'Fiction gotica'),
+        ('Le notti di Salem',10.20,10.20,17,'BOOK','New','Prefelibro','Stephen King','Ben Mears, uno scrittore di successo cresciuto nell''immaginaria cittadina di Jerusalem''s Lot, Maine (chiamata "il Lot" dagli abitanti), torna nella città natale 25 anni dopo. Giunto in città, diventa amico dell''insegnante di liceo Matt Burke e intraprende una relazione sentimentale con Susan Norton, una giovane laureata. Ben inizia così a scrivere un libro su ''Casa Marsten'', una magione abbandonata che gli causò molti incubi dopo una brutta avventura vissuta da bambino: infatti per far parte di un gruppo di ragazzi doveva eseguire una prova di coraggio, ovvero entrare in casa Marsten riportando un oggetto che testimoniasse il suo atto di coraggio, solo che durante questa bravata vide il signor Hubert Marsten, detto Hubie, impiccato che lo fissava con gli occhi sgranati. Per lui questo fu uno shock terribile.',
+            'Horror');
 
 # Comics Product
 INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Status`, `Store`, `Author`, `Artist`,
