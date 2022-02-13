@@ -1,5 +1,10 @@
 # StoreManagerISPW
 
+## Database
+
+- Eseguire `Database.sql` in `src/main/resources/com/shoppingpoint/`
+- Eseguire `Fakedata.sql` in `src/main/resources/com/shoppingpoint/`
+
 ## SonarCloud
 
 ```

@@ -81,7 +81,7 @@
 											"top": 55,
 											"width": 80.87548828125,
 											"height": 13,
-											"text": "LoginFormUI"
+											"text": "LoginUI"
 										},
 										{
 											"_type": "LabelView",
@@ -258,7 +258,7 @@
 											"top": 124,
 											"width": 176.64892578125,
 											"height": 13,
-											"text": "LoginFormControllerUI"
+											"text": "LoginGraphicController"
 										},
 										{
 											"_type": "LabelView",
@@ -523,8 +523,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 8,
-									"top": -176,
+									"top": -184,
 									"width": 10,
 									"height": 10
 								},
@@ -539,8 +538,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 8,
-									"top": -176,
+									"top": -184,
 									"width": 10,
 									"height": 10
 								}
@@ -1198,9 +1196,9 @@
 												"$ref": "AAAAAAF9w9LgRR4+oYo="
 											},
 											"font": "Arial;13;0",
-											"left": 189,
-											"top": 333,
-											"width": 304.54150390625,
+											"left": 325,
+											"top": 325,
+											"width": 134.037109375,
 											"height": 13,
 											"text": "«controller»"
 										},
@@ -1211,9 +1209,9 @@
 												"$ref": "AAAAAAF9w9LgRR4+oYo="
 											},
 											"font": "Arial;13;1",
-											"left": 189,
-											"top": 348,
-											"width": 304.54150390625,
+											"left": 325,
+											"top": 340,
+											"width": 134.037109375,
 											"height": 13,
 											"text": "LoginController"
 										},
@@ -1225,8 +1223,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -838,
-											"top": 222,
+											"left": -566,
+											"top": 206,
 											"width": 80.9072265625,
 											"height": 13,
 											"text": "(from Model1)"
@@ -1239,16 +1237,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -838,
-											"top": 222,
+											"left": -566,
+											"top": 206,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 184,
-									"top": 328,
-									"width": 314.54150390625,
+									"left": 320,
+									"top": 320,
+									"width": 144.037109375,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF9w9LgRR4/mCQ="
@@ -1273,9 +1271,9 @@
 										"$ref": "AAAAAAF9w9La/x4nZ5Y="
 									},
 									"font": "Arial;13;0",
-									"left": 184,
-									"top": 366,
-									"width": 314.54150390625,
+									"left": 320,
+									"top": 358,
+									"width": 144.037109375,
 									"height": 10
 								},
 								{
@@ -1298,9 +1296,9 @@
 												"$ref": "AAAAAAF9w9La/x4oVIc="
 											},
 											"font": "Arial;13;0",
-											"left": 189,
-											"top": 381,
-											"width": 304.54150390625,
+											"left": 325,
+											"top": 373,
+											"width": 134.037109375,
 											"height": 13,
 											"text": "+login(user: UserBean)",
 											"horizontalAlignment": 0
@@ -1316,8 +1314,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 189,
-											"top": 396,
+											"left": 461,
+											"top": 380,
 											"width": 304.54150390625,
 											"height": 13,
 											"text": "+loginAsStoreOwner(user: UserBean)",
@@ -1334,8 +1332,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 189,
-											"top": 411,
+											"left": 461,
+											"top": 395,
 											"width": 304.54150390625,
 											"height": 13,
 											"text": "+loginAsSupplier(user: UserBean)",
@@ -1352,8 +1350,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -171,
-											"top": 586,
+											"left": 101,
+											"top": 570,
 											"width": 304.54150390625,
 											"height": 13,
 											"text": "+navigateToStoreList()",
@@ -1361,9 +1359,9 @@
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 184,
-									"top": 376,
-									"width": 314.54150390625,
+									"left": 320,
+									"top": 368,
+									"width": 144.037109375,
 									"height": 23
 								},
 								{
@@ -1377,8 +1375,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -419,
-									"top": 111,
+									"left": -283,
+									"top": 103,
 									"width": 10,
 									"height": 10
 								},
@@ -1393,18 +1391,18 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -419,
-									"top": 111,
+									"left": -283,
+									"top": 103,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 184,
-							"top": 328,
-							"width": 314.54150390625,
-							"height": 101,
+							"left": 320,
+							"top": 320,
+							"width": 144.037109375,
+							"height": 71,
 							"nameCompartment": {
 								"$ref": "AAAAAAF9w9LgRR4+oYo="
 							},
@@ -1778,7 +1776,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 331,
+									"left": 390,
 									"top": 584,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1799,7 +1797,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 331,
+									"left": 390,
 									"top": 599,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1820,7 +1818,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 332,
+									"left": 391,
 									"top": 554,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1838,7 +1836,7 @@
 							"tail": {
 								"$ref": "AAAAAAF9w9LgRR49UXI="
 							},
-							"points": "332:428;332:575;210:575",
+							"points": "391:390;391:575;210:575",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF9w9v4HR9rI0s="
@@ -1872,7 +1870,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 432,
-									"top": 295,
+									"top": 291,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -1893,7 +1891,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 447,
-									"top": 295,
+									"top": 291,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1914,7 +1912,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 403,
-									"top": 296,
+									"top": 292,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1998,7 +1996,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 433,
-									"top": 296,
+									"top": 288,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -2018,7 +2016,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 446,
-									"top": 293,
+									"top": 285,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -2038,7 +2036,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 405,
-									"top": 300,
+									"top": 292,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -2082,7 +2080,7 @@
 							"tail": {
 								"$ref": "AAAAAAF9w87GjxyDjvQ="
 							},
-							"points": "418:277;418:328",
+							"points": "418:277;418:320",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF9w9xRPyACGVI="
@@ -3060,7 +3058,7 @@
 											"top": 237,
 											"width": 306.76318359375,
 											"height": 13,
-											"text": "+addProduct(product: ProductBean)",
+											"text": "+saveProduct(product: ProductBean)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4472,7 +4470,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 399,
-									"top": 551,
+									"top": 532,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -4493,7 +4491,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 414,
-									"top": 551,
+									"top": 532,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -4514,7 +4512,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 369,
-									"top": 552,
+									"top": 533,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -4531,7 +4529,7 @@
 							"tail": {
 								"$ref": "AAAAAAF9w9LgRR49UXI="
 							},
-							"points": "384:428;384:688",
+							"points": "384:390;384:688",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF9xA8ls/ZRMCQ="
@@ -5394,7 +5392,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 941,
+									"left": 923,
 									"top": 194,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -5415,8 +5413,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 937,
-									"top": 180,
+									"left": 919,
+									"top": 179,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -5436,7 +5434,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 948,
+									"left": 930,
 									"top": 223,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -5457,8 +5455,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 520,
-									"top": 307,
+									"left": 485,
+									"top": 308,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -5478,8 +5476,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 518,
-									"top": 294,
+									"left": 484,
+									"top": 295,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -5499,8 +5497,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 523,
-									"top": 335,
+									"left": 488,
+									"top": 336,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -5521,7 +5519,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1362,
-									"top": 81,
+									"top": 80,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -5541,7 +5539,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1356,
-									"top": 69,
+									"top": 67,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -5561,7 +5559,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1373,
-									"top": 106,
+									"top": 105,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -5606,7 +5604,7 @@
 								"$ref": "AAAAAAF9w9LgRR49UXI="
 							},
 							"lineStyle": 1,
-							"points": "499:335;1391:95",
+							"points": "464:336;1391:94",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF9yV2GrAbwKI4="
@@ -6540,7 +6538,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF9w86DsxxSgmU="
 					},
-					"name": "LoginFormControllerUI",
+					"name": "LoginGraphicController",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -8087,7 +8085,7 @@
 							"_parent": {
 								"$ref": "AAAAAAF9w/D88UEL7nc="
 							},
-							"name": "addProduct",
+							"name": "saveProduct",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -8949,7 +8947,7 @@
 					"_parent": {
 						"$ref": "AAAAAAF9w86DsxxSgmU="
 					},
-					"name": "LoginFormUI"
+					"name": "LoginUI"
 				},
 				{
 					"_type": "UMLPackage",

@@ -3430,7 +3430,7 @@
 								"$ref": "AAAAAAF9gAjhqFTY5PU="
 							},
 							"font": "Arial;13;0",
-							"points": "320:304;496:304;496:208"
+							"points": "320:304;488:304;488:184"
 						},
 						{
 							"_type": "FreelineEdgeView",
