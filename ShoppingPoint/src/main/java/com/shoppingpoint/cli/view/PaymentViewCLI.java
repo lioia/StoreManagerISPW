@@ -28,7 +28,7 @@ public class PaymentViewCLI {
     public int selectAction() throws IOException {
         System.out.println("What do you want to do?");
         return CLIReader.multiChoice(List.of(
-                "Check loyalty card",
+                "Use loyalty card",
                 "Increase quantity by 1",
                 "Decrease quantity by 1",
                 "Buy with PayPal",

@@ -30,13 +30,17 @@ public class PaymentGraphicControllerCLI {
                 view.showPaymentInformation(product, card, store, quantity, loyaltyCardCheck);
                 int action = view.selectAction();
                 switch (action) {
+                    // Use loyalty card
                     case 1 -> loyaltyCardCheck = !loyaltyCardCheck;
+                    // Increase quantity
                     case 2 -> {
                         if (quantity < product.getQuantity()) quantity++;
                     }
+                    // Decrease quantity
                     case 3 -> {
                         if (quantity > 1) quantity--;
                     }
+                    // Buy
                     case 4 -> {
                         try {
                             controller.buy(new PaymentBean(quantity, loyaltyCardCheck), card, LoggedInUser.getInstance().getUser().getUsername(), store, product);
@@ -57,6 +61,7 @@ public class PaymentGraphicControllerCLI {
                         }
                         exit = true;
                     }
+                    // Go back
                     case 5 -> exit = true;
                 }
             }
