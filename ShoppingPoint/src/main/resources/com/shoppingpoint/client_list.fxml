@@ -10,7 +10,7 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
       prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.shoppingpoint.graphic_controller.ClientListGraphicController">
-    <BorderPane prefHeight="80.0" prefWidth="200.0"
+    <BorderPane minHeight="80.0" prefHeight="80.0" prefWidth="200.0"
                 style="-fx-background-color: rgba(197,144,100,0.59); -fx-background-radius: 0 0 16 16;">
         <center>
             <Label fx:id="labelStoreName" text="Client List - Shopping Point" BorderPane.alignment="CENTER">
