@@ -110,10 +110,10 @@ INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Sta
                     `ConsoleType`)
 VALUES ('The Legend of Zelda', 59.98, 59.98, 23, 'VIDEOGAME', 'New', 'Super Joystick',
         'Entra in un mondo di avventure. Immergiti in un mondo di scoperte ed esplorazione.', 'Adventure',
-        'NINTENDOSWITCH'),
+        'Nintendo Switch'),
        ('The Legend of Zelda', 54.50, 54.50, 28, 'VIDEOGAME', 'USEDLIKENew', 'Super Joystick',
         'Entra in un mondo di avventure. Immergiti in un mondo di scoperte ed esplorazione.', 'Adventure',
-        'NINTENDOSWITCH'),
+        'Nintendo Switch'),
        ('Demon''s Souls', 69.98, 49.98, 34, 'VIDEOGAME', 'New', 'Super Joystick',
         'Per conquistare il potere, il 12° Re di Boletaria, Re Allant, adoperò le antiche Arti delle anime, risvegliando un demone risalente all''alba dei tempi: l''Antico.',
         'RPG', 'PS5');
@@ -121,8 +121,8 @@ VALUES ('The Legend of Zelda', 59.98, 59.98, 23, 'VIDEOGAME', 'New', 'Super Joys
 INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Status`, `Store`, `ConsoleType`,
                     `DigitalOnly`)
 VALUES ('PS5 - Digital Edition', 399.98, 399.98, 23, 'GAMECONSOLE', 'New', 'Super Joystick', 'PS5', TRUE),
-       ('PS5', 499.98, 499.98, 1, 'GAMECONSOLE', 'New', 'Game Store', 'PS5', FALSE),
-       ('Nintendo Switch OLED', 349.98, 349.98, 25, 'GAMECONSOLE', 'New', 'Super Joystick', 'NINTENDOSWITCH', FALSE);
+       ('PS5', 499.98, 499.98, 1, 'GAMECONSOLE', 'New', 'Super Joystick', 'PS5', FALSE),
+       ('Nintendo Switch OLED', 349.98, 349.98, 25, 'GAMECONSOLE', 'New', 'Super Joystick', 'Nintendo Switch', FALSE);
 # Computer Product
 INSERT INTO Product(`Name`, `Price`, `DiscountedPrice`, `Quantity`, `Type`, `Status`, `Store`, `ComputerType`, `Ram`,
                     `SSD`, `BatterySize`, `CPU`, `GPU`, `Brand`, `DisplaySize`)
